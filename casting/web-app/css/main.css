@@ -97,6 +97,7 @@ img {
 .content {
 	float: right;
     width: 75%;
+    padding-right:5px;
 }
 
 .content h1 {
@@ -492,6 +493,7 @@ th:hover, tr:hover {
 	-webkit-box-shadow: 0 0 3px 1px #AAAAAA;
 	        box-shadow: 0 0 3px 1px #AAAAAA;
 	background-color: #EFEFEF;
+	margin-bottom:5px;
 }
 
 .pagination a,
@@ -530,7 +532,7 @@ th:hover, tr:hover {
 	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
 	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
 	        box-shadow: 0 0 3px 1px #aaaaaa;
-	margin: 0.1em 0 0 0;
+	margin: 0.2em 0 0.3em 0;
 	border: none;
 }
 
@@ -569,14 +571,14 @@ th:hover, tr:hover {
 	text-decoration: underline;
 }
 
-.buttons .delete, .buttons .edit, .buttons .save {
+.buttons .delete, .buttons .edit, .buttons .save, .buttons .cancel {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
 }
 
-.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save,
-.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save {
+.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save,.ie6 .buttons input.cancel,
+.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save,.ie7 .buttons input.cancel {
 	padding-left: 36px;
 }
 
@@ -591,7 +593,9 @@ th:hover, tr:hover {
 .buttons .save {
 	background-image: url(../images/skin/database_save.png);
 }
-
+.buttons .cancel {
+	background-image: url(../images/skin/database_cancel.png);
+}
 a.skip {
 	position: absolute;
 	left: -9999px;
@@ -632,3 +636,12 @@ a.skip {
 				font-size: 1.1em;
 				margin: 0 0 0.3em;
 			}
+
+.bread-crump {padding:4px;font-size:0.8em;font-weight:bold;}
+.current-crump {font-weight:normal;}
+.bread-crump:before {content:'You are here: ';color:green;padding-left:1.2em;}
+.bread-crump r-arrow:after, .r-arrow:after {content:"\00BB"}
+.bread-crump l-arrow:after, .l-arrow:after {content:"\00AB"}
+.bread-crump r-arrow, .bread-crump l-arrow,.l-arrow,.r-arrow {color:orange; }
+
+.bread-crump tick-arrow:after, .tick-arrow:after {content:"\2713";color:green}

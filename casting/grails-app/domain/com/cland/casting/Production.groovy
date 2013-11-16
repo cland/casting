@@ -3,10 +3,12 @@ package com.cland.casting
 
 class Production {
 	String name
-	
+	String description
 	static hasMany =[portfolios:Portfolio,roles:CastingRole,categories:CastingCategory]
 	static belongsTo = [client:Client]
 	static constraints = {
+		name(blank:false)
+		description(nullable:true)
 	}
 	def beforeInsert = {
 		// your code goes here

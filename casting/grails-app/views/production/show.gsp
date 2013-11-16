@@ -18,39 +18,22 @@ var cland_params = {
 </script>		
 	</head>
 	<body>
+		<div class="bread-crump">
+				<span class="r-arrow"></span>
+				<g:link controller="production" action="list">Productions</g:link>
+				<span class="r-arrow"></span> <span class="current-crump">
+					Production: ${productionInstance?.name } (Client: ${productionInstance?.client?.encodeAsHTML()})
+				</span>
+		</div>	
 		<a href="#show-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="status" class="leftbar" role="complementary">
-			<h1>Client Details</h1>
-			<ul>
-			<g:if test="${productionInstance?.client}">
-				<li>
-					Name: <span class="property-value" aria-labelledby="client-label"><g:link controller="client" action="show" id="${productionInstance?.client?.id}">${productionInstance?.client?.encodeAsHTML()}</g:link></span>																
-				</li>
-				<li>Tel: ${productionInstance?.client?.company?.phoneNo}</li>				
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-				</g:if>							
-			</ul>
-			<br/>
-			<h1>Some More Info</h1>
-			<ul>
-			<li>one</li>
-			<li>two</li>
-			</ul>
-		</div>
+		<tmpl:sidenav/>
 		<div id="show-production" class="content scaffold-show" role="main">
 			<h1>Production: ${productionInstance?.name }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<!-- The tabs -->
-	<tmpl:tabs/>
+			<tmpl:tabs/>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${productionInstance?.id}" />

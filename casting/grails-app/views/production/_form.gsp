@@ -1,7 +1,27 @@
 <%@ page import="com.cland.casting.Production" %>
 
+<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'name', 'error')} ">
+	<label for="name">
+		<g:message code="production.name.label" default="Name" />
+		
+	</label>
+	<g:textField name="name" value="${productionInstance?.name}"/>
+</div>
 
-
+<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'description', 'error')} ">
+	<label for="description">
+		<g:message code="production.description.label" default="Description" />
+		
+	</label>
+	<g:textArea name="description" value="${productionInstance?.description}" rows="5" cols="40"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'client', 'error')} required">
+	<label for="client">
+		<g:message code="production.client.label" default="Client" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="client" name="client.id" from="${com.cland.casting.Client.list()}" optionKey="id" required="" value="${productionInstance?.client?.id}" class="many-to-one"/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'categories', 'error')} ">
 	<label for="categories">
 		<g:message code="production.categories.label" default="Categories" />
@@ -17,21 +37,9 @@
 </ul>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'client', 'error')} required">
-	<label for="client">
-		<g:message code="production.client.label" default="Client" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="client" name="client.id" from="${com.cland.casting.Client.list()}" optionKey="id" required="" value="${productionInstance?.client?.id}" class="many-to-one"/>
-</div>
 
-<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'name', 'error')} ">
-	<label for="name">
-		<g:message code="production.name.label" default="Name" />
-		
-	</label>
-	<g:textField name="name" value="${productionInstance?.name}"/>
-</div>
+
+
 
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'portfolios', 'error')} ">
 	<label for="portfolios">

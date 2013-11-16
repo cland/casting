@@ -10,27 +10,23 @@
 			<ol class="property-list production">
 			<g:if test="${productionInstance?.name}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="production.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${productionInstance}" field="name"/></span>
-					
+					<span id="name-label" class="property-label"><g:message code="production.name.label" default="Name" /></span>					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${productionInstance}" field="name"/></span>					
 				</li>
-				</g:if>
-				<g:if test="${productionInstance?.categories}">
+			</g:if>
+			<g:if test="${productionInstance?.description}">
+				<p>${productionInstance?.description}</p>
+			</g:if>			
+			<g:if test="${productionInstance?.categories}">
 				<li class="fieldcontain">
-					<span id="categories-label" class="property-label"><g:message code="production.categories.label" default="Categories" /></span>
-					
+					<span id="categories-label" class="property-label"><g:message code="production.categories.label" default="Categories" /></span>					
 						<g:each in="${productionInstance.categories}" var="c">
 						<span class="property-value" aria-labelledby="categories-label"><g:link controller="castingCategory" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
+						</g:each>				
 				</li>
-				</g:if>
+				</g:if>			
 			
-				
-			
-			
-				<g:if test="${productionInstance?.roles}">
+			<g:if test="${productionInstance?.roles}">
 				<li class="fieldcontain">
 					<span id="roles-label" class="property-label"><g:message code="production.roles.label" default="Roles" /></span>
 					

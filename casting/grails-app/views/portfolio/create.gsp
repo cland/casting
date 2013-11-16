@@ -7,13 +7,18 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
+		<div class="bread-crump">
+				<span class="r-arrow"></span>
+				<g:link controller="production" action="list">Productions</g:link>
+				<span class="r-arrow"></span>
+				<g:link controller="production" action="show" id="${productionInstance?.id}">Production: ${productionInstance?.name }</g:link>
+				<span class="r-arrow"></span> <span class="current-crump">
+					New Portfolio
+				</span>
+		</div>		
 		<a href="#create-portfolio" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
+		
+		<g:render template="/production/sidenav" /> 
 		<div id="create-portfolio" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -32,6 +37,7 @@
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+					<g:link class="cancel" action="show" controller="production" id="${productionInstance?.id}"><g:message code="default.button.cancel.label" default="Cancel" /></g:link>
 				</fieldset>
 			</g:form>
 		</div>

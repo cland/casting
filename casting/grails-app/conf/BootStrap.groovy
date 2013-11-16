@@ -204,7 +204,7 @@ class BootStrap {
 //						println agency.errors
 //					}
 //					def client = new Client(company:org2)
-//					def production = new Production(name:"Cape Advert")
+//					def production = new Production(name:"Cape Advert",description:"This is the Cape Advert Description")
 //					client.addToProductions(production) 
 //					client.save()
 //					if(client.hasErrors()){
