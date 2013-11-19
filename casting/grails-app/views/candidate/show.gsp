@@ -23,6 +23,15 @@
 			</g:if>
 			<ol class="property-list candidate">
 			
+				<g:if test="${candidateInstance?.agency}">
+				<li class="fieldcontain">
+					<span id="agency-label" class="property-label"><g:message code="candidate.agency.label" default="Agency" /></span>
+					
+						<span class="property-value" aria-labelledby="agency-label"><g:link controller="agency" action="show" id="${candidateInstance?.agency?.id}">${candidateInstance?.agency?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${candidateInstance?.clothing}">
 				<li class="fieldcontain">
 					<span id="clothing-label" class="property-label"><g:message code="candidate.clothing.label" default="Clothing" /></span>

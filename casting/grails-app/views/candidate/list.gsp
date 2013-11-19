@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<a href="#list-candidate" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
+<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
@@ -24,6 +24,8 @@
 				<thead>
 					<tr>
 					
+						<th><g:message code="candidate.agency.label" default="Agency" /></th>
+					
 						<g:sortableColumn property="clothing" title="${message(code: 'candidate.clothing.label', default: 'Clothing')}" />
 					
 						<g:sortableColumn property="eyes" title="${message(code: 'candidate.eyes.label', default: 'Eyes')}" />
@@ -34,15 +36,15 @@
 					
 						<th><g:message code="candidate.person.label" default="Person" /></th>
 					
-						<g:sortableColumn property="shoe" title="${message(code: 'candidate.shoe.label', default: 'Shoe')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${candidateInstanceList}" status="i" var="candidateInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${candidateInstance.id}">${fieldValue(bean: candidateInstance, field: "clothing")}</g:link></td>
+						<td><g:link action="show" id="${candidateInstance.id}">${fieldValue(bean: candidateInstance, field: "agency")}</g:link></td>
+					
+						<td>${fieldValue(bean: candidateInstance, field: "clothing")}</td>
 					
 						<td>${fieldValue(bean: candidateInstance, field: "eyes")}</td>
 					
@@ -51,8 +53,6 @@
 						<td>${fieldValue(bean: candidateInstance, field: "height")}</td>
 					
 						<td>${fieldValue(bean: candidateInstance, field: "person")}</td>
-					
-						<td>${fieldValue(bean: candidateInstance, field: "shoe")}</td>
 					
 					</tr>
 				</g:each>

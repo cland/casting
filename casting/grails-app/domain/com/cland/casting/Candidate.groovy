@@ -9,7 +9,7 @@ class Candidate {
 	String height
 	String hair
 	String eyes
-	//static belongsTo = [person:User]
+	static belongsTo = [agency:Agency]
 	static hasMany = [videos:VideoSet,pictures:PictureSet]
 	static constraints = {
 	}

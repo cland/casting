@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'agency', 'error')} required">
+	<label for="agency">
+		<g:message code="candidate.agency.label" default="Agency" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="agency" name="agency.id" from="${com.cland.casting.Agency.list()}" optionKey="id" required="" value="${candidateInstance?.agency?.id}" class="many-to-one"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'clothing', 'error')} ">
 	<label for="clothing">
 		<g:message code="candidate.clothing.label" default="Clothing" />
