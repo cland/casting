@@ -15,9 +15,8 @@ class PortfolioController {
         [portfolioInstanceList: Portfolio.list(params), portfolioInstanceTotal: Portfolio.count()]
     }
 
-    def create() {		
-		def productionInstance = Production.get(params.production.id)
-        [portfolioInstance: new Portfolio(params),productionInstance:productionInstance]
+    def create() {
+        [portfolioInstance: new Portfolio(params)]
     }
 
     def save() {
@@ -33,14 +32,13 @@ class PortfolioController {
 
     def show(Long id) {
         def portfolioInstance = Portfolio.get(id)
-		def productionInstance = portfolioInstance.production
         if (!portfolioInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'portfolio.label', default: 'Portfolio'), id])
             redirect(action: "list")
             return
         }
 
-        [portfolioInstance: portfolioInstance,productionInstance:productionInstance]
+        [portfolioInstance: portfolioInstance]
     }
 
     def edit(Long id) {

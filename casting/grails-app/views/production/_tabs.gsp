@@ -37,6 +37,16 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${productionInstance?.profiles}">
+				<li class="fieldcontain">
+					<span id="roles-label" class="property-label"><g:message code="production.profiles.label" default="Profiles" /></span>
+					
+						<g:each in="${productionInstance.profiles}" var="r">
+						<span class="property-value" aria-labelledby="profiles-label"><g:link controller="castingProfile" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
 			</ol>	
 	</div>
 	<div id="tab-portfolios">

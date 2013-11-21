@@ -1,9 +1,11 @@
 package com.cland.casting
 
+import java.util.List;
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class UserController {
-
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -25,6 +27,15 @@ class UserController {
             render(view: "create", model: [userInstance: userInstance])
             return
         }
+		
+		//update the roles here
+		castingApiService.updateRoles(userInstance, params)
+//		UserRole.removeAll(userInstance)
+//		def roles = Role.list()
+//		for(Role r : roles){
+//			def tmp = params.list("role_${r.authority}")
+//			if (tmp[0]) UserRole.create(userInstance, r, true)
+//		}
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
         redirect(action: "show", id: userInstance.id)
@@ -37,8 +48,9 @@ class UserController {
             redirect(action: "list")
             return
         }
-
-        [userInstance: userInstance]
+		//get the roles
+		def roleMap = userInstance.getAuthorities()
+		[userInstance: userInstance,roleMap:roleMap]
     }
 
     def edit(Long id) {
@@ -48,8 +60,9 @@ class UserController {
             redirect(action: "list")
             return
         }
-
-        [userInstance: userInstance]
+		//get the roles
+		def roleMap = userInstance.getAuthorities()
+        [userInstance: userInstance,roleMap:roleMap]
     }
 
     def update(Long id, Long version) {
@@ -76,7 +89,14 @@ class UserController {
             render(view: "edit", model: [userInstance: userInstance])
             return
         }
-
+		//update the roles here
+		castingApiService.updateRoles(userInstance, params)
+//		UserRole.removeAll(userInstance)
+//		def roles = Role.list()
+//		for(Role r : roles){
+//			def tmp = params.list("role_${r.authority}")
+//			if (tmp[0]) UserRole.create(userInstance, r, true)
+//		}
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
         redirect(action: "show", id: userInstance.id)
     }
@@ -99,4 +119,16 @@ class UserController {
             redirect(action: "show", id: id)
         }
     }
-}
+	/** Custom functions **/
+	List getOrgs (){
+		return Organisation.list()
+	}
+	def orgOptions(){
+		def orgs = getOrgs()
+		String options = "<option value='9999'>My Value</option>"
+		for(Organisation org: orgs){
+			options += "<option value='${org.id}'>${org.name}</option>"
+		}
+		render options
+	}
+} //end class

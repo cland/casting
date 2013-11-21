@@ -22,6 +22,28 @@
 	</label>
 	<g:select id="client" name="client.id" from="${com.cland.casting.Client.list()}" optionKey="id" required="" value="${productionInstance?.client?.id}" class="many-to-one"/>
 </div>
+
+<div
+	class="fieldcontain ${hasErrors(bean: productionInstance, field: 'profiles', 'error')} ">
+	<label for="profiles"> <g:message
+			code="production.profiles.label" default="Profiles" />
+	</label>
+	<ul class="one-to-many">
+		<g:each in="${productionInstance?.profiles?}" var="p">
+			<li><g:link controller="castingProfile" action="show"
+					id="${p.id}">
+					${p?.encodeAsHTML()}
+				</g:link></li>
+		</g:each>
+		<li class="add">
+			<g:link controller="castingProfile"
+				action="create" params="['production.id': productionInstance?.id]">
+				${message(code: 'default.add.label', args: [message(code: 'castingProfile.label', default: 'Profiles')])}
+			</g:link>
+		</li>
+	</ul>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'categories', 'error')} ">
 	<label for="categories">
 		<g:message code="production.categories.label" default="Categories" />

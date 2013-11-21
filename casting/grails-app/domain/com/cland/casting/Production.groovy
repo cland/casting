@@ -4,7 +4,7 @@ package com.cland.casting
 class Production {
 	String name
 	String description
-	static hasMany =[portfolios:Portfolio,roles:CastingRole,categories:CastingCategory]
+	static hasMany =[portfolios:Portfolio,profiles:CastingProfile,roles:CastingRole,categories:CastingCategory]
 	static belongsTo = [client:Client]
 	static constraints = {
 		name(blank:false)

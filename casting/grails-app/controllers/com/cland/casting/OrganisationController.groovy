@@ -1,5 +1,6 @@
 package com.cland.casting
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 
 class OrganisationController {
@@ -105,4 +106,34 @@ class OrganisationController {
             redirect(action: "show", id: id)
         }
     }
+	
+	/** Custom functions **/
+
+	def dialogcreate = {
+		def organisationInstance = new Organisation()
+		organisationInstance.properties = params
+		return [organisationInstance: organisationInstance]
+	}
+	
+
+	def dialogsave = {
+		//println ("Saving...${params}");
+		def message = ""
+		def organisationInstance = new Organisation(params)
+		if (!organisationInstance.save(flush: true)) {
+			println organisationInstance.errors
+		//	render(view: "create", model: [organisationInstance: organisationInstance])
+		//	return
+			message = "Error: " + organisationInstance.errors
+			def response = [message:message,id:'nothing']
+			render response as JSON
+			return
+		}
+		
+	//	flash.message = message(code: 'default.created.message', args: [message(code: 'organisationInstance.label', default: 'organisation'), organisationInstance.name])
+	//	redirect(action: "show", id: organisationInstance.id)
+		message = "success "
+		def response = [message:message,id:organisationInstance.id]
+		render response as JSON
+	}
 }

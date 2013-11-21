@@ -122,7 +122,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	
 	//** GENERAL AUTHENTICATED USER
 	'/home/**': ['IS_AUTHENTICATED_FULLY'],
-
+	'/production/show/**': ['IS_AUTHENTICATED_FULLY'],
 	'/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]

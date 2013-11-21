@@ -17,8 +17,8 @@ class CastingProfile {
 	Candidate canditate
 	VideoSet videos
 	PictureSet pictures
-	static hasMany = [ratings:Rating]
-	static belongsTo = [portfolio:Portfolio]
+	static hasMany = [ratings:Rating,roles:CastingRole,categories:CastingCategory]
+	static belongsTo = [production:Production]
 	static constraints = {
 		outcome(inList:["Pending","Selected","Not-Selected"],nullable:true)
 	}

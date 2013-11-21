@@ -185,7 +185,7 @@
 	</label>
 	<g:checkBox name="enabled" value="${userInstance?.enabled}" />
 </div>
-
+<tmpl:editRoles />
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'passwordExpired', 'error')} ">
 	<label for="passwordExpired">
 		<g:message code="user.passwordExpired.label" default="Password Expired" />

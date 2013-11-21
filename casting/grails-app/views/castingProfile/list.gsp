@@ -24,6 +24,8 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="outcome" title="${message(code: 'castingProfile.outcome.label', default: 'Outcome')}" />
+					
 						<g:sortableColumn property="averating" title="${message(code: 'castingProfile.averating.label', default: 'Averating')}" />
 					
 						<th><g:message code="castingProfile.canditate.label" default="Canditate" /></th>
@@ -34,15 +36,15 @@
 					
 						<g:sortableColumn property="comments" title="${message(code: 'castingProfile.comments.label', default: 'Comments')}" />
 					
-						<g:sortableColumn property="isShortlist" title="${message(code: 'castingProfile.isShortlist.label', default: 'Is Shortlist')}" />
-					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${castingProfileInstanceList}" status="i" var="castingProfileInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${castingProfileInstance.id}">${fieldValue(bean: castingProfileInstance, field: "averating")}</g:link></td>
+						<td><g:link action="show" id="${castingProfileInstance.id}">${fieldValue(bean: castingProfileInstance, field: "outcome")}</g:link></td>
+					
+						<td>${fieldValue(bean: castingProfileInstance, field: "averating")}</td>
 					
 						<td>${fieldValue(bean: castingProfileInstance, field: "canditate")}</td>
 					
@@ -51,8 +53,6 @@
 						<td>${fieldValue(bean: castingProfileInstance, field: "castNo")}</td>
 					
 						<td>${fieldValue(bean: castingProfileInstance, field: "comments")}</td>
-					
-						<td><g:formatBoolean boolean="${castingProfileInstance.isShortlist}" /></td>
 					
 					</tr>
 				</g:each>

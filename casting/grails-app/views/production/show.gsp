@@ -6,9 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'production.label', default: 'Production')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
-<link rel="stylesheet"	href="${resource(dir:'css/south-street',file:'jquery-ui-1.10.3.custom.min.css')}" />
-<g:javascript library="jquerymin" />
-<g:javascript library="jqueryuilatest" />
+
 	<script type="text/javascript">
 //<![CDATA[
 var cland_params = {

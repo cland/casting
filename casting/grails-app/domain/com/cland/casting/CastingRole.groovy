@@ -2,6 +2,11 @@ package com.cland.casting
 
 class CastingRole {
 	String name
+	int maxRequiredAuditionCount
+	int minRequiredAuditionCount
+	int requiredMaleCount
+	int requiredFemaleCount
+	int requiredCount
 	static belongsTo = [production:Production]
 	static constraints = {
 	}

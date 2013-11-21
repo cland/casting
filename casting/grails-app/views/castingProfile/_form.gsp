@@ -2,6 +2,14 @@
 
 
 
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'outcome', 'error')} ">
+	<label for="outcome">
+		<g:message code="castingProfile.outcome.label" default="Outcome" />
+		
+	</label>
+	<g:select name="outcome" from="${castingProfileInstance.constraints.outcome.inList}" value="${castingProfileInstance?.outcome}" valueMessagePrefix="castingProfile.outcome" noSelection="['': '']"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'averating', 'error')} required">
 	<label for="averating">
 		<g:message code="castingProfile.averating.label" default="Averating" />
@@ -34,12 +42,44 @@
 	<g:field name="castNo" type="number" value="${castingProfileInstance.castNo}" required=""/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'categories', 'error')} ">
+	<label for="categories">
+		<g:message code="castingProfile.categories.label" default="Categories" />
+		
+	</label>
+	<g:select name="categories" from="${com.cland.casting.CastingCategory.list()}" multiple="multiple" optionKey="id" size="5" value="${castingProfileInstance?.categories*.id}" class="many-to-many"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'comments', 'error')} ">
 	<label for="comments">
 		<g:message code="castingProfile.comments.label" default="Comments" />
 		
 	</label>
 	<g:textField name="comments" value="${castingProfileInstance?.comments}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isAuditionAvailable', 'error')} ">
+	<label for="isAuditionAvailable">
+		<g:message code="castingProfile.isAuditionAvailable.label" default="Is Audition Available" />
+		
+	</label>
+	<g:checkBox name="isAuditionAvailable" value="${castingProfileInstance?.isAuditionAvailable}" />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isInvited', 'error')} ">
+	<label for="isInvited">
+		<g:message code="castingProfile.isInvited.label" default="Is Invited" />
+		
+	</label>
+	<g:checkBox name="isInvited" value="${castingProfileInstance?.isInvited}" />
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isRoleAvailable', 'error')} ">
+	<label for="isRoleAvailable">
+		<g:message code="castingProfile.isRoleAvailable.label" default="Is Role Available" />
+		
+	</label>
+	<g:checkBox name="isRoleAvailable" value="${castingProfileInstance?.isRoleAvailable}" />
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isShortlist', 'error')} ">
@@ -58,12 +98,12 @@
 	<g:select id="pictures" name="pictures.id" from="${com.cland.casting.PictureSet.list()}" optionKey="id" required="" value="${castingProfileInstance?.pictures?.id}" class="many-to-one"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'portfolio', 'error')} required">
-	<label for="portfolio">
-		<g:message code="castingProfile.portfolio.label" default="Portfolio" />
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'production', 'error')} required">
+	<label for="production">
+		<g:message code="castingProfile.production.label" default="Production" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="portfolio" name="portfolio.id" from="${com.cland.casting.Portfolio.list()}" optionKey="id" required="" value="${castingProfileInstance?.portfolio?.id}" class="many-to-one"/>
+	<g:select id="production" name="production.id" from="${com.cland.casting.Production.list()}" optionKey="id" required="" value="${castingProfileInstance?.production?.id}" class="many-to-one"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'ratings', 'error')} ">
@@ -81,6 +121,14 @@
 </li>
 </ul>
 
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'roles', 'error')} ">
+	<label for="roles">
+		<g:message code="castingProfile.roles.label" default="Roles" />
+		
+	</label>
+	<g:select name="roles" from="${com.cland.casting.CastingRole.list()}" multiple="multiple" optionKey="id" size="5" value="${castingProfileInstance?.roles*.id}" class="many-to-many"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'round', 'error')} required">

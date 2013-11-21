@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<a href="#list-castingRole" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
+<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
@@ -24,9 +24,17 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="maxRequiredAuditionCount" title="${message(code: 'castingRole.maxRequiredAuditionCount.label', default: 'Max Required Audition Count')}" />
+					
+						<g:sortableColumn property="minRequiredAuditionCount" title="${message(code: 'castingRole.minRequiredAuditionCount.label', default: 'Min Required Audition Count')}" />
+					
 						<g:sortableColumn property="name" title="${message(code: 'castingRole.name.label', default: 'Name')}" />
 					
 						<th><g:message code="castingRole.production.label" default="Production" /></th>
+					
+						<g:sortableColumn property="requiredCount" title="${message(code: 'castingRole.requiredCount.label', default: 'Required Count')}" />
+					
+						<g:sortableColumn property="requiredFemaleCount" title="${message(code: 'castingRole.requiredFemaleCount.label', default: 'Required Female Count')}" />
 					
 					</tr>
 				</thead>
@@ -34,9 +42,17 @@
 				<g:each in="${castingRoleInstanceList}" status="i" var="castingRoleInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${castingRoleInstance.id}">${fieldValue(bean: castingRoleInstance, field: "name")}</g:link></td>
+						<td><g:link action="show" id="${castingRoleInstance.id}">${fieldValue(bean: castingRoleInstance, field: "maxRequiredAuditionCount")}</g:link></td>
+					
+						<td>${fieldValue(bean: castingRoleInstance, field: "minRequiredAuditionCount")}</td>
+					
+						<td>${fieldValue(bean: castingRoleInstance, field: "name")}</td>
 					
 						<td>${fieldValue(bean: castingRoleInstance, field: "production")}</td>
+					
+						<td>${fieldValue(bean: castingRoleInstance, field: "requiredCount")}</td>
+					
+						<td>${fieldValue(bean: castingRoleInstance, field: "requiredFemaleCount")}</td>
 					
 					</tr>
 				</g:each>
