@@ -31,6 +31,18 @@ class BootStrap {
 		}
 
 		println "Bootstrap > environment: " + Environment.getCurrent()
+		/*
+		 * if in need to run this with creating records whose domains uses audit-trail plugin
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
+// set up a default user, if one doesn't already exist
+def defaultUser = User.findByUsername('default') ?: new User(username:'default').save()
+
+// run the following code as if that user were logged in
+SpringSecurityUtils.doWithAuth('default') {
+  new Note(name:'Testing').save()
+}
+		 */
 		switch(Environment.getCurrent()){
 			case "DEVELOPMENT":
 //				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError:true)

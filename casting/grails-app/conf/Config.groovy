@@ -126,3 +126,57 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
 ]
+
+//Audit Trail Config
+
+grails{
+	plugin{
+		audittrail{
+			createdBy.field = "createdBy"
+			editedBy.field = "editedBy"
+			createdDate.field = "createdDate"
+			editedDate.field = "editedDate"
+			/*
+			// ** if field is not specified then it will default to 'createdBy'
+			createdBy.field = "createdBy"  // createdBy is default
+			// ** fully qualified class name for the type
+			createdBy.type   = "java.lang.Long" //Long is the default
+			// ** the constraints settings
+			createdBy.constraints = "nullable:false,display:false,editable:false"
+			// ** the mapping you want setup
+			createdBy.mapping = "column: 'inserted_by'" //<-example as there are NO defaults for mapping
+
+			createdDate.field = "createdDate"
+			createdDate.type  = "java.util.Date"
+			createdDate.constraints = "nullable:false,display:false,editable:false"
+			createdDate.mapping = "column: 'date_created'" //<-example as there are NO defaults for mapping
+
+			// ** Last updated by
+			editedBy.field = "lastUpdatedBy"  // createdBy is default
+			// ** fully qualified class name for the type
+			editedBy.type   = "java.lang.Long" //Long is the default
+			// ** the constraints settings
+			editedBy.constraints = "nullable:false,display:false,editable:false"
+			// ** the mapping you want setup
+			editedBy.mapping = "column: 'updated_by'" //<-example as there are NO defaults for mapping
+			
+			editedDate.field = "lastUpdatedDate"
+			editedDate.type  = "java.util.Date"
+			editedDate.constraints = "nullable:false,display:false,editable:false"
+			editedDate.mapping = "column: 'date_updated'" //<-example as there are NO defaults for mapping
+			
+			//custom closure to return the current user who is logged in
+			currentUserClosure = {ctx->
+				//ctx is the applicationContext
+				//default is basically
+				return springSecurityService.principal?.id
+			}
+			//there are NO defaults for companyId.
+			//companyId.field   = "companyId" //used for multi-tenant apps and is just the name of the field to use
+			 
+	
+			 */
+		}
+	}
+}
+

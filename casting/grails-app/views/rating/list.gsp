@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<a href="#list-rating" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
+<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
@@ -26,13 +26,15 @@
 					
 						<g:sortableColumn property="comments" title="${message(code: 'rating.comments.label', default: 'Comments')}" />
 					
-						<th><g:message code="rating.createdBy.label" default="Created By" /></th>
-					
-						<g:sortableColumn property="dateCreated" title="${message(code: 'rating.dateCreated.label', default: 'Date Created')}" />
-					
-						<th><g:message code="rating.profile.label" default="Profile" /></th>
-					
 						<g:sortableColumn property="rating" title="${message(code: 'rating.rating.label', default: 'Rating')}" />
+					
+						<g:sortableColumn property="createdBy" title="${message(code: 'rating.createdBy.label', default: 'Created By')}" />
+					
+						<g:sortableColumn property="createdDate" title="${message(code: 'rating.createdDate.label', default: 'Created Date')}" />
+					
+						<g:sortableColumn property="editedBy" title="${message(code: 'rating.editedBy.label', default: 'Edited By')}" />
+					
+						<g:sortableColumn property="editedDate" title="${message(code: 'rating.editedDate.label', default: 'Edited Date')}" />
 					
 					</tr>
 				</thead>
@@ -42,13 +44,15 @@
 					
 						<td><g:link action="show" id="${ratingInstance.id}">${fieldValue(bean: ratingInstance, field: "comments")}</g:link></td>
 					
+						<td>${fieldValue(bean: ratingInstance, field: "rating")}</td>
+					
 						<td>${fieldValue(bean: ratingInstance, field: "createdBy")}</td>
 					
-						<td><g:formatDate date="${ratingInstance.dateCreated}" /></td>
+						<td><g:formatDate date="${ratingInstance.createdDate}" /></td>
 					
-						<td>${fieldValue(bean: ratingInstance, field: "profile")}</td>
+						<td>${fieldValue(bean: ratingInstance, field: "editedBy")}</td>
 					
-						<td>${fieldValue(bean: ratingInstance, field: "rating")}</td>
+						<td><g:formatDate date="${ratingInstance.editedDate}" /></td>
 					
 					</tr>
 				</g:each>

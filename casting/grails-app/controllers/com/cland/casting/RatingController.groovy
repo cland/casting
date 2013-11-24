@@ -71,7 +71,7 @@ class RatingController {
         }
 
         ratingInstance.properties = params
-
+println(params)
         if (!ratingInstance.save(flush: true)) {
             render(view: "edit", model: [ratingInstance: ratingInstance])
             return

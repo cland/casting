@@ -3,7 +3,7 @@ package com.cland.casting
 import org.springframework.dao.DataIntegrityViolationException
 
 class CastingProfileController {
-
+	def springSecurityService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -16,7 +16,8 @@ class CastingProfileController {
     }
 
     def create() {
-		def production = Production.get(params.production.id)
+		def production = null //new Production(params)
+		if(params?.production?.id) production = Production.get(params.production.id) 
         [castingProfileInstance: new CastingProfile(params),productionInstance:production]
     }
 
@@ -72,7 +73,8 @@ class CastingProfileController {
         }
 
         castingProfileInstance.properties = params
-
+		// remove deleted entities. This relies on the cascade:"all-delete-orphan" setting in the respective Entity.
+		castingProfileInstance.ratings.removeAll{ it.deleted }
         if (!castingProfileInstance.save(flush: true)) {
             render(view: "edit", model: [castingProfileInstance: castingProfileInstance])
             return

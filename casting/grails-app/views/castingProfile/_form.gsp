@@ -12,7 +12,8 @@
 	<g:select id="production" name="production.id" from="${com.cland.casting.Production.list()}" optionKey="id" required="" value="${castingProfileInstance?.production?.id}" class="many-to-one"/>
 </div>
 </g:if>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'canditate', 'error')} required">
+<fieldset><legend>Details</legend>
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'Candidate', 'error')} required">
 	<label for="canditate">
 		<g:message code="castingProfile.canditate.label" default="Canditate" />
 		<span class="required-indicator">*</span>
@@ -63,7 +64,22 @@
 	</label>
 	<g:field name="round" type="number" value="${castingProfileInstance.round}" required=""/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'pictures', 'error')} required">
+	<label for="pictures">
+		<g:message code="castingProfile.pictures.label" default="Pictures" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="pictures" name="pictures.id" from="${com.cland.casting.PictureSet.list()}" optionKey="id" required="" value="${castingProfileInstance?.pictures?.id}" class="many-to-one"/>
+</div>
 
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'videos', 'error')} required">
+	<label for="videos">
+		<g:message code="castingProfile.videos.label" default="Videos" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="videos" name="videos.id" from="${com.cland.casting.VideoSet.list()}" optionKey="id" required="" value="${castingProfileInstance?.videos?.id}" class="many-to-one"/>
+</div>
+</fieldset>
 <fieldset><legend>Progress Indicators</legend>
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isInvited', 'error')} ">
 	<label for="isInvited">
@@ -104,33 +120,6 @@
 </div>
 </fieldset>
 
-
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'pictures', 'error')} required">
-	<label for="pictures">
-		<g:message code="castingProfile.pictures.label" default="Pictures" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="pictures" name="pictures.id" from="${com.cland.casting.PictureSet.list()}" optionKey="id" required="" value="${castingProfileInstance?.pictures?.id}" class="many-to-one"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'videos', 'error')} required">
-	<label for="videos">
-		<g:message code="castingProfile.videos.label" default="Videos" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="videos" name="videos.id" from="${com.cland.casting.VideoSet.list()}" optionKey="id" required="" value="${castingProfileInstance?.videos?.id}" class="many-to-one"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'ratings', 'error')} ">
-	<label for="ratings">
-		<g:message code="castingProfile.ratings.label" default="Ratings" />		
-	</label>
-	<ul class="one-to-many">
-		<g:each in="${castingProfileInstance?.ratings?}" var="r">
-		    <li><g:link controller="rating" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
-		</g:each>
-		<li class="add">
-			<g:link controller="rating" action="create" params="['castingProfile.id': castingProfileInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'rating.label', default: 'Rating')])}</g:link>
-		</li>
-	</ul>
-</div>
+<fieldset><legend>Ratings and Comments</legend>
+<g:render template="ratingsTable"/>
+</fieldset>

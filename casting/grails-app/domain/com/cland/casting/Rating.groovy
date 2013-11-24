@@ -1,12 +1,17 @@
 package com.cland.casting
-
+@gorm.AuditStamp
 class Rating {
 	Integer rating
 	String comments
-	User createdBy
-	Date dateCreated
+	//User createdBy
+	
+	boolean deleted
+	static transients = [ 'deleted' ]
 	static belongsTo = [profile:CastingProfile]
 	static constraints = {
+		comments(blank:true)
+		rating(min:1,max:5)
+	
 	}
 	def beforeInsert = {
 		// your code goes here

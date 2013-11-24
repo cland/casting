@@ -20,6 +20,13 @@ class CastingRole {
 		requiredFemaleCount(min:0)
 		requiredCount(min:1)
 	}
+	static mapping = {
+		requiredCount defaultValue: 1
+		maxRequiredAuditionCount : 10
+		minRequiredAuditionCount : 5
+		requiredMaleCount : 1
+		requiredMaleCount : 1
+	 }
 	def beforeInsert = {
 		// your code goes here
 	}

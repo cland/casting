@@ -17,13 +17,16 @@ class CastingProfile {
 	Candidate canditate
 	VideoSet videos
 	PictureSet pictures
+	List ratings
 	static hasMany = [ratings:Rating,roles:CastingRole,categories:CastingCategory]
 	static belongsTo = [production:Production]
 	static constraints = {
 		outcome(inList:["Pending","Selected","Not-Selected"],nullable:true)
 		averating(nullable:true) 
 	}
-	
+	static mapping = {
+		ratings cascade:"all-delete-orphan"
+	}
 	void computeAverageRating(){
 		averating = 0.0 //TODO: Calculate the average ratings
 	}
