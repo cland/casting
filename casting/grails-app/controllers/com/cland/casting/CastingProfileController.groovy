@@ -16,7 +16,8 @@ class CastingProfileController {
     }
 
     def create() {
-        [castingProfileInstance: new CastingProfile(params)]
+		def production = Production.get(params.production.id)
+        [castingProfileInstance: new CastingProfile(params),productionInstance:production]
     }
 
     def save() {

@@ -4,7 +4,7 @@
 		<li><g:link class="create" controller="production" action="create"><g:message code="default.new.label" args="['Production']" /></g:link></li>
 		<li><g:link class="list" controller="production" action="list"><g:message code="default.list.label" args="['Production']" /></g:link></li>
 		<li><g:link class="list" controller="production" action="show" id="${productionInstance?.id }"><g:message code="default.show.label" args="['Production']" /></g:link></li>	
-		<li><g:link class="create" controller="portfolio" action="create" params="${['production.id':productionInstance?.id]}" ><g:message code="default.new.label" args="['Portfolio']" /></g:link></li>	
+		<li><g:link class="create" controller="castingProfile" action="create" params="${['production.id':productionInstance?.id]}" ><g:message code="default.new.label" args="['Casting Profile']" /></g:link></li>	
 	</ul>
 	<g:if test="${productionInstance?.client}">
 		<h1>Client Details</h1>

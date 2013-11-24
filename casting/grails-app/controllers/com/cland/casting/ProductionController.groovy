@@ -71,7 +71,10 @@ class ProductionController {
         }
 
         productionInstance.properties = params
-
+		// remove deleted entities. This relies on the cascade:"all-delete-orphan" setting in the respective Entity.
+		productionInstance.roles.removeAll{ it.deleted }
+		productionInstance.categories.removeAll{ it.deleted }
+		productionInstance.portfolios.removeAll{ it.deleted }
         if (!productionInstance.save(flush: true)) {
             render(view: "edit", model: [productionInstance: productionInstance])
             return

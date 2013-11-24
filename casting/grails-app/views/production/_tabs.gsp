@@ -3,11 +3,11 @@
 	<ul>
 		<li><a href="#tab-production">Details</a></li>
 		<li><a href="#tab-portfolios">Portfolios</a></li>
-		<li id='tab_learner_head'><a href="#tab-learner">Other</a></li>
-		<li><a href="#tab-attachments">Supporting Documents</a></li>
+		<li><a href="#tab-profiles">All Profiles</a></li>
+		<li><a href="#tab-attachments">Attachments</a></li>
 	</ul>
-	<div id="tab-production">
-			<ol class="property-list production">
+<div id="tab-production">
+		<ol class="property-list production">
 			<g:if test="${productionInstance?.name}">
 				<li class="fieldcontain">
 					<span id="name-label" class="property-label"><g:message code="production.name.label" default="Name" /></span>					
@@ -35,34 +35,29 @@
 						</g:each>
 					
 				</li>
-				</g:if>
+			</g:if>
 			
-				<g:if test="${productionInstance?.profiles}">
-				<li class="fieldcontain">
-					<span id="roles-label" class="property-label"><g:message code="production.profiles.label" default="Profiles" /></span>
-					
-						<g:each in="${productionInstance.profiles}" var="r">
-						<span class="property-value" aria-labelledby="profiles-label"><g:link controller="castingProfile" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+				
 			</ol>	
-	</div>
+	<h5>Which agencies can access this production</h5>
+	<g:if test="${productionInstance?.agencyACL}">
+					<span id="agencyACL-label" class="property-label"><g:message code="production.agencyacl.label" default="Agency access list: " /></span>
+					
+						<g:each in="${productionInstance.agencyACL}" var="p">
+						<span class="property-value" aria-labelledby="agencyACL-label"><g:link controller="agency" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+						</g:each>		
+	</g:if>
+</div>
 	<div id="tab-portfolios">
-						<g:if test="${productionInstance?.portfolios}">
-				<li class="fieldcontain">
-					<span id="portfolios-label" class="property-label"><g:message code="production.portfolios.label" default="Portfolios" /></span>
-					
-						<g:each in="${productionInstance.portfolios}" var="p">
-						<span class="property-value" aria-labelledby="portfolios-label"><g:link controller="portfolio" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+		<g:render template="portfoliosTable"/>
 	</div>
-	<div id="tab-learner">
-		
+	<div id="tab-profiles">
+		<g:if test="${productionInstance?.profiles}">		
+			<span id="roles-label" class="property-label"><g:message code="production.profiles.label" default="Profiles" /></span>			
+			<g:each in="${productionInstance.profiles}" var="r">
+			<span class="property-value" aria-labelledby="profiles-label"><g:link controller="castingProfile" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+			</g:each>
+		</g:if>
 	</div>
 	<div id="tab-attachments">
 		<div id="attachments" class="attachments">

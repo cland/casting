@@ -211,12 +211,13 @@ img {
 fieldset,
 .property-list {
 	margin: 0.6em 1.25em 0 1.25em;
+	margin: 0;
 	padding: 0.3em 1.8em 1.25em;
 	position: relative;
 	zoom: 1;
 	border: none;
 }
-
+fieldset {border:solid 1px #444;}
 .property-list .fieldcontain {
 	list-style: none;
 	overflow: hidden;
@@ -646,3 +647,4 @@ a.skip {
 .bread-crump r-arrow, .bread-crump l-arrow,.l-arrow,.r-arrow {color:orange; }
 
 .bread-crump tick-arrow:after, .tick-arrow:after {content:"\2713";color:green}
+.field-small {width:40px}

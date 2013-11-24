@@ -3,6 +3,8 @@ package com.cland.casting
 class Portfolio {
 	String name
 	String comments
+	boolean deleted
+	static transients = [ 'deleted' ]
 	static belongsTo = [production:Production]
 	static hasMany =[profiles:CastingProfile]
 	static attachmentable = true

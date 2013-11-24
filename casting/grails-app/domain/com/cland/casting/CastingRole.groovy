@@ -7,8 +7,18 @@ class CastingRole {
 	int requiredMaleCount
 	int requiredFemaleCount
 	int requiredCount
+	
+	boolean deleted
+	static transients = [ 'deleted' ]
+	
 	static belongsTo = [production:Production]
 	static constraints = {
+		name(blank:false)
+		maxRequiredAuditionCount(min:0)
+		minRequiredAuditionCount(min:0)
+		requiredMaleCount(min:0)
+		requiredFemaleCount(min:0)
+		requiredCount(min:1)
 	}
 	def beforeInsert = {
 		// your code goes here

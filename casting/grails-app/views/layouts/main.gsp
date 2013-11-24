@@ -16,11 +16,11 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 			<!-- link rel="stylesheet" href="${resource(dir: 'css', file: 'fieldset.css')}" type="text/css" -->
 <link rel="stylesheet"	href="${resource(dir:'css/south-street',file:'jquery-ui-1.10.3.custom.min.css')}" />
-<g:javascript library="jquerymin" />
-<g:javascript library="jqueryuilatest" />
+
 		<g:layoutHead/>
+		<r:require module="application" />
 		<r:layoutResources />
-		<z:resources/>
+
 		<style>
 		/* Custom rules */
 		.ui-jqgrid .ui-jqgrid-htable th div {

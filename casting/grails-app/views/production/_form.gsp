@@ -23,6 +23,7 @@
 	<g:select id="client" name="client.id" from="${com.cland.casting.Client.list()}" optionKey="id" required="" value="${productionInstance?.client?.id}" class="many-to-one"/>
 </div>
 
+
 <div
 	class="fieldcontain ${hasErrors(bean: productionInstance, field: 'profiles', 'error')} ">
 	<label for="profiles"> <g:message
@@ -44,54 +45,18 @@
 	</ul>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'categories', 'error')} ">
-	<label for="categories">
-		<g:message code="production.categories.label" default="Categories" />
-		
-	</label>
-	<ul class="one-to-many">
-<g:each in="${productionInstance?.categories?}" var="p">
-    <li><g:link controller="castingCategory" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="castingCategory" action="create" params="['production.id': productionInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'castingCategory.label', default: 'Categories')])}</g:link>
-</li>
-</ul>
+<g:render template="categoriesTable"/>
+<g:render template="portfoliosTable"/>
+<g:render template="rolesTable"/>
+
+<br/>
+<h5>Which agencies can access this production</h5>
+<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'agencyACL', 'error')} ">
+		<label for="agencyACL">
+			<g:message code="production.agencyacl.label" default="Agency Access List" />		
+		</label>
+		<g:select name="agencyACL" from="${com.cland.casting.Agency.list()}" multiple="multiple" optionKey="id" size="5" value="${productionInstance?.agencyACL*.id}" class="many-to-many"/>
 </div>
 
 
-
-
-
-<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'portfolios', 'error')} ">
-	<label for="portfolios">
-		<g:message code="production.portfolios.label" default="Portfolios" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${productionInstance?.portfolios?}" var="p">
-    <li><g:link controller="portfolio" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="portfolio" action="create" params="['production.id': productionInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'portfolio.label', default: 'Portfolio')])}</g:link>
-</li>
-</ul>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'roles', 'error')} ">
-	<label for="roles">
-		<g:message code="production.roles.label" default="Roles" />
-		
-	</label>
-	<ul class="one-to-many">
-<g:each in="${productionInstance?.roles?}" var="p">
-    <li><g:link controller="castingRole" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="castingRole" action="create" params="['production.id': productionInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'castingRole.label', default: 'Roles')])}</g:link>
-</li>
-</ul>
-</div>
 

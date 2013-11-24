@@ -2,8 +2,11 @@ package com.cland.casting
 
 class CastingCategory {
 	String name
+	boolean deleted
+	static transients = [ 'deleted' ]
 	static belongsTo = [production:Production]
 	static constraints = {
+		name(blank:false)
 	}
 	def beforeInsert = {
 		// your code goes here

@@ -21,6 +21,7 @@ class CastingProfile {
 	static belongsTo = [production:Production]
 	static constraints = {
 		outcome(inList:["Pending","Selected","Not-Selected"],nullable:true)
+		averating(nullable:true) 
 	}
 	
 	void computeAverageRating(){

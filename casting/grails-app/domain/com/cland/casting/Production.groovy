@@ -1,10 +1,23 @@
 
 package com.cland.casting
 
+import java.util.List;
+
 class Production {
 	String name
 	String description
-	static hasMany =[portfolios:Portfolio,profiles:CastingProfile,roles:CastingRole,categories:CastingCategory]
+	List roles //without this problem: HibernateException – A collection with cascade=”all-delete-orphan” was no longer referenced by the owning entity instance
+	List categories
+	List portfolios
+
+	static hasMany =[portfolios:Portfolio,profiles:CastingProfile,roles:CastingRole,categories:CastingCategory,agencyACL:Agency]
+	
+	static mapping = {
+		roles cascade:"all-delete-orphan"
+		categories cascade:"all-delete-orphan"
+		portfolios cascade:"all-delete-orphan"
+	}
+	
 	static belongsTo = [client:Client]
 	static constraints = {
 		name(blank:false)

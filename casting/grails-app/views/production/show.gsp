@@ -24,14 +24,14 @@ var cland_params = {
 				</span>
 		</div>	
 		<a href="#show-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<tmpl:sidenav/>
+		<g:render template="sidenav"/>
 		<div id="show-production" class="content scaffold-show" role="main">
 			<h1>Production: ${productionInstance?.name }</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<!-- The tabs -->
-			<tmpl:tabs/>
+			<g:render template="tabs"/>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${productionInstance?.id}" />
@@ -44,6 +44,7 @@ var cland_params = {
 // when the page has finished loading.. execute the follow
 
 $(document).ready(function() {		
+
 	$("#tabs").tabs(
 					{
 					active:cland_params.active_tab(),
