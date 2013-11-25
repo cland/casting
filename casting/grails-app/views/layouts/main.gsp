@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 			<!-- link rel="stylesheet" href="${resource(dir: 'css', file: 'fieldset.css')}" type="text/css" -->
 <link rel="stylesheet"	href="${resource(dir:'css/south-street',file:'jquery-ui-1.10.3.custom.min.css')}" />
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'jqpagination.css')}" type="text/css">
 
 		<g:layoutHead/>
 		<r:require module="application" />
@@ -41,6 +42,25 @@
 }
 		
 .subgrid-data .ui-state-default { background:#768074;border:1px solid #ccc;}
+
+.nav a.aboutus {
+	background-image: url("${fam.icon(name:'information')}");
+}
+
+.nav a.newsevents {
+	background-image: url("${fam.icon(name:'newspaper')}");
+}
+.nav a.cancel {
+	background-image: url("${fam.icon(name:'cancel')}");
+}
+.nav a.login {
+	background-image: url("${fam.icon(name:'door_in')}");
+}
+.nav a.logout {
+	background-image: url("${fam.icon(name:'door_out')}");
+}
+
+
 		</style>
 	</head>
 	<body>

@@ -5,6 +5,7 @@ modules = {
         resource url:'js/jquery.metadata.js'
         resource url:'js/jquery.ui.writetable.js'
 		resource url: 'js/jquery.jqGrid.min.js'
+		resource url: 'js/jquery.jqpagination.min.js'
     }
 //	jquerymin{
 //		resource url: 'js/jquery-1.9.1.js', disposition: 'head'

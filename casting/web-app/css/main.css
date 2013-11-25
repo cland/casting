@@ -188,7 +188,8 @@ img {
 	text-decoration: underline;
 }
 
-.nav a.home, .nav a.list, .nav a.create {
+.nav a.home, .nav a.list, .nav a.create, .nav a.aboutus,.nav a.cancel,.nav a.newsevents,
+.nav a.login,.nav a.logout  {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
@@ -197,6 +198,7 @@ img {
 .nav a.home {
 	background-image: url(../images/skin/house.png);
 }
+
 
 .nav a.list {
 	background-image: url(../images/skin/database_table.png);
@@ -491,9 +493,9 @@ th:hover, tr:hover {
 	margin: 0;
 	padding: 0.3em 0.2em;
 	text-align: center;
-	   -moz-box-shadow: 0 0 3px 1px #AAAAAA;
-	-webkit-box-shadow: 0 0 3px 1px #AAAAAA;
-	        box-shadow: 0 0 3px 1px #AAAAAA;
+	   -moz-box-shadow: 0 0 1px 1px #ccc;
+	-webkit-box-shadow: 0 0 1px 1px #ccc;
+	        box-shadow: 0 0 1px 1px #ccc;
 	background-color: #EFEFEF;
 	margin-bottom:5px;
 }
@@ -638,6 +640,7 @@ a.skip {
 				font-size: 1.1em;
 				margin: 0 0 0.3em;
 			}
+/** CUSTOM CSS RULES **/
 
 .bread-crump {padding:4px;font-size:0.8em;font-weight:bold;}
 .current-crump {font-weight:normal;}
@@ -648,3 +651,27 @@ a.skip {
 
 .bread-crump tick-arrow:after, .tick-arrow:after {content:"\2713";color:green}
 .field-small {width:40px}
+
+.list-filter {border:solid 1px #ccc;background:#fff;}
+.list_buttons{ 
+    background-color: #FFFFFF;
+    border: medium none;
+    box-shadow: 0 0 2px 1px #CCCCCC;
+    margin: 0.2em 0 0.3em;
+    overflow: hidden;
+    padding: 0.3em;
+}
+.list-action-buttons {width:208px;}
+tr > td:first-child, tr > th:first-child {
+    padding-left: 0.8em !important;
+}
+td, th {
+    vertical-align: middle !important;
+}
+
+tr > td:last-child, tr > th:last-child {
+    padding-right: 0;
+}
+.ui-accordion .ui-accordion-header {
+    padding: 0.5em 0.5em 0.5em 1.7em !important;
+}

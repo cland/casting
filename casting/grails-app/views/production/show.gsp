@@ -7,10 +7,11 @@
 		<g:set var="entityName" value="${message(code: 'production.label', default: 'Production')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 //<![CDATA[
 var cland_params = {
-		active_tab : function(){ if (${params.tab==null}) return 0; else return ${params.tab};}
+		active_tab : function(){ if (${params.tab==null}) return 0; else return ${params.tab};}.
+		active_sidenav : '../layouts/sidenav-admin'
 	}
 //]]>
 </script>		
@@ -24,7 +25,7 @@ var cland_params = {
 				</span>
 		</div>	
 		<a href="#show-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<g:render template="sidenav"/>
+		<g:render template="../layouts/sidenav-admin"/>
 		<div id="show-production" class="content scaffold-show" role="main">
 			<h1>Production: ${productionInstance?.name }</h1>
 			<g:if test="${flash.message}">
@@ -44,7 +45,7 @@ var cland_params = {
 // when the page has finished loading.. execute the follow
 
 $(document).ready(function() {		
-
+	$("#accordion" ).accordion();
 	$("#tabs").tabs(
 					{
 					active:cland_params.active_tab(),
