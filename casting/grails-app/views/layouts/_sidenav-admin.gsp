@@ -14,10 +14,18 @@
 			<h3>Manage Productions</h3>
 			<div>
 				<ul>
-					<li><g:link class="create" controller="production" action="create">
-							<g:message code="default.new.label" args="['Production']" /></g:link></li>
 					<li><g:link class="list" controller="Production" action="list">
 							<g:message code="default.list.label" args="['Production']" /></g:link></li>
+				<g:if test="${productionInstance }">							
+					<li><g:link class="create" controller="production" action="create">
+							<g:message code="default.new.label" args="['Production']" /></g:link></li>
+				</g:if>
+				<g:if test="${productionInstance }">			
+					<li><g:link class="create" controller="castingProfile" action="create" params="${['production.id':productionInstance?.id]}">
+							<g:message code="default.new.label" args="['Profile']" /></g:link></li>
+				</g:if>
+				<li><g:link class="list" controller="castingProfile" action="list">
+							<g:message code="default.list.label" args="['Profile']" /></g:link></li>
 				</ul>
 			</div>
 			<h3>Manage Clients</h3>

@@ -1,9 +1,9 @@
 <%@ page import="com.cland.casting.CastingProfile" %>
 <g:hiddenField name="averating" value="${fieldValue(bean: castingProfileInstance, field: 'averating')}"/>
-<g:if test="${productionInstance != null}">
-<g:hiddenField name="production.id" value="${productionInstance?.id}" />
+<g:if test="${isEditing} & ${isNew != true } ">
+<g:hiddenField name="production.id" value="${castingProfileInstance?.production?.id}" />
 </g:if>
-<g:if test="${productionInstance == null}">
+<g:if test="${castingProfileInstance?.production == null}">
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'production', 'error')} required">
 	<label for="production">
 		<g:message code="castingProfile.production.label" default="Production" />

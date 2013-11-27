@@ -189,7 +189,7 @@ img {
 }
 
 .nav a.home, .nav a.list, .nav a.create, .nav a.aboutus,.nav a.cancel,.nav a.newsevents,
-.nav a.login,.nav a.logout  {
+.nav a.login,.nav a.logout,.nav a.casting  {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
@@ -642,14 +642,15 @@ a.skip {
 			}
 /** CUSTOM CSS RULES **/
 
-.bread-crump {padding:4px;font-size:0.8em;font-weight:bold;}
+.bread-crump {padding:6px;font-size:0.8em;font-weight:bold;}
 .current-crump {font-weight:normal;}
-.bread-crump:before {content:'You are here: ';color:green;padding-left:1.2em;}
+.bread-crump:before {content:'You are here: ';color:green;padding-left:0.5em;}
 .bread-crump r-arrow:after, .r-arrow:after {content:"\00BB"}
 .bread-crump l-arrow:after, .l-arrow:after {content:"\00AB"}
 .bread-crump r-arrow, .bread-crump l-arrow,.l-arrow,.r-arrow {color:orange; }
 
 .bread-crump tick-arrow:after, .tick-arrow:after {content:"\2713";color:green}
+.copyright {font-weight:bold;padding-top:10px;}
 .field-small {width:40px}
 
 .list-filter {border:solid 1px #ccc;background:#fff;}
@@ -674,4 +675,7 @@ tr > td:last-child, tr > th:last-child {
 }
 .ui-accordion .ui-accordion-header {
     padding: 0.5em 0.5em 0.5em 1.7em !important;
+}
+.ui-widget-content {
+	background :#fff !important;
 }

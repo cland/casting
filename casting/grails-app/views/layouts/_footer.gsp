@@ -9,10 +9,10 @@
 
 <g:link controller="organisation" action="list" >Organisations</g:link> |
 <g:link controller="region" action="list" >Regions</g:link> |
-<g:link controller="admin" action="index">Technical</g:link> |
+<g:link controller="admin" view="/admin/technical">Technical</g:link> |
 </sec:ifAnyGranted>
 <g:link controller="logout" action="index" >Logout</g:link>
 </sec:ifLoggedIn>
 <br/>
-<g:copyright startYear="2013">TI Systems</g:copyright>
+<div class="copyright"><g:copyright startYear="2013">TI Systems</g:copyright></div>
 </div>

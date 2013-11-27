@@ -18,7 +18,7 @@ class CastingProfileController {
     def create() {
 		def production = null //new Production(params)
 		if(params?.production?.id) production = Production.get(params.production.id) 
-        [castingProfileInstance: new CastingProfile(params),productionInstance:production]
+        [castingProfileInstance: new CastingProfile(params),productionInstance:production, isEditing:true, isNew:true]
     }
 
     def save() {
@@ -40,7 +40,7 @@ class CastingProfileController {
             return
         }
 
-        [castingProfileInstance: castingProfileInstance]
+        [castingProfileInstance: castingProfileInstance, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
@@ -51,7 +51,7 @@ class CastingProfileController {
             return
         }
 
-        [castingProfileInstance: castingProfileInstance]
+        [castingProfileInstance: castingProfileInstance, isEditing:true, isNew:false]
     }
 
     def update(Long id, Long version) {

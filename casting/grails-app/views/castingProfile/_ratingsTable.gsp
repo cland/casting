@@ -16,13 +16,20 @@
                     <td>${p.rating}</td>
                     <td>${p.comments}</td>
                     <td>${com.cland.casting.User.get(p?.createdBy) }</td>
-                    <td><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></td>
+                    <td>
+                    <g:if test="${isEditing }">
+                    <r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/>
+                    </g:if>
+                    </td>
+                    
                 </tr>
                 </g:each>
             </tbody>
         </table>
 
+		<g:if test="${isEditing }">
         <li class="add"><a id="addRatingLink" href="#">Rate this profile</a></li>
+        </g:if>
     </ul>
 </div>
 <r:script>

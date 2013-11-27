@@ -59,7 +59,9 @@
 .nav a.logout {
 	background-image: url("${fam.icon(name:'door_out')}");
 }
-
+.nav a.casting {
+	background-image: url("${fam.icon(name:'table_multiple')}");
+}
 
 		</style>
 	</head>

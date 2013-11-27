@@ -14,13 +14,15 @@
                 <tr rowId="${i}">
                     <td>${p.name}</td>
                     <td>${p.comments}</td>
-                    <td><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></td>
+                    <td>
+                    <g:if test="${isEditing }"><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></g:if>
+                    </td>
                 </tr>
                 </g:each>
             </tbody>
         </table>
 
-        <li class="add"><a id="addPortfolioLink" href="#">Add Portfolio</a></li>
+       <g:if test="${isEditing }"> <li class="add"><a id="addPortfolioLink" href="#">Add Portfolio</a></li></g:if>
     </ul>
 </div>
 <r:script>

@@ -16,7 +16,7 @@ class ProductionController {
     }
 
     def create() {
-        [productionInstance: new Production(params)]
+        [productionInstance: new Production(params), isEditing:true, isNew:true]
     }
 
     def save() {
@@ -38,7 +38,7 @@ class ProductionController {
             return
         }
 
-        [productionInstance: productionInstance]
+        [productionInstance: productionInstance, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
@@ -49,7 +49,7 @@ class ProductionController {
             return
         }
 
-        [productionInstance: productionInstance]
+        [productionInstance: productionInstance, isEditing:true, isNew:false]
     }
 
     def update(Long id, Long version) {

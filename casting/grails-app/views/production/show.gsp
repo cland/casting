@@ -7,14 +7,7 @@
 		<g:set var="entityName" value="${message(code: 'production.label', default: 'Production')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 
-<script type="text/javascript">
-//<![CDATA[
-var cland_params = {
-		active_tab : function(){ if (${params.tab==null}) return 0; else return ${params.tab};}.
-		active_sidenav : '../layouts/sidenav-admin'
-	}
-//]]>
-</script>		
+		<g:render template="head"></g:render>	
 	</head>
 	<body>
 		<div class="bread-crump">
@@ -24,8 +17,11 @@ var cland_params = {
 					Production: ${productionInstance?.name } (Client: ${productionInstance?.client?.encodeAsHTML()})
 				</span>
 		</div>	
+	<div id="status1" class="leftbar" role="complementary">
+         <g:render template="../layouts/sidenav-admin"></g:render>
+    </div>
 		<a href="#show-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<g:render template="../layouts/sidenav-admin"/>
+		
 		<div id="show-production" class="content scaffold-show" role="main">
 			<h1>Production: ${productionInstance?.name }</h1>
 			<g:if test="${flash.message}">
@@ -41,28 +37,31 @@ var cland_params = {
 				</fieldset>
 			</g:form>
 		</div>
-		<script type="text/javascript">
+<script type="text/javascript">
 // when the page has finished loading.. execute the follow
 
 $(document).ready(function() {		
-	$("#accordion" ).accordion();
+	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
+
+	//Main tabs	
 	$("#tabs").tabs(
-					{
-					active:cland_params.active_tab(),
-					create: function (event,ui){	
-						//executed after is created								
-						$('#tabs').show()
-					},
-					show: function(event,ui){
-						//on every tabs clicked
-					},
-					beforeLoad : function(event, ui) {
-							ui.jqXHR.error(function() {
-								ui.panel
-								.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
-							});
-						}
-			});		                
+			{
+				active:cland_params.active_tab(),
+				create: function (event,ui){	
+					//executed after is created								
+					$('#tabs').show()
+				},
+				show: function(event,ui){
+					//on every tabs clicked
+				},
+				beforeLoad : function(event, ui) {
+					ui.jqXHR.error(function() {
+						ui.panel
+						.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
+					});
+				}
+		});
+	
 });  //end method ready(...)
 
 </script>

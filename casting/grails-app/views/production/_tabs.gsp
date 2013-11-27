@@ -2,9 +2,11 @@
 <div id="tabs" style="display: none;">
 	<ul>
 		<li><a href="#tab-production">Details</a></li>
+		<li><a href="#tab-auditions">Auditions</a></li>
+		<li><a href="#tab-shortlist">Shortlist</a></li>
+		<li><a href="#tab-finalcast">Final Cast</a></li>				
+		<li><a href="#tab-resources">Resources</a></li>
 		<li><a href="#tab-portfolios">Portfolios</a></li>
-		<li><a href="#tab-profiles">All Profiles</a></li>
-		<li><a href="#tab-attachments">Attachments</a></li>
 	</ul>
 <div id="tab-production">
 		<ol class="property-list production">
@@ -14,6 +16,14 @@
 						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${productionInstance}" field="name"/></span>					
 				</li>
 			</g:if>
+		<g:if test="${productionInstance?.status}">
+				<li class="fieldcontain">
+					<span id="status-label" class="property-label"><g:message code="production.status.label" default="Status" /></span>
+					
+						<span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${productionInstance}" field="status"/></span>
+					
+				</li>
+				</g:if>			
 			<g:if test="${productionInstance?.description}">
 				<p>${productionInstance?.description}</p>
 			</g:if>			
@@ -48,18 +58,14 @@
 						</g:each>		
 	</g:if>
 </div>
-	<div id="tab-portfolios">
+<div id="tab-portfolios">
 		<g:render template="portfoliosTable"/>
 	</div>
-	<div id="tab-profiles">
-		<g:if test="${productionInstance?.profiles}">		
-			<span id="roles-label" class="property-label"><g:message code="production.profiles.label" default="Profiles" /></span>			
-			<g:each in="${productionInstance.profiles}" var="r">
-			<span class="property-value" aria-labelledby="profiles-label"><g:link controller="castingProfile" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-			</g:each>
-		</g:if>
-	</div>
-	<div id="tab-attachments">
+
+	<!-- CASTING TABS -->
+	<g:render template="tabs_casting"></g:render>
+	
+	<div id="tab-resources">
 		<div id="attachments" class="attachments">
 			<attachments:each bean="${productionInstance}">
 				<attachments:icon attachment="${attachment}" />

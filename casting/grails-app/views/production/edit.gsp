@@ -5,6 +5,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'production.label', default: 'Production')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<g:render template="head"></g:render>
 	</head>
 	<body>	
 		<div class="bread-crump">
@@ -14,8 +15,11 @@
 					Production: ${productionInstance?.name } (Client: ${productionInstance?.client?.encodeAsHTML()})
 				</span>
 		</div>	
+	<div id="status1" class="leftbar" role="complementary">
+         <g:render template="../layouts/sidenav-admin"></g:render>
+    </div>
 		<a href="#edit-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<tmpl:sidenav/>
+	
 		<div id="edit-production" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -41,5 +45,12 @@
 				</fieldset>
 			</g:form>
 		</div>
+<script type="text/javascript">
+// when the page has finished loading.. execute the follow
+$(document).ready(function() {		
+	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
+});  //end method ready(...)
+
+</script>		
 	</body>
 </html>

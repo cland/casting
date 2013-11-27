@@ -7,6 +7,10 @@
 			<a class="aboutus" href="${createLink(uri: '/')}">
 			<g:message code="default.aboutus.label" /></a>
 		</li>
+		<sec:ifLoggedIn>
+		<li><g:link controller="home" action="casting" class="casting"> <g:message
+					code="default.casting.label" /></g:link></li>
+		</sec:ifLoggedIn>
 		<li><a class="newsevents" href="${createLink(uri: '/')}"> <g:message
 					code="default.newsevents.label" /></a></li>
 		<sec:ifLoggedIn>		

@@ -90,4 +90,30 @@ class User {
 	String toString(){
 		"${firstName} ${lastName}"
 	}
+	
+	public enum PhoneType{
+		H("Home"),
+		M("Mobile"),
+		W("Work"),
+		F("Fax")
+
+		final String value;
+		
+		PhoneType(String value) {
+			this.value = value;
+		}
+		
+		String toString(){
+			value;
+		}
+		
+		String getKey(){
+			name()
+		}
+
+		static list() {
+			[H, M, W, F]
+		}
+
+	}
 } //end class

@@ -45,6 +45,7 @@ SpringSecurityUtils.doWithAuth('default') {
 		 */
 		switch(Environment.getCurrent()){
 			case "DEVELOPMENT":
+//				def devRole = new Role(authority: 'ROLE_DEVELOPER').save(flush: true, failOnError:true)
 //				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError:true)
 //				def directorRole = new Role(authority: 'ROLE_DIRECTOR').save(flush: true, failOnError:true)
 //				def agentRole = new Role(authority: 'ROLE_AGENT').save(flush: true, failOnError:true)
@@ -90,6 +91,25 @@ SpringSecurityUtils.doWithAuth('default') {
 //				}
 //				UserRole.create(adminUser, adminRole, true)
 //
+//			//* Dev user
+//				def devUser = new User(username: 'dev',
+//				enabled: true,
+//				password: 'password',
+//				firstName: 'Dev',
+//				lastName: 'User',
+//				idNo :"3453333463453",
+//				contactNo : "021334232",
+//				dateOfBirth:(new Date() - 365*30),
+//				gender:"Male",
+//				address:"123 Low St",
+//				city:"Cape Town",
+//				email:"dev@whereever.com")
+//
+//				devUser.save()
+//				if(devUser.hasErrors()){
+//					println devUser.errors
+//				}
+//				UserRole.create(adminUser, adminRole, true)
 //			//** ordinary user
 //				def directorUser1 = new User(username: 'mary',
 //				enabled: true,
@@ -229,13 +249,13 @@ SpringSecurityUtils.doWithAuth('default') {
 //					
 //					//setup a client
 //					def client = new Client(company:org2)
-//					def production = new Production(name:"Cape Advert",description:"This is the Cape Advert Description")
+//					def production = new Production(name:"Cape Advert",description:"This is the Cape Advert Description",status:ProductionStatus.OPEN_CANDIDATES_REQUIRED)
 //					client.addToProductions(production) 
 //					client.save()
 //					if(client.hasErrors()){
 //						println client.errors
 //					}
-					
+//					
 					
 				break
 			case "PRODUCTION" :

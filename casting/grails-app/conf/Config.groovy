@@ -121,7 +121,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/production/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	
 	//** GENERAL AUTHENTICATED USER
-	'/home/**': ['IS_AUTHENTICATED_FULLY'],
+	//'/home/**': ['IS_AUTHENTICATED_FULLY'],
 	'/production/show/**': ['IS_AUTHENTICATED_FULLY'],
 	'/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
 	'/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY']

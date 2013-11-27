@@ -7,7 +7,13 @@
 	</label>
 	<g:textField name="name" value="${productionInstance?.name}"/>
 </div>
-
+<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'status', 'error')} required">
+	<label for="type">
+		<g:message code="production.status.label" default="Status" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select name="status" from="${com.cland.casting.Production$ProductionStatus?.values()}" keys="${com.cland.casting.Production$ProductionStatus.values()*.name()}" required="" value="${productionInstance?.status?.name()}"/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'description', 'error')} ">
 	<label for="description">
 		<g:message code="production.description.label" default="Description" />
@@ -36,12 +42,7 @@
 					${p?.encodeAsHTML()}
 				</g:link></li>
 		</g:each>
-		<li class="add">
-			<g:link controller="castingProfile"
-				action="create" params="['production.id': productionInstance?.id]">
-				${message(code: 'default.add.label', args: [message(code: 'castingProfile.label', default: 'Profiles')])}
-			</g:link>
-		</li>
+		
 	</ul>
 </div>
 
