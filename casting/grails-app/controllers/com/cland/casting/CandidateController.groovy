@@ -16,11 +16,27 @@ class CandidateController {
     }
 
     def create() {
-        [candidateInstance: new Candidate(params)]
+		def agency = null 
+		if(params?.agency?.id) agency = Agency.get(params.agency.id)
+		[candidateInstance: new Candidate(params),agencyInstance:agency, isEditing:true, isNew:true]
+
     }
 
     def save() {
+		//println(params.person)
+		//def lines = params.list("param-name")  //accessing a parameter
+		
         def candidateInstance = new Candidate(params)
+		if(!params.person.id){
+			if(params.person.id == ""){
+				if(!candidateInstance.person.save(flush:true)){	
+					println("Failed to save new person..."  + candidateInstance.person?.errors)		
+					render(view: "create", model: [candidateInstance: candidateInstance])
+					return
+				}
+			}
+		}
+		
         if (!candidateInstance.save(flush: true)) {
             render(view: "create", model: [candidateInstance: candidateInstance])
             return
@@ -38,7 +54,7 @@ class CandidateController {
             return
         }
 
-        [candidateInstance: candidateInstance]
+        [candidateInstance: candidateInstance, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
@@ -49,7 +65,7 @@ class CandidateController {
             return
         }
 
-        [candidateInstance: candidateInstance]
+        [candidateInstance: candidateInstance,agencyInstance:candidateInstance.agency,isEditing:true, isNew:false]
     }
 
     def update(Long id, Long version) {

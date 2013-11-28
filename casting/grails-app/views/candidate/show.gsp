@@ -6,118 +6,30 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
-		<a href="#show-candidate" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+	<div class="bread-crump">			
+			<span class="r-arrow"></span>
+			<g:link controller="agency" action="list">Agencies</g:link>
+			<g:if test="${candidateInstance?.agency }">
+			<span class="r-arrow"></span>
+				<g:link controller="agency" action="show" params="${['id':candidateInstance?.agency?.id]}">Agency: ${candidateInstance?.agency?.encodeAsHTML()}</g:link>
+			</g:if>
+			<span class="r-arrow"></span> <span class="current-crump">
+				${candidateInstance?.encodeAsHTML() }
+			</span>
 		</div>
+		<div id="status1" class="leftbar" role="complementary">
+	         <g:render template="../layouts/sidenav-admin"></g:render>
+	    </div>	
+		<a href="#show-candidate" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="show-candidate" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list candidate">
-			
-				<g:if test="${candidateInstance?.agency}">
-				<li class="fieldcontain">
-					<span id="agency-label" class="property-label"><g:message code="candidate.agency.label" default="Agency" /></span>
-					
-						<span class="property-value" aria-labelledby="agency-label"><g:link controller="agency" action="show" id="${candidateInstance?.agency?.id}">${candidateInstance?.agency?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.clothing}">
-				<li class="fieldcontain">
-					<span id="clothing-label" class="property-label"><g:message code="candidate.clothing.label" default="Clothing" /></span>
-					
-						<span class="property-value" aria-labelledby="clothing-label"><g:fieldValue bean="${candidateInstance}" field="clothing"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.eyes}">
-				<li class="fieldcontain">
-					<span id="eyes-label" class="property-label"><g:message code="candidate.eyes.label" default="Eyes" /></span>
-					
-						<span class="property-value" aria-labelledby="eyes-label"><g:fieldValue bean="${candidateInstance}" field="eyes"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.hair}">
-				<li class="fieldcontain">
-					<span id="hair-label" class="property-label"><g:message code="candidate.hair.label" default="Hair" /></span>
-					
-						<span class="property-value" aria-labelledby="hair-label"><g:fieldValue bean="${candidateInstance}" field="hair"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.height}">
-				<li class="fieldcontain">
-					<span id="height-label" class="property-label"><g:message code="candidate.height.label" default="Height" /></span>
-					
-						<span class="property-value" aria-labelledby="height-label"><g:fieldValue bean="${candidateInstance}" field="height"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.person}">
-				<li class="fieldcontain">
-					<span id="person-label" class="property-label"><g:message code="candidate.person.label" default="Person" /></span>
-					
-						<span class="property-value" aria-labelledby="person-label"><g:link controller="user" action="show" id="${candidateInstance?.person?.id}">${candidateInstance?.person?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.pictures}">
-				<li class="fieldcontain">
-					<span id="pictures-label" class="property-label"><g:message code="candidate.pictures.label" default="Pictures" /></span>
-					
-						<g:each in="${candidateInstance.pictures}" var="p">
-						<span class="property-value" aria-labelledby="pictures-label"><g:link controller="pictureSet" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.shoe}">
-				<li class="fieldcontain">
-					<span id="shoe-label" class="property-label"><g:message code="candidate.shoe.label" default="Shoe" /></span>
-					
-						<span class="property-value" aria-labelledby="shoe-label"><g:fieldValue bean="${candidateInstance}" field="shoe"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.videos}">
-				<li class="fieldcontain">
-					<span id="videos-label" class="property-label"><g:message code="candidate.videos.label" default="Videos" /></span>
-					
-						<g:each in="${candidateInstance.videos}" var="v">
-						<span class="property-value" aria-labelledby="videos-label"><g:link controller="videoSet" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${candidateInstance?.waist}">
-				<li class="fieldcontain">
-					<span id="waist-label" class="property-label"><g:message code="candidate.waist.label" default="Waist" /></span>
-					
-						<span class="property-value" aria-labelledby="waist-label"><g:fieldValue bean="${candidateInstance}" field="waist"/></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
+			<g:render template="tabs"/>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${candidateInstance?.id}" />
@@ -126,5 +38,31 @@
 				</fieldset>
 			</g:form>
 		</div>
+<script type="text/javascript">
+// when the page has finished loading.. execute the follow
+
+$(document).ready(function() {		
+	$("#accordion" ).accordion();
+
+	$("#tabs").tabs(
+					{
+					active:cland_params.active_tab(),
+					create: function (event,ui){	
+						//executed after is created								
+						$('#tabs').show()
+					},
+					show: function(event,ui){
+						//on every tabs clicked
+					},
+					beforeLoad : function(event, ui) {
+							ui.jqXHR.error(function() {
+								ui.panel
+								.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
+							});
+						}
+			});		                
+});  //end method ready(...)
+
+</script>		
 	</body>
 </html>

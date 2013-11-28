@@ -2,14 +2,14 @@
 <div id="tabs" style="display: none;">
 	<ul>
 	    <li><a href="#tab-agency">Details</a></li>
-		<li><a href="#tab-List">Candidate List</a></li>
-		
+		<li><a href="#tab-candidates">Candidates</a></li>
+		<li><a href="#tab-productions">Productions</a></li>
 	</ul>
 	<div id="tab-agency">
 			<ol class="property-list agency">			
 				<g:if test="${agencyInstance?.company}">
 				<li class="fieldcontain">
-					<span id="company-label" class="property-label"><g:message code="agency.company.label" default="Company" /></span>
+					<span id="company-label" class="property-label"><g:message code="agency.company.label" default="Name" /></span>
 					
 						<span class="property-value" aria-labelledby="company-label"><g:link controller="organisation" action="show" id="${agencyInstance?.company?.id}">${agencyInstance?.company?.encodeAsHTML()}</g:link></span>
 					
@@ -43,19 +43,24 @@
 			
 			</ol>
 	</div>
-	<div id="tab-List">
+	<div id="tab-candidates">
 					<ol>
 					<g:if test="${agencyInstance?.candidates}">
-				<li>
+				
 						<g:each in="${agencyInstance.candidates}" var="c">
-						<span class="property-value" aria-labelledby="candidates-label"><g:link controller="user" action="show" id="${c.id}">${c?.clothing?.encodeAsHTML()}</g:link></span>
-						<span class="property-value" aria-labelledby="candidates-label"><g:link controller="user" action="show" id="${c.id}">${c?.eyes?.encodeAsHTML()}</g:link></span>
-						<span class="property-value" aria-labelledby="candidates-label"><g:link controller="user" action="show" id="${c.id}">${c?.hair?.encodeAsHTML()}</g:link></span>
-						<span class="property-value" aria-labelledby="candidates-label"><g:link controller="user" action="show" id="${c.id}">${c?.height?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="candidates-label"><g:link controller="candidate" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="candidates-label">${c?.clothing?.encodeAsHTML()}</span>
+						<span class="property-value" aria-labelledby="candidates-label">${c?.clothing?.encodeAsHTML()}</span>
+						<span class="property-value" aria-labelledby="candidates-label">${c?.eyes?.encodeAsHTML()}</span>
+						<span class="property-value" aria-labelledby="candidates-label">${c?.hair?.encodeAsHTML()}</span>
+						<span class="property-value" aria-labelledby="candidates-label">${c?.height?.encodeAsHTML()}</span><br/>
 						</g:each>					
-				</li>
+			
 				</g:if>
 					</ol>
+	</div>
+	<div id="tab-productions">
+	-- list of productions that this agency is allowed to view --
 	</div>
 </div>
 

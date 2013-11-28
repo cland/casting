@@ -17,6 +17,7 @@ class User {
 	 String firstName
 	 String lastName
 	 String middleName
+	 String knownAsName
 	 String idNo
 	 String homeLanguage
 	 Date dateOfBirth
@@ -34,23 +35,25 @@ class User {
 	 Organisation company
 	 
 	// Candidate candidate
-	 
+	static hasOne = [candidate:Candidate] 
 	static constraints = {
-		username blank: false, unique: true
-		password blank: false
+		candidate(nullable:true)
+		username blank: true, unique: true, nullable:true
+		password blank: true, nullable:true
 		firstName(blank:false)
 		lastName(blank:false)
 		middleName(nullable:true)
+		knownAsName(blank:true,nullable:true) 
 		homeLanguage(nullable:true)
 		salutation(inList:["Mr","Mrs","Ms","Miss"],nullable:true)
-		idNo()
-		dateOfBirth()
+		idNo(nullable:true)
+		dateOfBirth(nullable:true)
 		gender(inList:["Male", "Female"])
 		race(nullable:true)
 		maritalStatus(nullable:true,inList:["Single","Married","Divorced","Widowed"])
 		communicationMode(nullable:true,inList:["Email","SMS"])
-		address()	
-		city()
+		address(nullable:true)	
+		city(nullable:true)
 		region(nullable:true)
 		country(nullable:true)
 		contactNo()

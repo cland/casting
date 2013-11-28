@@ -1,15 +1,75 @@
 <%@ page import="com.cland.casting.Candidate" %>
+<fieldset><legend>Person Details</legend>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person', 'error')} required">
+	<label for="person">
+		<g:message code="candidate.person.label" default="Person" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="person" name="person.id" from="${com.cland.casting.User.list()}" optionKey="id"  value="${candidateInstance?.person?.id}" class="many-to-one"  noSelection="['': '--New Person/Select One--']"/>
+</div>
 
 
+<g:if test="${agencyInstance != null}">
+<g:hiddenField name="agency.id" value="${agencyInstance?.id}" />
+</g:if>
+<g:if test="${agencyInstance == null}">
 
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'agency', 'error')} required">
 	<label for="agency">
 		<g:message code="candidate.agency.label" default="Agency" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="agency" name="agency.id" from="${com.cland.casting.Agency.list()}" optionKey="id" required="" value="${candidateInstance?.agency?.id}" class="many-to-one"/>
+	<g:select id="agency" name="agency.id" from="${com.cland.casting.Agency.list()}" optionKey="id" required="" value="${candidateInstance?.agency?.id}" class="many-to-one" noSelection="['': '--Add New Agency--']"/>
 </div>
+</g:if>
 
+
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.firstName', 'error')} required">
+	<label for="person.firstName">
+		<g:message code="user.firstName.label" default="First Name" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="person.firstName" required="" value="${candidateInstance?.person?.firstName}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.lastName', 'error')} required">
+	<label for="person.lastName">
+		<g:message code="user.lastName.label" default="Last Name" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="person.lastName" required="" value="${candidateInstance?.person?.lastName}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.gender', 'error')} ">
+	<label for="person.gender">
+		<g:message code="user.gender.label" default="Gender" />
+		
+	</label>
+	<g:select name="person.gender" from="${com.cland.casting.User.constraints.gender.inList}" value="${candidateInstance?.person?.gender}" valueMessagePrefix="person.gender" noSelection="['': '']"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.race', 'error')} ">
+	<label for="person.race">
+		<g:message code="user.race.label" default="Race" />
+		
+	</label>
+	<g:select id="person.race" name="person.race.id" from="${com.cland.casting.Race.list()}" optionKey="id" value="${candidateInstance?.person?.race?.id}" class="many-to-one" noSelection="['null': '']"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.contactNo', 'error')} ">
+	<label for="person.contactNo">
+		<g:message code="user.contactNo.label" default="Contact No" />
+		
+	</label>
+	<g:textField name="person.contactNo" value="${candidateInstance?.person?.contactNo}"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.email', 'error')} ">
+	<label for="person.email">
+		<g:message code="user.email.label" default="Email" />
+		
+	</label>
+	<g:field type="email" name="person.email" value="${candidateInstance?.person?.email}"/>
+</div>
+</fieldset>
+
+<br/>
+<fieldset><legend>Characteristics</legend>	
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'clothing', 'error')} ">
 	<label for="clothing">
 		<g:message code="candidate.clothing.label" default="Clothing" />
@@ -42,54 +102,12 @@
 	<g:textField name="height" value="${candidateInstance?.height}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person', 'error')} required">
-	<label for="person">
-		<g:message code="candidate.person.label" default="Person" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="person" name="person.id" from="${com.cland.casting.User.list()}" optionKey="id" required="" value="${candidateInstance?.person?.id}" class="many-to-one"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'pictures', 'error')} ">
-	<label for="pictures">
-		<g:message code="candidate.pictures.label" default="Pictures" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${candidateInstance?.pictures?}" var="p">
-    <li><g:link controller="pictureSet" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="pictureSet" action="create" params="['candidate.id': candidateInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'pictureSet.label', default: 'PictureSet')])}</g:link>
-</li>
-</ul>
-
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'shoe', 'error')} ">
 	<label for="shoe">
 		<g:message code="candidate.shoe.label" default="Shoe" />
 		
 	</label>
 	<g:textField name="shoe" value="${candidateInstance?.shoe}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'videos', 'error')} ">
-	<label for="videos">
-		<g:message code="candidate.videos.label" default="Videos" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${candidateInstance?.videos?}" var="v">
-    <li><g:link controller="videoSet" action="show" id="${v.id}">${v?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="videoSet" action="create" params="['candidate.id': candidateInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'videoSet.label', default: 'VideoSet')])}</g:link>
-</li>
-</ul>
-
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'waist', 'error')} ">
@@ -99,4 +117,4 @@
 	</label>
 	<g:textField name="waist" value="${candidateInstance?.waist}"/>
 </div>
-
+</fieldset>

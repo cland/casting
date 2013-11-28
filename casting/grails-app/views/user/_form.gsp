@@ -7,7 +7,7 @@
 		<g:message code="user.username.label" default="Username" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="username" required="" value="${userInstance?.username}"/>
+	<g:textField name="username" value="${userInstance?.username}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
@@ -15,7 +15,7 @@
 		<g:message code="user.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" required="" value="${userInstance?.password}"/>
+	<g:textField name="password" type="password" type="password" value="${userInstance?.password}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'firstName', 'error')} required">

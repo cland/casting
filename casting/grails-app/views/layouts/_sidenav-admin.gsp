@@ -7,6 +7,8 @@
 							<g:message code="default.new.label" args="['Agency']" /></g:link></li>
 					<li><g:link class="list" controller="agency" action="list">
 							<g:message code="default.list.label" args="['Agencies']" /></g:link></li>
+					<li><g:link class="create" controller="candidate" action="create" params="${['agency.id':agencyInstance?.id]}">
+							<g:message code="default.new.label" args="['Candidate']" /></g:link></li>		
 					<li><g:link class="list" controller="candidate" action="list">
 							<g:message code="default.list.label" args="['Candidates']" /></g:link></li>							
 				</ul>

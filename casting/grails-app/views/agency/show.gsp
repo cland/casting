@@ -7,14 +7,7 @@
 		<g:set var="entityName" value="${message(code: 'agency.label', default: 'Agency')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 		
-<script type="text/javascript">
-//<![CDATA[
-var cland_params = {
-		active_tab : function(){ if (${params.tab==null}) return 0; else return ${params.tab};},
-		active_sidenav : '../layouts/sidenav-admin'
-	}
-//]]>
-</script>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
 	<div class="bread-crump">
@@ -36,7 +29,7 @@ var cland_params = {
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<!-- The tabs -->
-			<g:render template="tabs"></g:render>
+			<g:render template="tabs"/>
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${agencyInstance?.id}" />

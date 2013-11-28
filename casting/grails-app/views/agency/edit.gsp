@@ -5,14 +5,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'agency.label', default: 'Agency')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
-<script type="text/javascript">
-//<![CDATA[
-var cland_params = {
-		active_tab : function(){ if (${params.tab==null}) return 0; else return ${params.tab};},
-		active_sidenav : '../layouts/sidenav-admin'
-	}
-//]]>
-</script>	
+		<g:render template="head"></g:render>	
 	</head>
 	<body>
 	<div class="bread-crump">
@@ -47,6 +40,7 @@ var cland_params = {
 				</fieldset>
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+					<g:link class="cancel" action="show" id="${agencyInstance?.id}"><g:message code="default.button.cancel.label" default="Cancel" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
