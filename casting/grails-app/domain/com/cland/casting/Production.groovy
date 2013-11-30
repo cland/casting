@@ -9,31 +9,10 @@ class Production {
 	List roles //without this problem: HibernateException – A collection with cascade=”all-delete-orphan” was no longer referenced by the owning entity instance
 	List categories
 	List portfolios
+	Date shootDate
+	List auditionDates
 	ProductionStatus status
-//	public enum ProductionStatus{
-//		OPEN_CANDIDATES_REQUIRED("Open - Candidates Required"),
-//		OPEN_AUDITION_IN_PROGRESS("Open - Audition In Progress"),
-//		CLOSED("Closed")
-//
-//		final String value;
-//		
-//		ProductionStatus(String value) {
-//			this.value = value;
-//		}
-//		
-//		String toString(){
-//			value;
-//		}
-//		
-//		String getKey(){
-//			name()
-//		}
-//
-//		static list() {
-//			[OPEN_CANDIDATES_REQUIRED, OPEN_AUDITION_IN_PROGRESS, CLOSED]
-//		}
-//
-//	} //end Enum
+	
 	static hasMany =[portfolios:Portfolio,profiles:CastingProfile,roles:CastingRole,categories:CastingCategory,agencyACL:Agency]
 	
 	static mapping = {

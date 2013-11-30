@@ -52,7 +52,11 @@
 
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-
+	$(".datepick").multiDatesPicker({
+		dateFormat: "dd-M-yy",
+		beforeShowDay: $.datepicker.noWeekends,
+		maxPicks: 1		
+	});
 	//Main tabs	
 	$("#tabs").tabs(
 			{

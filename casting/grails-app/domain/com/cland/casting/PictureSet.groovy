@@ -4,7 +4,7 @@ class PictureSet {
 	String name
 	Date dateCreated
 	static attachmentable = true
-	static belongsTo = [candidate:Candidate]
+	static belongsTo = [castingProfile:CastingProfile]
 	static constraints = {
 	}
 	def beforeInsert = {

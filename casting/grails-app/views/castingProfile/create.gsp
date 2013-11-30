@@ -5,7 +5,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'castingProfile.label', default: 'CastingProfile')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
-<g:render template="head"></g:render>			
+		<g:render template="head"></g:render>			
 	</head>
 	<body>
 	
@@ -52,6 +52,12 @@
 // when the page has finished loading.. execute the follow
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
+	//$(element_or_selector).multiDatesPicker(options_to_initialize_datepicker_and_multidatepicker);
+	$(".datepick").multiDatesPicker({
+		dateFormat: "dd-M-yy",
+		beforeShowDay: $.datepicker.noWeekends,
+		maxPicks: 1		
+	});
 });  //end method ready(...)
 
 </script>		

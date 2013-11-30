@@ -47,7 +47,8 @@
 		<g:message code="castingProfile.castDate.label" default="Cast Date" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="castDate" precision="day"  value="${castingProfileInstance?.castDate}"  />
+	<g:textField name="castDate" class="datepick" id="cast-date" value="${castingProfileInstance?.castDate?.format('dd-MMM-yyyy')}"/>	
+	
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'castNo', 'error')} required">
@@ -64,21 +65,7 @@
 	</label>
 	<g:field name="round" type="number" value="${castingProfileInstance.round}" required=""/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'pictures', 'error')} required">
-	<label for="pictures">
-		<g:message code="castingProfile.pictures.label" default="Pictures" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="pictures" name="pictures.id" from="${com.cland.casting.PictureSet.list()}" optionKey="id" required="" value="${castingProfileInstance?.pictures?.id}" class="many-to-one"/>
-</div>
 
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'videos', 'error')} required">
-	<label for="videos">
-		<g:message code="castingProfile.videos.label" default="Videos" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="videos" name="videos.id" from="${com.cland.casting.VideoSet.list()}" optionKey="id" required="" value="${castingProfileInstance?.videos?.id}" class="many-to-one"/>
-</div>
 </fieldset>
 <fieldset><legend>Progress Indicators</legend>
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isInvited', 'error')} ">
@@ -88,14 +75,33 @@
 	<g:checkBox name="isInvited" value="${castingProfileInstance?.isInvited}" />
 </div>
 
+<!-- START AUDITION AVAILABILITY AND DATES -->
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isAuditionAvailable', 'error')} ">
 	<label for="isAuditionAvailable">
-		<g:message code="castingProfile.isAuditionAvailable.label" default="Is Audition Available" />
-		
+		<g:message code="castingProfile.isAuditionAvailable.label" default="Is Audition Available" />		
 	</label>
 	<g:checkBox name="isAuditionAvailable" value="${castingProfileInstance?.isAuditionAvailable}" />
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'auditionDate', 'error')} ">
+	<label for="auditionDate">
+		<g:message code="castingProfile.auditionDate.label" default="Audition date" />		
+	</label>
+	<g:textField name="auditionDate" class="datepick" id="audition-date" value="${castingProfileInstance?.auditionDate}"/>	
+</div>
+<!-- END AUDITION AVAILABILITY AND DATES -->
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isCallbackAvailable', 'error')} ">
+	<label for="isCallbackAvailable">
+		<g:message code="castingProfile.isCallbackAvailable.label" default="Is Callback Available" />		
+	</label>
+	<g:checkBox name="isCallbackAvailable" value="${castingProfileInstance?.isCallbackAvailable}" />
+</div>
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'callbackDate', 'error')} ">
+	<label for="callbackDate">
+		<g:message code="castingProfile.callbackDate.label" default="Callback date" />		
+	</label>
+	<g:textField name="callbackDate" class="datepick" id="callback-date" value="${castingProfileInstance?.callbackDate}"/>	
+</div>
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isShortlist', 'error')} ">
 	<label for="isShortlist">
 		<g:message code="castingProfile.isShortlist.label" default="Is Shortlist" />

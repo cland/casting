@@ -36,6 +36,7 @@ class User {
 	 
 	// Candidate candidate
 	static hasOne = [candidate:Candidate] 
+	static attachmentable = true
 	static constraints = {
 		candidate(nullable:true)
 		username blank: true, unique: true, nullable:true
@@ -80,7 +81,14 @@ class User {
 			encodePassword()
 		}
 	}
-
+	/**
+	 * To ensure that all attachments are removed when the "onwer" domain is deleted.
+	 */
+	transient def beforeDelete = {
+		withNewSession{
+		  removeAttachments()
+		}
+	  }
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}

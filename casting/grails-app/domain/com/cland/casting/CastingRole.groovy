@@ -7,6 +7,10 @@ class CastingRole {
 	int requiredMaleCount
 	int requiredFemaleCount
 	int requiredCount
+	List<Date> auditionDates
+	List<Date> callbackDates
+	List<Date> wardropeDates
+	List<Date> shootDates
 	
 	boolean deleted
 	static transients = [ 'deleted' ]
@@ -14,18 +18,18 @@ class CastingRole {
 	static belongsTo = [production:Production]
 	static constraints = {
 		name(blank:false)
-		maxRequiredAuditionCount(min:0)
-		minRequiredAuditionCount(min:0)
-		requiredMaleCount(min:0)
-		requiredFemaleCount(min:0)
-		requiredCount(min:1)
+		maxRequiredAuditionCount(min:0,blank:true)
+		minRequiredAuditionCount(min:0,blank:true)
+		requiredMaleCount(min:0,nullable:true,blank:true)
+		requiredFemaleCount(min:0,nullable:true,blank:true)
+		requiredCount(min:1,blank:true)	
 	}
 	static mapping = {
 		requiredCount defaultValue: 1
-		maxRequiredAuditionCount : 10
-		minRequiredAuditionCount : 5
-		requiredMaleCount : 1
-		requiredMaleCount : 1
+		maxRequiredAuditionCount defaultValue: 10
+		minRequiredAuditionCount defaultValue: 5
+		requiredMaleCount defaultValue: 1
+		requiredMaleCount defaultValue: 1
 	 }
 	def beforeInsert = {
 		// your code goes here

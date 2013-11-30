@@ -48,7 +48,7 @@
 				<li class="fieldcontain">
 					<span id="castDate-label" class="property-label"><g:message code="castingProfile.castDate.label" default="Cast Date" /></span>
 					
-						<span class="property-value" aria-labelledby="castDate-label"><g:formatDate date="${castingProfileInstance?.castDate}" /></span>
+						<span class="property-value" aria-labelledby="castDate-label"><g:formatDate date="${castingProfileInstance?.castDate}" format="dd-MMM-yyyy"/></span>
 					
 				</li>
 				</g:if>
@@ -61,7 +61,14 @@
 					
 				</li>
 				</g:if>
-			
+				<g:if test="${castingProfileInstance?.auditionDate}">
+				<li class="fieldcontain">
+					<span id="auditionDate-label" class="property-label"><g:message code="castingProfile.auditionDate.label" default="Audition Date" /></span>
+					
+						<span class="property-value" aria-labelledby="auditionDate-label"><g:formatDate date="${castingProfileInstance?.auditionDate}" format="dd-MMM-yyyy"/></span>
+					
+				</li>
+				</g:if>			
 				<g:if test="${castingProfileInstance?.categories}">
 				<li class="fieldcontain">
 					<span id="categories-label" class="property-label"><g:message code="castingProfile.categories.label" default="Categories" /></span>

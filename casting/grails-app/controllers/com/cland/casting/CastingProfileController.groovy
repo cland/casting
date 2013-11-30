@@ -18,11 +18,18 @@ class CastingProfileController {
     def create() {
 		def production = null //new Production(params)
 		if(params?.production?.id) production = Production.get(params.production.id) 
+
         [castingProfileInstance: new CastingProfile(params),productionInstance:production, isEditing:true, isNew:true]
     }
 
     def save() {
         def castingProfileInstance = new CastingProfile(params)
+		bindData(castingProfileInstance, params, [exclude: 'auditionDate'])
+		bindData(castingProfileInstance, params, [exclude: 'callbackDate'])
+		bindData(castingProfileInstance, params, [exclude: 'castDate'])
+		bindData(castingProfileInstance, ['auditionDate': params.date('auditionDate', ['dd-MMM-yyyy'])], [include: 'auditionDate'])
+		bindData(castingProfileInstance, ['callbackDate': params.date('callbackDate', ['dd-MMM-yyyy'])], [include: 'callbackDate'])
+		bindData(castingProfileInstance, ['castDate': params.date('castDate', ['dd-MMM-yyyy'])], [include: 'castDate'])
         if (!castingProfileInstance.save(flush: true)) {
             render(view: "create", model: [castingProfileInstance: castingProfileInstance])
             return
@@ -55,7 +62,7 @@ class CastingProfileController {
     }
 
     def update(Long id, Long version) {
-        def castingProfileInstance = CastingProfile.get(id)
+        def castingProfileInstance = CastingProfile.get(id)		
         if (!castingProfileInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'castingProfile.label', default: 'CastingProfile'), id])
             redirect(action: "list")
@@ -73,6 +80,12 @@ class CastingProfileController {
         }
 
         castingProfileInstance.properties = params
+		bindData(castingProfileInstance, params, [exclude: 'auditionDate'])
+		bindData(castingProfileInstance, params, [exclude: 'callbackDate'])
+		bindData(castingProfileInstance, params, [exclude: 'castDate'])
+		bindData(castingProfileInstance, ['auditionDate': params.date('auditionDate', ['dd-MMM-yyyy'])], [include: 'auditionDate'])
+		bindData(castingProfileInstance, ['callbackDate': params.date('callbackDate', ['dd-MMM-yyyy'])], [include: 'callbackDate'])
+		bindData(castingProfileInstance, ['castDate': params.date('castDate', ['dd-MMM-yyyy'])], [include: 'castDate'])
 		// remove deleted entities. This relies on the cascade:"all-delete-orphan" setting in the respective Entity.
 		castingProfileInstance.ratings.removeAll{ it.deleted }
         if (!castingProfileInstance.save(flush: true)) {

@@ -5,11 +5,13 @@
             <thead>
                 <tr>
                     <th data="{required:true, name:'name', placeholder:'Required'}">Casting Role</th>
-                    <th data="{required:true, name:'maxRequiredAuditionCount', placeholder:'20', type:'intenger',cssClass:'field-small'}  ">Max</th>
-                    <th data="{required:true, name:'mimRequiredAuditionCount', placeholder:'5', type:'intenger',cssClass:'field-small'}">Min</th>
-                    <th data="{required:false, name:'requiredMaleCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Male</th>
-                    <th data="{required:false, name:'requiredFemaleCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Female</th>
-                    <th data="{required:true, name:'requiredCount', placeholder:'1', type:'intenger',cssClass:'field-small'}">Required</th>
+                    <th data="{required:true, name:'maxRequiredAuditionCount', placeholder:'', type:'intenger',cssClass:'field-small'}  ">Max</th>
+                    <th data="{required:true, name:'mimRequiredAuditionCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Min</th>
+                    <th data="{required:true, name:'requiredCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Required</th>
+                    <th data="{required:false, name:'auditionDates', placeholder:'Dates', type:'intenger',cssClass:'field-small'}">Auditions</th>
+                    <th data="{required:false, name:'callbackDates', placeholder:'Dates', type:'intenger',cssClass:'field-small'}">Callbacks</th> 
+                    <th data="{required:false, name:'wardropeDates', placeholder:'Dates', type:'Date',cssClass:'field-small'}">Wardropes</th>
+                    <th data="{required:false, name:'shootDates', placeholder:'Dates',cssClass:'field-small'}">Shoot</th>                   
                     <th data="{editable:false}">&nbsp;</th>
                 </tr>
             </thead>
@@ -19,9 +21,11 @@
                     <td>${p.name}</td>
                     <td>${p.maxRequiredAuditionCount}</td>
                     <td>${p.minRequiredAuditionCount}</td>
-                    <td>${p.requiredMaleCount}</td>
-                    <td>${p.requiredFemaleCount}</td>
                     <td>${p.requiredCount}</td>
+                    <td>${p.auditionDates}</td>
+                    <td>${p.callbackDates}</td>
+                    <td>${p.wardropeDates}</td>
+                    <td>${p.shootDates}</td>
                     <td><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></td>
                 </tr>
                 </g:each>
