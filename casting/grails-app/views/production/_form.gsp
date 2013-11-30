@@ -7,6 +7,14 @@
 	</label>
 	<g:textField name="name" value="${productionInstance?.name}"/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'shootDate', 'error')} required">
+	<label for="shootDate">
+		<g:message code="production.shootDate.label" default="Shoot Date" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="shootDate" class="datepick" id="shoot-date" value="${productionInstance?.shootDate?.format('dd-MMM-yyyy')}"/>	
+	
+</div>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'status', 'error')} required">
 	<label for="type">
 		<g:message code="production.status.label" default="Status" />

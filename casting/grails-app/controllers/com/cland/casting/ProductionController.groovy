@@ -21,6 +21,8 @@ class ProductionController {
 
     def save() {
         def productionInstance = new Production(params)
+		bindData(productionInstance, params, [exclude: 'shootDate'])
+		bindData(productionInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
         if (!productionInstance.save(flush: true)) {
             render(view: "create", model: [productionInstance: productionInstance])
             return
@@ -71,6 +73,8 @@ class ProductionController {
         }
 
         productionInstance.properties = params
+		bindData(productionInstance, params, [exclude: 'shootDate'])
+		bindData(productionInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
 		// remove deleted entities. This relies on the cascade:"all-delete-orphan" setting in the respective Entity.
 		productionInstance.roles.removeAll{ it.deleted }
 		productionInstance.categories.removeAll{ it.deleted }

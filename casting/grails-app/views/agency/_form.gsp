@@ -16,6 +16,12 @@
 	</label>
 	<g:textField name="company.phoneNo" value="${agencyInstance?.company?.phoneNo}"/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: agencyInstance?.company, field: 'email', 'error')} ">
+	<label for="company.email">
+		<g:message code="organisation.email.label" default="Email" />		
+	</label>
+	<g:textField name="company.email" value="${agencyInstance?.company?.email}"/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: agencyInstance?.company, field: 'contactPerson', 'error')} ">
 	<label for="company.contactPerson">
 		<g:message code="organisation.contactPerson.label" default="Contact person" />

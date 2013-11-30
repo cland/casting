@@ -23,10 +23,20 @@
 						<span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${productionInstance}" field="status"/></span>
 					
 				</li>
-				</g:if>			
+			</g:if>		
+		<g:if test="${productionInstance?.shootDate}">
+				<li class="fieldcontain">
+					<span id="shootDate-label" class="property-label"><g:message code="production.shootDate.label" default="Shoot Date" /></span>				
+						<span class="property-value" aria-labelledby="shootDate-label"><g:formatDate date="${productionInstance?.shootDate}" format="dd-MMM-yyyy"/></span>				
+				</li>
+			</g:if>		
+		</ol>
+			<fieldset><legend>Brief</legend>
 			<g:if test="${productionInstance?.description}">
 				<p>${productionInstance?.description}</p>
 			</g:if>			
+			</fieldset>
+		<ol>
 			<g:if test="${productionInstance?.categories}">
 				<li class="fieldcontain">
 					<span id="categories-label" class="property-label"><g:message code="production.categories.label" default="Categories" /></span>					

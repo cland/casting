@@ -45,7 +45,7 @@
 		// when the page has finished loading.. execute the follow
 		
 		$(document).ready(function() {		
-			$("#accordion" ).accordion();
+			$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
 			       
 		});
 		</script>

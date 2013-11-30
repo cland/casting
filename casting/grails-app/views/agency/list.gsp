@@ -6,15 +6,7 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'agency.label', default: 'Agency')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
-		
-<script type="text/javascript">
-//<![CDATA[
-var cland_params = {
-		active_tab : function(){ if (${params.tab==null}) return 0; else return ${params.tab};},
-		active_sidenav : "../layouts/sidenav-admin"
-	}
-//]]>
-</script>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
 	<div id="status1" class="leftbar" role="complementary">		
@@ -88,22 +80,19 @@ var cland_params = {
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow
 
-$(document).ready(function() {		
-	 $(function() {
-		    $("#accordion" ).accordion();
-		  });
+$(document).ready(function() {
+	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
+	 /*$('.myTable tr').hide().filter(':lt(3)').show();
+	    $('.pagination').jqPagination({
+	      max_page : $('.myTable tr').length -1,
+		  paged : function(page) {
+	        $('.myTable tr:not(:first)').hide();
+	        $($('.myTable tr')[page]).show();
+	      }
+	    }); */     	
 	       
 });  //end method ready(...)
-$(document).ready(function() {	
-	/*$('.myTable tr').hide().filter(':lt(3)').show();
-    $('.pagination').jqPagination({
-      max_page : $('.myTable tr').length -1,
-	  paged : function(page) {
-        $('.myTable tr:not(:first)').hide();
-        $($('.myTable tr')[page]).show();
-      }
-    }); */       
-});
+
 </script>		
 	</body>
 </html>

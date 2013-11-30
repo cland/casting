@@ -6,15 +6,19 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
+	<div class="bread-crump">
+				<span class="r-arrow"></span> <span class="current-crump">
+					User List
+				</span>
+		</div>	
+	<div id="status1" class="leftbar" role="complementary">
+         <g:render template="../layouts/sidenav-admin"></g:render>
+    </div>
 		<a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
+		
 		<div id="list-user" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -22,8 +26,7 @@
 			</g:if>
 			<table>
 				<thead>
-					<tr>
-					
+					<tr>					
 						<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
 					
 						<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
@@ -62,5 +65,13 @@
 				<g:paginate total="${userInstanceTotal}" />
 			</div>
 		</div>
+<script>
+  $(document).ready(function() {
+	  $("#accordion" ).accordion({ active: cland_params.active_sidebar() });
+	 // $("#add_org").live("click",function(){
+	//	  addOrganisation();
+	//	});
+  });
+ </script>		
 	</body>
 </html>
