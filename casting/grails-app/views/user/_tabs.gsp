@@ -7,7 +7,6 @@
 		<li><a href="#tab-attachments">Supporting Documents</a></li>
 	</ul>
 	<div id="tab-person">
-				<div id="show-user" class="content scaffold-show" role="main">
 			<ol class="property-list user">
 			
 				<g:if test="${userInstance?.username}">
@@ -190,13 +189,20 @@
 					
 				</li>
 				</g:if>
-			
+			</ol>
+			<fieldset><legend>Login Details</legend>
+			<ol  class="property-list user">
+				<li class="fieldcontain">
+				<span id="roles-label" class="property-label"><g:message code="user.roles.label" default="Roles" /></span>
+				
+				<g:each var="auth" in="${roleMap}">
+					&nbsp;<span class="r-arrow"></span> ${auth } 
+				</g:each>				
+				</li>
 				<g:if test="${userInstance?.accountExpired}">
 				<li class="fieldcontain">
-					<span id="accountExpired-label" class="property-label"><g:message code="user.accountExpired.label" default="Account Expired" /></span>
-					
-						<span class="property-value" aria-labelledby="accountExpired-label"><g:formatBoolean boolean="${userInstance?.accountExpired}" /></span>
-					
+					<span id="accountExpired-label" class="property-label"><g:message code="user.accountExpired.label" default="Account Expired" /></span>					
+					<span class="property-value" aria-labelledby="accountExpired-label"><g:formatBoolean boolean="${userInstance?.accountExpired}" /></span>					
 				</li>
 				</g:if>
 			
@@ -228,14 +234,7 @@
 				</g:if>
 			
 			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${userInstance?.id}" />
-					<g:link class="edit" action="edit" id="${userInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
-		</div>
+			</fieldset>
 	</div>
 	<div id="tab-employee">
 		

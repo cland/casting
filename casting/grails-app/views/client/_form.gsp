@@ -31,26 +31,10 @@
 
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'contacts', 'error')} ">
 	<label for="contacts">
-		<g:message code="client.contacts.label" default="Contacts" />
+		<g:message code="client.contacts.label" default="Authorised Users" />
 		
 	</label>
-	<g:select name="contacts" from="${com.cland.casting.User.list()}" multiple="multiple" optionKey="id" size="5" value="${clientInstance?.contacts*.id}" class="many-to-many"/>
+	<g:select name="contacts" from="${directorList}" multiple="multiple" optionKey="id" size="5" value="${clientInstance?.contacts*.id}" class="many-to-many"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'productions', 'error')} ">
-	<label for="productions">
-		<g:message code="client.productions.label" default="Productions" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${clientInstance?.productions?}" var="p">
-    <li><g:link controller="production" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="production" action="create" params="['client.id': clientInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'production.label', default: 'Production')])}</g:link>
-</li>
-</ul>
-
-</div>
 

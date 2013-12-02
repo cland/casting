@@ -125,6 +125,21 @@
 				</g:if>
 			
 			</ol>		
+			
+			<fieldset><legend>Purpose</legend>
+			
+			<g:each in="${agencyList}" var="c">
+				<span class="property-value" aria-labelledby="categories-label">
+					Agency: <g:link controller="agency" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link>
+				</span>
+			</g:each>
+			<g:each in="${clientList}" var="c">
+				<span class="property-value" aria-labelledby="categories-label">
+					Client: <g:link controller="client" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link>
+				</span>
+			</g:each>
+
+			</fieldset>
 	</div>
 
 	<div id="tab-other">

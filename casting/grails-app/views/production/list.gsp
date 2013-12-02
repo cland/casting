@@ -26,10 +26,9 @@
 			<table>
 				<thead>
 					<tr>
-					
-						<th><g:message code="production.client.label" default="Client" /></th>
-					<th><g:message code="production.client.label" default="Client" /></th>
-						<g:sortableColumn property="name" title="${message(code: 'production.name.label', default: 'Name')}" />
+					<g:sortableColumn property="name" title="${message(code: 'production.name.label', default: 'Name')}" />
+					<g:sortableColumn property="status" title="${message(code: 'production.status.label', default: 'Status')}" />						
+					<th><g:message code="production.client.label" default="Client" /></th>	
 					
 					</tr>
 				</thead>
@@ -37,10 +36,9 @@
 				<g:each in="${productionInstanceList}" status="i" var="productionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${productionInstance.id}">${fieldValue(bean: productionInstance, field: "client")}</g:link></td>
-					<td><g:link action="show" id="${productionInstance.id}">${fieldValue(bean: productionInstance, field: "client")}</g:link></td>
-						<td>${fieldValue(bean: productionInstance, field: "name")}</td>
-					
+						<td><g:link action="show" id="${productionInstance.id}">${fieldValue(bean: productionInstance, field: "name")}</g:link></td>
+						<td>${fieldValue(bean: productionInstance, field: "status")}</td>
+						<td>${fieldValue(bean: productionInstance, field: "client")}</td>
 					</tr>
 				</g:each>
 				</tbody>

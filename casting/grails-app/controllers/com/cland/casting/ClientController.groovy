@@ -3,7 +3,7 @@ package com.cland.casting
 import org.springframework.dao.DataIntegrityViolationException
 
 class ClientController {
-
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -16,7 +16,12 @@ class ClientController {
     }
 
     def create() {
-        [clientInstance: new Client(params), isEditing:true, isNew:true]
+		//def role = Role.findByAuthority("ROLE_DIRECTOR")
+		List <String> rolenames = [SystemRoles.ROLE_DIRECTOR.value,SystemRoles.ROLE_REVIEWER.value]
+		//rolenames.add(SystemRoles.ROLE_REVIEWER.value)
+		def userList = castingApiService.getUsersWithRole(rolenames)
+		
+        [clientInstance: new Client(params), isEditing:true, isNew:true,directorList:userList]
     }
 
     def save() {

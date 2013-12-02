@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class OrganisationController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+	def castingApiService
     def index() {
         redirect(action: "list", params: params)
     }
@@ -16,7 +16,7 @@ class OrganisationController {
 		//def orglist = Organisation.list(params);
 		int offset = 0	//some pagination calculated value here
 		def orglist = Organisation.createCriteria().list (offset:offset,max:params.max){
-			eq "type","Agency"
+			//eq "type","Agency"
 			order ('name','desc')
 		}
         [organisationInstanceList: orglist, organisationInstanceTotal: Organisation.count()]
@@ -43,9 +43,8 @@ class OrganisationController {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'organisation.label', default: 'Organisation'), id])
             redirect(action: "list")
             return
-        }
-
-        [organisationInstance: organisationInstance]
+        }	
+        [organisationInstance: organisationInstance,clientList:castingApiService.getClientListForOrg(id, 0,100),agencyList:castingApiService.getAgencyCandidates(id, 0, 100)]
     }
 
     def edit(Long id) {

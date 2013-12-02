@@ -16,7 +16,11 @@ class ProductionController {
     }
 
     def create() {
-        [productionInstance: new Production(params), isEditing:true, isNew:true]
+		def clientInstance = null
+		if(params?.client?.id){
+			clientInstance = Client.get(params.client.id)
+		}
+        [productionInstance: new Production(params),clientInstance:clientInstance, isEditing:true, isNew:true]
     }
 
     def save() {

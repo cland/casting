@@ -18,28 +18,28 @@
 		<g:message code="castingProfile.canditate.label" default="Canditate" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="canditate" name="canditate.id" from="${com.cland.casting.Candidate.list()}" optionKey="id" required="" value="${castingProfileInstance?.canditate?.id}" class="many-to-one"/>
+	<g:select id="canditate" name="canditate.id" from="${candidateList}" optionKey="id" required="" value="${castingProfileInstance?.canditate?.id}" class="many-to-one" noSelection="['': '-- select one --']"/>
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'categories', 'error')} ">
-	<label for="categories">
-		<g:message code="castingProfile.categories.label" default="Categories" />		
-	</label>
-	<g:select name="categories" from="${com.cland.casting.CastingCategory.list()}" multiple="multiple" optionKey="id" size="5" value="${castingProfileInstance?.categories*.id}" class="many-to-many"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'roles', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'roles', 'error')} required">
 	<label for="roles">
-		<g:message code="castingProfile.roles.label" default="Roles" />		
+		<g:message code="castingProfile.roles.label" default="Casting Role:" />		
 	</label>
-	<g:select name="roles" from="${com.cland.casting.CastingRole.list()}" multiple="multiple" optionKey="id" size="5" value="${castingProfileInstance?.roles*.id}" class="many-to-many"/>
+	
+	<g:select id="roles" name="roles" from="${productionInstance?.roles}" optionKey="id" required="" value="${castingProfileInstance?.roles?.id}" class="many-to-one" required="" noSelection="['': '-- select one --']"/>
+</div>
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'categories', 'error')} required">
+	<label for="categories">
+		<g:message code="castingProfile.categories.label" default="Category" />		
+	</label>
+	
+	<g:select id="categories" name="categories" from="${productionInstance?.categories}" optionKey="id" required="" value="${castingProfileInstance?.categories?.id}" class="many-to-one" required="" noSelection="['': '-- select one --']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'comments', 'error')} ">
 	<label for="comments">
 		<g:message code="castingProfile.comments.label" default="Comments" />		
 	</label>
-	<g:textField name="comments" value="${castingProfileInstance?.comments}"/>
+	<g:textArea name="comments" value="${castingProfileInstance?.comments}" rows="5" cols="40"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'castDate', 'error')} required">

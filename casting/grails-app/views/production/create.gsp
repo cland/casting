@@ -13,6 +13,9 @@
 				<g:link controller="production" action="list">Productions</g:link>
 				<span class="r-arrow"></span> <span class="current-crump">
 					New Production
+				<g:if test="${clientInstance }">
+					 for Client: <g:link controller="client" action="show" params="${['id':clientInstance?.id]}">${clientInstance } </g:link>
+				</g:if>
 				</span>
 		</div>
 	<div id="status1" class="leftbar" role="complementary">

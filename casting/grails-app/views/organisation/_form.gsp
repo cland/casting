@@ -50,14 +50,6 @@
 	<g:select id="country" name="country.id" from="${com.cland.casting.Country.list()}" optionKey="id" value="${organisationInstance?.country?.id}" class="many-to-one" noSelection="['null': '']"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'type', 'error')} ">
-	<label for="type">
-		<g:message code="organisation.type.label" default="Type" />
-		
-	</label>
-	<g:select name="type" from="${organisationInstance.constraints.type.inList}" value="${organisationInstance?.type}" valueMessagePrefix="organisation.type" noSelection="['': '']"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'city', 'error')} ">
 	<label for="city">
 		<g:message code="organisation.city.label" default="City" />

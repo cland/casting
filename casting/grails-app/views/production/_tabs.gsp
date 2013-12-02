@@ -36,7 +36,7 @@
 				<p>${productionInstance?.description}</p>
 			</g:if>			
 			</fieldset>
-		<ol>
+		<ol  class="property-list production">
 			<g:if test="${productionInstance?.categories}">
 				<li class="fieldcontain">
 					<span id="categories-label" class="property-label"><g:message code="production.categories.label" default="Categories" /></span>					
@@ -48,7 +48,7 @@
 			
 			<g:if test="${productionInstance?.roles}">
 				<li class="fieldcontain">
-					<span id="roles-label" class="property-label"><g:message code="production.roles.label" default="Roles" /></span>
+					<span id="roles-label" class="property-label"><g:message code="production.roles.label" default="Casting Roles" /></span>
 					
 						<g:each in="${productionInstance.roles}" var="r">
 						<span class="property-value" aria-labelledby="roles-label"><g:link controller="castingRole" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
@@ -58,15 +58,17 @@
 			</g:if>
 			
 				
-			</ol>	
-	<h5>Which agencies can access this production</h5>
-	<g:if test="${productionInstance?.agencyACL}">
-					<span id="agencyACL-label" class="property-label"><g:message code="production.agencyacl.label" default="Agency access list: " /></span>
-					
-						<g:each in="${productionInstance.agencyACL}" var="p">
-						<span class="property-value" aria-labelledby="agencyACL-label"><g:link controller="agency" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>		
-	</g:if>
+
+	<li class="fieldcontain">
+		<span id="agencyACL-label" class="property-label"><g:message code="production.agencyacl.label" default="Agency access list" /></span>
+		<g:if test="${productionInstance?.agencyACL}">								
+			<g:each in="${productionInstance.agencyACL}" var="p">
+			<span class="property-value" aria-labelledby="agencyACL-label"><g:link controller="agency" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+			</g:each>		
+		</g:if>
+		<g:else><span class="property-value">All</span></g:else>
+	</li>
+	</ol>
 </div>
 <div id="tab-portfolios">
 		<g:render template="portfoliosTable"/>

@@ -1,5 +1,5 @@
  <div class="fieldcontain required">
- <label for="firstName">
+ <label for="">
 		<g:message code="user.role.label" default="Roles" />
 		<span class="required-indicator">*</span>
 	</label>

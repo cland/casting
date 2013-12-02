@@ -28,16 +28,15 @@
 				<thead>
 					<tr>					
 						<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
-					
-						<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
+											
 					
 						<g:sortableColumn property="firstName" title="${message(code: 'user.firstName.label', default: 'First Name')}" />
 					
 						<g:sortableColumn property="lastName" title="${message(code: 'user.lastName.label', default: 'Last Name')}" />
 					
-						<g:sortableColumn property="middleName" title="${message(code: 'user.middleName.label', default: 'Middle Name')}" />
+						<g:sortableColumn property="contactNo" title="${message(code: 'user.contactNo.label', default: 'Contact No.')}" />
 					
-						<g:sortableColumn property="homeLanguage" title="${message(code: 'user.homeLanguage.label', default: 'Home Language')}" />
+						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
 					
 					</tr>
 				</thead>
@@ -45,18 +44,12 @@
 				<g:each in="${userInstanceList}" status="i" var="userInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
-					
-						<td>${fieldValue(bean: userInstance, field: "password")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "firstName")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "lastName")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "middleName")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "homeLanguage")}</td>
-					
+						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>					
+						<td>${fieldValue(bean: userInstance, field: "firstName")}</td>					
+						<td>${fieldValue(bean: userInstance, field: "lastName")}</td>					
+						<td>${fieldValue(bean: userInstance, field: "contactNo")}</td>					
+						<td>${fieldValue(bean: userInstance, field: "email")}</td>
+
 					</tr>
 				</g:each>
 				</tbody>

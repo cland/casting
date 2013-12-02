@@ -12,17 +12,28 @@ class AgencyController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def candidatesList = castingApiService.getAgencyCandidates(1, 0, params.max)		
+		def candidatesList = Candidate.list() //castingApiService.getAgencyCandidates(1, 0, params.max)		
         [agencyInstanceList: Agency.list(params), agencyInstanceTotal: Agency.count(),candidatesList:candidatesList]
 		
     }
 
     def create() {
-        [agencyInstance: new Agency(params)]
+		List <String> rolenames = [SystemRoles.ROLE_AGENT.value]
+		def userList = castingApiService.getUsersWithRole(rolenames)
+        [agencyInstance: new Agency(params), isEditing:true, isNew:true,agencyList:userList]
     }
 
     def save() {
         def agencyInstance = new Agency(params)
+		if(!params.company.id){
+			if(params.company.id == ""){
+				if(!agencyInstance.company.save(flush:true)){
+					println("Failed to save new organisation/company..."  + agencyInstance.company?.errors)
+					render(view: "create", model: [clientInstance: agencyInstance])
+					return
+				}
+			}
+		}
         if (!agencyInstance.save(flush: true)) {
             render(view: "create", model: [agencyInstance: agencyInstance])
             return
@@ -50,8 +61,9 @@ class AgencyController {
             redirect(action: "list")
             return
         }
-
-        [agencyInstance: agencyInstance]
+		List <String> rolenames = [SystemRoles.ROLE_AGENT.value]
+		def userList = castingApiService.getUsersWithRole(rolenames)
+        [agencyInstance: agencyInstance, isEditing:true, isNew:false,agencyList:userList]
     }
 
     def update(Long id, Long version) {
@@ -73,7 +85,15 @@ class AgencyController {
         }
 
         agencyInstance.properties = params
-
+		if(!params.company.id){
+			if(params.company.id == ""){
+				if(!agencyInstance.company.save(flush:true)){
+					println("Failed to save new organisation/company..."  + agencyInstance.company?.errors)
+					render(view: "create", model: [clientInstance: agencyInstance])
+					return
+				}
+			}
+		}
         if (!agencyInstance.save(flush: true)) {
             render(view: "edit", model: [agencyInstance: agencyInstance])
             return

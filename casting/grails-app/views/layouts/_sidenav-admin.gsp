@@ -16,8 +16,8 @@
 			<h3>Manage Productions</h3>
 			<div>
 				<ul>
-				<li><g:link class="create" controller="production" action="create">
-							<g:message code="default.new.label" args="['Production']" /></g:link></li>
+				<li><g:link class="create" controller="production" action="create" params="${['client.id':clientInstance?.id]}">
+							<g:message code="default.new.label" args="['Production']"/></g:link></li>
 					<li><g:link class="list" controller="Production" action="list">
 							<g:message code="default.list.label" args="['Production']" /></g:link></li>																
 				
@@ -49,7 +49,7 @@
 						</g:link></li>
 					<li><g:link class="create" controller="organisation" action="create">
 							<g:message code="default.new.label" args="['Organisation']" /></g:link></li>
-					<li><g:link class="list" controller="user" action="list">
+					<li><g:link class="list" controller="organisation" action="list">
 							<g:message code="default.list.label" args="['Organisation']" />
 						</g:link></li>						
 				</ul>

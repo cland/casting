@@ -3,7 +3,7 @@ package com.cland.casting
 import org.springframework.dao.DataIntegrityViolationException
 
 class CastingProfileController {
-	def springSecurityService
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -17,9 +17,13 @@ class CastingProfileController {
 
     def create() {
 		def production = null //new Production(params)
-		if(params?.production?.id) production = Production.get(params.production.id) 
-
-        [castingProfileInstance: new CastingProfile(params),productionInstance:production, isEditing:true, isNew:true]
+		int productionId = 0
+		if(params?.production?.id) { production = Production.get(params.production.id)
+			productionId = production.id
+		} 
+		//work out the candidates list to present
+		def candidateList = castingApiService.getCandidates(productionId, 0, 0, 100) //Candidate.list();
+        [castingProfileInstance: new CastingProfile(params),productionInstance:production,candidateList:candidateList, isEditing:true, isNew:true]
     }
 
     def save() {
