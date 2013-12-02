@@ -17,17 +17,35 @@ class CastingProfileController {
 
     def create() {
 		def production = null //new Production(params)
-		int productionId = 0
-		if(params?.production?.id) { production = Production.get(params.production.id)
+		long productionId = 0
+		long agencyId = 0
+		int offset = 0
+		int max = 100
+		if(params?.production?.id) { 
+			production = Production.get(params.production.id)
 			productionId = production.id
 		} 
+		if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
 		//work out the candidates list to present
-		def candidateList = castingApiService.getCandidates(productionId, 0, 0, 100) //Candidate.list();
+		def candidateList = castingApiService.getCandidates(productionId, agencyId, offset, max) //Candidate.list();
         [castingProfileInstance: new CastingProfile(params),productionInstance:production,candidateList:candidateList, isEditing:true, isNew:true]
     }
 
     def save() {
         def castingProfileInstance = new CastingProfile(params)
+		def production = null //new Production(params)
+		long productionId = 0
+		long agencyId = 0
+		int offset = 0
+		int max = 100
+		if(params?.production?.id) {
+			production = Production.get(params.production.id)
+			productionId = production.id
+		}
+		if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
+		//work out the candidates list to present
+		def candidateList = castingApiService.getCandidates(productionId, agencyId, offset, max)
+		
 		bindData(castingProfileInstance, params, [exclude: 'auditionDate'])
 		bindData(castingProfileInstance, params, [exclude: 'callbackDate'])
 		bindData(castingProfileInstance, params, [exclude: 'castDate'])
@@ -35,7 +53,7 @@ class CastingProfileController {
 		bindData(castingProfileInstance, ['callbackDate': params.date('callbackDate', ['dd-MMM-yyyy'])], [include: 'callbackDate'])
 		bindData(castingProfileInstance, ['castDate': params.date('castDate', ['dd-MMM-yyyy'])], [include: 'castDate'])
         if (!castingProfileInstance.save(flush: true)) {
-            render(view: "create", model: [castingProfileInstance: castingProfileInstance])
+            render(view: "create", model: [castingProfileInstance: castingProfileInstance,productionInstance:production,candidateList:candidateList, isEditing:true, isNew:true])
             return
         }
 
@@ -61,8 +79,16 @@ class CastingProfileController {
             redirect(action: "list")
             return
         }
+		def production = castingProfileInstance?.production
+		long productionId = production?.id
+		long agencyId = 0
+		int offset = 0
+		int max = 100
 
-        [castingProfileInstance: castingProfileInstance, isEditing:true, isNew:false]
+		//if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
+		//work out the candidates list to present
+		def candidateList = castingApiService.getCandidates(productionId, agencyId, offset, max)
+        [castingProfileInstance: castingProfileInstance,productionInstance:production,candidateList:candidateList, isEditing:true, isNew:false]
     }
 
     def update(Long id, Long version) {

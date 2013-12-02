@@ -33,7 +33,7 @@ class User {
 	 String communicationMode //sms,email
 	 Date dateCreated
 	 Organisation company
-	 
+	 String status
 	// Candidate candidate
 	static hasOne = [candidate:Candidate] 
 	static attachmentable = true
@@ -61,6 +61,7 @@ class User {
 		email(email:true)
 		company(nullable:true)
 		dateCreated()
+		status(inList:["Active","Inactive"],nullable:true,blank:false)
 		//candidate(nullable:true)
 	}
 

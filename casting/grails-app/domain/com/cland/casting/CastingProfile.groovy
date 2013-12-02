@@ -29,6 +29,12 @@ class CastingProfile {
 		averating(nullable:true) 
 		videos(nullable:true)
 		pictures(nullable:true)
+		comments(nullable:true)		
+		auditionDate(nullable:true)
+		callbackDate(nullable:true)
+		castDate(nullable:true)
+		castNo(nullable:true)
+		round(nullable:true)
 	}
 	static mapping = {
 		ratings cascade:"all-delete-orphan"

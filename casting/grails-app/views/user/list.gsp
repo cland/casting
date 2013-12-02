@@ -44,7 +44,10 @@
 				<g:each in="${userInstanceList}" status="i" var="userInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>					
+						<td><g:if test="${userInstance?.username}">
+							<g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link>
+						</g:if><g:else><g:link action="show" id="${userInstance.id}">Undefined</g:link></g:else>
+						</td>					
 						<td>${fieldValue(bean: userInstance, field: "firstName")}</td>					
 						<td>${fieldValue(bean: userInstance, field: "lastName")}</td>					
 						<td>${fieldValue(bean: userInstance, field: "contactNo")}</td>					

@@ -106,7 +106,11 @@
 	
 	<!-- PRODUCTION PROFILE TAB -->
 	<div id="tab-profiles">
-	 -- LIST OF ALL PROFILES FOR EACH PRODUCTION			
+	 <g:each in="${profileList }" var="p">
+	 	<span class="property-value" aria-labelledby="candidates-label">
+	 		<g:link controller="castingProfile" action="show" id="${p.id}">${p?.encodeAsHTML()} | ${p?.production?.name?.encodeAsHTML()}</g:link>
+	 	</span>
+	 </g:each>
 	</div>
 
 </div>

@@ -42,6 +42,18 @@
 						<span class="property-value" aria-labelledby="canditate-label"><g:link controller="candidate" action="show" id="${castingProfileInstance?.canditate?.id}">${castingProfileInstance?.canditate?.encodeAsHTML()}</g:link></span>
 					
 				</li>
+				<li class="fieldcontain">
+					<span id="person-gender-label" class="property-label"><g:message code="candidate.person.gender.label" default="Gender" /></span>					
+					<span class="property-value" aria-labelledby="person-gender-label"> ${castingProfileInstance?.canditate?.person?.gender?.encodeAsHTML()}</span>					
+				</li>
+				<li class="fieldcontain">
+					<span id="person-race-label" class="property-label"><g:message code="candidate.person.race.label" default="Race" /></span>					
+					<span class="property-value" aria-labelledby="person-race-label"> ${castingProfileInstance?.canditate?.person?.race?.encodeAsHTML()}</span>					
+				</li>
+				<li class="fieldcontain">
+					<span id="person-contactno-label" class="property-label"><g:message code="candidate.person.contactno.label" default="Contact No." /></span>					
+					<span class="property-value" aria-labelledby="person-contactno-label"> ${castingProfileInstance?.canditate?.person?.contactNo?.encodeAsHTML()}</span>					
+				</li>
 				</g:if>
 			
 				<g:if test="${castingProfileInstance?.castDate}">
@@ -61,6 +73,26 @@
 					
 				</li>
 				</g:if>
+				<g:if test="${castingProfileInstance?.roles}">
+				<li class="fieldcontain">
+					<span id="roles-label" class="property-label"><g:message code="castingProfile.roles.label" default="Role" /></span>
+					
+						<g:each in="${castingProfileInstance.roles}" var="r">
+						<span class="property-value" aria-labelledby="roles-label"><g:link controller="castingRole" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>	
+				<g:if test="${castingProfileInstance?.categories}">
+				<li class="fieldcontain">
+					<span id="categories-label" class="property-label"><g:message code="castingProfile.categories.label" default="Category" /></span>
+					
+						<g:each in="${castingProfileInstance.categories}" var="c">
+						<span class="property-value" aria-labelledby="categories-label"><g:link controller="castingCategory" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
 				<g:if test="${castingProfileInstance?.auditionDate}">
 				<li class="fieldcontain">
 					<span id="auditionDate-label" class="property-label"><g:message code="castingProfile.auditionDate.label" default="Audition Date" /></span>
@@ -69,16 +101,6 @@
 					
 				</li>
 				</g:if>			
-				<g:if test="${castingProfileInstance?.categories}">
-				<li class="fieldcontain">
-					<span id="categories-label" class="property-label"><g:message code="castingProfile.categories.label" default="Categories" /></span>
-					
-						<g:each in="${castingProfileInstance.categories}" var="c">
-						<span class="property-value" aria-labelledby="categories-label"><g:link controller="castingCategory" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
 			
 				<g:if test="${castingProfileInstance?.comments}">
 				<li class="fieldcontain">
@@ -88,12 +110,71 @@
 					
 				</li>
 				</g:if>
+			</ol>
+			<fieldset><legend>Characteristics</legend>	
+		<ol class="property-list candidate">
+				<g:if test="${castingProfileInstance?.canditate?.clothing}">
+				<li class="fieldcontain">
+					<span id="clothing-label" class="property-label"><g:message code="candidate.clothing.label" default="Clothing" /></span>
+					
+						<span class="property-value" aria-labelledby="clothing-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="clothing"/></span>
+					
+				</li>
+				</g:if>
 			
+				<g:if test="${castingProfileInstance?.canditate?.eyes}">
+				<li class="fieldcontain">
+					<span id="eyes-label" class="property-label"><g:message code="candidate.eyes.label" default="Eyes" /></span>
+					
+						<span class="property-value" aria-labelledby="eyes-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="eyes"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${castingProfileInstance?.canditate?.hair}">
+				<li class="fieldcontain">
+					<span id="hair-label" class="property-label"><g:message code="candidate.hair.label" default="Hair" /></span>
+					
+						<span class="property-value" aria-labelledby="hair-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="hair"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${castingProfileInstance?.canditate?.height}">
+				<li class="fieldcontain">
+					<span id="height-label" class="property-label"><g:message code="candidate.height.label" default="Height" /></span>
+					
+						<span class="property-value" aria-labelledby="height-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="height"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${castingProfileInstance?.canditate?.shoe}">
+				<li class="fieldcontain">
+					<span id="shoe-label" class="property-label"><g:message code="candidate.shoe.label" default="Shoe" /></span>
+					
+						<span class="property-value" aria-labelledby="shoe-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="shoe"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${castingProfileInstance?.canditate?.waist}">
+				<li class="fieldcontain">
+					<span id="waist-label" class="property-label"><g:message code="candidate.waist.label" default="Waist" /></span>
+					
+						<span class="property-value" aria-labelledby="waist-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="waist"/></span>
+					
+				</li>
+				</g:if>
+				</ol>
+			</fieldset>
+			<fieldset><legend>Progress Indicators</legend>
+			<ol class="property-list castingProfile">
 				<g:if test="${castingProfileInstance?.isAuditionAvailable}">
 				<li class="fieldcontain">
 					<span id="isAuditionAvailable-label" class="property-label"><g:message code="castingProfile.isAuditionAvailable.label" default="Is Audition Available" /></span>
 					
-						<span class="property-value" aria-labelledby="isAuditionAvailable-label"><g:formatBoolean boolean="${castingProfileInstance?.isAuditionAvailable}" /></span>
+						<span class="property-value" aria-labelledby="isAuditionAvailable-label"><g:formatBoolean boolean="${castingProfileInstance?.isAuditionAvailable}" true="Yes" false="No"/></span>
 					
 				</li>
 				</g:if>
@@ -136,17 +217,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${castingProfileInstance?.roles}">
-				<li class="fieldcontain">
-					<span id="roles-label" class="property-label"><g:message code="castingProfile.roles.label" default="Roles" /></span>
-					
-						<g:each in="${castingProfileInstance.roles}" var="r">
-						<span class="property-value" aria-labelledby="roles-label"><g:link controller="castingRole" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${castingProfileInstance?.round}">
 				<li class="fieldcontain">
 					<span id="round-label" class="property-label"><g:message code="castingProfile.round.label" default="Round" /></span>
@@ -157,6 +227,7 @@
 				</g:if>
 			
 			</ol>
+			</fieldset>
 		<fieldset><legend>Ratings and Comments</legend>
 		<g:render template="ratingsTable"/>
 		</fieldset>	

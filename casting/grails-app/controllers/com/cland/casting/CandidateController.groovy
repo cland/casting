@@ -3,7 +3,7 @@ package com.cland.casting
 import org.springframework.dao.DataIntegrityViolationException
 
 class CandidateController {
-
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -54,7 +54,9 @@ class CandidateController {
             return
         }
 
-        [candidateInstance: candidateInstance, isEditing:false, isNew:false]
+		//workout the profiles list
+		def profiles = castingApiService.getProfiles(0, id, 0, 100)
+        [candidateInstance: candidateInstance,profileList:profiles, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {

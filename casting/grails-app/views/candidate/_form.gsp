@@ -1,4 +1,18 @@
 <%@ page import="com.cland.casting.Candidate" %>
+<g:if test="${agencyInstance != null}">
+<g:hiddenField name="agency.id" value="${agencyInstance?.id}" />
+</g:if>
+<g:if test="${agencyInstance == null}">
+<fieldset><legend>Agency Details</legend>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'agency', 'error')} required">
+	<label for="agency">
+		<g:message code="candidate.agency.label" default="Agency" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:select id="agency" name="agency.id" from="${com.cland.casting.Agency.list()}" optionKey="id" required="" value="${candidateInstance?.agency?.id}" class="many-to-one" noSelection="['': '--Select Agency--']"/>
+</div>
+</fieldset>
+</g:if>
 <fieldset><legend>Person Details</legend>
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person', 'error')} required">
 	<label for="person">
@@ -7,22 +21,6 @@
 	</label>
 	<g:select id="person" name="person.id" from="${com.cland.casting.User.list()}" optionKey="id"  value="${candidateInstance?.person?.id}" class="many-to-one"  noSelection="['': '--New Person/Select One--']"/>
 </div>
-
-
-<g:if test="${agencyInstance != null}">
-<g:hiddenField name="agency.id" value="${agencyInstance?.id}" />
-</g:if>
-<g:if test="${agencyInstance == null}">
-
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'agency', 'error')} required">
-	<label for="agency">
-		<g:message code="candidate.agency.label" default="Agency" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="agency" name="agency.id" from="${com.cland.casting.Agency.list()}" optionKey="id" required="" value="${candidateInstance?.agency?.id}" class="many-to-one" noSelection="['': '--Add New Agency--']"/>
-</div>
-</g:if>
-
 
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.firstName', 'error')} required">
 	<label for="person.firstName">

@@ -1,5 +1,6 @@
-
+<%@page import="com.cland.casting.ProductionStatus"%>
 <%@ page import="com.cland.casting.Production" %>
+<%@ page import="com.cland.casting.SystemRoles" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -35,8 +36,13 @@
 					<g:link class="edit" action="edit" id="${productionInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 					<span class="l-arrow"></span> | <span class="r-arrow"></span>
-					<g:link class="create" controller="castingProfile" action="create" params="${['production.id':productionInstance?.id]}">
-							<g:message code="default.new.label" args="['Casting Profile']"/></g:link>
+					<g:if test="${productionInstance.status.value.equalsIgnoreCase(ProductionStatus.OPEN_CANDIDATES_REQUIRED.value) }">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
+						<g:link class="create" controller="castingProfile" action="create" params="${['production.id':productionInstance?.id]}">
+						<g:message code="default.add.label" args="['Casting Profile']"/>
+						</g:link>
+					</sec:ifAnyGranted>
+					</g:if>
 				</fieldset>
 			</g:form>
 		</div>

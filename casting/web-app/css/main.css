@@ -1,7 +1,7 @@
 /* FONT STACK */
 body,
 input, select, textarea {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-family: Arial,"Verdana","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -219,7 +219,7 @@ fieldset,
 	zoom: 1;
 	border: none;
 }
-fieldset {border:solid 1px #444;}
+fieldset {border:solid 1px #444;margin-bottom:1em;}
 .property-list .fieldcontain {
 	list-style: none;
 	overflow: hidden;
@@ -679,7 +679,20 @@ tr > td:last-child, tr > th:last-child {
 .ui-widget-content {
 	background :#fff !important;
 }
-
+.checkbox-text {    
+    font-size: 0.9em;
+    vertical-align: text-top;
+}
+.fieldcontain label, .fieldcontain .property-label {
+    color: #8C8C8C;
+}
+.ui-widget{
+	font-family:"Arial","Verdana","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+	font-size:1em !important;
+}
+p {
+	font-size:0.9em;
+}
 /* begin: jQuery UI Datepicker moving pixels fix */
 	table.ui-datepicker-calendar {border-collapse: separate;}
 	.ui-datepicker-calendar td {border: 1px solid transparent;}

@@ -15,6 +15,7 @@ class Organisation {
 	Region region
 	Country country
 	String comments
+	String status
 	//static hasMany = [people:Person]
 	
     static constraints = {
@@ -31,6 +32,7 @@ class Organisation {
 		postalPostCode(nullable:true)
 		phyPostCode(nullable:true)
 		comments(nullable:true)
+		status(inList:["Active","Inactive"],nullable:true,blank:false)
     }
 	def beforeInsert = {
 	// your code goes here

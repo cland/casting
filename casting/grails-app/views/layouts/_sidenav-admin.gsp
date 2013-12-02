@@ -1,6 +1,6 @@
 	
 	<div id="accordion" style="font-size: 14px;">
-			<h3>Manage Agencies</h3>
+			<h3><g:message code="default.agencies.menu" default="Agencies" /></h3>
 			<div>
 				<ul>
 					<li><g:link class="create" controller="agency" action="create">
@@ -13,23 +13,19 @@
 							<g:message code="default.list.label" args="['Candidates']" /></g:link></li>							
 				</ul>
 			</div>
-			<h3>Manage Productions</h3>
+			<h3><g:message code="default.productions.menu" default="Productions" /></h3>
 			<div>
 				<ul>
 				<li><g:link class="create" controller="production" action="create" params="${['client.id':clientInstance?.id]}">
 							<g:message code="default.new.label" args="['Production']"/></g:link></li>
 					<li><g:link class="list" controller="Production" action="list">
 							<g:message code="default.list.label" args="['Production']" /></g:link></li>																
-				
-				<g:if test="${productionInstance }">			
-					<li><g:link class="create" controller="castingProfile" action="create" params="${['production.id':productionInstance?.id]}">
-							<g:message code="default.new.label" args="['Profile']" /></g:link></li>
-				</g:if>
+								
 				<li><g:link class="list" controller="castingProfile" action="list">
 							<g:message code="default.list.label" args="['Profile']" /></g:link></li>
 				</ul>
 			</div>
-			<h3>Manage Clients</h3>
+			<h3><g:message code="default.clients.menu" default="Clients" /></h3>
 			<div>
 				<ul>
 					<li><g:link class="create" controller="Client" action="create">
@@ -39,7 +35,7 @@
 				</ul>
 			</div>
 
-			<h3>Manage Users</h3>
+			<h3><g:message code="default.users.menu" default="Users" /></h3>
 			<div>
 				<ul>
 					<li><g:link class="create" controller="user" action="create">
@@ -54,7 +50,7 @@
 						</g:link></li>						
 				</ul>
 			</div>
-			<h3>Other</h3>
+			<h3><g:message code="default.other.menu" default="Other" /></h3>
 			<div>
 			<ul>
 					<li><g:link class="create" controller="region" action="create">
