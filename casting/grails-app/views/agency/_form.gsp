@@ -1,7 +1,5 @@
 <%@ page import="com.cland.casting.Agency" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: agencyInstance, field: 'company', 'error')} required">
 	<label for="company">
 		<g:message code="agency.company.label" default="Select Company" />
@@ -9,11 +7,11 @@
 	</label>
 	<g:select id="company" name="company.id" from="${com.cland.casting.Organisation.list()}" optionKey="id" value="${agencyInstance?.company?.id}" class="many-to-one" noSelection="['': '--Add New Company--']"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: clientInstance?.company, field: 'company.name', 'error')} ">
-	<label for="company.phoneNo">
+<div class="fieldcontain ${hasErrors(bean: agencyInstance?.company, field: 'company.name', 'error')} ">
+	<label for="company.name">
 		<g:message code="organisation.name.label" default="Company Name" />		
 	</label>
-	<g:textField name="company.name" value="${clientInstance?.company?.name}" required=""/>
+	<g:textField name="company.name" value="${agencyInstance?.company?.name}" required=""/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: agencyInstance?.company, field: 'phoneNo', 'error')} ">
 	<label for="company.phoneNo">

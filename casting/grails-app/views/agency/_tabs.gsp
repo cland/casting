@@ -60,7 +60,20 @@
 					</ol>
 	</div>
 	<div id="tab-productions">
-	-- list of productions that this agency is allowed to view --
+		<ol>
+			<g:if test="${productionList}">
+			
+					<g:each in="${productionList}" var="p">
+					<span class="property-value" aria-labelledby="production-label"><g:link controller="production" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+					<span class="property-value" aria-labelledby="production-label">${p?.status?.encodeAsHTML()}</span>
+					<span class="property-value" aria-labelledby="production-label">${p?.shootDate?.encodeAsHTML()}</span>
+					<span class="property-value" aria-labelledby="production-label">${p?.roles}</span>
+					<span class="property-value" aria-labelledby="production-label">${p?.categories}</span>
+					<br/>
+					</g:each>					
+		
+			</g:if>
+		</ol>
 	</div>
 </div>
 

@@ -1,7 +1,5 @@
 <%@ page import="com.cland.casting.Client" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: clientInstance, field: 'company', 'error')} required">
 	<label for="company">
 		<g:message code="client.company.label" default="Select Company" />

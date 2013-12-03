@@ -3,7 +3,7 @@
 	<ul>
 		<li><a href="#tab-person">Personal Details</a></li>
 		<li><a href="#tab-employee">Employee Details</a></li>
-		<li id='tab_learner_head'><a href="#tab-learner">Other</a></li>
+		<li id='tab_learner_head'><a href="#tab-other">Other</a></li>
 		<li><a href="#tab-attachments">Supporting Documents</a></li>
 	</ul>
 	<div id="tab-person">
@@ -239,8 +239,22 @@
 	<div id="tab-employee">
 		
 	</div>
-	<div id="tab-learner">
-		
+	<div id="tab-other">
+		<fieldset><legend>Linked To</legend>
+			
+			<g:each in="${agencyList}" var="c">
+				<span class="property-value" aria-labelledby="categories-label">
+					Agency: <g:link controller="agency" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link>
+				</span>
+			</g:each>
+			<g:each in="${clientList}" var="c">
+				<span class="property-value" aria-labelledby="categories-label">
+				<span class="r-arrow"></span> Client: <g:link controller="client" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link>
+				</span>
+				<br/>
+			</g:each>
+
+			</fieldset>
 	</div>
 	<div id="tab-attachments">
 		<div id="attachments" class="attachments">

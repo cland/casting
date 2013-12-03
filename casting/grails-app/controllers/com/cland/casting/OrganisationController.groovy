@@ -44,7 +44,7 @@ class OrganisationController {
             redirect(action: "list")
             return
         }	
-        [organisationInstance: organisationInstance,clientList:castingApiService.getClientListForOrg(id, 0,100),agencyList:castingApiService.getAgencyCandidates(id, 0, 100)]
+        [organisationInstance: organisationInstance,clientList:castingApiService.getClientListForOrg(id, 0,100),agencyList:castingApiService.getAgencyListForOrg(id, 0, 100)]
     }
 
     def edit(Long id) {

@@ -34,24 +34,26 @@
 						</g:each>
 					
 				</li>
-				</g:if>
-			
-				<g:if test="${clientInstance?.productions}">
-				<li class="fieldcontain">
-					<span id="productions-label" class="property-label"><g:message code="client.productions.label" default="Productions" /></span>
-					
-						<g:each in="${clientInstance.productions}" var="p">
-						<span class="property-value" aria-labelledby="productions-label"><g:link controller="production" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+				</g:if>							
 			
 			</ol>			
 	</div>
 
 	<div id="tab-productions">
-	-- list of productions that this client has --
+	<ol>
+			<g:if test="${clientInstance?.productions}">
+			
+					<g:each in="${clientInstance?.productions}" var="p">
+					<span class="property-value" aria-labelledby="production-label"><g:link controller="production" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+					<span class="property-value" aria-labelledby="production-label">${p?.status?.encodeAsHTML()}</span>
+					<span class="property-value" aria-labelledby="production-label">${p?.shootDate?.encodeAsHTML()}</span>
+					<span class="property-value" aria-labelledby="production-label">${p?.roles}</span>
+					<span class="property-value" aria-labelledby="production-label">${p?.categories}</span>
+					<br/><br/>
+					</g:each>					
+		
+			</g:if>
+		</ol>
 	</div>
 </div>
 

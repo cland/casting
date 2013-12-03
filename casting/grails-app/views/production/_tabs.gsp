@@ -74,8 +74,8 @@
 		<g:render template="portfoliosTable"/>
 	</div>
 
-	<!-- CASTING TABS -->
-	<g:render template="tabs_casting"></g:render>
+<!-- CASTING TABS -->
+<g:render template="tabs_casting"></g:render>
 	
 	<div id="tab-resources">
 		<div id="attachments" class="attachments">

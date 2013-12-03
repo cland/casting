@@ -2,6 +2,7 @@ package com.cland.casting
 
 import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 import org.codehaus.groovy.grails.plugins.springsecurity.*
+import org.grails.datastore.gorm.finders.MethodExpression.IsEmpty;
 
 class CastingApiService {
 	def springSecurityService
@@ -29,7 +30,34 @@ class CastingApiService {
 			if( tmp ) alldata.addAll(tmp)
 		}		
 		return alldata
-	}
+	} //
+	
+	def getProductions(long agencyId, int offset, int max){
+		def user = springSecurityService?.currentUser
+		def productionList = Production.withCriteria { isEmpty("agencyACL") }
+		if(isAdmin()){
+			def tmpList = Production.withCriteria {
+				if(agencyId > 0) agencyACL { idEq(agencyId) }
+				//firstResult(offset)
+				maxResults(max)
+				order("status", "asc")
+			}
+			productionList.addAll(tmpList)
+		}else{
+			agencyId = 0	//force agencyId to something that returns empty results
+			def agency = getAgencyForUser(user.id)
+			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
+			if(agency) agencyId = agency.id
+			def tmpList = Production.withCriteria {
+				agencyACL { idEq(agencyId) }
+				//firstResult(offset)
+				maxResults(max)
+				order("status", "asc")
+			}
+			productionList.addAll(tmpList)
+		}
+		return productionList.sort{it.name} //.reverse() // Production.list() //
+	} //end function
 	
 	def getCandidates(long productionId, long agencyId, int offset, int max){
 		def user = springSecurityService.currentUser
@@ -93,6 +121,18 @@ class CastingApiService {
 	def getAgencyListForOrg(Long id,Integer offset,Integer max){
 		def agencylist = Agency.createCriteria().list (offset:offset,max:max){
 			eq "company.id",id
+		}
+		return agencylist
+	} //end function
+	def getClientListForUser(Long id,Integer offset,Integer max){
+		def clientlist = Client.createCriteria().list (offset:offset,max:max){
+			contacts{ idEq(id) }
+		}
+		return clientlist
+	}
+	def getAgencyListForUser(Long id,Integer offset,Integer max){
+		def agencylist = Agency.createCriteria().list (offset:offset,max:max){
+			contacts{ idEq(id) }
 		}
 		return agencylist
 	} //end function

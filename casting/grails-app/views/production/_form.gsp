@@ -42,7 +42,8 @@
 <g:render template="rolesTable"/>
 
 <br/>
-<h5>Which agencies can access this production</h5>
+<h5>Which agencies can access this production </h5>
+<div class="message">** None selected means ALL can access</div>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'agencyACL', 'error')} ">
 		<label for="agencyACL">
 			<g:message code="production.agencyacl.label" default="Agency Access List" />		

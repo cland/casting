@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class AgencyController {
 	def castingApiService
+	def springSecurityService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -50,8 +51,10 @@ class AgencyController {
             redirect(action: "list")
             return
         }
-
-        [agencyInstance: agencyInstance]
+		//fetch the productions that this agency is allowed to view
+		def productionList = castingApiService.getProductions(id, 1, 100)
+		
+        [agencyInstance: agencyInstance,productionList:productionList]
     }
 
     def edit(Long id) {

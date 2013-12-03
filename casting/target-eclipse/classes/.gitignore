@@ -5,9 +5,11 @@
 /aclSid
 /attachmentable
 /auditLogEvent
+/com
 /dbdoc
 /gorm
 /grails
+/hibernate
 /includes
 /layouts
 /login
@@ -23,11 +25,11 @@
 /requestmap
 /role
 /securityInfo
+/spring
 /spring-security-core.properties
 /spring-security-core_de.properties
 /spring-security-core_fr.properties
 /user
-/com
 /ApplicationResources$_run_closure1.class
 /ApplicationResources$_run_closure1_closure2.class
 /ApplicationResources.class
@@ -73,6 +75,8 @@
 /DefaultUiSecurityConfig$_run_closure1_closure2_closure3.class
 /DefaultUiSecurityConfig$_run_closure1_closure2_closure4.class
 /DefaultUiSecurityConfig.class
+/DefaultWebXmlConfig$_run_closure1.class
+/DefaultWebXmlConfig.class
 /GrailsMelodyConfig.class
 /JQueryConfig$_run_closure1.class
 /JQueryConfig.class
@@ -119,5 +123,3 @@
 /UrlMappings.class
 /resources$_run_closure1.class
 /resources.class
-/DefaultWebXmlConfig$_run_closure1.class
-/DefaultWebXmlConfig.class

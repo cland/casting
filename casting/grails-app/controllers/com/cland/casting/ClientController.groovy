@@ -62,8 +62,9 @@ class ClientController {
             redirect(action: "list")
             return
         }
-
-        [clientInstance: clientInstance, isEditing:true, isNew:false]
+		List <String> rolenames = [SystemRoles.ROLE_DIRECTOR.value,SystemRoles.ROLE_REVIEWER.value]
+		def userList = castingApiService.getUsersWithRole(rolenames)
+        [clientInstance: clientInstance, isEditing:true, isNew:false,directorList:userList]
     }
 
     def update(Long id, Long version) {

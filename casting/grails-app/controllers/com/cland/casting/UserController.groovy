@@ -50,7 +50,7 @@ class UserController {
         }
 		//get the roles
 		def roleMap = userInstance.getAuthorities()
-		[userInstance: userInstance,roleMap:roleMap]
+		[userInstance: userInstance,roleMap:roleMap,clientList:castingApiService.getClientListForUser(id, 0,100),agencyList:castingApiService.getAgencyListForUser(id, 0, 100)]
     }
 
     def edit(Long id) {

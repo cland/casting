@@ -1,5 +1,5 @@
-
 <%@ page import="com.cland.casting.Agency" %>
+<%@ page import="com.cland.casting.SystemRoles" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,8 +11,10 @@
 	</head>
 	<body>
 	<div class="bread-crump">
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DEVELOPER }">
 		<span class="r-arrow"></span>
-		<g:link controller="agency" action="list">Agency</g:link>
+		<g:link controller="agency" action="list">Agencies</g:link>
+		</sec:ifAnyGranted>
 		<span class="r-arrow"></span> <span class="current-crump">
 			Agency: ${agencyInstance?.id } (Company: ${agencyInstance?.company?.encodeAsHTML()})
 		</span>
@@ -35,9 +37,10 @@
 					<g:hiddenField name="id" value="${agencyInstance?.id}" />
 					<g:link class="edit" action="edit" id="${agencyInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-			<span class="l-arrow"></span> | <span class="r-arrow"></span>
+					<span class="l-arrow"></span> | <span class="r-arrow"></span>
 					<g:link class="create" controller="candidate" action="create" params="${['agency.id':agencyInstance?.id]}">
-							<g:message code="default.new.label" args="['Candidate']"/></g:link>		
+						<g:message code="default.new.label" args="['Candidate']"/>
+					</g:link>					
 				</fieldset>
 			</g:form>
 		</div>

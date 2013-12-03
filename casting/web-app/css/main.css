@@ -653,21 +653,23 @@ a.skip {
 .copyright {font-weight:bold;padding-top:10px;}
 .field-small {width:40px}
 
-.list-filter {border:solid 1px #ccc;background:#fff;}
+.list-filter {border:solid 1px #ccc;background:#fff;margin-bottom:1em;box-shadow:1px 1px 1px 0 #CCCCCC;}
 .list_buttons{ 
     background-color: #FFFFFF;
-    border: medium none;
-    box-shadow: 0 0 2px 1px #CCCCCC;
+    box-shadow: 1px 1px 0px 0 #CCCCCC;
     margin: 0.2em 0 0.3em;
     overflow: hidden;
     padding: 0.3em;
 }
+tr > th:last-child.action-header {text-align:center;}
 .list-action-buttons {width:208px;}
 tr > td:first-child, tr > th:first-child {
     padding-left: 0.8em !important;
 }
-td, th {
+td {
     vertical-align: middle !important;
+    line-height:1em;
+    padding: 0.5em 0.6em;
 }
 
 tr > td:last-child, tr > th:last-child {

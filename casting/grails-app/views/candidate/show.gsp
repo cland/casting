@@ -1,4 +1,4 @@
-
+<%@ page import="com.cland.casting.SystemRoles" %>
 <%@ page import="com.cland.casting.Candidate" %>
 <!DOCTYPE html>
 <html>
@@ -9,9 +9,11 @@
 		<g:render template="head"></g:render>
 	</head>
 	<body>
-	<div class="bread-crump">			
-			<span class="r-arrow"></span>
+	<div class="bread-crump">		
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DEVELOPER }">	
+			<span class="r-arrow"></span>			
 			<g:link controller="agency" action="list">Agencies</g:link>
+			</sec:ifAnyGranted>
 			<g:if test="${candidateInstance?.agency }">
 			<span class="r-arrow"></span>
 				<g:link controller="agency" action="show" params="${['id':candidateInstance?.agency?.id]}">Agency: ${candidateInstance?.agency?.encodeAsHTML()}</g:link>

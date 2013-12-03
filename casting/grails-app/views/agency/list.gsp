@@ -20,7 +20,7 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-<div class="nav list-filter">
+<div class="nav list-filter" style="display:none;">
 			<p style="font-weight: bold;">Filter</p>
 			<ul>
 				<li>View By:<select name="viewFilter">
@@ -44,7 +44,7 @@
 						<th><g:message code="agency.company.label" default="Company" /></th>
 						<th>Contact Person</th>
 					     <th>Phone No.</th>
-					     <th>Action</th>
+					     <th class="action-header">Action</th>
 					
 					</tr>
 				</thead>

@@ -44,7 +44,10 @@ class ProductionController {
             return
         }
 
-        [productionInstance: productionInstance, isEditing:false, isNew:false]
+		def auditionProfiles = productionInstance?.profiles //?.findAll{it.isShortlist}
+		def shortlistProfiles = productionInstance?.profiles?.findAll{it.isShortlist}
+		def finalProfiles = productionInstance?.profiles?.findAll{it?.outcome?.equalsIgnoreCase("selected")}
+        [productionInstance: productionInstance,auditionProfiles:auditionProfiles,shortlistProfiles:shortlistProfiles,finalProfiles:finalProfiles, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
