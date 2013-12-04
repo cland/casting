@@ -705,3 +705,94 @@ p {
 	color: white; /* a color that is readeable with the color above */
 }
 /* end: jQuery UI Datepicker emphasis on selected dates */
+
+/** Headshots style **/
+.cast-list {
+    float:left;
+	width:100%;
+	clear:both;
+	margin: 10px 0 5px 0;
+	font-size: 0.9em;
+}
+.headshot-row {
+    clear:both;
+    page-break-inside: avoid;
+}
+
+.mugshot {
+    border: solid 1px #0094ff;
+    float: left;
+    padding: 0.5em;
+    text-align: center;
+    margin: 0.5em;
+}
+.profile-text{}
+.profile-input{}
+.mugshot_radioyes { }
+.mugshot_radiono { }
+.summary-row {
+    clear: both;
+    page-break-inside: avoid;
+    float:left;
+    width:100%;
+    border:solid 1px #ccc;
+    margin-bottom:0.8em;
+}
+
+.summary-row .cast-details {
+    float: left;
+    border: none 1px #0e8523;
+    width: 30%;
+    margin: 0.5em;
+}
+.summary-row .cast-actions {
+    float: left;
+    border: none 1px #0094ff;
+	width: 40%;
+    margin: 0.5em;
+    margin-left:1px;
+    margin-right:1px;
+}
+.summary-row .cast-actions textarea{font-size:0.8em; width:166px;height:60px;}
+.summary-row .cast-mugshot {
+    border: solid 1px #0094ff;
+    float: left;
+    padding: 0.5em;
+    text-align: center;
+    margin: 0.5em;
+    margin-left:0;
+    float:right;   
+    width:150px;    
+}
+.detailed-row {
+    clear: both;
+    page-break-inside: avoid;
+    float:left;
+    width:100%;
+    border:solid 1px #ccc;
+}
+.detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#999;}
+.detailed-row .cast-details {
+    float: left;
+    border: none 1px #0e8523;
+    margin: 0.5em;
+}
+.detailed-row .cast-actions {
+    float: left;
+    display:none;  
+    width: 40%;
+    margin: 0.5em;
+}
+.detailed-row .cast-mugshot {
+    border: solid 1px #0094ff;
+    float: left;
+    padding: 0.5em;
+    text-align: center;
+    margin: 0.5em;
+    float:right;
+    width:25%;
+}
+.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table{display:table;}
+.row{display:table-row;}
+.row:hover, .row:hover label{background:#999;color:#fff !important;}
+.cell{display:table-cell; padding:4px;}

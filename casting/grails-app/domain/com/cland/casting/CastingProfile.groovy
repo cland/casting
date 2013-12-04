@@ -18,6 +18,7 @@ class CastingProfile {
 	Double averating	//average rating - a computed field from the exiting ratings.
 	String comments
 	Candidate canditate
+	int age		//computed value at the time of this casting profile
 //	VideoSet videos
 //	PictureSet pictures
 	List ratings
@@ -35,12 +36,16 @@ class CastingProfile {
 		castDate(nullable:true)
 		castNo(nullable:true)
 		round(nullable:true)
+		age(nullable:true)
 	}
 	static mapping = {
 		ratings cascade:"all-delete-orphan"
 	}
 	void computeAverageRating(){
 		averating = 0.0 //TODO: Calculate the average ratings
+	}
+	void computeAge(){
+		age = 18 //TODO: compute the age here
 	}
 	def beforeInsert = {
 		computeAverageRating()
