@@ -9,34 +9,31 @@
 		<li><a href="#tab-portfolios">Portfolios</a></li>
 	</ul>
 <div id="tab-production">
-		<ol class="property-list production">
-			<g:if test="${productionInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="production.name.label" default="Name" /></span>					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${productionInstance}" field="name"/></span>					
-				</li>
+		<fieldset>
+			<legend>Brief</legend>
+			<g:if test="${productionInstance?.description}">
+				<p>
+					${productionInstance?.description}
+				</p>
 			</g:if>
-		<g:if test="${productionInstance?.status}">
-				<li class="fieldcontain">
-					<span id="status-label" class="property-label"><g:message code="production.status.label" default="Status" /></span>
-					
-						<span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${productionInstance}" field="status"/></span>
-					
-				</li>
-			</g:if>		
+		</fieldset>
+		<ol class="property-list production">	
+	
 		<g:if test="${productionInstance?.shootDate}">
 				<li class="fieldcontain">
 					<span id="shootDate-label" class="property-label"><g:message code="production.shootDate.label" default="Shoot Date" /></span>				
 						<span class="property-value" aria-labelledby="shootDate-label"><g:formatDate date="${productionInstance?.shootDate}" format="dd-MMM-yyyy"/></span>				
 				</li>
 			</g:if>		
-		</ol>
-			<fieldset><legend>Brief</legend>
-			<g:if test="${productionInstance?.description}">
-				<p>${productionInstance?.description}</p>
-			</g:if>			
-			</fieldset>
-		<ol  class="property-list production">
+			<g:if test="${productionInstance?.roles}">
+				<li class="fieldcontain">
+					<span id="roles-label" class="property-label"><g:message code="production.roles.label" default="Casting Roles" /></span>
+					
+						<g:each in="${productionInstance.roles}" var="r">
+						<span class="property-value" aria-labelledby="roles-label"><g:link controller="castingRole" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						</g:each>				
+				</li>
+			</g:if>
 			<g:if test="${productionInstance?.categories}">
 				<li class="fieldcontain">
 					<span id="categories-label" class="property-label"><g:message code="production.categories.label" default="Categories" /></span>					
@@ -44,20 +41,7 @@
 						<span class="property-value" aria-labelledby="categories-label"><g:link controller="castingCategory" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
 						</g:each>				
 				</li>
-				</g:if>			
-			
-			<g:if test="${productionInstance?.roles}">
-				<li class="fieldcontain">
-					<span id="roles-label" class="property-label"><g:message code="production.roles.label" default="Casting Roles" /></span>
-					
-						<g:each in="${productionInstance.roles}" var="r">
-						<span class="property-value" aria-labelledby="roles-label"><g:link controller="castingRole" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
 			</g:if>
-			
-				
 
 	<li class="fieldcontain">
 		<span id="agencyACL-label" class="property-label"><g:message code="production.agencyacl.label" default="Agency access list" /></span>

@@ -189,7 +189,7 @@ img {
 }
 
 .nav a.home, .nav a.list, .nav a.create, .nav a.aboutus,.nav a.cancel,.nav a.newsevents,
-.nav a.login,.nav a.logout,.nav a.casting  {
+.nav a.login,.nav a.logout,.nav a.casting, .nav a.print-button  {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
@@ -796,3 +796,5 @@ p {
 .row{display:table-row;}
 .row:hover, .row:hover label{background:#999;color:#fff !important;}
 .cell{display:table-cell; padding:4px;}
+.float-right{float:right;}
+.float-left{float:left;}

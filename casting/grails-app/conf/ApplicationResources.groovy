@@ -7,6 +7,7 @@ modules = {
 		resource url: 'js/jquery.jqGrid.min.js'
 		resource url: 'js/jquery.jqpagination.min.js'
 		resource url: 'js/jquery-ui.multidatespicker.js'
+		resource url: 'js/cland-common.js'
     }
 //	jquerymin{
 //		resource url: 'js/jquery-1.9.1.js', disposition: 'head'

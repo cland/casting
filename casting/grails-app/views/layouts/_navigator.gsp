@@ -23,4 +23,6 @@
 					code="default.login.label" /></g:link></li>
 		</sec:ifNotLoggedIn>
 	</ul>
+	<a href="javascript:printFriendly();" style="margin-top:-25px" class="print-button float-right"><g:message
+					code="default.print.label" /></a>
 </div>

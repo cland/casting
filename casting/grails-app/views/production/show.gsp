@@ -24,7 +24,7 @@
 		<a href="#show-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="show-production" class="content scaffold-show" role="main">
-			<h1>Production: ${productionInstance?.name }</h1>
+			<h1>Production: ${productionInstance?.name } <span class="float-right">${productionInstance?.status}</span></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

@@ -12,7 +12,8 @@
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
 		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css" media="screen">
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'print.css')}" type="text/css" media="print">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 			<!-- link rel="stylesheet" href="${resource(dir: 'css', file: 'fieldset.css')}" type="text/css" -->
 <link rel="stylesheet"	href="${resource(dir:'css/south-street',file:'jquery-ui-1.10.3.custom.min.css')}" />
@@ -62,7 +63,9 @@
 .nav a.casting {
 	background-image: url("${fam.icon(name:'table_multiple')}");
 }
-
+.nav a.print-button {
+	background-image: url("${fam.icon(name:'printer')}");
+}
 		</style>
 	</head>
 	<body>
