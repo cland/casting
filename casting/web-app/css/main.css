@@ -48,7 +48,7 @@ body {
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	background-color: #F8BB59;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -111,7 +111,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #FFF;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -119,6 +119,7 @@ img {
 	padding: 1em;
 	min-height: 1em;
 	text-align:center;
+	border-top:dotted 2px #F8BB59
 }
 
 .footer a {
@@ -798,3 +799,5 @@ p {
 .cell{display:table-cell; padding:4px;}
 .float-right{float:right;}
 .float-left{float:left;}
+.clear{clear:both;}
+.photo-display{margin:5px;padding:5px;border:1px solid #ccc;text-align:center;}

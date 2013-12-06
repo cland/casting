@@ -16,7 +16,9 @@ class VideoSetController {
     }
 
     def create() {
-        [videoSetInstance: new VideoSet(params)]
+		def profile = null
+		if(params?.castingProfile?.id) profile = CastingProfile.get(params.castingProfile.id)
+        [videoSetInstance: new VideoSet(params),castingProfileInstance:profile]
     }
 
     def save() {
@@ -27,7 +29,7 @@ class VideoSetController {
             return
         }
 		attachUploadedFilesTo(videoSetInstance)
-		println("saved! ${videoSetInstance.totalAttachments}" )
+		
         flash.message = message(code: 'default.created.message', args: [message(code: 'videoSet.label', default: 'VideoSet'), videoSetInstance.id])
         redirect(action: "show", id: videoSetInstance.id)
     }
@@ -40,7 +42,7 @@ class VideoSetController {
             return
         }
 
-        [videoSetInstance: videoSetInstance]
+        [videoSetInstance: videoSetInstance,castingProfileInstance:videoSetInstance?.castingProfile]
     }
 
     def edit(Long id) {
@@ -50,8 +52,8 @@ class VideoSetController {
             redirect(action: "list")
             return
         }
-
-        [videoSetInstance: videoSetInstance]
+		def profile = videoSetInstance?.castingProfile
+        [videoSetInstance: videoSetInstance,castingProfileInstance:profile]
     }
 
     def update(Long id, Long version) {

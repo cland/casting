@@ -59,7 +59,9 @@ class CastingProfile {
 	def onLoad = {
 		// your code goes here
 	}
-
+	String getName(){
+		"${canditate?.person?.toString()}"
+	}
 	String toString(){
 		"Cast: ${castNo} - ${canditate?.person?.toString()}"
 	}

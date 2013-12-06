@@ -1,9 +1,13 @@
 <!-- The tabs -->
+<%@ page import="com.cland.casting.SystemRoles" %>
+<g:set var="pictureSetInstance" value="${castingProfileInstance?.pictures}"/>
+<g:set var="videoSetInstance" value="${castingProfileInstance?.videos}"/>
 <div id="tabs" style="display: none;">
 	<ul>
 		<li><a href="#tab-details">Details</a></li>
-		<li><a href="#tab-videos">Videos</a></li>
 		<li><a href="#tab-photos">Photos</a></li>
+		<li><a href="#tab-videos">Videos</a></li>
+
 	</ul>
 
 	<!-- DETAILS -->	
@@ -232,36 +236,63 @@
 		<g:render template="ratingsTable"/>
 		</fieldset>	
 	</div>
-	
-	<!-- VIDEOS -->
-	<div id="tab-videos">
-		<g:if test="${castingProfileInstance?.videos}">
-			<li class="fieldcontain">
-				<span id="videos-label" class="property-label"><g:message code="castingProfile.videos.label" default="Videos" /></span>					
-					<span class="property-value" aria-labelledby="videos-label"><g:link controller="videoSet" action="show" id="${castingProfileInstance?.videos?.id}">${castingProfileInstance?.videos?.encodeAsHTML()}</g:link></span>					
-			</li>
-		</g:if>
-	</div>
-	
 	<!-- PHOTOS -->
 	<div id="tab-photos">
-				<g:if test="${castingProfileInstance?.pictures}">
-				<li class="fieldcontain">
-					<span id="pictures-label" class="property-label"><g:message code="castingProfile.pictures.label" default="Pictures" /></span>
-					
-						<span class="property-value" aria-labelledby="pictures-label"><g:link controller="pictureSet" action="show" id="${castingProfileInstance?.pictures?.id}">${castingProfileInstance?.pictures?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if> <br/>
-		<div id="attachments" class="attachments">
-			<attachments:each bean="${castingProfileInstance}">
-				<attachments:icon attachment="${attachment}" />
-				<attachments:deleteLink attachment="${attachment}" label="${'[X]'}"
-					returnPageURI="${createLink(action: 'show', id: castingProfileInstance.id,absolute:true)}" />
-				<attachments:downloadLink attachment="${attachment}" />
-				${attachment.niceLength}
-			</attachments:each>
+	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+		<g:if test="${castingProfileInstance?.pictures}">
+			<div class="float-right property-value" aria-labelledby="pictures-label">
+			<g:link controller="pictureSet" action="show" id="${castingProfileInstance?.pictures?.id}">
+			<g:message code="default.manage.label" args=" " />${message(code: 'pictureSet.label', default: 'PictureSet')} </g:link>
+			</div>
+		</g:if> <br/>
+	</sec:ifAnyGranted>	
+		<div id="attachments-photos" class="attachments">
+				<attachments:each bean="${pictureSetInstance}" status="i">	
+				<div class="photo-display float-left">
+				<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+					<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />				
+					<attachments:downloadLink attachment="${attachment}" inline="true" withContentType="true" />
+					${attachment.niceLength}
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DEVELOPER},${SystemRoles.ROLE_ADMIN }">
+					<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+						returnPageURI="${createLink(action:'show', id:castingProfileInstance?.id,absolute:true,params:'#tab-photos')}" />
+					</sec:ifAnyGranted>
+				</div>	
+					<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+				
+				</attachments:each>
+				<div style="clear:both"></div>
 		</div>
+	</div>	
+	<!-- VIDEOS -->
+	<div id="tab-videos">
+
+<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+		<g:if test="${castingProfileInstance?.pictures}">
+			<div class="float-right property-value" aria-labelledby="videos-label">
+			<g:link controller="videoSet" action="show" id="${castingProfileInstance?.videos?.id}">
+			<g:message code="default.manage.label" args=" " />${message(code: 'videoSet.label', default: 'VideoSet')} </g:link>
+			</div>
+		</g:if> <br/>
+	</sec:ifAnyGranted>	
+		<div id="attachments-videos" class="attachments">
+				<attachments:each bean="${videoSetInstance}" status="i">	
+				<div class="photo-display float-left">
+				<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+					<img src="${resource(dir:'images/icons',file:'film.png',plugin:'famfamfam')}" />				
+					<attachments:downloadLink attachment="${attachment}" inline="false" withContentType="false" />
+					${attachment.niceLength}
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DEVELOPER},${SystemRoles.ROLE_ADMIN }">
+					<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+						returnPageURI="${createLink(action:'show', id:castingProfileInstance?.id,absolute:true,params:'#tab-videos')}" />
+					</sec:ifAnyGranted>
+				</div>	
+					<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+				
+				</attachments:each>
+				<div style="clear:both"></div>
+		</div>		
 	</div>
+	
 </div>
 <!--  End tabs -->

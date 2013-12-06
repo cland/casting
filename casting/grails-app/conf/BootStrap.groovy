@@ -240,8 +240,74 @@ SpringSecurityUtils.doWithAuth('default') {
 					
 				break
 			case "PRODUCTION" :
-				
+	
+				def devRole = new Role(authority: 'ROLE_DEVELOPER').save(flush: true, failOnError:true)
+				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError:true)
+				def directorRole = new Role(authority: 'ROLE_DIRECTOR').save(flush: true, failOnError:true)
+				def agentRole = new Role(authority: 'ROLE_AGENT').save(flush: true, failOnError:true)
+				def reviewerRole = new Role(authority: 'ROLE_REVIEWER').save(flush: true, failOnError:true)
 
+				def sa = new Country(name:"South Africa")
+				sa.addToRegions(new Region(name:"Western Cape"))
+				sa.addToRegions(new Region(name:"KZN"))
+				sa.addToRegions(new Region(name:"Limpopo"))
+				sa.addToRegions(new Region(name:"Mpumalanga"))
+				sa.addToRegions(new Region(name:"Gauteng"))
+				sa.addToRegions(new Region(name:"North West"))
+				sa.addToRegions(new Region(name:"Free State"))
+				sa.addToRegions(new Region(name:"Eastern Cape"))
+				sa.addToRegions(new Region(name:"Northern Cape"))
+				sa.save()
+				if(sa.hasErrors()){
+					println(sa.errors)
+				}
+
+				new Race(name:"Black").save()
+				new Race(name:"White").save()
+				new Race(name:"Coloured").save()
+				new Race(name:"Indian").save()
+				new Race(name:"Asian").save()
+				new Race(name:"Other").save()
+
+			//* Admin user
+				def adminUser = new User(username: 'castingadmin',
+				enabled: true,
+				password: 'Cast1Admin',
+				firstName: 'Casting',
+				lastName: 'Administrator',
+				idNo :"3456753463453",
+				contactNo : "021334232",
+				dateOfBirth:(new Date() - 365*30),
+				gender:"Male",
+				address:"123 Main St",
+				city:"Cape Town",
+				email:"jay@whereever.com")
+
+				adminUser.save()
+				if(adminUser.hasErrors()){
+					println adminUser.errors
+				}
+				UserRole.create(adminUser, adminRole, true)
+
+			//* Dev user
+				def devUser = new User(username: 'devadmin',
+				enabled: true,
+				password: 'Cast1Dev',
+				firstName: 'Casting',
+				lastName: 'Developer',
+				idNo :"3453333463453",
+				contactNo : "021334232",
+				dateOfBirth:(new Date() - 365*30),
+				gender:"Male",
+				address:"123 Low St",
+				city:"Cape Town",
+				email:"dev@whereever.com")
+
+				devUser.save()
+				if(devUser.hasErrors()){
+					println devUser.errors
+				}
+				UserRole.create(devUser, devRole, true)
 				break
 		}
 	} //end init

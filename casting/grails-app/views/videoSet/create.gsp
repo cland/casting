@@ -8,13 +8,15 @@
 		<g:render template="head"></g:render>
 	</head>
 	<body>
-		<div class="bread-crump">
+<div class="bread-crump">
+	<span class="r-arrow"></span>
+				<g:link controller="production" action="show" id="${castingProfileInstance?.production?.id }">Production: ${castingProfileInstance?.production?.name }</g:link>
 				<span class="r-arrow"></span>
-				<g:link controller="videoSet" action="list">Videos</g:link>
+				<g:link controller="castingProfile" action="show" id="${castingProfileInstance?.id }">${castingProfileInstance }</g:link>
 				<span class="r-arrow"></span> <span class="current-crump">
-					New Video Set
+					New ${entityName }
 				</span>
-		</div>	
+	</div>	
 		<div id="status1" class="leftbar" role="complementary">
 	         <g:render template="../layouts/sidenav-admin"></g:render>
 	    </div>	

@@ -1,5 +1,7 @@
-
+<%@ page import="com.cland.casting.SystemRoles" %>
 <%@ page import="com.cland.casting.CastingProfile" %>
+<g:set var="pictureSetInstance" value="${castingProfileInstance?.pictures}"/>
+<g:set var="videoSetInstance" value="${castingProfileInstance?.videos}"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -31,9 +33,33 @@
 			<g:render template="tabs"/>
 			<g:form>
 				<fieldset class="buttons">
+				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 					<g:hiddenField name="id" value="${castingProfileInstance?.id}" />
 					<g:link class="edit" action="edit" id="${castingProfileInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<span class="l-arrow"></span> | <span class="r-arrow"></span>
+						<g:if test="${ pictureSetInstance}">
+							<g:link class="edit" controller="pictureSet" action="edit" id="${pictureSetInstance?.id}">
+							<g:message code="default.manage.label" args="['Photos']"/>
+							</g:link>
+						</g:if>
+						<g:else>
+							<g:link class="create" controller="pictureSet" action="create" params="${['castingProfile.id':castingProfileInstance?.id]}">
+							<g:message code="default.add.label" args="['Photos']"/>
+							</g:link>
+						</g:else>
+						<g:if test="${ videoSetInstance}">
+							<g:link class="edit" controller="videoSet" action="edit" id="${videoSetInstance?.id}">
+							<g:message code="default.manage.label" args="['Videos']"/>
+							</g:link>
+						</g:if>
+						<g:else>
+							<g:link class="create" controller="videoSet" action="create" params="${['castingProfile.id':castingProfileInstance?.id]}">
+							<g:message code="default.add.label" args="['Videos']"/>
+							</g:link>
+						</g:else>
+					</sec:ifAnyGranted>
+					
 				</fieldset>
 			</g:form>
 		</div>

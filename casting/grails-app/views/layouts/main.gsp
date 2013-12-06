@@ -69,7 +69,7 @@
 		</style>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="/casting"><img src="${resource(dir: 'images', file: 'grails_logo.png')}" alt="Cland"/></a></div>
+		<div id="grailsLogo" role="banner"><a href="/casting"><img src="${resource(dir: 'images', file: 'logo.png')}" alt="Cland"/></a></div>
 		<g:render template="/layouts/navigator" />
 		<g:layoutBody/>
 		<g:render template="/layouts/footer" />

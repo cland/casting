@@ -1,4 +1,4 @@
-<%@ page import="com.cland.elearning.Organisation" %>
+<%@ page import="com.cland.casting.Organisation" %>
 <!DOCTYPE html>
 <html>
 	<head>

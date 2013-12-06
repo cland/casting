@@ -17,7 +17,9 @@ class PictureSetController {
     }
 
     def create() {
-        [pictureSetInstance: new PictureSet(params)]
+		def profile = null
+		if(params?.castingProfile?.id) profile = CastingProfile.get(params.castingProfile.id)
+        [pictureSetInstance: new PictureSet(params),castingProfileInstance:profile]
     }
 
     def save() {
@@ -40,7 +42,7 @@ class PictureSetController {
             return
         }
 
-        [pictureSetInstance: pictureSetInstance]
+        [pictureSetInstance: pictureSetInstance,castingProfileInstance:pictureSetInstance?.castingProfile]
     }
 
     def edit(Long id) {
@@ -50,8 +52,9 @@ class PictureSetController {
             redirect(action: "list")
             return
         }
-
-        [pictureSetInstance: pictureSetInstance]
+		def profile = pictureSetInstance?.castingProfile
+		
+        [pictureSetInstance: pictureSetInstance,castingProfileInstance:profile]
     }
 
     def update(Long id, Long version) {

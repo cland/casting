@@ -9,19 +9,21 @@
 	</head>
 	<body>
 	<div class="bread-crump">
+	<span class="r-arrow"></span>
+				<g:link controller="production" action="show" id="${castingProfileInstance?.production?.id }">Production: ${castingProfileInstance?.production?.name }</g:link>
 				<span class="r-arrow"></span>
-				<g:link controller="pictureSet" action="list">Pictures</g:link>
+				<g:link controller="castingProfile" action="show" id="${castingProfileInstance?.id }">${castingProfileInstance }</g:link>
 				<span class="r-arrow"></span> <span class="current-crump">
-					New Picture Set
+					New ${entityName }
 				</span>
-		</div>	
+	</div>	
 	<div id="status1" class="leftbar" role="complementary">
          <g:render template="../layouts/sidenav-admin"></g:render>
     </div>	
 		<a href="#create-pictureSet" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
 		<div id="create-pictureSet" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.create.label" args="[entityName]" /> <g:if test="${castingProfileInstance }">for ${castingProfileInstance }</g:if></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
