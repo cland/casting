@@ -2,6 +2,7 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
 <g:set var="pictureSetInstance" value="${castingProfileInstance?.pictures}"/>
 <g:set var="videoSetInstance" value="${castingProfileInstance?.videos}"/>
+<g:set var="candidate" value="${castingProfileInstance?.canditate }"/>
 <div id="tabs" style="display: none;">
 	<ul>
 		<li><a href="#tab-details">Details</a></li>
@@ -11,111 +12,111 @@
 	</ul>
 
 	<!-- DETAILS -->	
-	<div id="tab-details">
-		<ol class="property-list castingProfile">
-				<g:if test="${castingProfileInstance?.production}">
-				<li class="fieldcontain">
-					<span id="production-label" class="property-label"><g:message code="castingProfile.production.label" default="Production" /></span>
-					
-						<span class="property-value" aria-labelledby="production-label"><g:link controller="production" action="show" id="${castingProfileInstance?.production?.id}">${castingProfileInstance?.production?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>			
-				<g:if test="${castingProfileInstance?.outcome}">
-				<li class="fieldcontain">
-					<span id="outcome-label" class="property-label"><g:message code="castingProfile.outcome.label" default="Outcome" /></span>
-					
-						<span class="property-value" aria-labelledby="outcome-label"><g:fieldValue bean="${castingProfileInstance}" field="outcome"/></span>
-					
-				</li>
-				</g:if>
-			
+<div id="tab-details">
+	
+	
+	<div id="row-${castingProfileInstance?.id }" class="profile-row"> <!--  start candidate profile details -->
+		<div id="cast-details-${castingProfileInstance?.id }" class="cast-details">
+			<div class="cast-details-data-table">
+         		<div class="row castnum">
+            		<div class="cell"><label>Cast No.:</label></div>
+            		<div class="cell"><span class="property-value">${castingProfileInstance?.castNo}</span></div>
+            	</div>
+            	<div class="row name">
+            		<div class="cell"><label>Name:</label></div>
+            		<div class="cell"><span class="property-value">${candidate?.person?.encodeAsHTML() }</span></div>
+            	</div>
+            	<div class="row contactno">
+            		<div class="cell"><label>Contact No.:</label></div>
+            		<div class="cell"><span class="property-value">${candidate?.person?.contactNo }</span></div>
+            	</div>             	
+            	<div class="row gender">
+            		<div class="cell"><label>Gender:</label></div>
+            		<div class="cell"><span class="property-value">${candidate?.person?.gender }</span></div>
+            	</div>  
+             	<div class="row race">
+            		<div class="cell"><label>Race:</label></div>
+            		<div class="cell"><span class="property-value">${candidate?.person?.race }</span></div>
+            	</div>           	          	
+            	<div class="row age">
+            		<div class="cell"><label>Age:</label></div>
+            		<div class="cell"><span class="property-value">${castingProfileInstance?.age }</span></div>
+            	</div>
+            	<div class="row casting-role">
+            		<div class="cell"><label>Casting Role:</label></div>
+            		<div class="cell">
+            			<g:each in="${castingProfileInstance.roles}" var="r">
+						<span class="property-value">${r?.encodeAsHTML()}</span>
+						</g:each>
+            		</div>
+            	</div>
+            	<div class="row casting-category">
+            		<div class="cell"><label>Casting Category:</label></div>
+            		<div class="cell">
+            			<g:each in="${castingProfileInstance.categories}" var="r">
+						<span class="property-value">${r?.encodeAsHTML()}</span>
+						</g:each>
+            		</div>
+            	</div>           	   
+            	<div class="row castdate">
+            		<div class="cell"><label>Cast Date:</label></div>
+            		<div class="cell"><span class="property-value"><g:formatDate date="${castingProfileInstance?.castDate}" format="dd-MMM-yyyy"/></span></div>
+            	</div>	 
+             	<div class="row auditiondate">
+            		<div class="cell"><label>Audition Date:</label></div>
+            		<div class="cell"><span class="property-value"><g:formatDate date="${castingProfileInstance?.auditionDate}" format="dd-MMM-yyyy"/></span></div>
+            	</div>  
 				<g:if test="${castingProfileInstance?.averating}">
-				<li class="fieldcontain">
-					<span id="averating-label" class="property-label"><g:message code="castingProfile.averating.label" default="Averating" /></span>
-					
-						<span class="property-value" aria-labelledby="averating-label"><g:fieldValue bean="${castingProfileInstance}" field="averating"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.canditate}">
-				<li class="fieldcontain">
-					<span id="canditate-label" class="property-label"><g:message code="castingProfile.canditate.label" default="Canditate" /></span>
-					
-						<span class="property-value" aria-labelledby="canditate-label"><g:link controller="candidate" action="show" id="${castingProfileInstance?.canditate?.id}">${castingProfileInstance?.canditate?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				<li class="fieldcontain">
-					<span id="person-gender-label" class="property-label"><g:message code="candidate.person.gender.label" default="Gender" /></span>					
-					<span class="property-value" aria-labelledby="person-gender-label"> ${castingProfileInstance?.canditate?.person?.gender?.encodeAsHTML()}</span>					
-				</li>
-				<li class="fieldcontain">
-					<span id="person-race-label" class="property-label"><g:message code="candidate.person.race.label" default="Race" /></span>					
-					<span class="property-value" aria-labelledby="person-race-label"> ${castingProfileInstance?.canditate?.person?.race?.encodeAsHTML()}</span>					
-				</li>
-				<li class="fieldcontain">
-					<span id="person-contactno-label" class="property-label"><g:message code="candidate.person.contactno.label" default="Contact No." /></span>					
-					<span class="property-value" aria-labelledby="person-contactno-label"> ${castingProfileInstance?.canditate?.person?.contactNo?.encodeAsHTML()}</span>					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.castDate}">
-				<li class="fieldcontain">
-					<span id="castDate-label" class="property-label"><g:message code="castingProfile.castDate.label" default="Cast Date" /></span>
-					
-						<span class="property-value" aria-labelledby="castDate-label"><g:formatDate date="${castingProfileInstance?.castDate}" format="dd-MMM-yyyy"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.castNo}">
-				<li class="fieldcontain">
-					<span id="castNo-label" class="property-label"><g:message code="castingProfile.castNo.label" default="Cast No" /></span>
-					
-						<span class="property-value" aria-labelledby="castNo-label"><g:fieldValue bean="${castingProfileInstance}" field="castNo"/></span>
-					
-				</li>
-				</g:if>
-				<g:if test="${castingProfileInstance?.roles}">
-				<li class="fieldcontain">
-					<span id="roles-label" class="property-label"><g:message code="castingProfile.roles.label" default="Role" /></span>
-					
-						<g:each in="${castingProfileInstance.roles}" var="r">
-						<span class="property-value" aria-labelledby="roles-label"><g:link controller="castingRole" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>	
-				<g:if test="${castingProfileInstance?.categories}">
-				<li class="fieldcontain">
-					<span id="categories-label" class="property-label"><g:message code="castingProfile.categories.label" default="Category" /></span>
-					
-						<g:each in="${castingProfileInstance.categories}" var="c">
-						<span class="property-value" aria-labelledby="categories-label"><g:link controller="castingCategory" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-				<g:if test="${castingProfileInstance?.auditionDate}">
-				<li class="fieldcontain">
-					<span id="auditionDate-label" class="property-label"><g:message code="castingProfile.auditionDate.label" default="Audition Date" /></span>
-					
-						<span class="property-value" aria-labelledby="auditionDate-label"><g:formatDate date="${castingProfileInstance?.auditionDate}" format="dd-MMM-yyyy"/></span>
-					
-				</li>
-				</g:if>			
-			
+	             	<div class="row averating">
+	            		<div class="cell"><label>Audition Date:</label></div>
+	            		<div class="cell"><span class="property-value"><g:message code="castingProfile.averating.label" default="Averating" /></span></div>
+	            	</div> 								
+				</g:if>  
+            	<div class="row production">
+            		<div class="cell"><label>Production:</label></div>
+            		<div class="cell"><span class="property-value"><g:link controller="production" action="show" id="${castingProfileInstance?.production?.id}">${castingProfileInstance?.production?.name?.encodeAsHTML()}</g:link></span></div>
+            	</div>
 				<g:if test="${castingProfileInstance?.comments}">
-				<li class="fieldcontain">
-					<span id="comments-label" class="property-label"><g:message code="castingProfile.comments.label" default="Comments" /></span>
-					
-						<span class="property-value" aria-labelledby="comments-label"><g:fieldValue bean="${castingProfileInstance}" field="comments"/></span>
-					
-				</li>
+            	<div class="row comments">
+            		<div class="cell"><label>Production:</label></div>
+            		<div class="cell"><span class="property-value">${castingProfileInstance?.comments?.encodeAsHTML()}</span></div>
+            	</div>				
+				</g:if>            									          	         	       
+            </div>
+		</div>
+		
+		<div id="cast-actions-${profile?.id }" style="display:none;" class="cast-actions">&nbsp;</div>
+	
+		<div id="cast-mugshot-${castingProfileInstance?.id }" class="cast-mugshot">
+			<g:set var="hasphoto" value="${false }"/>
+		    <attachments:each bean="${castingProfileInstance?.pictures}" inputName="headshot" status="j">	         
+				<g:if test="${j==0}">
+					<g:set var="hasphoto" value="${true }"/>
+					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+				</g:if>			
+			</attachments:each>	
+			
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+				<g:if test="${hasphoto==false}"> 
+					<g:if test="${ castingProfileInstance?.pictures}">
+							<g:link class="edit" controller="pictureSet" action="edit" id="${castingProfileInstance?.pictures?.id}">
+							<g:message code="default.add.label" args="['Photo']"/>
+							</g:link>
+					</g:if>
+					<g:else>
+						<g:link class="create" controller="pictureSet" action="create" params="${['castingProfile.id':castingProfileInstance?.id]}">
+						<g:message code="default.add.label" args="['Photo']"/>
+						</g:link>
+					</g:else>
 				</g:if>
-			</ol>
-			<fieldset><legend>Characteristics</legend>	
+			</sec:ifAnyGranted>
+		</div>
+		<br/>
+		<div class="clear"></div>
+	</div>	<!-- end profile details row -->
+
+		
+		<fieldset><legend>Characteristics</legend>	
 		<ol class="property-list candidate">
 				<g:if test="${castingProfileInstance?.canditate?.clothing}">
 				<li class="fieldcontain">
@@ -171,8 +172,8 @@
 				</li>
 				</g:if>
 				</ol>
-			</fieldset>
-			<fieldset><legend>Progress Indicators</legend>
+		</fieldset>
+		<fieldset><legend>Progress Indicators</legend>
 			<ol class="property-list castingProfile">
 				<g:if test="${castingProfileInstance?.isAuditionAvailable}">
 				<li class="fieldcontain">
@@ -229,25 +230,55 @@
 					
 				</li>
 				</g:if>
-			
+				<g:if test="${castingProfileInstance?.outcome}">
+				<li class="fieldcontain">
+					<span id="outcome-label" class="property-label"><g:message code="castingProfile.outcome.label" default="Outcome" /></span>
+					
+						<span class="property-value" aria-labelledby="outcome-label"><g:fieldValue bean="${castingProfileInstance}" field="outcome"/></span>
+					
+				</li>
+				</g:if>		
 			</ol>
-			</fieldset>
+		</fieldset>
 		<fieldset><legend>Ratings and Comments</legend>
 		<g:render template="ratingsTable"/>
 		</fieldset>	
-	</div>
+</div>
+	
+	
 	<!-- PHOTOS -->
-	<div id="tab-photos">
-	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
-		<g:if test="${castingProfileInstance?.pictures}">
-			<div class="float-right property-value" aria-labelledby="pictures-label">
-			<g:link controller="pictureSet" action="show" id="${castingProfileInstance?.pictures?.id}">
-			<g:message code="default.manage.label" args=" " />${message(code: 'pictureSet.label', default: 'PictureSet')} </g:link>
-			</div>
-		</g:if> <br/>
-	</sec:ifAnyGranted>	
+<div id="tab-photos">
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+			<g:if test="${castingProfileInstance?.pictures}">
+				<div class="float-right property-value" aria-labelledby="pictures-label">
+				<g:link controller="pictureSet" action="show" id="${castingProfileInstance?.pictures?.id}">
+				<g:message code="default.manage.label" args=" " />${message(code: 'pictureSet.label', default: 'PictureSet')} </g:link>
+				</div>
+			</g:if> <br/>
+		</sec:ifAnyGranted>	
+		<fieldset><legend>Headshot Picture</legend>
+			<div id="attachments-photos-headshot" class="attachments">
+				<attachments:each bean="${pictureSetInstance}" inputName="headshot" status="j">	
+				<div class="photo-display float-left">
+				<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+					<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />				
+					<attachments:downloadLink attachment="${attachment}" inline="true" withContentType="true" />
+					${attachment.niceLength}
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DEVELOPER},${SystemRoles.ROLE_ADMIN }">
+					<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+						returnPageURI="${createLink(action:'show', id:castingProfileInstance?.id,absolute:true,params:'#tab-photos')}" />
+					</sec:ifAnyGranted>
+				</div>	
+					<g:if test="${j%2==0 & j!=0 }"><br/></g:if>
+				
+				</attachments:each>
+				<div style="clear:both"></div>
+		</div>
+		</fieldset>
+		<br/>
+		<fieldset><legend>Other Pictures</legend>
 		<div id="attachments-photos" class="attachments">
-				<attachments:each bean="${pictureSetInstance}" status="i">	
+				<attachments:each bean="${pictureSetInstance}" inputName="pictures" status="i">	
 				<div class="photo-display float-left">
 				<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
 					<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />				
@@ -263,17 +294,29 @@
 				</attachments:each>
 				<div style="clear:both"></div>
 		</div>
-	</div>	
-	<!-- VIDEOS -->
-	<div id="tab-videos">
+		</fieldset>
+		
+</div>	
 
-<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
-		<g:if test="${castingProfileInstance?.pictures}">
-			<div class="float-right property-value" aria-labelledby="videos-label">
-			<g:link controller="videoSet" action="show" id="${castingProfileInstance?.videos?.id}">
-			<g:message code="default.manage.label" args=" " />${message(code: 'videoSet.label', default: 'VideoSet')} </g:link>
-			</div>
-		</g:if> <br/>
+
+
+<!-- VIDEOS -->
+<div id="tab-videos">
+
+	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+		
+		<div class="float-right property-value" aria-labelledby="videos-label">
+			<g:if test="${castingProfileInstance?.videos}">
+				<g:link controller="videoSet" action="show" id="${castingProfileInstance?.videos?.id}">			
+				<g:message code="default.manage.label" args=" " />${message(code: 'videoSet.label', default: 'VideoSet')} </g:link>
+			</g:if>
+			<g:else>
+				<g:link class="create" controller="videoSet" action="create" params="${['castingProfile.id':castingProfileInstance?.id]}">
+					<g:message code="default.add.label" args="['Videos']"/>
+				</g:link>
+			</g:else>
+		</div>
+		
 	</sec:ifAnyGranted>	
 		<div id="attachments-videos" class="attachments">
 				<attachments:each bean="${videoSetInstance}" status="i">	

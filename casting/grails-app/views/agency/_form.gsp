@@ -5,7 +5,7 @@
 		<g:message code="agency.company.label" default="Select Company" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="company" name="company.id" from="${com.cland.casting.Organisation.list()}" optionKey="id" value="${agencyInstance?.company?.id}" class="many-to-one" noSelection="['': '--Add New Company--']"/>
+	<g:select onChange="onChangeCompany();" id="company" name="company.id" from="${com.cland.casting.Organisation.list()}" optionKey="id" value="${agencyInstance?.company?.id}" class="many-to-one" noSelection="['': '--Add New Company--']"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: agencyInstance?.company, field: 'company.name', 'error')} ">
 	<label for="company.name">
@@ -39,6 +39,6 @@
 		<g:message code="agency.contacts.label" default="Authorised Users" />
 		
 	</label>
-	<g:select name="contacts" from="${agencyList}" multiple="multiple" optionKey="id" size="5" value="${agencyInstance?.contacts*.id}" class="many-to-many"/>
+	<g:select name="contacts" from="${agencyList}" multiple="multiple" optionKey="id" size="5" value="${agencyInstance?.contacts*.id}" optionValue="mediumDetails" class="many-to-many"/>
 </div>
 

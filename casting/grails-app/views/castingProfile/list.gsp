@@ -25,22 +25,19 @@
 			<table>
 				<thead>
 					<tr>		
-						<th><g:message code="castingProfile.canditate.label" default="Canditate" /></th>					
-						<g:sortableColumn property="castDate" title="${message(code: 'castingProfile.castDate.label', default: 'Cast Date')}" />					
-						<g:sortableColumn property="averating" title="${message(code: 'castingProfile.averating.label', default: 'Ave Rating')}" />
-						<g:sortableColumn property="castNo" title="${message(code: 'castingProfile.castNo.label', default: 'Cast No')}" />
+						<g:sortableColumn property="canditate.person.firstName" title="${message(code: 'castingProfile.canditate.label', default: 'Candidate')}"/> 										
+						<g:sortableColumn property="castNo" title="${message(code: 'castingProfile.castNo.label', default: 'Cast No')}" />					
+						<g:sortableColumn property="production.name" title="${message(code: 'castingProfile.production.label', default: 'Production')}"/> 						
 						<g:sortableColumn property="outcome" title="${message(code: 'castingProfile.outcome.label', default: 'Outcome')}" />						
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${castingProfileInstanceList}" status="i" var="castingProfileInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${castingProfileInstance.id}">${fieldValue(bean: castingProfileInstance, field: "canditate")}</g:link></td>			
-						<td><g:formatDate date="${castingProfileInstance.castDate}" /></td>					
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">					
+						<td><g:link action="show" id="${castingProfileInstance.id}">${fieldValue(bean: castingProfileInstance, field: "canditate")}</g:link></td>							
 						<td>${fieldValue(bean: castingProfileInstance, field: "castNo")}</td>
-						<td>${fieldValue(bean: castingProfileInstance, field: "averating")}</td>	
-						<td>${fieldValue(bean: castingProfileInstance, field: "outcome")}</td>										
+						<td>${fieldValue(bean: castingProfileInstance, field: "production.name")}</td>
+						<td>${fieldValue(bean: castingProfileInstance, field: "outcome")}</td>						
 					</tr>
 				</g:each>
 				</tbody>

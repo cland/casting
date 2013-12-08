@@ -40,7 +40,7 @@
 				<g:each in="${videoSetInstanceList}" status="i" var="videoSetInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${videoSetInstance.id}">${fieldValue(bean: videoSetInstance, field: "candidate")}</g:link></td>
+						<td><g:link action="show" id="${videoSetInstance.id}">${fieldValue(bean: videoSetInstance, field: "castingProfile")}</g:link></td>
 					
 						<td><g:formatDate date="${videoSetInstance.dateCreated}" /></td>
 					

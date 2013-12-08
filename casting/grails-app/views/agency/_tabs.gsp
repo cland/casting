@@ -36,7 +36,7 @@
 					<span id="contacts-label" class="property-label"><g:message code="agency.contacts.label" default="System users" /></span>
 					
 						<g:each in="${agencyInstance.contacts}" var="c">
-						<span class="property-value" aria-labelledby="contacts-label"><g:link controller="user" action="show" id="${c.id}">${c.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="contacts-label"><g:link controller="user" action="show" id="${c.id}">${c.getShortDetails().encodeAsHTML()}</g:link></span>
 						</g:each>					
 				</li>
 				</g:if>

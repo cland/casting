@@ -41,24 +41,7 @@
 				<fieldset class="form">
 					<g:render template="form"/>
 				</fieldset>
-				<br/>
-				<fieldset><legend>Existing</legend>
-	<div id="attachments" class="attachments">
-			<attachments:each bean="${pictureSetInstance}" status="i">	
-			<div class="photo-display float-left">
-			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
-				<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />			
-				<attachments:downloadLink attachment="${attachment}" inline="true" withContentType="true" />
-				${attachment.niceLength}
-				<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
-					returnPageURI="${createLink(action:'show', id:pictureSetInstance.id,absolute:true)}" />
-			</div>	
-				<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
-			
-			</attachments:each>
-			<div style="clear:both"></div>
-		</div>				
-				</fieldset>
+
 				<fieldset class="buttons">
 				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />

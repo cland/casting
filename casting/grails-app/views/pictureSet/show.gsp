@@ -28,8 +28,26 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-		<div id="attachments" class="attachments">
-			<attachments:each bean="${pictureSetInstance}" status="i">	
+		<div id="headshot" class="attachments">
+			<h3>Headshot Picture (Only 1 Required)</h3>
+			<attachments:each bean="${pictureSetInstance}" inputName="headshot" status="j">	
+			<div class="photo-display float-left">
+			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+				<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />			
+				<attachments:downloadLink attachment="${attachment}" inline="true" withContentType="true" />
+				${attachment.niceLength}
+				<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+					returnPageURI="${createLink(action:'show', id:pictureSetInstance.id,absolute:true)}" />
+			</div>	
+				<g:if test="${j%2==0 & j!=0 }"><br/></g:if>
+			
+			</attachments:each>
+			<div class="clear"></div>
+		</div>
+		
+		<div id="attachments" class="attachments">	
+			<h3>Other Pictures</h3>
+			<attachments:each bean="${pictureSetInstance}" inputName="pictures" status="i">	
 			<div class="photo-display float-left">
 			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
 				<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />			

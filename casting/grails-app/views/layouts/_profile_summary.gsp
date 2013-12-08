@@ -1,5 +1,5 @@
 <!-- div SUMMARY structure -->
-
+<%@ page import="com.cland.casting.SystemRoles" %>
      <div id="row-${profile?.id }" class="summary-row">
          <div id="cast-details-${profile?.id }" class="cast-details">
          	<div class="cast-details-data-table">
@@ -47,8 +47,29 @@
 			</div>	
          </div>
          <div id="cast-mugshot-${profile?.id }" class="cast-mugshot">
-             <img width="130" src="../../images/female.jpg">
-             <div class="profile-text">${profile?.canditate?.person }</div>                
+ 			<g:set var="hasphoto" value="${false }"/>
+		    <attachments:each bean="${profile?.pictures}" inputName="headshot" status="j">	         
+				<g:if test="${j==0}">
+					<g:set var="hasphoto" value="${true }"/>
+					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+				</g:if>			
+			</attachments:each>	
+			
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+				<g:if test="${hasphoto==false}"> 
+					<g:if test="${ profile?.pictures}">
+							<g:link class="edit" controller="pictureSet" action="edit" id="${profile?.pictures?.id}">
+							<g:message code="default.add.label" args="['Photo']"/>
+							</g:link>
+					</g:if>
+					<g:else>
+						<g:link class="create" controller="pictureSet" action="create" params="${['castingProfile.id':profile?.id]}">
+						<g:message code="default.add.label" args="['Photo']"/>
+						</g:link>
+					</g:else>
+				</g:if>
+			</sec:ifAnyGranted>
+             <div class="profile-text"><g:link controller="castingProfile" action="show" id="${profile.id }">${profile?.canditate?.person }</g:link></div>                
          </div>            
      </div>     
 

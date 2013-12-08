@@ -18,7 +18,7 @@ class VideoSetController {
     def create() {
 		def profile = null
 		if(params?.castingProfile?.id) profile = CastingProfile.get(params.castingProfile.id)
-        [videoSetInstance: new VideoSet(params),castingProfileInstance:profile]
+        [videoSetInstance: new VideoSet(params),castingProfileInstance:profile, isEditing:true, isNew:true]
     }
 
     def save() {

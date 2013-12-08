@@ -26,7 +26,7 @@ class CastingApiService {
 		for(int i=0;i<rolelist.size();i++){
 			role = Role.findByAuthority(rolelist[i])
 			//def data = UserRole.findByRole(role)*.user
-			def tmp = UserRole.findByRole(role)?.user
+			def tmp = UserRole.findAllByRole(role)*.user
 			if( tmp ) alldata.addAll(tmp)
 		}		
 		return alldata
@@ -47,7 +47,9 @@ class CastingApiService {
 			agencyId = 0	//force agencyId to something that returns empty results
 			def agency = getAgencyForUser(user.id)
 			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
-			if(agency) agencyId = agency.id
+			if(agency){			
+				 agencyId = agency?.id?.get(0)
+			}
 			def tmpList = Production.withCriteria {
 				agencyACL { idEq(agencyId) }
 				//firstResult(offset)
@@ -110,6 +112,15 @@ class CastingApiService {
 			contacts{
 				idEq(id)
 			}
+			maxResults(1)
+		}
+	}
+	def getClientForUser(Long id){
+		return Client.withCriteria {
+			contacts{
+				idEq(id)
+			}
+			maxResults(1)
 		}
 	}
 	def getClientListForOrg(Long id,Integer offset,Integer max){
@@ -136,6 +147,47 @@ class CastingApiService {
 		}
 		return agencylist
 	} //end function
+	String getHomeLink(){
+		Long userId = springSecurityService?.currentUser?.id
+		if(isAdmin()) return "/admin/"
+		if(isAgent()){
+			//work out the agency that this user belongs to
+			def agency = getAgencyForUser(userId)
+			long id = agency?.id?.get(0) //comes back as an array coz user can belong to more that one???? 
+			
+			if(agency?.id){
+				//return agency's details link
+				return "/agency/show/" + id
+			}
+		}
+		if (isClient()){
+			//work out the client that this user belongs to
+			def client = getClientForUser(userId)
+			long id = client?.id?.get(0)
+			if(client){
+				//return client's details link
+				return "/client/show/" + id
+			}
+		}
+		
+		//else we rturn the user back to home page.
+		return "/"
+	}
+	String getSideMenuName(){
+		long userId = springSecurityService.currentUser?.id //?.principal?.id
+		if(isAdmin()) return "sidenav-admin"
+		if(isAgent()){
+			return "sidenav-agency"
+		}
+		if (isClient()){
+
+			return "sidenav-client"
+
+		}
+
+		//else we rturn the user back to home page.
+		return "sidenav"
+	}
 	boolean isAdmin(){
 		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_ADMIN.value + "," + SystemRoles.ROLE_DEVELOPER.value))
 	}

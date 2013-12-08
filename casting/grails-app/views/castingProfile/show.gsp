@@ -39,7 +39,7 @@
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 					<span class="l-arrow"></span> | <span class="r-arrow"></span>
 						<g:if test="${ pictureSetInstance}">
-							<g:link class="edit" controller="pictureSet" action="edit" id="${pictureSetInstance?.id}">
+							<g:link class="show" controller="pictureSet" action="show" id="${pictureSetInstance?.id}">
 							<g:message code="default.manage.label" args="['Photos']"/>
 							</g:link>
 						</g:if>
@@ -49,7 +49,7 @@
 							</g:link>
 						</g:else>
 						<g:if test="${ videoSetInstance}">
-							<g:link class="edit" controller="videoSet" action="edit" id="${videoSetInstance?.id}">
+							<g:link class="show" controller="videoSet" action="show" id="${videoSetInstance?.id}">
 							<g:message code="default.manage.label" args="['Videos']"/>
 							</g:link>
 						</g:if>

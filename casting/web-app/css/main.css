@@ -739,14 +739,22 @@ p {
     border:solid 1px #ccc;
     margin-bottom:0.8em;
 }
-
-.summary-row .cast-details {
+.profile-row {
+    clear: both;
+    page-break-inside: avoid;
+    width:100%;
+    border:solid 1px #ccc;
+    margin-bottom:0.8em;
+    
+}
+.profile-row label {color:#999;font-size:1em;}
+.summary-row .cast-details,.profile-row .cast-details {
     float: left;
     border: none 1px #0e8523;
     width: 30%;
     margin: 0.5em;
 }
-.summary-row .cast-actions {
+.summary-row .cast-actions, .profile-row .cast-actions {
     float: left;
     border: none 1px #0094ff;
 	width: 40%;
@@ -754,8 +762,9 @@ p {
     margin-left:1px;
     margin-right:1px;
 }
-.summary-row .cast-actions textarea{font-size:0.8em; width:166px;height:60px;}
-.summary-row .cast-mugshot {
+
+.summary-row .cast-actions textarea,.profile-row .cast-actions textarea{font-size:0.8em; width:166px !important;height:75px !important;}
+.summary-row .cast-mugshot,.profile-row .cast-mugshot {
     border: solid 1px #0094ff;
     float: left;
     padding: 0.5em;
@@ -763,8 +772,10 @@ p {
     margin: 0.5em;
     margin-left:0;
     float:right;   
-    width:150px;    
+    width:180px;    
 }
+.profile-row .cast-details {width:66%}
+.profile-row .cast-mugshot {width:200px;}
 .detailed-row {
     clear: both;
     page-break-inside: avoid;
@@ -801,3 +812,4 @@ p {
 .float-left{float:left;}
 .clear{clear:both;}
 .photo-display{margin:5px;padding:5px;border:1px solid #ccc;text-align:center;}
+.attachments {margin-bottom:5px;}

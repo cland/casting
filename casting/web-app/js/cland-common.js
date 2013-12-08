@@ -23,3 +23,9 @@ function printPage(){
 	printableTabs();
 	window.print();
 }
+function onChangeCompany(){
+	var id = $("#company").val()
+	var lnk = document.location.href
+	lnk = lnk.substring(0,lnk.indexOf("?"))
+	document.location.href = lnk + "?company.id=" + id
+}

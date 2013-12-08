@@ -1,4 +1,4 @@
-.pagination {
+.jqpagination {
 	float: left;
 	border: 0px solid #CCC;
 	border-radius: 3px;
@@ -6,7 +6,7 @@
 	-webkit-border-radius: 3px;
 }
 
-.pagination a {
+.jqpagination a {
 	display: block;
 	float: left;
 	height: 28px;
@@ -32,7 +32,7 @@
 
 }
 
-.pagination a:hover, .pagination a:focus, .pagination a:active {
+.jqpagination a:hover, .jqpagination a:focus, .jqpagination a:active {
 
 	background: #CECECE; /* Old browsers */
 	background: -moz-linear-gradient(top,  #E4E4E4 0%, #CECECE 100%); /* FF3.6+ */
@@ -45,7 +45,7 @@
 
 }
 
-.pagination a.disabled, .pagination a.disabled:hover, .pagination a.disabled:focus, .pagination a.disabled:active {
+.jqpagination a.disabled, .jqpagination a.disabled:hover, .jqpagination a.disabled:focus, .jqpagination a.disabled:active {
 
 	background: #F3F3F3; /* Old browsers */
 	background: -moz-linear-gradient(top,  #F3F3F3 0%, #D3D3D3 100%); /* FF3.6+ */
@@ -60,32 +60,32 @@
 	
 }
 
-.pagination a:first-child {
+.jqpagination a:first-child {
 	border-radius: 2px 0 0 2px;
 	-moz-border-radius: 2px 0 0 2px;
 	-webkit-border-radius: 2px 0 0 2px;
 }
 
-.pagination a:last-child {
+.jqpagination a:last-child {
 	border-radius: 0 2px 2px 0;
 	-moz-border-radius: 0 2px 2px 0;
 	-webkit-border-radius: 0 2px 2px 0;
 }
 
-.pagination a {
+.jqpagination a {
 	border-right: 1px solid #CDCDCD; 
 	border-left: 1px solid #CDCDCD;   
 }
 
-.pagination a:first-child {
+.jqpagination a:first-child {
 	border: none;
 }
 
-.pagination a:last-child {
+.jqpagination a:last-child {
 	border: none;
 }
 
-.pagination input {
+.jqpagination input {
 	border: none;
 	float: left;
 	text-align: center;
@@ -99,18 +99,18 @@
 
 /* gigantic class for demo purposes */
 
-.gigantic.pagination {
+.gigantic.jqpagination {
 	margin: 30px 0;
 }
 
-.gigantic.pagination a {
+.gigantic.jqpagination a {
 	height: 60px;
 	width: 60px;
 	font-size: 50px;
 	line-height: 50px;
 }
 
-.gigantic.pagination input {
+.gigantic.jqpagination input {
 	width: 300px;
 	height: 60px;
 	font-size: 30px;

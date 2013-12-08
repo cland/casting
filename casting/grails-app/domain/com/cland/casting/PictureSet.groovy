@@ -3,6 +3,7 @@ package com.cland.casting
 class PictureSet {
 	String name
 	Date dateCreated
+
 	static attachmentable = true
 	static belongsTo = [castingProfile:CastingProfile]
 	static constraints = {

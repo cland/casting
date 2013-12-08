@@ -35,6 +35,7 @@ class User {
 	 Organisation company
 	 String status
 	// Candidate candidate
+	static transients = [ 'mediumDetails','shortDetails','firstLastName' ]
 	static hasOne = [candidate:Candidate] 
 	static attachmentable = true
 	static constraints = {
@@ -93,10 +94,16 @@ class User {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}
-	String lastFirstName(String s = " "){
+	public getShortDetails(){
+		toString() + " (${username})"
+	}
+	public String getMediumDetails(){
+		toString() + " (${username} | ${gender} | ${race})"
+	}
+	public String getLastFirstName(String s = " "){
 		"${lastName}" + s + "${firstName}"
 	}
-	String firstLastName(String s = " "){
+	public String getFirstLastName(String s = " "){
 		"${firstName}" + s + "${lastName}"
 	}
 	String toString(){

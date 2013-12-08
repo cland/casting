@@ -35,8 +35,8 @@
 						<g:sortableColumn property="lastName" title="${message(code: 'user.lastName.label', default: 'Last Name')}" />
 					
 						<g:sortableColumn property="contactNo" title="${message(code: 'user.contactNo.label', default: 'Contact No.')}" />
-					
-						<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
+						<th>${message(code: 'user.role.label', default: 'Role')} </th>
+						<g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled')}" />
 					
 					</tr>
 				</thead>
@@ -50,9 +50,9 @@
 						</td>					
 						<td>${fieldValue(bean: userInstance, field: "firstName")}</td>					
 						<td>${fieldValue(bean: userInstance, field: "lastName")}</td>					
-						<td>${fieldValue(bean: userInstance, field: "contactNo")}</td>					
-						<td>${fieldValue(bean: userInstance, field: "email")}</td>
-
+						<td>${fieldValue(bean: userInstance, field: "contactNo")}</td>
+						<td>${com.cland.casting.UserRole.findByUser(userInstance)?.role}</td>					
+						<td><g:formatBoolean boolean="${userInstance?.enabled }"/>
 					</tr>
 				</g:each>
 				</tbody>
