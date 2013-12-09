@@ -1,6 +1,7 @@
 package com.cland.casting;
 
 class Candidate {
+	def castingApiService
 	//casting details:
 	User person
 	String clothing
@@ -10,18 +11,29 @@ class Candidate {
 	String hair
 	String eyes
 	String status
+	String keywords
+	long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
+	
+	static hasMany = [portfolios:AgencyPortfolioSet]
 	static belongsTo = [agency:Agency]	
 	static constraints = {
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
+		keywords (blank:true, nullable:true)
 	}
 	def beforeInsert = {
 		// your code goes here
+		createdBy = castingApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
-		// your code goes here
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
 	def beforeDelete = {
-		// your code goes here
+		
 	}
 	def onLoad = {
 		// your code goes here

@@ -2,8 +2,8 @@ package com.cland.casting
 
 
 	public enum ProductionStatus{
-		OPEN_CANDIDATES_REQUIRED("Open - Candidates Required"),
-		OPEN_AUDITION_IN_PROGRESS("Open - Audition In Progress"),
+		OPEN_CANDIDATES_REQUIRED("Open - Auditions In Progress"),
+		OPEN_AUDITION_IN_PROGRESS("Open - Shortlisting In Progress"),
 		CLOSED("Closed")
 
 		final String value;

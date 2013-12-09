@@ -3,7 +3,7 @@ package com.cland.casting
 class Agency {
 	Organisation company
 	String status
-	static hasMany = [contacts:User,candidates:Candidate]
+	static hasMany = [contacts:User,candidates:Candidate,categories:Category]
 	static constraints = {
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
 	}

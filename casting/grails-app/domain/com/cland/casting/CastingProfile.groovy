@@ -8,9 +8,11 @@ class CastingProfile {
 	
 	boolean isInvited		//invited for first casting audition - Y/N
 	boolean isAuditionAvailable //called for casting audition - available Y/N
+	boolean isAuditionAttended  //whether candidate did attend the audition
 	boolean isCallbackAvailable //available for the call back date - Y/N
+	boolean isCallbackAttended	//whether the candidated attended the callback
 	boolean isShortlist
-	boolean isRoleAvailable //accepted for the job - available Y/N
+	boolean isRoleAvailable 	//accepted/confirmed for the job - available Y/N
 	Date auditionDate
 	Date callbackDate
 	String outcome	//Final outcome
@@ -26,7 +28,7 @@ class CastingProfile {
 	static hasOne = [videos:VideoSet,pictures:PictureSet]
 	static belongsTo = [production:Production]
 	static constraints = {
-		outcome(inList:["Pending","Selected","Not-Selected"],nullable:true)
+		outcome(inList:["Pending","Confirmed","Not-Confirmed"],nullable:true)
 		averating(nullable:true) 
 		videos(nullable:true)
 		pictures(nullable:true)

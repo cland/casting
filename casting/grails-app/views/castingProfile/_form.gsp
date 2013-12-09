@@ -114,6 +114,13 @@
 	</label>
 	<g:textField name="callbackDate" class="datepick" id="callback-date" value="${castingProfileInstance?.callbackDate}"/>	
 </div>
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isCallbackAttended', 'error')} ">
+	<label for="isCallbackAttended">
+		<g:message code="castingProfile.isCallbackAttended.label" default="Attended callback" />		
+	</label>
+	<g:checkBox name="isCallbackAttended" value="${castingProfileInstance?.isCallbackAttended}" />
+<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+</div>
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isShortlist', 'error')} ">
 	<label for="isShortlist">
 		<g:message code="castingProfile.isShortlist.label" default="Is Shortlist" />		

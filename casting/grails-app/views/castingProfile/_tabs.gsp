@@ -256,7 +256,7 @@
 				</div>
 			</g:if> <br/>
 		</sec:ifAnyGranted>	
-		<fieldset><legend>Headshot Picture</legend>
+		<fieldset><legend>Headshot</legend>
 			<div id="attachments-photos-headshot" class="attachments">
 				<attachments:each bean="${pictureSetInstance}" inputName="headshot" status="j">	
 				<div class="photo-display float-left">

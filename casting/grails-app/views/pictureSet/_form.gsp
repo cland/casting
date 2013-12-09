@@ -19,7 +19,7 @@
 
 <div class="fieldcontain">
 <attachments:progressBar/>
-<fieldset><legend>Headshot Photo</legend>
+<fieldset><legend>Headshot</legend>
 <input type="file" name="headshot"/>
 <g:if test="${isNew == false  }">
 	<div id="headshot" class="attachments">

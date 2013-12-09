@@ -45,6 +45,11 @@ SpringSecurityUtils.doWithAuth('default') {
 		 */
 		switch(Environment.getCurrent()){
 			case "DEVELOPMENT":
+				new Category(name:'Models').save(flush:true, failOnError:true)
+				new Category(name:'Actors').save(flush:true, failOnError:true)
+				new Category(name:'Children').save(flush:true, failOnError:true)
+				new Category(name:'Characters').save(flush:true, failOnError:true)
+				new Category(name:'Sport').save(flush:true, failOnError:true)
 //				def devRole = new Role(authority: 'ROLE_DEVELOPER').save(flush: true, failOnError:true)
 //				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError:true)
 //				def directorRole = new Role(authority: 'ROLE_DIRECTOR').save(flush: true, failOnError:true)
@@ -240,7 +245,11 @@ SpringSecurityUtils.doWithAuth('default') {
 					
 				break
 			case "PRODUCTION" :
-	
+				new Category(name:'Models').save(flush:true, failOnError:true)
+				new Category(name:'Actors').save(flush:true, failOnError:true)
+				new Category(name:'Children').save(flush:true, failOnError:true)
+				new Category(name:'Characters').save(flush:true, failOnError:true)
+				new Category(name:'Sport').save(flush:true, failOnError:true)
 				def devRole = new Role(authority: 'ROLE_DEVELOPER').save(flush: true, failOnError:true)
 				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true, failOnError:true)
 				def directorRole = new Role(authority: 'ROLE_DIRECTOR').save(flush: true, failOnError:true)

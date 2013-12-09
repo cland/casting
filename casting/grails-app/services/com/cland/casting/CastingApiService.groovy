@@ -62,7 +62,7 @@ class CastingApiService {
 	} //end function
 	
 	def getCandidates(long productionId, long agencyId, int offset, int max){
-		def user = springSecurityService.currentUser
+		def user = getCurrentUser() //springSecurityService.currentUser
 		def candidateList = []
 		
 		if(isAdmin()){
@@ -148,7 +148,7 @@ class CastingApiService {
 		return agencylist
 	} //end function
 	String getHomeLink(){
-		Long userId = springSecurityService?.currentUser?.id
+		Long userId = getCurrentUserId() // springSecurityService?.currentUser?.id
 		if(isAdmin()) return "/admin/"
 		if(isAgent()){
 			//work out the agency that this user belongs to
@@ -174,7 +174,7 @@ class CastingApiService {
 		return "/"
 	}
 	String getSideMenuName(){
-		long userId = springSecurityService.currentUser?.id //?.principal?.id
+		long userId = getCurrentUserId() //springSecurityService.currentUser?.id //?.principal?.id
 		if(isAdmin()) return "sidenav-admin"
 		if(isAgent()){
 			return "sidenav-agency"
@@ -205,6 +205,13 @@ class CastingApiService {
 	}
 	boolean isReviewer(){
 		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_REVIEWER.value))
+	}
+	Long getCurrentUserId(){
+		long userId = springSecurityService?.principal?.id //.currentUser?.id //
+		return userId
+	}
+	User getCurrentUser(){
+		return springSecurityService?.currentUser
 	}
 	// example criteria search
 	//		def resultSummaryInstanceList = ResultSummary.createCriteria().list(offset: offset, max: max) {

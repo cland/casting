@@ -3,6 +3,7 @@ package com.cland.casting
 class Region {
 	String name
 	static belongsTo = [country:Country]
+	static hasMany = [citites:City]
 	static constraints = {
 		name(blank:false)
 	}

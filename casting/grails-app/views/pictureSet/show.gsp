@@ -29,7 +29,7 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 		<div id="headshot" class="attachments">
-			<h3>Headshot Picture (Only 1 Required)</h3>
+			<h3>Headshot (Only 1 Required)</h3>
 			<attachments:each bean="${pictureSetInstance}" inputName="headshot" status="j">	
 			<div class="photo-display float-left">
 			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
