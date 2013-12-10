@@ -1,7 +1,7 @@
 package com.cland.casting
 
 class Role {
-
+	
 	String authority
 
 	static mapping = {

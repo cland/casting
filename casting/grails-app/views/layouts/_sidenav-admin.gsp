@@ -60,7 +60,7 @@
 						</g:link></li>
 					<li><g:link class="create" controller="race" action="create">
 							<g:message code="default.new.label" args="['Race']" /></g:link></li>
-					<li><g:link class="list" controller="user" action="list">
+					<li><g:link class="list" controller="race" action="list">
 							<g:message code="default.list.label" args="['Race']" />
 						</g:link></li>
 			</ul>

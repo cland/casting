@@ -5,6 +5,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.*
 import org.grails.datastore.gorm.finders.MethodExpression.IsEmpty;
 
 class CastingApiService {
+	static transactional = false
 	def springSecurityService
 	/**
 	 * This function is used to update the roles for a given user from the checkbox on the user gsp
@@ -207,7 +208,8 @@ class CastingApiService {
 		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_REVIEWER.value))
 	}
 	Long getCurrentUserId(){
-		long userId = springSecurityService?.principal?.id //.currentUser?.id //
+		long userId = 0 //.currentUser?.id //
+		if(springSecurityService?.principal?.id) userId = springSecurityService?.principal?.id
 		return userId
 	}
 	User getCurrentUser(){

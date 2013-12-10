@@ -3,9 +3,13 @@ package com.cland.casting
 import java.util.Date;
 
 class CastingProfile {
+	transient castingApiService
 	BigInteger castNo
 	Date castDate
-	
+	long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
 	boolean isInvited		//invited for first casting audition - Y/N
 	boolean isAuditionAvailable //called for casting audition - available Y/N
 	boolean isAuditionAttended  //whether candidate did attend the audition
@@ -39,6 +43,8 @@ class CastingProfile {
 		castNo(nullable:true)
 		round(nullable:true)
 		age(nullable:true)
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
 	}
 	static mapping = {
 		ratings cascade:"all-delete-orphan"
@@ -50,9 +56,11 @@ class CastingProfile {
 		age = 18 //TODO: compute the age here
 	}
 	def beforeInsert = {
+		createdBy = castingApiService.getCurrentUserId()
 		computeAverageRating()
 	}
 	def beforeUpdate = {
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 		computeAverageRating()
 	}
 	def beforeDelete = {

@@ -1,7 +1,14 @@
 package com.cland.casting
 
+import java.util.Date;
+
 class CastingRole {
+	transient castingApiService
 	String name
+	long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
 	String description	//the description of the role
 	double dayfee
 	String feeNotes	//any comments on the structure of the fee.
@@ -27,6 +34,8 @@ class CastingRole {
 		requiredFemaleCount(min:0,nullable:true,blank:true)
 		requiredCount(min:1,blank:true)	
 		allowedCategories nullable: true  
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
 	}
 	static mapping = {
 		requiredCount defaultValue: 1
@@ -36,10 +45,10 @@ class CastingRole {
 		requiredMaleCount defaultValue: 1
 	 }
 	def beforeInsert = {
-		// your code goes here
+		createdBy = castingApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
-		// your code goes here
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
 	def beforeDelete = {
 		// your code goes here

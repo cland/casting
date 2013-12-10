@@ -1,17 +1,26 @@
 package com.cland.casting
 
+import java.util.Date;
+
 class Agency {
+	transient castingApiService
 	Organisation company
+	long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
 	String status
 	static hasMany = [contacts:User,candidates:Candidate,categories:Category]
 	static constraints = {
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
 	}
 	def beforeInsert = {
-		// your code goes here
+		createdBy = castingApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
-		// your code goes here
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
 	def beforeDelete = {
 		// your code goes here

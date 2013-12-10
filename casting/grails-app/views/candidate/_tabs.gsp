@@ -3,7 +3,7 @@
 	<ul>
 	    <li><a href="#tab-candidate">Details</a></li>
 		<li><a href="#tab-profiles">Casting Profiles</a></li>
-		
+		<li><a href="#tab-photos">Photos</a></li>
 	</ul>
 	<div id="tab-candidate">
 	<fieldset><legend>Person Details</legend>
@@ -112,7 +112,9 @@
 	 	</span>
 	 </g:each>
 	</div>
-
+	
+	<div id="tab-photos">
+		<p>Photos uploaded by Agency</p>
+	</div>
 </div>
-
 <!--  End tabs -->

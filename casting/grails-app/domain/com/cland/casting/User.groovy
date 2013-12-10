@@ -3,7 +3,7 @@ package com.cland.casting
 import java.util.Date;
 
 class User {
-
+	transient castingApiService
 	transient springSecurityService
 
 	String username
@@ -31,7 +31,10 @@ class User {
 	 String email
 	 String contactNo
 	 String communicationMode //sms,email
-	 Date dateCreated
+	 long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
 	 Organisation company
 	 String status
 	// Candidate candidate
@@ -62,6 +65,8 @@ class User {
 		email(email:true)
 		company(nullable:true)
 		dateCreated()
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
 		//candidate(nullable:true)
 	}
@@ -75,10 +80,12 @@ class User {
 	}
 
 	def beforeInsert() {
+		createdBy = castingApiService.getCurrentUserId()
 		encodePassword()
 	}
 
 	def beforeUpdate() {
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 		if (isDirty('password')) {
 			encodePassword()
 		}

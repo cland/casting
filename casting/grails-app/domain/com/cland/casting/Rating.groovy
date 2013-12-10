@@ -1,8 +1,10 @@
 package com.cland.casting
 @gorm.AuditStamp
 class Rating {
+	transient castingApiService
 	Integer rating
 	String comments
+	
 	//User createdBy
 	
 	boolean deleted

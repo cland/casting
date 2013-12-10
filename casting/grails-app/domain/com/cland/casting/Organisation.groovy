@@ -1,7 +1,9 @@
 package com.cland.casting
 
-class Organisation {
+import java.util.Date;
 
+class Organisation {
+	transient castingApiService
 	String name
 	String phoneNo
 	String email
@@ -16,6 +18,10 @@ class Organisation {
 	Country country
 	String comments
 	String status
+	long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
 	//static hasMany = [people:Person]
 	
     static constraints = {
@@ -33,12 +39,14 @@ class Organisation {
 		phyPostCode(nullable:true)
 		comments(nullable:true)
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
     }
 	def beforeInsert = {
-	// your code goes here
+	createdBy = castingApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
-	// your code goes here
+	lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
 	def beforeDelete = {
 	// your code goes here

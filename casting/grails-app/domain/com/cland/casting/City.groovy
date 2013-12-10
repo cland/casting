@@ -1,15 +1,24 @@
 package com.cland.casting
 
+import java.util.Date;
+
 class City {
+	transient castingApiService
 	String name
+	long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
 	static constraints = {
 		name(blank:false)
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
 	}
 	def beforeInsert = {
-		// your code goes here
+		createdBy = castingApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
-		// your code goes here
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
 	def beforeDelete = {
 		// your code goes here

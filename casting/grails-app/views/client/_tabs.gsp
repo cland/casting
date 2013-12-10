@@ -27,7 +27,7 @@
 				</g:if>						
 				<g:if test="${clientInstance?.contacts}">
 				<li class="fieldcontain">
-					<span id="contacts-label" class="property-label"><g:message code="client.contacts.label" default="Contacts" /></span>
+					<span id="contacts-label" class="property-label"><g:message code="client.contacts.label" default="Authorised users" /></span>
 					
 						<g:each in="${clientInstance.contacts}" var="c">
 						<span class="property-value" aria-labelledby="contacts-label"><g:link controller="user" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>

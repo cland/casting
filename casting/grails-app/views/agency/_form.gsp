@@ -1,12 +1,17 @@
 <%@ page import="com.cland.casting.Agency" %>
 
-<div class="fieldcontain ${hasErrors(bean: agencyInstance, field: 'company', 'error')} required">
-	<label for="company">
-		<g:message code="agency.company.label" default="Select Company" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select onChange="onChangeCompany();" id="company" name="company.id" from="${com.cland.casting.Organisation.list()}" optionKey="id" value="${agencyInstance?.company?.id}" class="many-to-one" noSelection="['': '--Add New Company--']"/>
-</div>
+<g:if test="${isNew }">
+	<div class="fieldcontain ${hasErrors(bean: agencyInstance, field: 'company', 'error')} required">
+		<label for="company">
+			<g:message code="agency.company.label" default="Select Company" />
+			<span class="required-indicator">*</span>
+		</label>
+		<g:select onChange="onChangeCompany();" id="company" name="company.id" from="${com.cland.casting.Organisation.list()}" optionKey="id" value="${agencyInstance?.company?.id}" class="many-to-one" noSelection="['': '--Add New Company--']"/>
+	</div>
+</g:if>
+<g:else>
+	<g:hiddenField name="company.id" value="${agencyInstance?.company?.id}"/>
+</g:else>
 <div class="fieldcontain ${hasErrors(bean: agencyInstance?.company, field: 'company.name', 'error')} ">
 	<label for="company.name">
 		<g:message code="organisation.name.label" default="Company Name" />		

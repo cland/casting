@@ -9,7 +9,7 @@ import java.util.Date;
  *
  */
 class AgencyPortfolioSet {
-	def castingApiService
+	transient castingApiService
 	String name
 	long createdBy
 	long lastUpdatedBy

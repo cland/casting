@@ -1,9 +1,11 @@
 
 package com.cland.casting
 
+import java.util.Date;
 import java.util.List;
 
 class Production {
+	transient castingApiService
 	String name
 	String description
 	String address
@@ -19,20 +21,23 @@ class Production {
 	String productionCompany
 	String storyboard
 	/** Package Deal Fields **/
-	String usage
+	String prodUsage
 	String medium 
 	String period
 	String territories
 	String exclusions
 	String feeNotes
-	
+	long createdBy
+	long lastUpdatedBy
+	Date dateCreated
+	Date lastUpdated
 	static hasMany =[portfolios:Portfolio,profiles:CastingProfile,roles:CastingRole,categories:CastingCategory,agencyACL:Agency]
 	
 	static mapping = {
 		roles cascade:"all-delete-orphan"
 		categories cascade:"all-delete-orphan"
 		portfolios cascade:"all-delete-orphan"
-		status defaultValue : ProductionStatus.OPEN_CANDIDATES_REQUIRED		
+		status defaultValue : ProductionStatus.OPEN_CANDIDATES_REQUIRED	
 	}
 	
 	static belongsTo = [client:Client]
@@ -44,19 +49,21 @@ class Production {
 		productionCompany (nullable:true)
 		city(nullable:true)
 		storyboard(nullable:true)
-		usage(nullable:true)
+		prodUsage(nullable:true)
 		medium(nullable:true)
 		period(nullable:true)
 		territories(nullable:true)
 		exclusions(nullable:true)
 		feeNotes(nullable:true)
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
 	}
 
-	def beforeInsert = {
-		// your code goes here
+	def beforeInsert = { 
+		createdBy = castingApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
-		// your code goes here
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
 	def beforeDelete = {
 		// your code goes here

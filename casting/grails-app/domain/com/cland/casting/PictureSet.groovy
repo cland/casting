@@ -1,18 +1,26 @@
 package com.cland.casting
 
+import java.util.Date;
+
 class PictureSet {
+	transient castingApiService
 	String name
+	long createdBy
+	long lastUpdatedBy
 	Date dateCreated
+	Date lastUpdated
 
 	static attachmentable = true
 	static belongsTo = [castingProfile:CastingProfile]
 	static constraints = {
+		lastUpdatedBy nullable:true
+		createdBy nullable:true
 	}
 	def beforeInsert = {
-		// your code goes here
+		createdBy = castingApiService.getCurrentUserId()
 	}
 	def beforeUpdate = {
-		// your code goes here
+		lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
 	/**
 	 * To ensure that all attachments are removed when the "onwer" domain is deleted.

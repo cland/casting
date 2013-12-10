@@ -1,7 +1,7 @@
 package com.cland.casting;
 
 class Candidate {
-	def castingApiService
+	transient castingApiService
 	//casting details:
 	User person
 	String clothing
