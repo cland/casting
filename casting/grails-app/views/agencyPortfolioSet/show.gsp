@@ -35,7 +35,14 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<ol class="property-list agencyPortfolioSet">
-			
+				<g:if test="${agencyPortfolioSetInstance?.name}">
+				<li class="fieldcontain">
+					<span id="name-label" class="property-label"><g:message code="agencyPortfolioSet.name.label" default="Title" /></span>
+					
+						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${agencyPortfolioSetInstance}" field="name"/></span>
+					
+				</li>
+				</g:if>			
 				<g:if test="${agencyPortfolioSetInstance?.candidate}">
 				<li class="fieldcontain">
 					<span id="candidate-label" class="property-label"><g:message code="agencyPortfolioSet.candidate.label" default="Candidate" /></span>
@@ -67,15 +74,6 @@
 					<span id="lastUpdated-label" class="property-label"><g:message code="agencyPortfolioSet.lastUpdated.label" default="Last Updated" /></span>
 					
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${agencyPortfolioSetInstance?.lastUpdated}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${agencyPortfolioSetInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="agencyPortfolioSet.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${agencyPortfolioSetInstance}" field="name"/></span>
 					
 				</li>
 				</g:if>

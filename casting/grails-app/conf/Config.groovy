@@ -60,7 +60,7 @@ grails.exceptionresolver.params.exclude = ['password']
 grails.hibernate.cache.queries = false
 //attachments
 grails.attachmentable.maxInMemorySize = 1024
-grails.attachmentable.maxUploadSize = 1024000000
+grails.attachmentable.maxUploadSize = 31457280
 //grails.attachmentable.uploadDir = "C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\temp" //YOUR_USER_HOME/APP_NAME
 grails.attachmentable.poster.evaluator = { "unknown" }
 environments {

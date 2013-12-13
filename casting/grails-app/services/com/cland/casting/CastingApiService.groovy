@@ -215,6 +215,14 @@ class CastingApiService {
 	User getCurrentUser(){
 		return springSecurityService?.currentUser
 	}
+	User getUser(Long id){
+		return User.get(id)
+	}
+	String getUserFullname(Long id){
+		User user = getUser(id)
+		if(user) return user.getFirstLastName()
+		return ""
+	}
 	// example criteria search
 	//		def resultSummaryInstanceList = ResultSummary.createCriteria().list(offset: offset, max: max) {
 	//			createAlias('register','reg')

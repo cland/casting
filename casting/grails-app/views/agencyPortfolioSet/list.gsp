@@ -6,15 +6,23 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'agencyPortfolioSet.label', default: 'AgencyPortfolioSet')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
-		<a href="#list-agencyPortfolioSet" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+	<div class="bread-crump">		
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DEVELOPER }"></sec:ifAnyGranted>	
+			<span class="r-arrow"></span>			
+			
+			
+			<span class="r-arrow"></span> <span class="current-crump">
+				List of Candidate Portfolios
+			</span>
 		</div>
+	<div id="status1" class="leftbar" role="complementary">
+         <g:render template="../layouts/sidenav-admin"></g:render>
+    </div>	
+		<a href="#list-agencyPortfolioSet" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+
 		<div id="list-agencyPortfolioSet" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">

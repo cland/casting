@@ -114,7 +114,33 @@
 	</div>
 	
 	<div id="tab-photos">
-		<p>Photos uploaded by Agency</p>
+					<table>
+				<thead>
+					<tr>
+					<th><g:message code="agencyPortfolioSet.candidate.label" default="Candidate" /></th>
+					<g:sortableColumn property="name" title="${message(code: 'agencyPortfolioSet.name.label', default: 'Title')}" />
+					<g:sortableColumn property="createdBy" title="${message(code: 'agencyPortfolioSet.createdBy.label', default: 'Created By')}" />
+					<g:sortableColumn property="dateCreated" title="${message(code: 'agencyPortfolioSet.dateCreated.label', default: 'Date Created')}" />
+					<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'agencyPortfolioSet.lastUpdatedBy.label', default: 'Last Updated By')}" />
+					<g:sortableColumn property="lastUpdated" title="${message(code: 'agencyPortfolioSet.lastUpdated.label', default: 'Last Updated')}" />
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${candidateInstance?.portfolios}" status="i" var="agencyPortfolioSetInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+						<td>${fieldValue(bean: agencyPortfolioSetInstance, field: "candidate.person")}</td>
+						<td><g:link controller="agencyPortfolioSet" action="show" id="${agencyPortfolioSetInstance.id}">${fieldValue(bean: agencyPortfolioSetInstance, field: "name")}</g:link></td>			
+						<td><g:userFullname id="${fieldValue(bean: agencyPortfolioSetInstance, field: "createdBy")}"/></td>
+						<td><g:formatDate date="${agencyPortfolioSetInstance.dateCreated}" format="dd-MMM-yyyy"/></td>
+						<td><g:userFullname id="${fieldValue(bean: agencyPortfolioSetInstance, field: "lastUpdatedBy")}" default="None"/></td>
+						<td><g:formatDate date="${agencyPortfolioSetInstance.lastUpdated}" format="dd-MMM-yyyy"/></td>
+					
+						
+					
+					</tr>
+				</g:each>
+				</tbody>
+			</table>
 	</div>
 </div>
 <!--  End tabs -->
