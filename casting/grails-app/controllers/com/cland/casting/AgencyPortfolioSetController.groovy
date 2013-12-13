@@ -1,7 +1,7 @@
 package com.cland.casting
 
 import org.springframework.dao.DataIntegrityViolationException
-
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment; 
 class AgencyPortfolioSetController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -16,7 +16,9 @@ class AgencyPortfolioSetController {
     }
 
     def create() {
-        [agencyPortfolioSetInstance: new AgencyPortfolioSet(params)]
+		def profile = null
+		if(params?.candidate?.id) profile = Candidate.get(params.candidate.id)
+        [agencyPortfolioSetInstance: new AgencyPortfolioSet(params),candidateInstance:profile, isEditing:true, isNew:true]
     }
 
     def save() {
@@ -25,7 +27,7 @@ class AgencyPortfolioSetController {
             render(view: "create", model: [agencyPortfolioSetInstance: agencyPortfolioSetInstance])
             return
         }
-
+		attachUploadedFilesTo(agencyPortfolioSetInstance)
         flash.message = message(code: 'default.created.message', args: [message(code: 'agencyPortfolioSet.label', default: 'AgencyPortfolioSet'), agencyPortfolioSetInstance.id])
         redirect(action: "show", id: agencyPortfolioSetInstance.id)
     }
@@ -37,8 +39,8 @@ class AgencyPortfolioSetController {
             redirect(action: "list")
             return
         }
-
-        [agencyPortfolioSetInstance: agencyPortfolioSetInstance]
+		def profile = agencyPortfolioSetInstance?.candidate
+        [agencyPortfolioSetInstance: agencyPortfolioSetInstance,candidateInstance:profile, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
@@ -48,8 +50,10 @@ class AgencyPortfolioSetController {
             redirect(action: "list")
             return
         }
-
-        [agencyPortfolioSetInstance: agencyPortfolioSetInstance]
+		def profile = agencyPortfolioSetInstance?.candidate
+		
+		[agencyPortfolioSetInstance: agencyPortfolioSetInstance,candidateInstance:profile, isEditing:true, isNew:false]
+   
     }
 
     def update(Long id, Long version) {
@@ -71,12 +75,13 @@ class AgencyPortfolioSetController {
         }
 
         agencyPortfolioSetInstance.properties = params
-
+		
         if (!agencyPortfolioSetInstance.save(flush: true)) {
             render(view: "edit", model: [agencyPortfolioSetInstance: agencyPortfolioSetInstance])
             return
         }
-
+		attachUploadedFilesTo(agencyPortfolioSetInstance)
+		
         flash.message = message(code: 'default.updated.message', args: [message(code: 'agencyPortfolioSet.label', default: 'AgencyPortfolioSet'), agencyPortfolioSetInstance.id])
         redirect(action: "show", id: agencyPortfolioSetInstance.id)
     }

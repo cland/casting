@@ -81,6 +81,7 @@ class PictureSetController {
             render(view: "edit", model: [pictureSetInstance: pictureSetInstance])
             return
         }
+		
 		attachUploadedFilesTo(pictureSetInstance)
         flash.message = message(code: 'default.updated.message', args: [message(code: 'pictureSet.label', default: 'PictureSet'), pictureSetInstance.id])
         redirect(action: "show", id: pictureSetInstance.id)

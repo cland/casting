@@ -37,6 +37,14 @@
 					<g:hiddenField name="id" value="${candidateInstance?.id}" />
 					<g:link class="edit" action="edit" id="${candidateInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<span class="l-arrow"></span> | <span class="r-arrow"></span>
+					
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
+						<g:link class="create" controller="agencyPortfolioSet" action="create" params="${['candidate.id':candidateInstance?.id]}">
+						<g:message code="default.add.label" args="['Picture Set']"/>
+						</g:link>
+					</sec:ifAnyGranted>
+					
 				</fieldset>
 			</g:form>
 		</div>

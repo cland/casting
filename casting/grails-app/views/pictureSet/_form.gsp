@@ -4,6 +4,7 @@
 <g:else>${castingProfileInstance?.getName() }</g:else>
 </g:set>
 <g:hiddenField name="name" value="${thisName }"/>
+
 <g:if test="${castingProfileInstance }">
 	<g:hiddenField name="castingProfile.id" value="${castingProfileInstance?.id }"/> 
 </g:if>
