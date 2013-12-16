@@ -36,6 +36,8 @@ class CastingRole {
 		allowedCategories nullable: true  
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
+		feeNotes nullable:true
+		description nullable:true
 	}
 	static mapping = {
 		requiredCount defaultValue: 1

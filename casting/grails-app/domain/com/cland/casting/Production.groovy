@@ -18,7 +18,7 @@ class Production {
 	ProductionStatus status
 	
 	String producer
-	String productionCompany
+	String productionCompany	//?? not necessary - client will represent the production company
 	String storyboard
 	/** Package Deal Fields **/
 	String prodUsage
@@ -26,7 +26,7 @@ class Production {
 	String period
 	String territories
 	String exclusions
-	String feeNotes
+	String feeNotes		//?? not necessary. details on the role as well as the general comments can be used for this
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated

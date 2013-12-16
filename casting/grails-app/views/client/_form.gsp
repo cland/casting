@@ -36,7 +36,7 @@
 		<g:message code="client.contacts.label" default="Authorised Users" />
 		
 	</label>
-	<g:select name="contacts" from="${directorList}" multiple="multiple" optionKey="id" size="5" value="${clientInstance?.contacts*.id}" class="many-to-many"/>
+	<g:select name="contacts" from="${directorList}" multiple="multiple" optionKey="id" size="5" value="${clientInstance?.contacts*.id}" optionValue="mediumDetails" class="many-to-many"/>
 </div>
 
 

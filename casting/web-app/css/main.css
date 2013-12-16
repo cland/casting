@@ -220,7 +220,7 @@ fieldset,
 	zoom: 1;
 	border: none;
 }
-fieldset {border:solid 1px #444;margin-bottom:1em;}
+fieldset {border:solid 1px #999;margin-bottom:1em;}
 .property-list .fieldcontain {
 	list-style: none;
 	overflow: hidden;
@@ -763,7 +763,7 @@ p {
     margin-right:1px;
 }
 
-.summary-row .cast-actions textarea,.profile-row .cast-actions textarea{font-size:0.8em; width:166px !important;height:75px !important;}
+.summary-row .cast-actions textarea,.profile-row .cast-actions textarea, .production textarea{font-size:0.8em; width:166px !important;height:75px !important;}
 .summary-row .cast-mugshot,.profile-row .cast-mugshot {
     border: solid 1px #0094ff;
     float: left;
@@ -804,7 +804,8 @@ p {
     float:right;
     width:25%;
 }
-.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table{display:table;}
+.production fieldset {padding:1em;}
+.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table,production-data-table{display:table;}
 .row{display:table-row;}
 .row:hover, .row:hover label{background:#999;color:#fff !important;}
 .cell{display:table-cell; padding:4px;}
