@@ -16,7 +16,7 @@ class Candidate {
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	
+	static attachmentable = true
 	static hasMany = [portfolios:AgencyPortfolioSet]
 	static belongsTo = [agency:Agency]	
 	static constraints = {
@@ -32,9 +32,14 @@ class Candidate {
 	def beforeUpdate = {
 		lastUpdatedBy = castingApiService.getCurrentUserId()
 	}
-	def beforeDelete = {
-		
-	}
+	/**
+	 * To ensure that all attachments are removed when the "onwer" domain is deleted.
+	 */
+	transient def beforeDelete = {
+		withNewSession{
+		  removeAttachments()
+		}
+	 }
 	def onLoad = {
 		// your code goes here
 	}
