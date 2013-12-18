@@ -91,10 +91,11 @@ SpringSecurityUtils.doWithAuth('default') {
 						if(sa.hasErrors()){
 							println(sa.errors)
 						}
-						
+						new Race(name:"Asian").save()
 						new Race(name:"Black").save()
-						new Race(name:"White").save()
-						new Race(name:"Indian").save()
+						new Race(name:"Caucasian").save()
+						new Race(name:"Coloured").save()
+						new Race(name:"Indian").save()						
 						new Race(name:"Other").save()
 						
 		

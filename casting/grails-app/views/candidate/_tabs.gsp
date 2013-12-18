@@ -1,4 +1,5 @@
 <!-- The tabs -->
+<%@ page import="com.cland.casting.SystemRoles" %>
 <div id="tabs" style="display: none;">
 	<ul>
 	    <li><a href="#tab-candidate">Details</a></li>
@@ -7,6 +8,26 @@
 	</ul>
 	<div id="tab-candidate">
 	<fieldset><legend>Person Details</legend>
+	<div id="candidate-mugshot-${castingProfileInstance?.id }" class="candidate-mugshot">
+			<g:set var="hasphoto" value="${false }"/>
+		    <attachments:each bean="${candidateInstance}" inputName="headshot" status="j">	         
+				<g:if test="${j==0}">
+					<g:set var="hasphoto" value="${true }"/>
+					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+				</g:if>			
+			</attachments:each>	
+			
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
+				<g:if test="${hasphoto==false}"> 
+					<g:if test="${ candidateInstance}">
+							<g:link class="edit" action="edit" id="${candidateInstance?.id}">
+							<g:message code="default.add.label" args="['Headshot']"/>
+							</g:link>
+					</g:if>
+					
+				</g:if>
+			</sec:ifAnyGranted>
+		</div>
 		<ol class="property-list candidate">
 		
 				<g:if test="${candidateInstance?.person}">

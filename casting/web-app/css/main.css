@@ -764,7 +764,7 @@ p {
 }
 
 .summary-row .cast-actions textarea,.profile-row .cast-actions textarea, .production textarea{font-size:0.8em; width:166px !important;height:75px !important;}
-.summary-row .cast-mugshot,.profile-row .cast-mugshot {
+.summary-row .cast-mugshot,.profile-row .cast-mugshot,.candidate-mugshot {
     border: solid 1px #0094ff;
     float: left;
     padding: 0.5em;

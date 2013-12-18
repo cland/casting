@@ -36,7 +36,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" >
+			<g:uploadForm method="post" >
 				<g:hiddenField name="id" value="${candidateInstance?.id}" />
 				<g:hiddenField name="version" value="${candidateInstance?.version}" />
 				<fieldset class="form">
@@ -47,7 +47,7 @@
 					<g:link class="cancel" action="show" id="${candidateInstance?.id}"><g:message code="default.button.cancel.label" default="Cancel" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
-			</g:form>
+			</g:uploadForm>
 		</div>
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow

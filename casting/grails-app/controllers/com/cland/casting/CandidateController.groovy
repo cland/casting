@@ -1,6 +1,7 @@
 package com.cland.casting
 
 import org.springframework.dao.DataIntegrityViolationException
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 
 class CandidateController {
 	def castingApiService
@@ -41,7 +42,7 @@ class CandidateController {
             render(view: "create", model: [candidateInstance: candidateInstance])
             return
         }
-
+		attachUploadedFilesTo(candidateInstance)
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidateInstance.id])
         redirect(action: "show", id: candidateInstance.id)
     }
@@ -94,7 +95,7 @@ class CandidateController {
             render(view: "edit", model: [candidateInstance: candidateInstance])
             return
         }
-
+		attachUploadedFilesTo(candidateInstance)
         flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidateInstance.id])
         redirect(action: "show", id: candidateInstance.id)
     }
