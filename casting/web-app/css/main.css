@@ -814,3 +814,6 @@ p {
 .clear{clear:both;}
 .photo-display{margin:5px;padding:5px;border:1px solid #ccc;text-align:center;}
 .attachments {margin-bottom:5px;}
+form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
+.tab a:link, .tab a:visited{color:#48802C ;}
+.tab a:hover {color:#EB8F2A ;text-decoration:none;}

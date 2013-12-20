@@ -1,7 +1,8 @@
+<%@ page import="com.cland.casting.SystemRoles" %>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'categories', 'error')} ">
 
     <ul class="one-to-many">
-        <table id="categories-table" data="{tableName:'categories'}">
+        <table id="categories-table${isEditing==false ? '-view' : '' }" data="{tableName:'categories'}">
             <thead>
                 <tr>
                     <th data="{required:true, name:'name', placeholder:'Required'}">Category Name</th>                    
@@ -11,16 +12,27 @@
             <tbody>
                 <g:each in="${productionInstance?.categories}" var="p" status="i">
                 <tr rowId="${i}">
-                    <td>${p.name}</td>
-                    
-                    <td><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></td>
+                    <td><g:link class="show" action="show" controller="castingCategory" id="${p?.id}">${p.name}</g:link></td>    
+                    <td>
+                    <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+                    	<g:if test="${isEditing == true }"><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></g:if>
+                    	<g:link class="edit" action="edit" controller="castingCategory" id="${p?.id}"><g:if test="${isEditing == false }">
+                    		<r:img class="editRowButton" dir='images' file='skin/database_edit.png'/></g:if>
+                    	</g:link>
+                    </sec:ifAnyGranted>
+                    </td>
                 </tr>
                 </g:each>
             </tbody>
         </table>
-
-        <li class="add"><a id="addCategoryLink" href="#">Add Category</a></li>
-
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+	        <g:if test="${isEditing == true }">
+	        	<li class="add float-right"><a id="addCategoryLink" href="#">Add Category</a></li>
+	        </g:if>
+	        <g:else>
+	        	<g:link class="create float-right" action="create" controller="castingCategory" params="${['production.id':productionInstance?.id]}">Add Category</g:link>
+	        </g:else>
+		</sec:ifAnyGranted>
     </ul>
 </div>
 
@@ -61,6 +73,9 @@ var categoriesTable = {
             var target = $(event.target);
             var row = target.closest('tr');
             $(_tableid).writetable('removeRow', event, row);
+        });
+        $('img.editRowButton').on("click", function(event) {
+            alert("Edit..")
         });
 		}
 	}

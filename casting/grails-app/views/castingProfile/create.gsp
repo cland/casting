@@ -7,8 +7,7 @@
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 		<g:render template="head"></g:render>			
 	</head>
-	<body>
-	
+	<body>	
 	<div class="bread-crump">
 		<span class="r-arrow"></span>
 		<g:link controller="production" action="list">Productions</g:link>

@@ -26,10 +26,10 @@
 			<div class="cell"></div>
 		</div>
 		<div class="row">
-			<div class="cell"><label for="name"><g:message code="production.producer.label" default="Producer" /></label></div>
+			<div class="cell"><label for="producer"><g:message code="production.producer.label" default="Producer" /></label></div>
 			<div class="cell">
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'producer', 'error')} ">
-					<g:textField name="name" value="${productionInstance?.producer}"/>
+					<g:textField name="producer" value="${productionInstance?.producer}"/>
 				</div>
 			</div>
 			<div class="cell"><label for="shootDate"><g:message code="production.shootDate.label" default="Shoot Date/s" />	<span class="required-indicator">*</span></label>
@@ -98,7 +98,7 @@
 				</div>
 			</div>			
 			<div class="row">
-				<div class="cell"><label for="feeNote"><g:message code="production.feenotes.label" default="feeNotes" /></label></div>
+				<div class="cell"><label for="feeNote"><g:message code="default.feenotes.label" default="Fee Notes" /></label></div>
 				<div class="cell">
 					<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'feeNotes', 'error')} ">			
 						<g:textArea name="feeNotes" value="${productionInstance?.feeNotes}" rows="3" cols="40"/>
@@ -114,8 +114,6 @@
 <br/>
 <g:render template="categoriesTable"/>
 </fieldset>
-
-
 
 <fieldset><legend>Notes and Other Information</legend>
 	<div class="production-comments">

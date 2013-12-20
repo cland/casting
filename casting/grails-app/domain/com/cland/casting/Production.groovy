@@ -14,7 +14,7 @@ class Production {
 	List categories
 	List portfolios
 	Date shootDate
-	List auditionDates
+	List <Date> auditionDates
 	ProductionStatus status
 	
 	String producer

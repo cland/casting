@@ -1,38 +1,45 @@
+<%@ page import="com.cland.casting.SystemRoles" %>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'roles', 'error')} ">
 
     <ul class="one-to-many">
-        <table id="roles-table" data="{tableName:'roles'}">
+        <table id="roles-table${isEditing==false ? '-view' : '' }" data="{tableName:'roles'}">
             <thead>
                 <tr>
                     <th data="{required:true, name:'name', placeholder:'Required'}">Casting Role</th>
                     <th data="{required:true, name:'maxRequiredAuditionCount', placeholder:'', type:'intenger',cssClass:'field-small'}  ">Max</th>
                     <th data="{required:true, name:'mimRequiredAuditionCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Min</th>
                     <th data="{required:true, name:'requiredCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Required</th>
-                    <th data="{required:false, name:'auditionDates', placeholder:'Dates', type:'intenger',cssClass:'field-small'}">Auditions</th>
-                    <th data="{required:false, name:'callbackDates', placeholder:'Dates', type:'intenger',cssClass:'field-small'}">Callbacks</th> 
-                    <th data="{required:false, name:'wardropeDates', placeholder:'Dates', type:'Date',cssClass:'field-small'}">Wardropes</th>
-                    <th data="{required:false, name:'shootDates', placeholder:'Dates',cssClass:'field-small'}">Shoot</th>                   
+                                    
                     <th data="{editable:false}">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
                 <g:each in="${productionInstance?.roles}" var="p" status="i">
                 <tr rowId="${i}">
-                    <td>${p.name}</td>
+                    <td><g:link class="show" action="show" controller="castingRole" id="${p?.id}">${p.name}</g:link></td>
                     <td>${p.maxRequiredAuditionCount}</td>
                     <td>${p.minRequiredAuditionCount}</td>
                     <td>${p.requiredCount}</td>
-                    <td>${p.auditionDates}</td>
-                    <td>${p.callbackDates}</td>
-                    <td>${p.wardropeDates}</td>
-                    <td>${p.shootDates}</td>
-                    <td><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></td>
+                    <td>
+						<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+	                    	<g:if test="${isEditing == true }"><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></g:if>
+	                    	<g:link class="edit" action="edit" controller="castingRole" id="${p?.id}"><g:if test="${isEditing == false }">
+	                    		<r:img class="editRowButton" dir='images' file='skin/database_edit.png'/></g:if>
+	                    	</g:link>
+	                    </sec:ifAnyGranted>
+                    </td>
                 </tr>
                 </g:each>
             </tbody>
         </table>
-
-        <li class="add"><a id="addRoleLink" href="#">Add Role</a></li>
+    
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+	        <g:if test="${isEditing == true }"><li class="add float-right"><a id="addRoleLink" href="#">Add Role</a></li></g:if>
+	        <g:else>
+	        	<g:link class="create float-right" action="create" controller="castingRole" params="${['production.id':productionInstance?.id]}">Add Role</g:link>
+	        </g:else>
+        </sec:ifAnyGranted>
+        
 
     </ul>	
 </div>

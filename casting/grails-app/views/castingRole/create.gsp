@@ -5,15 +5,24 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'castingRole.label', default: 'CastingRole')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
+	<div class="bread-crump">
+		<span class="r-arrow"></span>
+		<g:link controller="production" action="list">Productions</g:link>
+		<span class="r-arrow"></span>
+		<g:link controller="production" action="show" params="${['id':productionInstance?.id]}">Production: ${productionInstance?.name} (Client: ${productionInstance?.client?.encodeAsHTML()})</g:link>
+		<span class="r-arrow"></span> 
+		<span class="current-crump">
+			New Casting Role
+		</span>
+	</div>	
+	<div id="status1" class="leftbar" role="complementary">
+         <g:render template="../layouts/sidenav-admin"></g:render>
+    </div>
 		<a href="#create-castingRole" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
+		
 		<div id="create-castingRole" class="content scaffold-create" role="main">
 			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -35,5 +44,18 @@
 				</fieldset>
 			</g:form>
 		</div>
+	<script type="text/javascript">
+// when the page has finished loading.. execute the follow
+$(document).ready(function() {		
+	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
+	//$(element_or_selector).multiDatesPicker(options_to_initialize_datepicker_and_multidatepicker);
+	$(".datepick").multiDatesPicker({
+		dateFormat: "dd-M-yy",
+		beforeShowDay: $.datepicker.noWeekends,
+		maxPicks: 1		
+	});
+});  //end method ready(...)
+
+</script>	
 	</body>
 </html>

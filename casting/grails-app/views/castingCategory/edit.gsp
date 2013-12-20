@@ -5,16 +5,24 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'castingCategory.label', default: 'CastingCategory')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
-		<a href="#edit-castingCategory" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+		<div class="bread-crump">
+			<span class="r-arrow"></span>
+			<g:link controller="production" action="list">Productions</g:link>
+			<span class="r-arrow"></span>
+			<g:link controller="production" action="show" params="${['id':castingCategoryInstance?.production?.id]}">Production: ${castingCategoryInstance?.production?.name} (Client: ${castingCategoryInstance?.production?.client?.encodeAsHTML()})</g:link>
+			<span class="r-arrow"></span> 
+			<span class="current-crump">
+				${castingCategoryInstance }
+			</span>
 		</div>
+	<div id="status1" class="leftbar" role="complementary">
+         <g:render template="../layouts/sidenav-admin"></g:render>
+    </div>
+		<a href="#edit-castingCategory" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+		
 		<div id="edit-castingCategory" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -39,5 +47,36 @@
 				</fieldset>
 			</g:form>
 		</div>
+<script type="text/javascript">
+// when the page has finished loading.. execute the follow
+
+$(document).ready(function() {		
+	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
+	$(".datepick").multiDatesPicker({
+		dateFormat: "dd-M-yy",
+		beforeShowDay: $.datepicker.noWeekends,
+		maxPicks: 1		
+	});
+	//Main tabs	
+	$("#tabs").tabs(
+			{
+				active:cland_params.active_tab(),
+				create: function (event,ui){	
+					//executed after is created								
+					$('#tabs').show()
+				},
+				show: function(event,ui){
+					//on every tabs clicked
+				},
+				beforeLoad : function(event, ui) {
+					ui.jqXHR.error(function() {
+						ui.panel
+						.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
+					});
+				}
+		});		
+});  //end method ready(...)
+
+</script>		
 	</body>
 </html>
