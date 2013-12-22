@@ -75,7 +75,8 @@ $(document).ready(function() {
 		});
 		//alert(datelist)
 		if(datelist != "") {
-			datelist = datelist.split(",");
+			$("#" + altfield_id).attr("value",datelist)
+			datelist = datelist.split(",");			
 			$("#" + picker_id).multiDatesPicker('addDates',datelist);
 		}	
 	}

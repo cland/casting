@@ -56,8 +56,7 @@ class CastingRoleController {
 
     def update(Long id, Long version) {
 		def castingRoleInstance = CastingRole.get(id)
-		
-        
+   
         if (!castingRoleInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), id])
             redirect(action: "list")
@@ -74,30 +73,25 @@ class CastingRoleController {
             }
         }
 
+		//un-bind the dates fields as we need to process them differently
 		bindData(castingRoleInstance, params, [exclude: 'auditionDates'])
 		bindData(castingRoleInstance, params, [exclude: 'shootDates'])
 		bindData(castingRoleInstance, params, [exclude: 'callbackDates'])
 		bindData(castingRoleInstance, params, [exclude: 'wardropeDates'])
         castingRoleInstance.properties = params
-		
-		appendDates(params?.auditionDates,castingRoleInstance,CastEventType.AUDITION)
-		appendDates(params?.callbackDates,castingRoleInstance,CastEventType.CALLBACK)
-		appendDates(params?.wardropeDates,castingRoleInstance,CastEventType.WARDROPE)
-		appendDates(params?.shootDates,castingRoleInstance,CastEventType.SHOOT)
-//		if(params?.auditionDates){			
-//			String dtlist = params?.auditionDates			
-//			def datelist = Arrays.asList(dtlist.split("\\s*,\\s*"))
-//			datelist.each{ entry ->
-//				println ">> adding..." + (DateParser.fromString("",entry))?.format("d-M-yyyy")
-//				castingRoleInstance.addToAuditionDates(DateParser.fromString("",entry))
-//			}
-//		}
+	
         if (!castingRoleInstance.save(flush: true)) {
             render(view: "edit", model: [castingRoleInstance: castingRoleInstance])
             return
         }
+		
+		//add the dates
+		appendDates(params?.auditionDates,castingRoleInstance,CastEventType.AUDITION)
+		appendDates(params?.callbackDates,castingRoleInstance,CastEventType.CALLBACK)
+		appendDates(params?.wardropeDates,castingRoleInstance,CastEventType.WARDROPE)
+		appendDates(params?.shootDates,castingRoleInstance,CastEventType.SHOOT)
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), castingRoleInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), castingRoleInstance.name])
         redirect(action: "show", id: castingRoleInstance.id)
     }
 
@@ -121,50 +115,28 @@ class CastingRoleController {
     }
 	
 	private void appendDates(String rawdates,def objInstance,def to){
-		println(">> " + to + " - " + rawdates)
 		if(rawdates){
 			String dtlist = rawdates
 			def datelist = Arrays.asList(dtlist.split("\\s*,\\s*"))
-			
+			objInstance.with{
 				switch(to){
 					case CastEventType.AUDITION:
-					objInstance.auditionDates.clear()
-						datelist.each{ entry ->
-							println "\t > aud: " + DateParser.fromString("",entry)						
-							objInstance.addToAuditionDates(DateParser.fromString("",entry))
-						} //end each
+						datelist.each{ entry ->	addToAuditionDates(DateParser.fromString("",entry)).save(flush:true)} //end each
 					break;
 					case CastEventType.WARDROPE:
-					objInstance.wardropeDates.clear()
-						
-						datelist.each{ entry ->
-							println "\t > wad: " + DateParser.fromString("",entry)
-						objInstance.addToWardropeDates(DateParser.fromString("",entry))
-						}
+						datelist.each{ entry ->	addToWardropeDates(DateParser.fromString("",entry)).save(flush:true)}
 					break;
 					case CastEventType.CALLBACK:
 					objInstance.callbackDates.clear()
-						datelist.each{ entry ->
-						println "\t > cal: " + DateParser.fromString("",entry)
-						
-						objInstance.addToCallbackDates(DateParser.fromString("",entry))
-						}
+						datelist.each{ entry ->	addToCallbackDates(DateParser.fromString("",entry)).save(flush:true)}
 					break;
 					case CastEventType.SHOOT:
-						objInstance.shootDates.clear()
-						datelist.each{ entry ->
-							println "\t > sho: " + DateParser.fromString("",entry)					
-							objInstance.addToShootDates(DateParser.fromString("",entry))
-						}
+						datelist.each{ entry ->	addToShootDates(DateParser.fromString("",entry)).save(flush:true)}
 					break;
-					default: println("nothing to do")
+					
 				}				
-			
-			
-			//save
-		//	if(!objInstance.save(flush: true)){
-		//		println("Failed to add dats to " + to)
-		//	}
+			}
+
 		} //end if
 	}//end 
 	

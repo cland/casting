@@ -27,6 +27,7 @@ class CastingRole {
 	
 	static belongsTo = [production:Production]
 	static hasMany = [agencyACL:Agency,auditionDates:Date,callbackDates:Date,wardropeDates:Date,shootDates:Date]
+	static fetchMode = [shootDates: 'eager']
 	static constraints = {
 		name(blank:false)
 		maxRequiredAuditionCount(min:0,nullable:true,blank:true)
