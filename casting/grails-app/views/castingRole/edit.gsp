@@ -52,39 +52,14 @@
 
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-
 	$(".datepicker-reset").live("click",function(){
-		resetPicker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
+		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
-	
-	
-	function resetPicker(picker_id,altfield_id, type){
-		$("#" + picker_id).multiDatesPicker('resetDates',type);
-		$("#" + altfield_id).attr("value","")
-	}
-	function initDatePicker(picker_id,altfield_id){
-		var datelist = $("#" + altfield_id).attr("value")
-		$("#" + picker_id).multiDatesPicker({
-			dateFormat: "yy-mm-dd",
-			altField: '#' + altfield_id,			
-			altFormat:"yy-mm-dd",
-			minDate:"+0",
-			maxDate:"+3M +5D"
-			//beforeShowDay: $.datepicker.noWeekends
-			//maxPicks: 1		
-		});
-		//alert(datelist)
-		if(datelist != "") {
-			$("#" + altfield_id).attr("value",datelist)
-			datelist = datelist.split(",");			
-			$("#" + picker_id).multiDatesPicker('addDates',datelist);
-		}	
-	}
-	
-	initDatePicker("audition-datepicker","audition-date");
-	initDatePicker("callback-datepicker","callback-date");
-	initDatePicker("wardrope-datepicker","wardrope-date");
-	initDatePicker("shoot-datepicker","shoot-date");
+	cland_datepickers.init_datepicker("audition-datepicker","audition-date");
+	cland_datepickers.init_datepicker("callback-datepicker","callback-date");
+	cland_datepickers.init_datepicker("wardrope-datepicker","wardrope-date");
+	cland_datepickers.init_datepicker("shoot-datepicker","shoot-date");
+
 	//Main tabs	
 	$("#tabs").tabs(
 			{

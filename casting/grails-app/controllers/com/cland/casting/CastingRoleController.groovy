@@ -20,13 +20,21 @@ class CastingRoleController {
     }
 
     def save() {
-		
+		//un-bind the dates fields as we need to process them differently
         def castingRoleInstance = new CastingRole(params)
+		bindData(castingRoleInstance, params, [exclude: 'auditionDates'])
+		bindData(castingRoleInstance, params, [exclude: 'shootDates'])
+		bindData(castingRoleInstance, params, [exclude: 'callbackDates'])
+		bindData(castingRoleInstance, params, [exclude: 'wardropeDates'])
         if (!castingRoleInstance.save(flush: true)) {
             render(view: "create", model: [castingRoleInstance: castingRoleInstance])
             return
         }
-
+		//add the dates
+		appendDates(params?.auditionDates,castingRoleInstance,CastEventType.AUDITION)
+		appendDates(params?.callbackDates,castingRoleInstance,CastEventType.CALLBACK)
+		appendDates(params?.wardropeDates,castingRoleInstance,CastEventType.WARDROPE)
+		appendDates(params?.shootDates,castingRoleInstance,CastEventType.SHOOT)
         flash.message = message(code: 'default.created.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), castingRoleInstance.id])
         redirect(action: "show", id: castingRoleInstance.id)
     }

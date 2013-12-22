@@ -49,11 +49,13 @@
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
 	//$(element_or_selector).multiDatesPicker(options_to_initialize_datepicker_and_multidatepicker);
-	$(".datepick").multiDatesPicker({
-		dateFormat: "dd-M-yy",
-		beforeShowDay: $.datepicker.noWeekends,
-		maxPicks: 1		
+	$(".datepicker-reset").live("click",function(){
+		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
+	cland_datepickers.init_datepicker("audition-datepicker","audition-date");
+	cland_datepickers.init_datepicker("callback-datepicker","callback-date");
+	cland_datepickers.init_datepicker("wardrope-datepicker","wardrope-date");
+	cland_datepickers.init_datepicker("shoot-datepicker","shoot-date");
 });  //end method ready(...)
 
 </script>	

@@ -29,3 +29,28 @@ function onChangeCompany(){
 	lnk = lnk.substring(0,lnk.indexOf("?"))
 	document.location.href = lnk + "?company.id=" + id
 }
+
+var cland_datepickers = {
+		reset_picker : function resetPicker(picker_id,altfield_id, type){
+			$("#" + picker_id).multiDatesPicker('resetDates',type);
+			$("#" + altfield_id).attr("value","")
+		},
+		init_datepicker : function initDatePicker(picker_id,altfield_id){
+			var datelist = $("#" + altfield_id).attr("value")
+			$("#" + picker_id).multiDatesPicker({
+				dateFormat: "yy-mm-dd",
+				altField: '#' + altfield_id,			
+				altFormat:"yy-mm-dd",
+				minDate:"+0",
+				maxDate:"+3M +5D"
+				//beforeShowDay: $.datepicker.noWeekends
+				//maxPicks: 1		
+			});
+			//alert(datelist)
+			if(datelist != "") {
+				$("#" + altfield_id).attr("value",datelist)
+				datelist = datelist.split(",");			
+				$("#" + picker_id).multiDatesPicker('addDates',datelist);
+			}	
+		}
+} //end cland_datepicker
