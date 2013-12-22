@@ -52,11 +52,38 @@
 
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-	$(".datepick").multiDatesPicker({
-		dateFormat: "dd-M-yy",
-		beforeShowDay: $.datepicker.noWeekends,
-		maxPicks: 1		
+
+	$(".datepicker-reset").live("click",function(){
+		resetPicker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
+	
+	
+	function resetPicker(picker_id,altfield_id, type){
+		$("#" + picker_id).multiDatesPicker('resetDates',type);
+		$("#" + altfield_id).attr("value","")
+	}
+	function initDatePicker(picker_id,altfield_id){
+		var datelist = $("#" + altfield_id).attr("value")
+		$("#" + picker_id).multiDatesPicker({
+			dateFormat: "yy-mm-dd",
+			altField: '#' + altfield_id,			
+			altFormat:"yy-mm-dd",
+			minDate:"+0",
+			maxDate:"+3M +5D"
+			//beforeShowDay: $.datepicker.noWeekends
+			//maxPicks: 1		
+		});
+		//alert(datelist)
+		if(datelist != "") {
+			datelist = datelist.split(",");
+			$("#" + picker_id).multiDatesPicker('addDates',datelist);
+		}	
+	}
+	
+	initDatePicker("audition-datepicker","audition-date");
+	initDatePicker("callback-datepicker","callback-date");
+	initDatePicker("wardrope-datepicker","wardrope-date");
+	initDatePicker("shoot-datepicker","shoot-date");
 	//Main tabs	
 	$("#tabs").tabs(
 			{

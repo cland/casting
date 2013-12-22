@@ -74,9 +74,7 @@ var categoriesTable = {
             var row = target.closest('tr');
             $(_tableid).writetable('removeRow', event, row);
         });
-        $('img.editRowButton').on("click", function(event) {
-            alert("Edit..")
-        });
+        
 		}
 	}
 categoriesTable.init()

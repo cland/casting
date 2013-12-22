@@ -817,3 +817,7 @@ p {
 form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
 .tab a:link, .tab a:visited{color:#48802C ;}
 .tab a:hover {color:#EB8F2A ;text-decoration:none;}
+.datepicker-reset {pointer:hand;}
+.field-calendar-container{display:inline-block; margin-top:1em;margin-bottom:1em;width:100%;}
+.field-calendar-picker-container{width:48%;}
+.field-calendar-picker-container label {width:100% !important;text-align:left;}

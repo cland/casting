@@ -17,15 +17,16 @@ class CastingRole {
 	int requiredMaleCount
 	int requiredFemaleCount
 	int requiredCount
-	List<Date> auditionDates	//castingDates
-	List<Date> callbackDates
-	List<Date> wardropeDates
-	List<Date> shootDates
+	//List<Date> auditionDates	//castingDates
+	//List<Date> callbackDates
+	//List<Date> wardropeDates
+	//List<Date> shootDates
 	List<Category> allowedCategories //emply list means all allowed otherwise restricted to allow categories in the list.
 	boolean deleted
 	static transients = [ 'deleted' ]
 	
 	static belongsTo = [production:Production]
+	static hasMany = [agencyACL:Agency,auditionDates:Date,callbackDates:Date,wardropeDates:Date,shootDates:Date]
 	static constraints = {
 		name(blank:false)
 		maxRequiredAuditionCount(min:0,nullable:true,blank:true)

@@ -7,7 +7,7 @@
                 <tr>
                     <th data="{required:true, name:'name', placeholder:'Required'}">Casting Role</th>
                     <th data="{required:true, name:'maxRequiredAuditionCount', placeholder:'', type:'intenger',cssClass:'field-small'}  ">Max</th>
-                    <th data="{required:true, name:'mimRequiredAuditionCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Min</th>
+                    <th data="{required:true, name:'minRequiredAuditionCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Min</th>
                     <th data="{required:true, name:'requiredCount', placeholder:'', type:'intenger',cssClass:'field-small'}">Required</th>
                                     
                     <th data="{editable:false}">&nbsp;</th>
