@@ -821,3 +821,17 @@ form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;paddi
 .field-calendar-container{display:inline-block; margin-top:1em;margin-bottom:1em;width:100%;}
 .field-calendar-picker-container{width:48%;}
 .field-calendar-picker-container label {width:100% !important;text-align:left;}
+
+.role-view {border:solid 1px #ccc;margin-bottom:1em;width:100%;}
+.role-view table th {font-size:0.9em;}
+.role-view table td {font-size:0.9em;}
+.role-header-section {padding: 8px;background:#F9DCB1;font-size:1.3em;}
+.role-edit_buttons {float:right;}
+.role-admin-section {}
+.role-userview-section {}
+.role-userview-section table tbody tr td.td-section-head{background:#f8f8f8;padding:8px;font-weight:bold;}
+.role-userview-section table tbody tr td.td-audition-dates,
+.role-userview-section table tbody tr td.td-wardrope-dates,
+.role-userview-section table tbody tr td.td-callback-dates,
+.role-userview-section table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;}
+.role-userview-section table tbody tr td.td-shoot-dates {border-right:none;}

@@ -1,8 +1,8 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'roles', 'error')} ">
 
-    <ul class="one-to-many">
     	<g:if test="${isEditing==true}">
+    	 <ul class="one-to-many">
         <table id="roles-table${isEditing==false ? '-view' : '' }" data="{tableName:'roles'}">
             <thead>
                 <tr>
@@ -33,27 +33,62 @@
                 </g:each>
             </tbody>
         </table>
+        </ul>
         </g:if>
         <g:else>
        		<g:each in="${productionInstance?.roles}" var="p" status="i">
-       			<div id="role-${p.id } class="role-view">
-	       			<div id="role-header-section">Role: ${p.name }</div>
+       			<div id="role-${p.id }" class="role-view">
+	       			<div id="role-header-section-${p.id }" class="role-header-section">
+	       				Role: <g:link class="show" action="show" controller="castingRole" id="${p?.id}">${p.name}</g:link>
+	       				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+		       				<div id="role-edit_buttons-${p.id }" class="role-edit_buttons">		       					
+		                    	<g:if test="${isEditing == true }"><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></g:if>
+		                    	<g:link class="edit" action="edit" controller="castingRole" id="${p?.id}"><g:if test="${isEditing == false }">
+		                    		<r:img class="editRowButton" dir='images' file='skin/database_edit.png'/></g:if>
+		                    	</g:link>	                    	
+		       				</div>
+	       				</sec:ifAnyGranted>
+	       			</div>
 	                <!-- add admin related stuff only -->
-	                <div id="role-admin-section">
-	                	<table>
-		       				<tr><th>Agencies Allowed</th><th>Required</th><th>Min</th><th>Max</th></tr>
-		       				<tr><td>Base Inc</td><td>20</td><td>15</td><td>1</td></tr>	                	
-	                	</table>
-	                </div>	       			
-	       			<div id="role-userview-section">
+	                <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+		                <div id="role-admin-section-${p.id }" class="role-admin-section">
+		                	<table>
+			       				<tr><th>Agencies Allowed</th><th>Required</th><th>Min</th><th>Max</th></tr>
+			       				<tr><td>Base Inc</td><td>${p.requiredCount}</td><td>${p.maxRequiredAuditionCount}</td><td>${p.minRequiredAuditionCount}</td></tr>	                	
+		                	</table>
+		                </div>	 
+	                </sec:ifAnyGranted>
+	       			<div id="role-userview-section-${p.id }" class="role-userview-section">
 		       			<table>
-		       				<tr><th>Audition Dates</th><th>Callback Dates</th><th>Wardrope Dates</th><th>Shoot Dates</th></tr>
-		       				<tr><td>20 Dec 2013</td><td>20 Dec 2013</td><td>20 Dec 2013</td><td>20 Dec 2013</td></tr>
-		       				<tr><td colspan="4">Description</td></tr>
-		       				<tr><td colspan="4">p.description</td></tr>
-		       				<tr><td colspan="4">Fees</td></tr>
-		       				<tr><td>Day Fee:</td><td colspan="3">p.dayfee</td></tr>
-		       				<tr><td>Fee Notes:</td><td colspan="3">p.feeNotes</td></tr>       					             
+		       				<tr><th>Audition Date(s)</th><th>Callback Date(s)</th><th>Wardrope Date(s)</th><th>Shoot Date(s)</th></tr>
+		       				<tr>
+		       					<td class="td-audition-dates">
+			       					<g:each in="${p?.auditionDates}" var="d">
+			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+			            			</g:each>
+								</td>
+		       					<td class="td-callback-dates">
+			       					<g:each in="${p?.callbackDates}" var="d">
+			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+			            			</g:each>		       					
+								</td>
+		       					<td  class="td-wardrope-dates">  					
+		       						<g:each in="${p?.wardropeDates}" var="d">
+			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+			            			</g:each>
+			            		</td>
+		       					<td  class="td-shoot-dates">
+			       					<g:each in="${p?.shootDates}" var="d">
+			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+			            			</g:each>
+		       					</td>
+		       				</tr>
+		       				<tr><td colspan="4">&nbsp;</td></tr>
+		       				<tr><td colspan="4" class="td-section-head">Description</td></tr>
+		       				<tr><td colspan="4">${p?.description == "" ? 'No Description' : p.description }</td></tr>
+		       				<tr><td colspan="4" class="td-section-head">Fees</td></tr>
+		       				<tr><td>Day Fee:</td><td colspan="3">${p.dayfee}</td></tr>
+		       				<tr><td>Fee Notes:</td><td colspan="3">${p.feeNotes}</td></tr>       					             
 		                </table>
 	                </div>
 
@@ -69,7 +104,7 @@
         </sec:ifAnyGranted>
         
 
-    </ul>	
+    	
 </div>
 
 <r:script>
