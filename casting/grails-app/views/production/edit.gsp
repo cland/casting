@@ -49,6 +49,9 @@
 // when the page has finished loading.. execute the follow
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
+	cland_datepickers.init_datepicker_single_future("#start-date","dd-M-yy");
+	cland_datepickers.init_datepicker_single_future("#end-date","dd-M-yy"); // "yy-mm-dd"
+	
 });  //end method ready(...)
 
 </script>		

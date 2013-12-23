@@ -63,22 +63,22 @@
 		       				<tr><th>Audition Date(s)</th><th>Callback Date(s)</th><th>Wardrope Date(s)</th><th>Shoot Date(s)</th></tr>
 		       				<tr>
 		       					<td class="td-audition-dates">
-			       					<g:each in="${p?.auditionDates}" var="d">
+			       					<g:each in="${p?.auditionDates?.sort()}" var="d">
 			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 			            			</g:each>
 								</td>
 		       					<td class="td-callback-dates">
-			       					<g:each in="${p?.callbackDates}" var="d">
+			       					<g:each in="${p?.callbackDates?.sort()}" var="d">
 			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 			            			</g:each>		       					
 								</td>
 		       					<td  class="td-wardrope-dates">  					
-		       						<g:each in="${p?.wardropeDates}" var="d">
+		       						<g:each in="${p?.wardropeDates?.sort()}" var="d">
 			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 			            			</g:each>
 			            		</td>
 		       					<td  class="td-shoot-dates">
-			       					<g:each in="${p?.shootDates}" var="d">
+			       					<g:each in="${p?.shootDates?.sort()}" var="d">
 			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 			            			</g:each>
 		       					</td>

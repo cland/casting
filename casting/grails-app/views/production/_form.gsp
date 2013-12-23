@@ -22,21 +22,26 @@
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'client', 'error')} required">
 					<g:select id="client" name="client.id" from="${com.cland.casting.Client.list()}" optionKey="id" required="" value="${productionInstance?.client?.id}" class="many-to-one"/></div>
 				</div>	
-			<div class="cell">Casting dates</div>
-			<div class="cell"></div>
+			<div class="cell"><label for="startDate"><g:message code="production.startDate.label" default="Start Date" /></label></div>
+			<div class="cell">
+				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'startDate', 'error')} required">	
+					<g:textField name="startDate" class="datepick_single_future" id="start-date" value="${productionInstance?.startDate?.format('dd-MMM-yyyy')}"/>	
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="cell"><label for="producer"><g:message code="production.producer.label" default="Producer" /></label></div>
 			<div class="cell">
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'producer', 'error')} ">
 					<g:textField name="producer" value="${productionInstance?.producer}"/>
-				</div>
-			</div>
-			<div class="cell"><label for="shootDate"><g:message code="production.shootDate.label" default="Shoot Date/s" />	<span class="required-indicator">*</span></label>
+				</div>			
 			</div>
 			<div class="cell">
-				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'shootDate', 'error')} required">	
-					<g:textField name="shootDate" class="datepick" id="shoot-date" value="${productionInstance?.shootDate?.format('dd-MMM-yyyy')}"/>	
+				<label for="endDate"><g:message code="production.endDate.label" default="End Date" /></label>
+			</div>
+			<div class="cell">
+				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'endDate', 'error')} required">	
+					<g:textField name="endDate" class="datepick_single_future" id="end-date" value="${productionInstance?.endDate?.format('dd-MMM-yyyy')}"/>	
 				</div>			
 			</div>			
 		</div>
@@ -47,7 +52,7 @@
 					<g:textArea name="address" value="${productionInstance?.address}" rows="3" cols="40"/>
 				</div>			
 			</div>
-			<div class="cell">Callback wardrobe</div>
+			<div class="cell"></div>
 			<div class="cell"></div>
 		</div>
 	</div>
@@ -86,25 +91,20 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="cell"><label for="feeNote"><g:message code="default.feenotes.label" default="Fee Notes" /></label></div>
+				<div class="cell">
+					<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'feeNotes', 'error')} ">			
+						<g:textArea name="feeNotes" value="${productionInstance?.feeNotes}" rows="3" cols="40"/>
+					</div>			
+				</div>			
 				<div class="cell"><label for="exclusions"><g:message code="production.exclusions.label" default="Exclusions" /></label></div>
 				<div class="cell">
 					<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'exclusions', 'error')} ">			
 						<g:textField name="exclusions" value="${productionInstance?.exclusions}" />
 					</div>			
 				</div>
-				<div class="cell"></div>
-				<div class="cell">
-					
-				</div>
 			</div>			
-			<div class="row">
-				<div class="cell"><label for="feeNote"><g:message code="default.feenotes.label" default="Fee Notes" /></label></div>
-				<div class="cell">
-					<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'feeNotes', 'error')} ">			
-						<g:textArea name="feeNotes" value="${productionInstance?.feeNotes}" rows="3" cols="40"/>
-					</div>			
-				</div>
-			</div>		
+	
 		</div>
 	</div>
 </fieldset>

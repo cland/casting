@@ -2,12 +2,16 @@
 
 <g:set var="data_table" value=""/>
 <g:set var="tmp" value=""/>
-<g:set var="count_per_row" value="${4 }"/>
+<g:set var="count_per_row" value="${3 }"/>
 <g:set var="total_count" value="${profileList.size() }"/>
 <g:each in="${profileList }"  var="profile" status="i">
 	<g:set var="entry">
 		<div id="entry-${profile?.id }" class="mugshot">
-	        <img width="120" src="../../images/male.jpg">
+	        <attachments:each bean="${profile?.pictures}" inputName="headshot" status="j">	         
+				<g:if test="${j==0}">
+					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+				</g:if>			
+			</attachments:each>
 	        <div class="profile-text"> Include in short list:</div>
 	        <div class="profile-input">
 	            <input class="mugshot_radioyes" type="radio" value="yes" checked="" name="E1_${profile?.id }">Yes

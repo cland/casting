@@ -45,7 +45,7 @@
             	<div class="row castdate">
             		<div class="cell"><label>Cast Date(s):</label></div>
             		<div class="cell">
-            			<g:each in="${castingRoleInstance?.auditionDates}" var="d">
+            			<g:each in="${castingRoleInstance?.auditionDates?.sort()}" var="d">
             			<span class="property-value"><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
             			</g:each>            			
             		</div>
@@ -53,7 +53,7 @@
              	<div class="row callbackdate">
             		<div class="cell"><label>Callback Date(s):</label></div>
             		<div class="cell">
-            			<g:each in="${castingRoleInstance?.callbackDates}" var="d">
+            			<g:each in="${castingRoleInstance?.callbackDates?.sort()}" var="d">
             			<span class="property-value"><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
             			</g:each>            			
             		</div>
@@ -61,7 +61,7 @@
              	<div class="row wardropedate">
             		<div class="cell"><label>Wardrope Date(s):</label></div>
             		<div class="cell">
-            			<g:each in="${castingRoleInstance?.wardropeDates}" var="d">
+            			<g:each in="${castingRoleInstance?.wardropeDates?.sort()}" var="d">
             			<span class="property-value"><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
             			</g:each>            			
             		</div>
@@ -69,7 +69,7 @@
              	<div class="row shootdates">
             		<div class="cell"><label>Shoot Date(s):</label></div>
             		<div class="cell">
-            			<g:each in="${castingRoleInstance?.shootDates}" var="d">
+            			<g:each in="${castingRoleInstance?.shootDates?.sort()}" var="d">
             			<span class="property-value"><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
             			</g:each>            			
             		</div>

@@ -3,7 +3,7 @@ package com.cland.casting
 import org.springframework.dao.DataIntegrityViolationException
 
 class ProductionController {
-
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -47,7 +47,11 @@ class ProductionController {
 		def auditionProfiles = productionInstance?.profiles //?.findAll{it.isShortlist}
 		def shortlistProfiles = productionInstance?.profiles?.findAll{it.isShortlist}
 		def finalProfiles = productionInstance?.profiles?.findAll{it?.outcome?.equalsIgnoreCase("selected")}
-        [productionInstance: productionInstance,auditionProfiles:auditionProfiles,shortlistProfiles:shortlistProfiles,finalProfiles:finalProfiles, isEditing:false, isNew:false]
+		
+		def productionDates = castingApiService.getProductionDates(productionInstance)
+		
+		
+        [productionInstance: productionInstance,auditionProfiles:auditionProfiles,shortlistProfiles:shortlistProfiles,finalProfiles:finalProfiles,productionDates:productionDates, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
@@ -82,6 +86,10 @@ class ProductionController {
         productionInstance.properties = params
 		bindData(productionInstance, params, [exclude: 'shootDate'])
 		bindData(productionInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
+		bindData(productionInstance, params, [exclude: 'startDate'])
+		bindData(productionInstance, ['startDate': params.date('startDate', ['dd-MMM-yyyy'])], [include: 'startDate'])
+		bindData(productionInstance, params, [exclude: 'endDate'])
+		bindData(productionInstance, ['endDate': params.date('endDate', ['dd-MMM-yyyy'])], [include: 'endDate'])
 		// remove deleted entities. This relies on the cascade:"all-delete-orphan" setting in the respective Entity.
 		productionInstance.roles.removeAll{ it.deleted }
 		productionInstance.categories.removeAll{ it.deleted }

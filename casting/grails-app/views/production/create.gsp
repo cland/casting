@@ -48,11 +48,8 @@
 // when the page has finished loading.. execute the follow
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
-	$(".datepick").multiDatesPicker({
-		dateFormat: "dd-M-yy",
-		beforeShowDay: $.datepicker.noWeekends,
-		maxPicks: 1		
-	});
+	cland_datepickers.init_datepicker_single_future("#start-date","dd-M-yy");
+	cland_datepickers.init_datepicker_single_future("#end-date","dd-M-yy");
 });  //end method ready(...)
 
 </script>		

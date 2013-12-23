@@ -36,8 +36,10 @@ var cland_datepickers = {
 			$("#" + altfield_id).attr("value","")
 		},
 		init_datepicker : function initDatePicker(picker_id,altfield_id){
-			var datelist = $("#" + altfield_id).attr("value")
-			$("#" + picker_id).multiDatesPicker({
+			var el = $("#" + picker_id)
+			var altEl = $("#" + altfield_id)
+			var datelist = altEl.attr("value")
+			el.multiDatesPicker({
 				dateFormat: "yy-mm-dd",
 				altField: '#' + altfield_id,			
 				altFormat:"yy-mm-dd",
@@ -46,11 +48,26 @@ var cland_datepickers = {
 				//beforeShowDay: $.datepicker.noWeekends
 				//maxPicks: 1		
 			});
-			//alert(datelist)
 			if(datelist != "") {
-				$("#" + altfield_id).attr("value",datelist)
+				altEl.attr("value",datelist)
 				datelist = datelist.split(",");			
-				$("#" + picker_id).multiDatesPicker('addDates',datelist);
+				el.multiDatesPicker('addDates',datelist);
+			}	
+		},
+		init_datepicker_single_future : function initDatePickerSingleFuture(picker_id,fmt){
+			var el = $(picker_id)
+			var datelist = el.attr("value")
+			$(picker_id).multiDatesPicker({
+				dateFormat: fmt,
+				minDate:"+0",
+				maxDate:"+3M +5D",
+				maxPicks: 1
+			});
+
+			if(datelist != "") {
+				el.attr("value",datelist)
+				datelist = datelist.split(",");			
+				el.multiDatesPicker('addDates',datelist);
 			}	
 		}
 } //end cland_datepicker

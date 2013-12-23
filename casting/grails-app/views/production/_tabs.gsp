@@ -19,42 +19,72 @@
 				${productionInstance?.name}
 				
 			</div>
-			<div class="cell"><label for="status"><g:message code="production.status.label" default="Status" /><span class="required-indicator">*</span></label></div>
+			<div class="cell"><label for="status"><g:message code="production.status.label" default="Status" /></label></div>
 			<div class="cell">
-					${productionInstance?.status?.name()}
+					${productionInstance?.status?.getValue()}
 			</div>
 		</div>
 		<div class="row">
-			<div class="cell"><label for="client"><g:message code="production.client.label" default="Production company" /><span class="required-indicator">*</span></label></div>
+			<div class="cell"><label for="client"><g:message code="production.client.label" default="Production company" /></label></div>
 			<div class="cell">
 				${productionInstance?.client}
 			</div>	
-			<div class="cell">Casting dates</div>
-			<div class="cell"></div>
+			<div class="cell"><label for="startDate"><g:message code="production.startDate.label" default="Start Date" /></label>
+			</div>
+			<div class="cell">
+				${productionInstance?.startDate?.format('dd-MMM-yyyy')}		
+			</div>
 		</div>
 		<div class="row">
 			<div class="cell"><label for="name"><g:message code="production.producer.label" default="Producer" /></label></div>
 			<div class="cell">
 				${productionInstance?.producer}
 			</div>
-			<div class="cell"><label for="shootDate"><g:message code="production.shootDate.label" default="Shoot Date/s" />	<span class="required-indicator">*</span></label>
+			<div class="cell"><label for="endDate"><g:message code="production.endDate.label" default="End Date" /></label>
 			</div>
 			<div class="cell">
-				${productionInstance?.shootDate?.format('dd-MMM-yyyy')}		
+				${productionInstance?.endDate?.format('dd-MMM-yyyy')}		
 			</div>			
 		</div>
 		<div class="row">
-			<div class="cell"><label for="address"><g:message code="production.address.label" default="Address" /></label></div>
+			<div class="cell"><label for="address"><g:message code="production.address.label" default="Casting Address" /></label></div>
 			<div class="cell">
 				${productionInstance?.address}		
 			</div>
-			<div class="cell">Callback wardrobe</div>
+			<div class="cell"></div>
 			<div class="cell"></div>
 		</div>
 	</div>
 </div>
+	<div id="role-dates-summary" class="role-userview-section">
+		<table>
+     		<tr><th>Audition Date(s)</th><th>Callback Date(s)</th><th>Wardrope Date(s)</th><th>Shoot Date(s)</th></tr>
+     		<tr>
+     			<td class="td-audition-dates">
+      				<g:each in="${productionDates?.auditionDates}" var="d">
+	           			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+	           		</g:each>
+				</td>
+     			<td class="td-callback-dates">
+      				<g:each in="${productionDates?.callbackDates}" var="d">
+	           			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+	           		</g:each>		       					
+				</td>
+     			<td  class="td-wardrope-dates">  					
+     				<g:each in="${productionDates?.wardropeDates}" var="d">
+	           			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+	           		</g:each>
+           		</td>
+     			<td  class="td-shoot-dates">
+      				<g:each in="${productionDates?.shootDates}" var="d">
+	           			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
+	           		</g:each>
+     			</td>
+     		</tr>
+        </table>
+	</div>
 </fieldset>
-<br/>
+
 <fieldset><legend>Usage - Package Deal</legend>
 	<div class="production-usage">
 		<div class="production-data-table">
@@ -79,26 +109,22 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="cell"><label for="feeNote"><g:message code="default.feenotes.label" default="Fee Notes" /></label></div>
+				<div class="cell">
+					${productionInstance?.feeNotes}	
+				</div>			
 				<div class="cell"><label for="exclusions"><g:message code="production.exclusions.label" default="Exclusions" /></label></div>
 				<div class="cell">
 					${productionInstance?.exclusions}
 				</div>
-				<div class="cell"></div>
-				<div class="cell">
-					
-				</div>
 			</div>			
 			<div class="row">
-				<div class="cell"><label for="feeNote"><g:message code="default.feenotes.label" default="Fee Notes" /></label></div>
-				<div class="cell">
-					${productionInstance?.feeNotes}	
-				</div>
+
 			</div>		
 		</div>
 	</div>
 </fieldset>
-<br/>
-<br/>
+
 <fieldset><legend>Roles and Categories</legend>
 <g:render template="rolesTable"/>
 <br/>
@@ -117,12 +143,16 @@
 		</div>
 	</div>
 </fieldset>
-<br/>
+
 <fieldset><legend>Who can access this production</legend>
 <span id="agencyACL-label" class="property-label"><g:message code="production.agencyacl.label" default="Agency access list" /></span>
 		<g:if test="${productionInstance?.agencyACL}">								
+		<br/>
 			<g:each in="${productionInstance.agencyACL}" var="p">
-			<span class="property-value" aria-labelledby="agencyACL-label"><g:link controller="agency" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
+			<span class="property-value" aria-labelledby="agencyACL-label">
+				<span class="r-arrow"></span>
+				<g:link controller="agency" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link><br/>
+			</span>
 			</g:each>		
 		</g:if>
 		<g:else><span class="property-value">All</span></g:else>

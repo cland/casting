@@ -835,3 +835,9 @@ form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;paddi
 .role-userview-section table tbody tr td.td-callback-dates,
 .role-userview-section table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;}
 .role-userview-section table tbody tr td.td-shoot-dates {border-right:none;}
+#role-dates-summary table th, #role-dates-summary table td { font-size: 0.9em;}
+#role-dates-summary table tbody tr td.td-audition-dates,
+#role-dates-summary table tbody tr td.td-wardrope-dates,
+#role-dates-summary table tbody tr td.td-callback-dates,
+#role-dates-summary table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;vertical-align:top;}
+#role-dates-summary table tbody tr td.td-audition-dates {border-left:solid 1px #ccc;}

@@ -4,6 +4,8 @@ import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 import org.codehaus.groovy.grails.plugins.springsecurity.*
 import org.grails.datastore.gorm.finders.MethodExpression.IsEmpty;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.ForEach;
+
 class CastingApiService {
 	static transactional = false
 	def springSecurityService
@@ -60,6 +62,29 @@ class CastingApiService {
 			productionList.addAll(tmpList)
 		}
 		return productionList.sort{it.name} //.reverse() // Production.list() //
+	} //end function
+	
+	/*
+	 * Given a production, it computes all the key dates defined on the roles if any
+	 * These are: AUDITION_DATES, CALLBACK_DATES, WARDROPE_DATES, SHOOT_DATES
+	 * Returns: an array of unique dates as defined by all the roles for the production
+	 */
+	def getProductionDates(Production production){
+		List auditionDates = []
+		List callbackDates = []
+		List wardropeDates = []
+		List shootDates = []
+		//loop through the available roles
+		production?.roles?.each {role->
+			auditionDates.addAll(role?.auditionDates)
+			callbackDates.addAll(role?.callbackDates)
+			wardropeDates.addAll(role?.wardropeDates)
+			shootDates.addAll(role?.shootDates)
+		}
+		return [auditionDates:auditionDates?.sort()?.unique(),
+			callbackDates:callbackDates?.sort()?.unique(),
+			wardropeDates:wardropeDates?.sort()?.unique(),
+			shootDates:shootDates?.sort()?.unique()]
 	} //end function
 	
 	def getCandidates(long productionId, long agencyId, int offset, int max){

@@ -14,7 +14,8 @@ class Production {
 	List categories
 	List portfolios
 	Date shootDate
-	List <Date> auditionDates
+	Date startDate
+	Date endDate
 	ProductionStatus status
 	
 	String producer
@@ -57,6 +58,9 @@ class Production {
 		feeNotes(nullable:true)
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
+		shootDate (nullable:true)
+		startDate (nullable:true)
+		endDate (nullable:true)
 	}
 
 	def beforeInsert = { 
