@@ -715,6 +715,7 @@ p {
 	margin: 10px 0 5px 0;
 	font-size: 0.9em;
 }
+.cast-list fieldset legend {font-size:1.1em;}
 .headshot-row {
     clear:both;
     page-break-inside: avoid;
@@ -804,8 +805,10 @@ p {
     float:right;
     width:25%;
 }
+
+.ui-tabs .ui-tabs-panel {padding:0.5em !important;}
 .production fieldset {padding:1em;}
-.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table,production-data-table{display:table;}
+.data-table,.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table,production-data-table{display:table;width:100%;}
 .row{display:table-row;}
 .row:hover, .row:hover label{background:#999;color:#fff !important;}
 .cell{display:table-cell; padding:4px;}
@@ -841,3 +844,12 @@ form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;paddi
 #role-dates-summary table tbody tr td.td-callback-dates,
 #role-dates-summary table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;vertical-align:top;}
 #role-dates-summary table tbody tr td.td-audition-dates {border-left:solid 1px #ccc;}
+.search-filter-container {font-size:0.9em;}
+.search-filter-container label {font-weight:bold;color:#000;}
+.search-filter-container .filter-button {display:none;}
+.search-filter-container .search-filter {border:solid 1px #ccc; padding:10px;}
+.cell.group {background:#F9DCB1;}
+.row.group .cell {border-bottom:solid 1px #F9DCB1;font-size:0.9em;}
+.row.group .cell.group {font-size:0.8em;}
+.hide {display:none;}
+.cell input.submit {background:#EB8F2A; color:#fff;font-weight:bold;}

@@ -72,8 +72,28 @@ $(document).ready(function() {
 					});
 				}
 		});
-	
 });  //end method ready(...)
+function filterDialog(){
+  	 var $dialog = $('<div></div>')
+
+             .load('../dialogfilter/'+cland_params.this_id)
+             .dialog({
+                 autoOpen: false,
+                 width:450,
+                 beforeClose: function(event,ui){
+                 	
+                 },
+                 close: function(event){     
+                 	loadProfiles()
+                 },
+                 title: 'Profile Filter'                         
+             });
+                 
+    $dialog.dialog('open');
+  }
+function loadProfiles(){
+ 
+}
 
 </script>
 	</body>

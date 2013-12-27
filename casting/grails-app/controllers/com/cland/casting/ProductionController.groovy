@@ -121,4 +121,26 @@ class ProductionController {
             redirect(action: "show", id: id)
         }
     }
-}
+	
+	/**
+	 * Custom functions
+	 */
+
+	def filter(){	
+		def productionId = params?.production?.id?.toLong()
+		int offset = 0
+		int max = 10
+		def viewas = params?.viewas 
+		
+		def profiles = castingApiService.doStage1Filter(productionId, params)
+		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset]
+	} //end 
+	
+	
+	
+	def dialogfilter(Long id){
+		def productionInstance = Production.get(id)
+		//get all the filter params and tab where we are coming from
+		[productionInstance: productionInstance]
+	}
+} //End class

@@ -3,7 +3,7 @@
 <g:set var="data_table" value=""/>
 <g:set var="tmp" value=""/>
 <g:set var="count_per_row" value="${3 }"/>
-<g:set var="total_count" value="${profileList.size() }"/>
+<g:set var="total_count" value="${profileList?.size() }"/>
 <g:each in="${profileList }"  var="profile" status="i">
 	<g:set var="entry">
 		<div id="entry-${profile?.id }" class="mugshot">

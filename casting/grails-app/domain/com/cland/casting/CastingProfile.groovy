@@ -26,7 +26,7 @@ class CastingProfile {
 	Date auditionDate
 	Date callbackDate
 	Date wardropeDate
-	Date shooteDate
+	Date shootDate
 	
 	String outcome	//TODO: Final outcome. Remove and replaced by isConfirmed flag.
 	Integer round
@@ -36,6 +36,7 @@ class CastingProfile {
 	int age		//computed value at the time of this casting profile
 
 	List ratings
+	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName','gender','race','email','contactNo' ]
 	static hasMany = [ratings:Rating,roles:CastingRole,categories:CastingCategory]
 	static hasOne = [videos:VideoSet,pictures:PictureSet]
 	static belongsTo = [production:Production]
@@ -79,6 +80,31 @@ class CastingProfile {
 	}
 	def onLoad = {
 		// your code goes here
+	}
+	public getShortDetails(){
+		canditate?.person?.shortDetails
+	}
+	public String getMediumDetails(){
+		canditate?.person?.mediumDetails
+	}
+	public String getLastFirstName(String s = " "){
+		canditate?.person?.lastFirstName
+	}
+	public String getFirstLastName(String s = " "){
+		canditate?.person?.firstLastName
+	}
+
+	public String getGender(){
+		canditate?.person?.gender
+	}
+	public String getRace(){
+		canditate?.person?.race
+	}
+	public String getEmail(){
+		canditate?.person?.email
+	}
+	public String getContactNo(){
+		canditate?.person?.contactNo
 	}
 	String getName(){
 		"${canditate?.person?.toString()}"

@@ -38,7 +38,7 @@ class User {
 	 Organisation company
 	 String status
 	// Candidate candidate
-	static transients = [ 'mediumDetails','shortDetails','firstLastName' ]
+	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName' ]
 	static hasOne = [candidate:Candidate] 
 	static attachmentable = true
 	static constraints = {

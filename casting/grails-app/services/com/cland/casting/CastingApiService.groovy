@@ -248,6 +248,112 @@ class CastingApiService {
 		if(user) return user.getFirstLastName()
 		return ""
 	}
+	
+// ***** FILTER FUNCTIONS ************** //
+	
+	def doStage1Filter(Long productionId,Map params){
+		def sortby = params?.sortby
+		def user = getCurrentUser()
+		def agencyId = 0
+		
+		//Auditions stage
+		def profiles = CastingProfile.withCriteria {
+			if(isAgent()){
+				//then we only show them their profiles
+				def agency = getAgencyForUser(user.id) //user.id				
+				if(agency) agencyId = agency[0].id
+				canditate {
+					createAlias("canditate.agency",'agency')
+					eq("agency.id",agencyId.toLong())				
+				}			
+			}
+			roles{
+				if(params?.filter_roles_stage1) 'in'("id",params?.filter_roles_stage1*.toLong())
+			}			
+			categories{
+				if(params?.filter_categories_stage1) 'in'("id",params?.filter_categories_stage1*.toLong())
+			}
+			//STAGE 1
+			params?.filter_invited_stage1?.with{
+				if(!equalsIgnoreCase("any")){	eq("isInvited",equalsIgnoreCase("yes")) }
+			}
+			params?.filter_attended_stage1?.with{
+				if(!equalsIgnoreCase("any")) eq("isAuditionAttended",equalsIgnoreCase("yes"))
+			}
+			params?.filter_available_stage1?.with{
+				if(!equalsIgnoreCase("any")) eq("isAuditionAvailable",equalsIgnoreCase("yes"))
+			}
+			params?.filter_shortlist_stage1?.with{
+				if(!equalsIgnoreCase("any")) eq("isShortlist",equalsIgnoreCase("yes"))
+			}
+			params?.filter_confirmed_stage1?.with{
+				if(!equalsIgnoreCase("any")) eq("isConfirmed",equalsIgnoreCase("yes"))
+			}
+			//STAGE 2
+			params?.filter_callback_stage2?.with{
+				if(!equalsIgnoreCase("any")){	eq("isCallbackAvailable",equalsIgnoreCase("yes")) }
+			}
+			params?.filter_callback_attended_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isAuditionAttended",equalsIgnoreCase("yes"))
+			}
+			params?.filter_wardrope_attended_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardropeAttended",equalsIgnoreCase("yes"))
+			}
+			params?.filter_wardrope_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardropeAvailable",equalsIgnoreCase("yes"))
+			}
+			params?.filter_shoot_stage2?.with{
+				if(!equalsIgnoreCase("any")){	eq("isRoleAvailable",equalsIgnoreCase("yes")) }
+			}
+			params?.filter_shoot_attended_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isRoleAttended",equalsIgnoreCase("yes"))
+			}
+			params?.filter_shortlist_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isShortlist",equalsIgnoreCase("yes"))
+			}
+			params?.filter_confirmed_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isConfirmed",equalsIgnoreCase("yes"))
+			}
+			//STAGE 3
+			params?.filter_callback_stage3?.with{
+				if(!equalsIgnoreCase("any")){	eq("isCallbackAvailable",equalsIgnoreCase("yes")) }
+			}
+			params?.filter_callback_attended_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isAuditionAttended",equalsIgnoreCase("yes"))
+			}
+			params?.filter_wardrope_attended_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardropeAttended",equalsIgnoreCase("yes"))
+			}
+			params?.filter_wardrope_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardropeAvailable",equalsIgnoreCase("yes"))
+			}
+			params?.filter_shoot_stage3?.with{
+				if(!equalsIgnoreCase("any")){	eq("isRoleAvailable",equalsIgnoreCase("yes")) }
+			}
+			params?.filter_shoot_attended_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isRoleAttended",equalsIgnoreCase("yes"))
+			}
+			params?.filter_shortlist_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isShortlist",equalsIgnoreCase("yes"))
+			}
+			params?.filter_confirmed_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isConfirmed",equalsIgnoreCase("yes"))
+			}
+			production{
+				if(productionId > 0){
+					idEq(productionId)
+				}
+			}
+		}.unique().with{				
+				sort{ it?.castNo	
+					if(params?.sortby?.equalsIgnoreCase("castname"))it?.firstLastName
+					else if(params?.sortby?.equalsIgnoreCase("castno")){ it?.castNo	}
+					else if(params?.sortby?.equalsIgnoreCase("castdate")) it?.auditionDate				
+				}
+			}
+		
+		return profiles
+	} //end doStage1Filter
 	// example criteria search
 	//		def resultSummaryInstanceList = ResultSummary.createCriteria().list(offset: offset, max: max) {
 	//			createAlias('register','reg')

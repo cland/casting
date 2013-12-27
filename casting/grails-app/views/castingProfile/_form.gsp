@@ -35,7 +35,7 @@
 		<span class="required-indicator">*</span>	
 	</label>
 	
-	<g:select id="roles" name="roles" from="${productionInstance?.roles}" optionKey="id" required="" value="${castingProfileInstance?.roles?.id}" class="many-to-one" required="" noSelection="['': '-- select one --']"/>
+	<g:select multiple="false" id="roles" name="roles" from="${productionInstance?.roles}" optionKey="id" required="" value="${castingProfileInstance?.roles?.id}" class="many-to-one" noSelection="['': '-- select one --']"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'categories', 'error')} required">
 	<label for="categories">
