@@ -1,5 +1,9 @@
-		<fieldset><legend>Search Filter and Display Options</legend>
-		<g:formRemote name="stage1_filter_form" url="[controller:'production',action:'filter']" update="stage1-cast-list">
+<%@ page import="com.cland.casting.SystemRoles" %>		
+<fieldset><legend>Search Filter and Display Options</legend>
+		<g:formRemote name="stage1_filter_form" url="[controller:'production',action:'filter']" update="stage1-cast-list" onSuccess="onSuccessFilterStage1CallbackHander(data,textStatus)"
+			onLoading="onLoading()"
+			onComplete="onComplete()"
+			onFailure="onFailure(data,textStatus)">
 			<g:hiddenField name="production.id" value="${productionInstance?.id }"/>
 			<div class="search-filter">
 				<div class="filter-button float-right"><a href="#" onclick="filterDialog();return false;">Update Filter</a></div>
@@ -63,7 +67,7 @@
 						</div>
 						
 						<div class="row group hide">
-							<div class="cell group"><label>WARDROPE:</label></div>
+							<div class="cell group"><label>WARDROBE:</label></div>
 							<div class="cell"><span class="r-arrow"></span> <label>Available:</label></div>
 							<div class="cell">
 								<g:radioGroup name="filter_wardrope_stage1" values="['yes','no','any']" labels="['yes','no','any']" >
@@ -106,21 +110,17 @@
 					<div class="row">
 						<div class="cell"><label for="">View as:</label></div>
 						<div class="cell">
-							<select name="viewas" id="viewas">
-								<option value="headshots">Headshots</option>
-								<option value="summary">Summary</option>
-								<option value="Detailed">Detailed</option>
-								<option value="list">List Table</option>
-							</select>
+							<g:select name="viewas" id="viewas_stage1" value="headshots" 
+							from="${['Headshots','Summary','Detailed','List Table'] }" 
+							keys="${['headshots','summary','detailed','list']}"/>														
 						</div>
 						<div class="cell"><label for="">Sort as:</label></div>
 						<div class="cell">
-							<select name="sortby" id="sortby">
-								<option value="castno">Casting Num</option>
-								<option value="castname">Profile Name</option>
-							</select>
+							<g:select name="sortby" id="sortby_stage1" value="castno" 
+							from="${['Profile Name','Cast No'] }" 
+							keys="${['castname','castno']}"/>
 						</div>
-						<div class="cell"> <g:submitButton name="Submit" id="submit_stage1" class="submit"/></div>
+						<div class="cell"> <g:submitButton name="Submit" id="submit_stage1" class="submit action_wait"/></div>
 					</div>
 				</div>	
 			</div>

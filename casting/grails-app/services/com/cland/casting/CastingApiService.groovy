@@ -251,7 +251,7 @@ class CastingApiService {
 	
 // ***** FILTER FUNCTIONS ************** //
 	
-	def doStage1Filter(Long productionId,Map params){
+	def profileFilter(Long productionId,Map params){
 		def sortby = params?.sortby
 		def user = getCurrentUser()
 		def agencyId = 0

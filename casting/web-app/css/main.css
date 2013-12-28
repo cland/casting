@@ -40,7 +40,7 @@ body {
 	background: #ffffff;
 	color: #333333;
 	margin: 0 auto;
-	max-width: 1080px;
+	max-width: 1200px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: 0 0 0.3em #255b17;
 	-webkit-box-shadow: 0 0 0.3em #255b17;
@@ -96,7 +96,7 @@ img {
 
 .content {
 	float: right;
-    width: 75%;
+    width: 77%;
     padding-right:5px;
 }
 
@@ -784,7 +784,7 @@ p {
     width:100%;
     border:solid 1px #ccc;
 }
-.detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#999;}
+.detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#333;}
 .detailed-row .cast-details {
     float: left;
     border: none 1px #0e8523;
@@ -851,5 +851,5 @@ form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;paddi
 .cell.group {background:#F9DCB1;}
 .row.group .cell {border-bottom:solid 1px #F9DCB1;font-size:0.9em;}
 .row.group .cell.group {font-size:0.8em;}
-.hide {display:none;}
+.hide, .wait {display:none;padding:10px; border:solid 1px red;text-align:center;font-weight:bold;font-size:1.5em;color:#EB8F2A;}
 .cell input.submit {background:#EB8F2A; color:#fff;font-weight:bold;}

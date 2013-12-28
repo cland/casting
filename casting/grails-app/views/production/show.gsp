@@ -64,6 +64,7 @@ $(document).ready(function() {
 				},
 				show: function(event,ui){
 					//on every tabs clicked
+					stageDisplay(getCurrentTabText())
 				},
 				beforeLoad : function(event, ui) {
 					ui.jqXHR.error(function() {
@@ -73,6 +74,57 @@ $(document).ready(function() {
 				}
 		});
 });  //end method ready(...)
+function onSuccessFilterStage1CallbackHander(data, textStatus){
+	stageDisplay(getCurrentTabText())
+	$("#hidden_viewas_stage1").attr("value",$("#viewas_stage1").val())
+	$("#hidden_sortby_stage1").attr("value",$("#sortby_stage1").val())
+}
+function onSuccessFilterStage2CallbackHander(data, textStatus){
+	stageDisplay(getCurrentTabText())
+}
+function onSuccessFilterStage3CallbackHander(data, textStatus){
+	stageDisplay(getCurrentTabText())
+}
+function onSuccessStage1CallbackHander(data,textStatus){
+	stageDisplay(getCurrentTabText())
+}
+function onLoading(){
+	$(".wait").show()
+	$(".action_wait").attr("disabled",true)
+}
+function onComplete(){
+	$(".wait").hide()
+	$(".action_wait").attr("disabled",false)
+}
+function onFailure(data,textStatus){
+	alert("Operation failed with status '" + textStatus + "'")
+}
+
+function getCurrentTabText(){
+	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected").text()
+}
+function getCurrentTabLink(){
+	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected a").attr("href")
+}
+function stageDisplay(curtab){
+
+	if(curtab.toLowerCase() == "auditions"){		
+		$(".vstage2").hide();
+		$(".vstage3").hide();
+		$(".vstage1").show();
+	}else if(curtab.toLowerCase() == "shortlist"){
+	
+		$(".vstage1").hide();		
+		$(".vstage3").hide();
+		$(".vstage2").show();
+	}else if(curtab.toLowerCase() == "final cast"){
+		$(".vstage1").hide();		
+		$(".vstage2").hide();
+		$(".vstage3").show();
+	}
+} // end function
+
+
 function filterDialog(){
   	 var $dialog = $('<div></div>')
 

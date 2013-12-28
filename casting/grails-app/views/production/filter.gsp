@@ -1,13 +1,13 @@
 
 
-<g:if test="${viewas.equalsIgnoreCase("detailed") }">
+<g:if test="${viewas?.equalsIgnoreCase("detailed") }">
 	<g:render template="../layouts/profile_detailed" collection="${profileList }" var="profile"/>
 </g:if>
-<g:elseif test="${viewas.equalsIgnoreCase("summary") }">
+<g:elseif test="${viewas?.equalsIgnoreCase("summary") }">
 	<g:render template="../layouts/profile_summary" collection="${profileList }" var="profile"/>
 </g:elseif>
 
-<g:elseif test="${viewas.equalsIgnoreCase("list") }">
+<g:elseif test="${viewas?.equalsIgnoreCase("list") }">
 	<table>
 		<thead><tr>
 			<th class="cell head">Cast No.</th>

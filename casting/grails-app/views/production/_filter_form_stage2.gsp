@@ -1,5 +1,8 @@
 		<fieldset><legend>Search Filter and Display Options</legend>
-		<g:formRemote name="stage2_filter_form" url="[controller:'production',action:'filter']" update="stage2-cast-list">
+		<g:formRemote name="stage2_filter_form" url="[controller:'production',action:'filter']" update="stage2-cast-list" onSuccess="onSuccessFilterStage2CallbackHander(data,textStatus)"
+			onLoading="onLoading()"
+			onComplete="onComplete()"
+			onFailure="onFailure(data,textStatus)">
 			<g:hiddenField name="production.id" value="${productionInstance?.id }"/>
 			<g:hiddenField name="filter_shortlist_stage2" value="yes"/>
 			<div class="search-filter">
@@ -39,7 +42,7 @@
 							<div class="cell"></div>
 						</div>
 						<div class="row group">
-							<div class="cell group"><label>WARDROPE:</label></div>
+							<div class="cell group"><label>WARDROBE:</label></div>
 							<div class="cell"><span class="r-arrow"></span> <label>Available:</label></div>
 							<div class="cell">
 								<g:radioGroup name="filter_wardrope_stage2" values="['yes','no','any']" labels="['yes','no','any']" >
@@ -81,21 +84,17 @@
 					<div class="row">
 						<div class="cell"><label for="">View as:</label></div>
 						<div class="cell">
-							<select name="viewas" id="viewas">
-								<option value="headshots">Headshots</option>
-								<option value="summary">Summary</option>
-								<option value="Detailed">Detailed</option>
-								<option value="list">List Table</option>
-							</select>
+							<g:select name="viewas" id=" viewas_stage2" value="summary" 
+							from="${['Headshots','Summary','Detailed','List Table'] }" 
+							keys="${['headshots','summary','detailed','list']}"/>														
 						</div>
 						<div class="cell"><label for="">Sort as:</label></div>
 						<div class="cell">
-							<select name="sortby" id="sortby">
-								<option value="castno">Casting Num</option>
-								<option value="castname">Profile Name</option>
-							</select>
+							<g:select name="sortby" id="sortby_stage2" value="castno" 
+							from="${['Profile Name','Cast No'] }" 
+							keys="${['castname','castno']}"/>
 						</div>
-						<div class="cell"> <g:submitButton name="Submit" id="submit_stage2" class="submit"/></div>
+						<div class="cell"> <g:submitButton name="Submit" id="submit_stage2" class="submit action_wait"/></div>
 					</div>
 				</div>	
 			</div>

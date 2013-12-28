@@ -17,15 +17,15 @@ class CastingProfile {
 	boolean isAuditionAttended  //whether candidate did attend the audition
 	boolean isCallbackAvailable //available for the call back date - Y/N
 	boolean isCallbackAttended	//whether the candidate attended the callback	
-	boolean isWardropeAvailable	//available
-	boolean isWardropeAttended	//
+	boolean isWardrobeAvailable	//available
+	boolean isWardrobeAttended	//
 	boolean isRoleAvailable 	//accepted/confirmed for the job - available Y/N
 	boolean isRoleAttended		//after the production, might want to know if candidate did attend the shoot
 	
 	Date castDate	//TODO: duplicate, same purpose as auditionDate
 	Date auditionDate
 	Date callbackDate
-	Date wardropeDate
+	Date wardrobeDate	//wardropeDate, isWardropeAvailable,isWardropeAttended
 	Date shootDate
 	
 	String outcome	//TODO: Final outcome. Remove and replaced by isConfirmed flag.
@@ -36,7 +36,10 @@ class CastingProfile {
 	int age		//computed value at the time of this casting profile
 
 	List ratings
-	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName','gender','race','email','contactNo' ]
+	static transients = [ 'mediumDetails',
+		'shortDetails','firstLastName','lastFirstName','gender','race','email','contactNo',
+		'wardropeDate', 'isWardropeAvailable','isWardropeAttended','candidate' ]
+	
 	static hasMany = [ratings:Rating,roles:CastingRole,categories:CastingCategory]
 	static hasOne = [videos:VideoSet,pictures:PictureSet]
 	static belongsTo = [production:Production]
@@ -48,7 +51,7 @@ class CastingProfile {
 		comments(nullable:true)		
 		auditionDate(nullable:true)
 		callbackDate(nullable:true)
-		wardropeDate(nullable:true)
+		wardrobeDate(nullable:true)
 		shootDate(nullable:true)
 		castDate(nullable:true)
 		castNo(nullable:true)
@@ -81,7 +84,7 @@ class CastingProfile {
 	def onLoad = {
 		// your code goes here
 	}
-	public getShortDetails(){
+	public String getShortDetails(){
 		canditate?.person?.shortDetails
 	}
 	public String getMediumDetails(){
@@ -106,10 +109,25 @@ class CastingProfile {
 	public String getContactNo(){
 		canditate?.person?.contactNo
 	}
+
 	String getName(){
 		"${canditate?.person?.toString()}"
 	}
 	String toString(){
 		"Cast: ${castNo} - ${canditate?.person?.toString()}"
+	}
+	
+	public Candidate getCandidate(){
+		return canditate
+	}
+	//function to fix the stupid spelling error. to phase out slowly
+	public Date getWardropeDate(){
+		wardrobeDate
+	}
+	public boolean isWardropeAvailable(){
+		isWardrobeAvailable
+	}
+	public boolean isWardropeAttended(){
+		isWardrobeAttended
 	}
 } //end class

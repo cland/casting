@@ -44,7 +44,7 @@ class ProductionController {
             return
         }
 
-		def auditionProfiles = productionInstance?.profiles //?.findAll{it.isShortlist}
+		def auditionProfiles = productionInstance?.profiles?.sort{it.castNo} //?.findAll{it.isShortlist}
 		def shortlistProfiles = productionInstance?.profiles?.findAll{it.isShortlist}
 		def finalProfiles = productionInstance?.profiles?.findAll{it?.outcome?.equalsIgnoreCase("selected")}
 		
@@ -132,11 +132,64 @@ class ProductionController {
 		int max = 10
 		def viewas = params?.viewas 
 		
-		def profiles = castingApiService.doStage1Filter(productionId, params)
+		def profiles = castingApiService.profileFilter(productionId, params)
 		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset]
 	} //end 
 	
-	
+	def update_profiles(){
+		def productionId = params?.production?.id?.toLong()		
+		def viewas = params?.viewas ? params.viewas : "headshots"
+		def sortby = params?.sortby ? params.sortby : "castno"
+		def stage = params?.stage
+
+		//get the list of profiles submitted
+		List profiles = []
+		params?.profiles?.each {entry ->					
+			def tmp = CastingProfile.get(entry.toLong())
+			def values = [:]  //  [:].withDefault { [] }
+			if(tmp){
+				
+				//progress status params
+				def isInvited = params?.boolean("invited_${entry.toLong()}")
+				if(params?.list("invited_${entry.toLong()}")){
+					values += [isInvited:isInvited]
+				}
+				def shortlist = params?.boolean("shortlist_${entry.toLong()}")
+				if(params?.list("shortlist_${entry.toLong()}")){
+					values += [isShortlist:shortlist]
+				}
+				def isConfirmed = params?.boolean("confirmed_${entry.toLong()}")
+				if(params?.list("confirmed_${entry.toLong()}")){
+					values += [isConfirmed:isConfirmed]
+				}
+				//availability params
+				def isAudition = params?.boolean("audition_${entry.toLong()}")
+				if(params?.list("audition_${entry.toLong()}")){
+					values += [isAuditionAvailable:isAudition]
+				}
+				def isCallback = params?.boolean("callback_${entry.toLong()}")
+				if(params?.list("callback_${entry.toLong()}")){
+					values += [isCallbackAvailable:isCallback]
+				}
+				def isWardrobe = params?.boolean("wardrobe_${entry.toLong()}")
+				if(params?.list("wardrobe_${entry.toLong()}")){
+					values += [isWardrobeAvailable:isWardrobe]
+				}
+				def isShoot = params?.boolean("shoot_${entry.toLong()}")
+				if(params?.list("shoot_${entry.toLong()}")){
+					values += [isRoleAvailable:isShoot]
+				}				
+				//save updates
+				tmp.properties = values //[isAuditionAvailable:val]
+				if(!tmp.save(flush:true)){
+					//failed to update profile
+					tmp.errors
+				}
+				profiles.add(tmp)
+			}
+		}  //end for each profile submitted			
+		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset])
+	} //end def update_stage1()
 	
 	def dialogfilter(Long id){
 		def productionInstance = Production.get(id)
