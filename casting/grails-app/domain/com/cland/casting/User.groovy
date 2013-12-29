@@ -38,7 +38,7 @@ class User {
 	 Organisation company
 	 String status
 	// Candidate candidate
-	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName' ]
+	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName','age' ]
 	static hasOne = [candidate:Candidate] 
 	static attachmentable = true
 	static constraints = {
@@ -116,7 +116,24 @@ class User {
 	String toString(){
 		"${firstName} ${lastName}"
 	}
-	
+
+	public getAge(){
+		if(dateOfBirth == null){
+			return 0
+		}
+		def now = new GregorianCalendar()
+		Integer birthMonth = dateOfBirth.getAt(Calendar.MONTH)
+		Integer birthYear = dateOfBirth.getAt(Calendar.YEAR)
+		Integer birthDate = dateOfBirth.getAt(Calendar.DATE)
+		Integer yearNow = now.get(Calendar.YEAR)
+
+		def offset = new GregorianCalendar(
+				yearNow,
+				birthMonth-1,
+				birthDate)
+		return (yearNow - birthYear - (offset > now ? 1 : 0))
+	}
+
 	public enum PhoneType{
 		H("Home"),
 		M("Mobile"),

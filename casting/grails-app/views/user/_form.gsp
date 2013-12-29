@@ -5,7 +5,7 @@
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required">
 	<label for="username">
 		<g:message code="user.username.label" default="Username" />
-		<span class="required-indicator">*</span>
+		
 	</label>
 	<g:textField name="username" value="${userInstance?.username}"/>
 </div>
@@ -13,7 +13,7 @@
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
 	<label for="password">
 		<g:message code="user.password.label" default="Password" />
-		<span class="required-indicator">*</span>
+		
 	</label>
 	<g:passwordField name="password" value="${userInstance?.password}"/>
 </div>
@@ -69,7 +69,7 @@
 		<g:message code="user.dateOfBirth.label" default="Date Of Birth" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="dateOfBirth" precision="day"  value="${userInstance?.dateOfBirth}"  />
+	<g:textField name="dateOfBirth" class="datepick_single_past" id="birth-date" value="${userInstance?.dateOfBirth?.format('dd-MMM-yyyy')}"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">
 	<label for="enabled">

@@ -38,7 +38,7 @@ class CastingProfile {
 	List ratings
 	static transients = [ 'mediumDetails',
 		'shortDetails','firstLastName','lastFirstName','gender','race','email','contactNo',
-		'wardropeDate', 'isWardropeAvailable','isWardropeAttended','candidate' ]
+		'wardropeDate', 'isWardropeAvailable','isWardropeAttended','candidate','currentAge' ]
 	
 	static hasMany = [ratings:Rating,roles:CastingRole,categories:CastingCategory]
 	static hasOne = [videos:VideoSet,pictures:PictureSet]
@@ -68,14 +68,18 @@ class CastingProfile {
 		averating = 0.0 //TODO: Calculate the average ratings
 	}
 	void computeAge(){
-		age = 18 //TODO: compute the age here
+		if(age == null || age <= 0){
+			age = getCanditate()?.person?.age			
+		}		
 	}
 	def beforeInsert = {
 		createdBy = castingApiService.getCurrentUserId()
+		computeAge()
 		computeAverageRating()
 	}
 	def beforeUpdate = {
 		lastUpdatedBy = castingApiService.getCurrentUserId()
+		computeAge()
 		computeAverageRating()
 	}
 	def beforeDelete = {
@@ -84,37 +88,40 @@ class CastingProfile {
 	def onLoad = {
 		// your code goes here
 	}
+	public getCurrentAge(){
+		candidate?.person?.age
+	}
 	public String getShortDetails(){
-		canditate?.person?.shortDetails
+		candidate?.person?.shortDetails
 	}
 	public String getMediumDetails(){
-		canditate?.person?.mediumDetails
+		candidate?.person?.mediumDetails
 	}
 	public String getLastFirstName(String s = " "){
-		canditate?.person?.lastFirstName
+		candidate?.person?.lastFirstName
 	}
 	public String getFirstLastName(String s = " "){
-		canditate?.person?.firstLastName
+		candidate?.person?.firstLastName
 	}
 
 	public String getGender(){
-		canditate?.person?.gender
+		candidate?.person?.gender
 	}
 	public String getRace(){
-		canditate?.person?.race
+		candidate?.person?.race
 	}
 	public String getEmail(){
-		canditate?.person?.email
+		candidate?.person?.email
 	}
 	public String getContactNo(){
-		canditate?.person?.contactNo
+		candidate?.person?.contactNo
 	}
 
 	String getName(){
-		"${canditate?.person?.toString()}"
+		"${candidate?.person?.toString()}"
 	}
 	String toString(){
-		"Cast: ${castNo} - ${canditate?.person?.toString()}"
+		"Cast: ${castNo} - ${candidate?.person?.toString()}"
 	}
 	
 	public Candidate getCandidate(){

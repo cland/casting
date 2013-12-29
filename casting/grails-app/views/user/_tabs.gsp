@@ -77,7 +77,7 @@
 				<li class="fieldcontain">
 					<span id="dateOfBirth-label" class="property-label"><g:message code="user.dateOfBirth.label" default="Date Of Birth" /></span>
 					
-						<span class="property-value" aria-labelledby="dateOfBirth-label"><g:formatDate date="${userInstance?.dateOfBirth}" /></span>
+						<span class="property-value" aria-labelledby="dateOfBirth-label"><g:formatDate date="${userInstance?.dateOfBirth}" format="dd-MMM-yyyy" /></span>
 					
 				</li>
 				</g:if>
@@ -181,14 +181,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.dateCreated}">
-				<li class="fieldcontain">
-					<span id="dateCreated-label" class="property-label"><g:message code="user.dateCreated.label" default="Date Created" /></span>
-					
-						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${userInstance?.dateCreated}" /></span>
-					
-				</li>
-				</g:if>
 			</ol>
 			<fieldset><legend>Login Details</legend>
 			<ol  class="property-list user">
@@ -254,6 +246,18 @@
 				<br/>
 			</g:each>
 
+			</fieldset>
+			<fieldset><legend>Creation Details</legend>
+			<ol>
+				<g:if test="${userInstance?.dateCreated}">
+				<li class="fieldcontain">
+					<span id="dateCreated-label" class="property-label"><g:message code="user.dateCreated.label" default="Date Created" /></span>
+					
+						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${userInstance?.dateCreated}" format="dd-MMM-yyyy" /></span>
+					
+				</li>
+				</g:if>			
+			</ol>
 			</fieldset>
 	</div>
 	<div id="tab-attachments">

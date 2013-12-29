@@ -23,6 +23,8 @@ class UserController {
 
     def save() {
         def userInstance = new User(params)
+		bindData(userInstance, params, [exclude: 'dateOfBirth'])
+		bindData(userInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
         if (!userInstance.save(flush: true)) {
             render(view: "create", model: [userInstance: userInstance])
             return
@@ -84,6 +86,8 @@ class UserController {
         }
 
         userInstance.properties = params
+		bindData(userInstance, params, [exclude: 'dateOfBirth'])
+		bindData(userInstance, ['dateOfBirth': params.date('dateOfBirth', ['dd-MMM-yyyy'])], [include: 'dateOfBirth'])
 
         if (!userInstance.save(flush: true)) {
             render(view: "edit", model: [userInstance: userInstance])

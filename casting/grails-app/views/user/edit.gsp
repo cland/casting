@@ -47,9 +47,7 @@
 <script>
   $(document).ready(function() {
 	  $("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-	 // $("#add_org").live("click",function(){
-	//	  addOrganisation();
-	//	});
+	  cland_datepickers.init_datepicker_single_dob("#birth-date","dd-M-yy");
   });
   function after(res){
 	  alert (res)

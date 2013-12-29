@@ -69,5 +69,35 @@ var cland_datepickers = {
 				datelist = datelist.split(",");			
 				el.multiDatesPicker('addDates',datelist);
 			}	
+		},init_datepicker_single_past : function initDatePickerSinglePast(picker_id,fmt){
+			var el = $(picker_id)
+			var datelist = el.attr("value")
+			$(picker_id).multiDatesPicker({
+				dateFormat: fmt,
+				maxDate:"+0",
+				maxPicks: 1
+			});
+
+			if(datelist != "") {
+				el.attr("value",datelist)
+				datelist = datelist.split(",");			
+				el.multiDatesPicker('addDates',datelist);
+			}	
+		},
+		init_datepicker_single_dob : function initDatePickerSingleDob(picker_id,fmt){
+			var el = $(picker_id)
+			var datelist = el.attr("value")
+			$(picker_id).multiDatesPicker({
+				dateFormat: fmt,
+				maxDate:"+0",
+				defaultDate: "-18y",
+				maxPicks: 1
+			});
+
+			if(datelist != "") {
+				el.attr("value",datelist)
+				datelist = datelist.split(",");			
+				el.multiDatesPicker('addDates',datelist);
+			}	
 		}
 } //end cland_datepicker

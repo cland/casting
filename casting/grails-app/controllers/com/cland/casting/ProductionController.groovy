@@ -27,6 +27,10 @@ class ProductionController {
         def productionInstance = new Production(params)
 		bindData(productionInstance, params, [exclude: 'shootDate'])
 		bindData(productionInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
+		bindData(productionInstance, params, [exclude: 'startDate'])
+		bindData(productionInstance, ['startDate': params.date('startDate', ['dd-MMM-yyyy'])], [include: 'startDate'])
+		bindData(productionInstance, params, [exclude: 'endDate'])
+		bindData(productionInstance, ['endDate': params.date('endDate', ['dd-MMM-yyyy'])], [include: 'endDate'])
         if (!productionInstance.save(flush: true)) {
             render(view: "create", model: [productionInstance: productionInstance])
             return
