@@ -17,8 +17,8 @@
          	<th class="cell head vstage1 center" colspan="3">Auditions</th>       
          	<th class="cell head vstage2 vstage3 center" colspan="2">Callback</th>
          	<th class="cell head vstage2 vstage3 center" colspan="2">Wardrobe</th>
-         	<th class="cell head vstage2 vstage center3" colspan="2">Shoot</th>
-         	<th class="cell head vstage1 vstage2 center  ">Shortlisted</th>
+         	<th class="cell head vstage2 vstage3 center" colspan="2">Shoot</th>
+         	<th class="cell head vstage1 vstage2 center ">Shortlisted</th>
          	<th class="cell head vstage2 vstage3 center">Confirmed</th>
          </tr></thead>
          <tr>

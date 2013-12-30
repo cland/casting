@@ -269,9 +269,13 @@ class CastingApiService {
 			}
 			roles{
 				if(params?.filter_roles_stage1) 'in'("id",params?.filter_roles_stage1*.toLong())
+				if(params?.filter_roles_stage2) 'in'("id",params?.filter_roles_stage2*.toLong())
+				if(params?.filter_roles_stage3) 'in'("id",params?.filter_roles_stage3*.toLong())
 			}			
 			categories{
 				if(params?.filter_categories_stage1) 'in'("id",params?.filter_categories_stage1*.toLong())
+				if(params?.filter_categories_stage2) 'in'("id",params?.filter_categories_stage2*.toLong())
+				if(params?.filter_categories_stage3) 'in'("id",params?.filter_categories_stage3*.toLong())
 			}
 			//STAGE 1
 			params?.filter_invited_stage1?.with{
@@ -296,11 +300,11 @@ class CastingApiService {
 			params?.filter_callback_attended_stage2?.with{
 				if(!equalsIgnoreCase("any")) eq("isAuditionAttended",equalsIgnoreCase("yes"))
 			}
-			params?.filter_wardrope_attended_stage2?.with{
-				if(!equalsIgnoreCase("any")) eq("isWardropeAttended",equalsIgnoreCase("yes"))
+			params?.filter_wardrobe_attended_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardrobeAttended",equalsIgnoreCase("yes"))
 			}
-			params?.filter_wardrope_stage2?.with{
-				if(!equalsIgnoreCase("any")) eq("isWardropeAvailable",equalsIgnoreCase("yes"))
+			params?.filter_wardrobe_stage2?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardrobeAvailable",equalsIgnoreCase("yes"))
 			}
 			params?.filter_shoot_stage2?.with{
 				if(!equalsIgnoreCase("any")){	eq("isRoleAvailable",equalsIgnoreCase("yes")) }
@@ -321,11 +325,11 @@ class CastingApiService {
 			params?.filter_callback_attended_stage3?.with{
 				if(!equalsIgnoreCase("any")) eq("isAuditionAttended",equalsIgnoreCase("yes"))
 			}
-			params?.filter_wardrope_attended_stage3?.with{
-				if(!equalsIgnoreCase("any")) eq("isWardropeAttended",equalsIgnoreCase("yes"))
+			params?.filter_wardrobe_attended_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardrobeAttended",equalsIgnoreCase("yes"))
 			}
-			params?.filter_wardrope_stage3?.with{
-				if(!equalsIgnoreCase("any")) eq("isWardropeAvailable",equalsIgnoreCase("yes"))
+			params?.filter_wardrobe_stage3?.with{
+				if(!equalsIgnoreCase("any")) eq("isWardrobeAvailable",equalsIgnoreCase("yes"))
 			}
 			params?.filter_shoot_stage3?.with{
 				if(!equalsIgnoreCase("any")){	eq("isRoleAvailable",equalsIgnoreCase("yes")) }

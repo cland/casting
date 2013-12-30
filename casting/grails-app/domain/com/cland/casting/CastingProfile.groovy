@@ -22,6 +22,11 @@ class CastingProfile {
 	boolean isRoleAvailable 	//accepted/confirmed for the job - available Y/N
 	boolean isRoleAttended		//after the production, might want to know if candidate did attend the shoot
 	
+	int auditionAvailRank	//if profiles is not available for audition, how many other jobs are waiting for profile before us
+	int callbackAvailRank	//if profiles is not available for callback, how many other jobs are waiting for profile before us
+	int wardrobeAvailRank	//if profiles is not available for wardrobe, how many other jobs are waiting for profile before us
+	int roleAvailRank		//** if profiles is not available for role, how many other jobs are waiting for profile before us
+	
 	Date castDate	//TODO: duplicate, same purpose as auditionDate
 	Date auditionDate
 	Date callbackDate
@@ -60,6 +65,10 @@ class CastingProfile {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 		isConfirmed (nullable:true)
+		auditionAvailRank(nullable:true)
+		callbackAvailRank(nullable:true)
+		wardrobeAvailRank(nullable:true)
+		roleAvailRank(nullable:true)
 	}
 	static mapping = {
 		ratings cascade:"all-delete-orphan"

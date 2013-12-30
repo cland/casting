@@ -55,8 +55,8 @@
 				</div>
 			</div>
 			<div class="data-table">
-				<div class="row group">
-					<div class="cell vstage1 group"><label><g:message code="default.auditiongroup.label" default="AUDITION" />:</label></div>
+				<div class="row vstage1 group">
+					<div class="cell group"><label><g:message code="default.auditiongroup.label" default="AUDITION" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="audition_${profile.id }">Available</label></div>
 					<div class="cell">
 						<g:radioGroup name="audition_${profile?.id }" value='${profile?.isAuditionAvailable }' values="['true','false']" labels="['yes','no']" class="mugshot_radio_group">

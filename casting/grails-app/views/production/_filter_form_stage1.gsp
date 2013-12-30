@@ -70,13 +70,13 @@
 							<div class="cell group"><label>WARDROBE:</label></div>
 							<div class="cell"><span class="r-arrow"></span> <label>Available:</label></div>
 							<div class="cell">
-								<g:radioGroup name="filter_wardrope_stage1" values="['yes','no','any']" labels="['yes','no','any']" >
+								<g:radioGroup name="filter_wardrobe_stage1" values="['yes','no','any']" labels="['yes','no','any']" >
 									<span>${it.radio } ${it.label } </span>
 								</g:radioGroup>
 							</div>
 							<div class="cell"><label>Attended:</label></div>
 							<div class="cell">
-								<g:radioGroup name="filter_wardrope_attended_stage1" values="['yes','no','any']" labels="['yes','no','any']" >
+								<g:radioGroup name="filter_wardrobe_attended_stage1" values="['yes','no','any']" labels="['yes','no','any']" >
 									<span>${it.radio } ${it.label } </span>
 								</g:radioGroup>
 							</div>

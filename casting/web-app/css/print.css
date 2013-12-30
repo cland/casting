@@ -667,4 +667,5 @@ p {
 ul, img {
    page-break-inside: avoid;
 }
-.buttons {display:none;}
+.buttons,.search-filter-container {display:none;}
+

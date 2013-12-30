@@ -75,28 +75,35 @@ $(document).ready(function() {
 		});
 });  //end method ready(...)
 function onSuccessFilterStage1CallbackHander(data, textStatus){
-	stageDisplay(getCurrentTabText())
-	$("#hidden_viewas_stage1").attr("value",$("#viewas_stage1").val())
-	$("#hidden_sortby_stage1").attr("value",$("#sortby_stage1").val())
+	stageDisplay(getCurrentTabText(),"stage1")
+//	$("#hidden_viewas_stage1").attr("value",$("#viewas_stage1").val())
+//	$("#hidden_sortby_stage1").attr("value",$("#sortby_stage1").val())
 }
 function onSuccessFilterStage2CallbackHander(data, textStatus){
-	stageDisplay(getCurrentTabText())
+	stageDisplay(getCurrentTabText(),"stage2")	
 }
 function onSuccessFilterStage3CallbackHander(data, textStatus){
-	stageDisplay(getCurrentTabText())
+	stageDisplay(getCurrentTabText(),"stage3")
 }
 function onSuccessStage1CallbackHander(data,textStatus){
-	stageDisplay(getCurrentTabText())
+	stageDisplay(getCurrentTabText(),"stage1")
+}
+function onSuccessStage2CallbackHander(data,textStatus){
+	stageDisplay(getCurrentTabText(),"stage2")
+}
+function onSuccessStage3CallbackHander(data,textStatus){
+	stageDisplay(getCurrentTabText(),"stage3")
 }
 function onLoading(){
 	$(".wait").show()
-	$(".action_wait").attr("disabled",true)
+	//$(".action_wait").attr("disabled",true)
 }
 function onComplete(){
 	$(".wait").hide()
-	$(".action_wait").attr("disabled",false)
+	//$(".action_wait").attr("disabled",false)
 }
 function onFailure(data,textStatus){
+	$(".wait").hide()
 	alert("Operation failed with status '" + textStatus + "'")
 }
 
@@ -106,19 +113,13 @@ function getCurrentTabText(){
 function getCurrentTabLink(){
 	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected a").attr("href")
 }
-function stageDisplay(curtab){
+function stageDisplay(curtab, stage){
 
 	if(curtab.toLowerCase() == "auditions"){		
 		$(".vstage2").hide();
 		$(".vstage3").hide();
 		$(".vstage1").show();
-		if($("#viewas_stage1").attr("value") == "list"){
-			$("#submit_stage1_top").hide()
-			$("#submit_stage1_bottom").hide()
-		}else{
-			$("#submit_stage1_top").show()
-			$("#submit_stage1_bottom").show()
-			}
+		
 	}else if(curtab.toLowerCase() == "shortlist"){
 	
 		$(".vstage1").hide();		
@@ -129,6 +130,15 @@ function stageDisplay(curtab){
 		$(".vstage2").hide();
 		$(".vstage3").show();
 	}
+	if($("#viewas_" + stage).attr("value") == "list"){
+		$("#submit_" + stage + "_top").hide()
+		$("#submit_" + stage + "_bottom").hide()
+	}else{
+		$("#submit_" + stage + "_top").show()
+		$("#submit_" + stage + "_bottom").show()
+	}
+	$("#hidden_viewas_" + stage).attr("value",$("#viewas_" + stage).val())
+	$("#hidden_sortby_" + stage).attr("value",$("#sortby_" + stage).val())
 } // end function
 
 

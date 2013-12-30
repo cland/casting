@@ -22,7 +22,12 @@
 									<g:checkBox name="filter_categories_stage2" value="${c.id }"/><span class="checkbox-text">${c }</span><br/>								
 								</g:each>
 							</div>
-							
+							<div class="cell"><label>Confirmed:</label></div>
+							<div class="cell">
+								<g:radioGroup name="filter_confirmed_stage2" values="['yes','no','any']" labels="['yes','no','any']" >
+									<span>${it.radio } ${it.label } </span>
+								</g:radioGroup>
+							</div>
 						</div>
 						<div class="row group">
 							<div class="cell group"><label>CALLBACK:</label></div>
@@ -45,13 +50,13 @@
 							<div class="cell group"><label>WARDROBE:</label></div>
 							<div class="cell"><span class="r-arrow"></span> <label>Available:</label></div>
 							<div class="cell">
-								<g:radioGroup name="filter_wardrope_stage2" values="['yes','no','any']" labels="['yes','no','any']" >
+								<g:radioGroup name="filter_wardrobe_stage2" values="['yes','no','any']" labels="['yes','no','any']" >
 									<span>${it.radio } ${it.label } </span>
 								</g:radioGroup>
 							</div>
 							<div class="cell"><label>Attended:</label></div>
 							<div class="cell">
-								<g:radioGroup name="filter_wardrope_attended_stage2" values="['yes','no','any']" labels="['yes','no','any']" >
+								<g:radioGroup name="filter_wardrobe_attended_stage2" values="['yes','no','any']" labels="['yes','no','any']" >
 									<span>${it.radio } ${it.label } </span>
 								</g:radioGroup>
 							</div>
@@ -84,7 +89,7 @@
 					<div class="row">
 						<div class="cell"><label for=""><g:message code="default.viewas.label" default="View as" />:</label></div>
 						<div class="cell">
-							<g:select name="viewas" id=" viewas_stage2" value="summary" 
+							<g:select name="viewas" id="viewas_stage2" value="summary" 
 							from="${['Headshots','Summary','Detailed','List Table'] }" 
 							keys="${['headshots','summary','detailed','list']}"/>					
 						</div>

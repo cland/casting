@@ -133,7 +133,7 @@ class ProductionController {
 	def filter(){	
 		def productionId = params?.production?.id?.toLong()
 		int offset = 0
-		int max = 10
+		int max = 50
 		def viewas = params?.viewas 
 		
 		def profiles = castingApiService.profileFilter(productionId, params)
@@ -184,7 +184,24 @@ class ProductionController {
 				def isShoot = params?.boolean("shoot_${entry.toLong()}")
 				if(params?.list("shoot_${entry.toLong()}")){
 					values += [isRoleAvailable:isShoot]
-				}				
+				}
+				//attendance params
+				def isAuditionAtt = params?.boolean("audition_attended_${entry.toLong()}")
+				if(params?.list("audition_attended_${entry.toLong()}")){
+					values += [isAuditionAttended:isAuditionAtt]
+				}
+				def isCallbackAtt = params?.boolean("callback_attended_${entry.toLong()}")
+				if(params?.list("callback_attended_${entry.toLong()}")){
+					values += [isCallbackAttended:isCallbackAtt]
+				}
+				def isWardrobeAtt = params?.boolean("wardrobe_attended_${entry.toLong()}")
+				if(params?.list("wardrobe_attended_${entry.toLong()}")){
+					values += [isWardrobeAttended:isWardrobeAtt]
+				}
+				def isShootAtt = params?.boolean("shoot_attended_${entry.toLong()}")
+				if(params?.list("shoot_attended_${entry.toLong()}")){
+					values += [isRoleAttended:isShootAtt]
+				}
 				//save updates
 				if(!values.isEmpty()){
 					tmp.properties = values //[isAuditionAvailable:val]
