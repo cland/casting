@@ -108,13 +108,13 @@
 			<div class="display-options">
 				<div class="data-table">
 					<div class="row">
-						<div class="cell"><label for="">View as:</label></div>
+						<div class="cell"><label for=""><g:message code="default.viewas.label" default="View as" />:</label></div>
 						<div class="cell">
 							<g:select name="viewas" id="viewas_stage1" value="headshots" 
 							from="${['Headshots','Summary','Detailed','List Table'] }" 
 							keys="${['headshots','summary','detailed','list']}"/>														
 						</div>
-						<div class="cell"><label for="">Sort as:</label></div>
+						<div class="cell"><label for=""><g:message code="default.sortby.label" default="Sort by" />:</label></div>
 						<div class="cell">
 							<g:select name="sortby" id="sortby_stage1" value="castno" 
 							from="${['Profile Name','Cast No'] }" 

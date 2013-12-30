@@ -716,6 +716,7 @@ p {
 	font-size: 0.9em;
 }
 .cast-list fieldset legend {font-size:1.1em;}
+.cast-list table tr td {border-bottom:1px dotted #ccc;}
 .headshot-row {
     clear:both;
     page-break-inside: avoid;
@@ -752,13 +753,13 @@ p {
 .summary-row .cast-details,.profile-row .cast-details {
     float: left;
     border: none 1px #0e8523;
-    width: 30%;
+    width: 28%;
     margin: 0.5em;
 }
 .summary-row .cast-actions, .profile-row .cast-actions {
     float: left;
     border: none 1px #0094ff;
-	width: 40%;
+	width: 45%;
     margin: 0.5em;
     margin-left:1px;
     margin-right:1px;
@@ -776,35 +777,39 @@ p {
     width:180px;    
 }
 .profile-row .cast-details {width:66%}
-.profile-row .cast-mugshot {width:200px;}
+.profile-row .cast-mugshot {width:200px;text-align:center;}
 .detailed-row {
     clear: both;
     page-break-inside: avoid;
     float:left;
     width:100%;
     border:solid 1px #ccc;
+    margin-bottom:15px;
+    text-align:left;
 }
 .detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#333;}
 .detailed-row .cast-details {
     float: left;
     border: none 1px #0e8523;
     margin: 0.5em;
+    width:50%;
 }
 .detailed-row .cast-actions {
     float: left;
     display:none;  
-    width: 40%;
+    width: 10%;
     margin: 0.5em;
 }
-.detailed-row .cast-mugshot {
-    border: solid 1px #0094ff;
+.detailed-row .cast-mugshot-container {
+    border: none 1px #0094ff;
     float: left;
     padding: 0.5em;
-    text-align: center;
+    text-align: left;
     margin: 0.5em;
     float:right;
-    width:25%;
+    width:45%;
 }
+.detailed-row .cast-mugshot {float:right;padding:5px;}
 
 .ui-tabs .ui-tabs-panel {padding:0.5em !important;}
 .production fieldset {padding:1em;}
@@ -845,11 +850,14 @@ form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;paddi
 #role-dates-summary table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;vertical-align:top;}
 #role-dates-summary table tbody tr td.td-audition-dates {border-left:solid 1px #ccc;}
 .search-filter-container {font-size:0.9em;}
-.search-filter-container label {font-weight:bold;color:#000;}
+.search-filter-container label, .data-table label {font-weight:bold;color:#000;}
 .search-filter-container .filter-button {display:none;}
 .search-filter-container .search-filter {border:solid 1px #ccc; padding:10px;}
 .cell.group {background:#F9DCB1;}
 .row.group .cell {border-bottom:solid 1px #F9DCB1;font-size:0.9em;}
-.row.group .cell.group {font-size:0.8em;}
+.row.group .cell.group {font-size:0.8em;border-bottom:1px dotted #F8F8F8;}
 .hide, .wait {display:none;padding:10px; border:solid 1px red;text-align:center;font-weight:bold;font-size:1.5em;color:#EB8F2A;}
 .cell input.submit {background:#EB8F2A; color:#fff;font-weight:bold;}
+table tr th.center{text-align:center;background:#F9DCB1;border-left:1px solid #f8f8f8;}
+table tr td.center{text-align:center;} 
+table tr td.sub-head {font-weight:bold;font-size:0.9em;text-align:center;}

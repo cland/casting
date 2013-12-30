@@ -12,9 +12,24 @@
 		<thead><tr>
 			<th class="cell head">Cast No.</th>
          	<th class="cell head">Name</th>
-         	<th class="cell head">Contact No.</th>
+         	<th class="cell head">Age</th>
          	<th class="cell head">Role</th>
+         	<th class="cell head vstage1 center" colspan="3">Auditions</th>       
+         	<th class="cell head vstage2 vstage3 center" colspan="2">Callback</th>
+         	<th class="cell head vstage2 vstage3 center" colspan="2">Wardrobe</th>
+         	<th class="cell head vstage2 vstage center3" colspan="2">Shoot</th>
+         	<th class="cell head vstage1 vstage2 center  ">Shortlisted</th>
+         	<th class="cell head vstage2 vstage3 center">Confirmed</th>
          </tr></thead>
+         <tr>
+         	<td colspan="4"></td>
+         	<td class="vstage1  sub-head">Invited</td><td class="vstage1  sub-head">Available</td><td class="vstage1  sub-head">Attended</td>
+         	<td class="vstage2 vstage3 sub-head">Available</td><td class="vstage2 vstage3 sub-head">Attended</td>
+         	<td class="vstage2 vstage3 sub-head">Available</td><td class="vstage2 vstage3 sub-head">Attended</td>
+         	<td class="vstage2 vstage3 sub-head">Available</td><td class="vstage2 vstage3 sub-head">Attended</td>
+         	<td class="vstage1 vstage2"></td>
+         	<td class="vstage2 vstage3"></td>
+         </tr>
          <tbody>
          	<g:render template="../layouts/profile_list" collection="${profileList }" var="profile"/>
          </tbody>         

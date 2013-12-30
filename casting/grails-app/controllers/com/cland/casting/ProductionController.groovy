@@ -141,6 +141,7 @@ class ProductionController {
 	} //end 
 	
 	def update_profiles(){
+		//println(params)
 		def productionId = params?.production?.id?.toLong()		
 		def viewas = params?.viewas ? params.viewas : "headshots"
 		def sortby = params?.sortby ? params.sortby : "castno"
@@ -159,6 +160,7 @@ class ProductionController {
 					values += [isInvited:isInvited]
 				}
 				def shortlist = params?.boolean("shortlist_${entry.toLong()}")
+				
 				if(params?.list("shortlist_${entry.toLong()}")){
 					values += [isShortlist:shortlist]
 				}
@@ -184,10 +186,12 @@ class ProductionController {
 					values += [isRoleAvailable:isShoot]
 				}				
 				//save updates
-				tmp.properties = values //[isAuditionAvailable:val]
-				if(!tmp.save(flush:true)){
-					//failed to update profile
-					tmp.errors
+				if(!values.isEmpty()){
+					tmp.properties = values //[isAuditionAvailable:val]
+					if(!tmp.save(flush:true)){
+						//failed to update profile
+						tmp.errors
+					}
 				}
 				profiles.add(tmp)
 			}

@@ -77,71 +77,87 @@
 </div>
 </fieldset>
 <fieldset><legend>Progress Indicators</legend>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isInvited', 'error')} ">
-	<label for="isInvited">
-		<g:message code="castingProfile.isInvited.label" default="Is Invited" />		
-	</label>
-	<g:checkBox name="isInvited" value="${castingProfileInstance?.isInvited}" />
-	<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+<div class="data-table">
+	<div class="row group">
+		<div class="cell group"><label>PROGRESS:</label></div>
+		<div class="cell"><span class="r-arrow"></span> <label for="isInvited">Invited</label></div>
+		<div class="cell">
+			<g:checkBox name="isInvited" value="${castingProfileInstance?.isInvited}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>		
+		<div class="cell"><label for="isShortlist">Shortlist</label></div>
+		<div class="cell">
+			<g:checkBox name="isShortlist" value="${castingProfileInstance?.isShortlist}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>	
+		<div class="cell"><label for="isConfirmed">Confirmed</label></div>
+		<div class="cell">
+			<g:checkBox name="isConfirmed" value="${castingProfileInstance?.isConfirmed}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>					
+	</div>	
+	<div class="row group">
+		<div class="cell group"><label>AUDITION:</label></div>			
+		<div class="cell"><span class="r-arrow"></span> <label for="isAuditionAvailable">Available</label></div>
+		<div class="cell">
+			<g:checkBox name="isAuditionAvailable" value="${castingProfileInstance?.isAuditionAvailable}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="isAuditionAttended">Attended:</label></div>
+		<div class="cell">
+			<g:checkBox name="isAuditionAttended" value="${castingProfileInstance?.isAuditionAttended}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="auditionDate">Date:</label></div>
+		<div class="cell"><g:textField name="auditionDate" class="datepick" id="audition-date" value="${castingProfileInstance?.auditionDate}"/></div>
+	</div>	
+	<div class="row group">
+		<div class="cell group"><label>CALLBACK:</label></div>	
+		<div class="cell"><span class="r-arrow"></span> <label for="isCallbackAvailable">Available</label></div>
+		<div class="cell">
+			<g:checkBox name="isCallbackAvailable" value="${castingProfileInstance?.isCallbackAvailable}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="isCallbackAttended">Attended:</label></div>
+		<div class="cell">
+			<g:checkBox name="isCallbackAttended" value="${castingProfileInstance?.isCallbackAttended}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="callbackDate">Date:</label></div>
+		<div class="cell"><g:textField name="callbackDate" class="datepick" id="callback-date" value="${castingProfileInstance?.callbackDate}"/></div>
+	</div>
+	<div class="row group">
+		<div class="cell group"><label>WARDROBE:</label></div>			
+		<div class="cell"><span class="r-arrow"></span> <label for="isWardrobeAvailable">Available</label></div>
+		<div class="cell">
+			<g:checkBox name="isWardrobeAvailable" value="${castingProfileInstance?.isWardrobeAvailable}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="isWardrobeAttended">Attended:</label></div>
+		<div class="cell">
+			<g:checkBox name="isWardrobeAttended" value="${castingProfileInstance?.isWardrobeAttended}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="wardrobeDate">Date:</label></div>
+		<div class="cell"><g:textField name="wardrobeDate" class="datepick" id="wardrobe-date" value="${castingProfileInstance?.wardrobeDate}"/></div>
+	</div>	
+	<div class="row group">
+		<div class="cell group"><label>SHOOT:</label></div>		
+		<div class="cell"><span class="r-arrow"></span> <label for="isRoleAvailable">Available</label></div>
+		<div class="cell">
+			<g:checkBox name="isRoleAvailable" value="${castingProfileInstance?.isRoleAvailable}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="isRoleAttended">Attended:</label></div>
+		<div class="cell">
+			<g:checkBox name="isRoleAttended" value="${castingProfileInstance?.isRoleAttended}" />
+			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+		</div>
+		<div class="cell"><label for="shootDate">Date:</label></div>
+		<div class="cell"><g:textField name="shootDate" class="datepick" id="shoot-date" value="${castingProfileInstance?.shootDate}"/></div>
+	</div>				
 </div>
 
-<!-- START AUDITION AVAILABILITY AND DATES -->
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isAuditionAvailable', 'error')} ">
-	<label for="isAuditionAvailable">
-		<g:message code="castingProfile.isAuditionAvailable.label" default="Is Audition Available" />		
-	</label>
-	<g:checkBox name="isAuditionAvailable" value="${castingProfileInstance?.isAuditionAvailable}" />
-	<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'auditionDate', 'error')} ">
-	<label for="auditionDate">
-		<g:message code="castingProfile.auditionDate.label" default="Audition date" />		
-	</label>
-	<g:textField name="auditionDate" class="datepick" id="audition-date" value="${castingProfileInstance?.auditionDate}"/>	
-</div>
-<!-- END AUDITION AVAILABILITY AND DATES -->
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isCallbackAvailable', 'error')} ">
-	<label for="isCallbackAvailable">
-		<g:message code="castingProfile.isCallbackAvailable.label" default="Is Callback Available" />		
-	</label>
-	<g:checkBox name="isCallbackAvailable" value="${castingProfileInstance?.isCallbackAvailable}" />
-<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
-</div>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'callbackDate', 'error')} ">
-	<label for="callbackDate">
-		<g:message code="castingProfile.callbackDate.label" default="Callback date" />		
-	</label>
-	<g:textField name="callbackDate" class="datepick" id="callback-date" value="${castingProfileInstance?.callbackDate}"/>	
-</div>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isCallbackAttended', 'error')} ">
-	<label for="isCallbackAttended">
-		<g:message code="castingProfile.isCallbackAttended.label" default="Attended callback" />		
-	</label>
-	<g:checkBox name="isCallbackAttended" value="${castingProfileInstance?.isCallbackAttended}" />
-<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
-</div>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isShortlist', 'error')} ">
-	<label for="isShortlist">
-		<g:message code="castingProfile.isShortlist.label" default="Is Shortlist" />		
-	</label>
-	<g:checkBox name="isShortlist" value="${castingProfileInstance?.isShortlist}" />
-<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'isRoleAvailable', 'error')} ">
-	<label for="isRoleAvailable">
-		<g:message code="castingProfile.isRoleAvailable.label" default="Is Role Available" />		
-	</label>
-	<g:checkBox name="isRoleAvailable" value="${castingProfileInstance?.isRoleAvailable}" /> 
-	<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
-</div>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'outcome', 'error')} ">
-	<label for="outcome">
-		<g:message code="castingProfile.outcome.label" default="Outcome" />		
-	</label>
-	<g:select name="outcome" from="${castingProfileInstance.constraints.outcome.inList}" value="${castingProfileInstance?.outcome}" valueMessagePrefix="castingProfile.outcome" noSelection="['': '']"/>
-</div>
 </fieldset>
 
 <fieldset><legend>Ratings and Comments</legend>

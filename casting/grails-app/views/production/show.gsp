@@ -112,6 +112,13 @@ function stageDisplay(curtab){
 		$(".vstage2").hide();
 		$(".vstage3").hide();
 		$(".vstage1").show();
+		if($("#viewas_stage1").attr("value") == "list"){
+			$("#submit_stage1_top").hide()
+			$("#submit_stage1_bottom").hide()
+		}else{
+			$("#submit_stage1_top").show()
+			$("#submit_stage1_bottom").show()
+			}
 	}else if(curtab.toLowerCase() == "shortlist"){
 	
 		$(".vstage1").hide();		

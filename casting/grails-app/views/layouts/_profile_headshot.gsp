@@ -32,7 +32,7 @@
 							</g:radioGroup>			
 						</div>
 					</div>				
-					<div class="row shortlist" id="shortlist_${profile?.id }">
+					<div class="row vstage1 vstage2 shortlist" id="shortlist_${profile?.id }">
 						<div class="cell"><label class="profile-text">Shortlist:</label></div>
 						<div class="cell">
 							<g:radioGroup name="shortlist_${profile?.id }" value='${profile?.isShortlist }' values="['true','false']" labels="['yes','no']" class="mugshot_radio_group">
