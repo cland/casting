@@ -92,6 +92,7 @@
 		<div class="clear"></div>
 	</div>	<!-- end role details row -->
 <br/>
+ <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 <fieldset><legend>Who can access this role</legend>
 		<span id="allowedCategories-label" class="property-label"><g:message code="role.allowedcategories.label" default="Allowed categories:" /></span>
 		<g:if test="${castingRoleInstance?.allowedCategories}">								
@@ -109,7 +110,7 @@
 		</g:if>
 		
 </fieldset>	
-		
+</sec:ifAnyGranted>	
 	
 </div>
 

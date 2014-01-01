@@ -48,10 +48,10 @@ class CastingApiService {
 			productionList.addAll(tmpList)
 		}else{
 			agencyId = 0	//force agencyId to something that returns empty results
-			def agency = getAgencyForUser(user.id)
+			def agency = getAgencyForUser(user.id)?.find{true}
 			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
 			if(agency){			
-				 agencyId = agency?.id?.get(0)
+				 agencyId = agency?.id //?.get(0)
 			}
 			def tmpList = Production.withCriteria {
 				agencyACL { idEq(agencyId) }
@@ -73,7 +73,7 @@ class CastingApiService {
 		
 		def user = getCurrentUser()
 		agencyId = 0	//force agencyId to something that returns empty results
-		def agency = getAgencyForUser(user.id)
+		def agency = getAgencyForUser(user.id)?.find{true}
 
 		//First get all the allowed roles
 		//def test1  =  CastingRole.withCriteria { isEmpty("allowedCategories") eq("production.id",prod.id.toLong()) }.unique()
@@ -143,7 +143,7 @@ class CastingApiService {
 		}else{
 			//current user is not admin, check if he/she is agency contact
 			agencyId = 0	//force agencyId to something that returns empty results
-			def agency = getAgencyForUser(user.id)
+			def agency = getAgencyForUser(user.id)?.find{true}
 			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
 			if(agency) agencyId = agency.id
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
@@ -228,8 +228,8 @@ class CastingApiService {
 		if(isAdmin()) return "/admin/"
 		if(isAgent()){
 			//work out the agency that this user belongs to
-			def agency = getAgencyForUser(userId)
-			long id = agency?.id?.get(0) //comes back as an array coz user can belong to more that one???? 
+			def agency = getAgencyForUser(userId)?.find{true}
+			long id = agency?.id //?.get(0) //comes back as an array coz user can belong to more that one???? 
 			
 			if(agency?.id){
 				//return agency's details link
@@ -238,8 +238,8 @@ class CastingApiService {
 		}
 		if (isClient()){
 			//work out the client that this user belongs to
-			def client = getClientForUser(userId)
-			long id = client?.id?.get(0)
+			def client = getClientForUser(userId)?.find{true}
+			long id = client?.id	//?.get(0)
 			if(client){
 				//return client's details link
 				return "/client/show/" + id
@@ -310,8 +310,8 @@ class CastingApiService {
 		def profiles = CastingProfile.withCriteria {
 			if(isAgent()){
 				//then we only show them their profiles
-				def agency = getAgencyForUser(user.id) //user.id				
-				if(agency) agencyId = agency[0].id
+				def agency = getAgencyForUser(user.id)?.find{true} //user.id				
+				if(agency) agencyId = agency.id
 				canditate {
 					createAlias("canditate.agency",'agency')
 					eq("agency.id",agencyId.toLong())				

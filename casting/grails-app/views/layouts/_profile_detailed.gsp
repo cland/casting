@@ -1,6 +1,6 @@
 <!-- div DETAILED structure -->
 <%@ page import="com.cland.casting.SystemRoles" %>
-<g:set var="candidate" value="${profile?.canditate }"/>
+<g:set var="candidate" value="${profile?.candidate }"/>
 <div id="row-${profile?.id }" class="detailed-row">	
 <g:hiddenField name="profiles" value="${profile.id}"/>
     <div id="cast-details-${profile?.id }" class="cast-details">
@@ -106,7 +106,9 @@
 			</sec:ifAnyGranted>
             
 	</div>
-<div class="cast-actions-data-table">
+	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+	<div class="cast-actions-data-table">
+
          		<div class="row vstage1 invited">
 					<div class="cell"><label for="invited_${profile?.id }"><g:message code="default.invited.label" default="Invited" />:</label></div>
 					<div class="cell">
@@ -132,6 +134,7 @@
 					</div>	
 				</div>
 			</div>
+			</sec:ifAnyGranted>
 			<div class="data-table">
 				<div class="row vstage1 group">
 					<div class="cell group"><label><g:message code="default.auditiongroup.label" default="AUDITION" />:</label></div>

@@ -28,7 +28,9 @@
             </div>
          </div>
          <div id="cast-actions-${profile?.id }" class="cast-actions">
+         <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
          	<div class="cast-actions-data-table">
+         	
          		<div class="row vstage1 invited">
 					<div class="cell"><label for="invited_${profile?.id }"><g:message code="default.invited.label" default="Invited" /></label></div>
 					<div class="cell">
@@ -54,6 +56,7 @@
 					</div>	
 				</div>
 			</div>
+			</sec:ifAnyGranted>
 			<div class="data-table">
 				<div class="row vstage1 group">
 					<div class="cell group"><label><g:message code="default.auditiongroup.label" default="AUDITION" />:</label></div>

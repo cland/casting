@@ -28,6 +28,8 @@ class CandidateController {
 		//def lines = params.list("param-name")  //accessing a parameter
 		
         def candidateInstance = new Candidate(params)
+		bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
+		bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
 		if(!params.person.id){
 			if(params.person.id == ""){
 				if(!candidateInstance.person.save(flush:true)){	
@@ -37,8 +39,7 @@ class CandidateController {
 				}
 			}
 		}
-		bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
-		bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
+		
         if (!candidateInstance.save(flush: true)) {
             render(view: "create", model: [candidateInstance: candidateInstance])
             return
