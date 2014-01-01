@@ -9,7 +9,7 @@
 					code="default.casting.label" /></g:link></li>
 		</sec:ifLoggedIn>						
 		<li>
-			<a class="aboutus" href="${createLink(uri: '/')}">
+			<a class="aboutus" href="${createLink(uri: '/home/aboutus')}">
 			<g:message code="default.aboutus.label" /></a>
 		</li>
 

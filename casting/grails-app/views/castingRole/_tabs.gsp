@@ -93,13 +93,21 @@
 	</div>	<!-- end role details row -->
 <br/>
 <fieldset><legend>Who can access this role</legend>
-		<span id="agencyACL-label" class="property-label"><g:message code="role.agencyacl.label" default="Agency access list" /></span>
+		<span id="allowedCategories-label" class="property-label"><g:message code="role.allowedcategories.label" default="Allowed categories:" /></span>
+		<g:if test="${castingRoleInstance?.allowedCategories}">								
+			
+			<span class="property-value" aria-labelledby="allowedCategories-label">${castingRoleInstance?.allowedCategories*.name?.join(",")}</span>
+				
+		</g:if>
+		<g:else><span class="property-value">All Categories</span></g:else>
+<br/><br/>
+		<span id="agencyACL-label" class="property-label"><g:message code="role.agencyacl.label" default="Agency access list (optional):" /></span>
 		<g:if test="${castingRoleInstance?.agencyACL}">								
 			<g:each in="${castingRoleInstance.agencyACL}" var="p">
 			<span class="property-value" aria-labelledby="agencyACL-label"><g:link controller="agency" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
 			</g:each>		
 		</g:if>
-		<g:else><span class="property-value">All</span></g:else>
+		
 </fieldset>	
 		
 	

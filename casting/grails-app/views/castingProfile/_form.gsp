@@ -24,7 +24,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'Candidate', 'error')} required">
 	<label for="canditate">
-		<g:message code="castingProfile.canditate.label" default="Canditate" />
+		<g:message code="castingProfile.candidate.label" default="Candidate" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:select id="canditate" name="canditate.id" from="${candidateList}" optionKey="id" required="" value="${castingProfileInstance?.canditate?.id}" class="many-to-one" noSelection="['': '-- select one --']"/>
@@ -52,8 +52,10 @@
 		
 	</label>
 	<g:textField name="castDate" class="datepick" id="cast-date" value="${castingProfileInstance?.castDate?.format('dd-MMM-yyyy')}"/>	
+	<span class="datepicker-reset" picker="cast-date" altfield="cast-date">clear</span>
 	
 </div>
+
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'castNo', 'error')} required">
 	<label for="castNo">
 		<g:message code="castingProfile.castNo.label" default="Cast No" />
@@ -78,24 +80,26 @@
 </fieldset>
 <fieldset><legend>Progress Indicators</legend>
 <div class="data-table">
-	<div class="row group">
-		<div class="cell group"><label>PROGRESS:</label></div>
-		<div class="cell"><span class="r-arrow"></span> <label for="isInvited">Invited</label></div>
-		<div class="cell">
-			<g:checkBox name="isInvited" value="${castingProfileInstance?.isInvited}" />
-			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
-		</div>		
-		<div class="cell"><label for="isShortlist">Shortlist</label></div>
-		<div class="cell">
-			<g:checkBox name="isShortlist" value="${castingProfileInstance?.isShortlist}" />
-			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+		<div class="row group">
+			<div class="cell group"><label>PROGRESS:</label></div>
+			<div class="cell"><span class="r-arrow"></span> <label for="isInvited">Invited</label></div>
+			<div class="cell">
+				<g:checkBox name="isInvited" value="${castingProfileInstance?.isInvited}" />
+				<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+			</div>		
+			<div class="cell"><label for="isShortlist">Shortlist</label></div>
+			<div class="cell">
+				<g:checkBox name="isShortlist" value="${castingProfileInstance?.isShortlist}" />
+				<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+			</div>	
+			<div class="cell"><label for="isConfirmed">Confirmed</label></div>
+			<div class="cell">
+				<g:checkBox name="isConfirmed" value="${castingProfileInstance?.isConfirmed}" />
+				<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+			</div>					
 		</div>	
-		<div class="cell"><label for="isConfirmed">Confirmed</label></div>
-		<div class="cell">
-			<g:checkBox name="isConfirmed" value="${castingProfileInstance?.isConfirmed}" />
-			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
-		</div>					
-	</div>	
+	</sec:ifAnyGranted>
 	<div class="row group">
 		<div class="cell group"><label>AUDITION:</label></div>			
 		<div class="cell"><span class="r-arrow"></span> <label for="isAuditionAvailable">Available</label></div>
@@ -109,7 +113,10 @@
 			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
 		</div>
 		<div class="cell"><label for="auditionDate">Date:</label></div>
-		<div class="cell"><g:textField name="auditionDate" class="datepick" id="audition-date" value="${castingProfileInstance?.auditionDate}"/></div>
+		<div class="cell">
+			<g:textField name="auditionDate" class="datepick" id="audition-date" value="${castingProfileInstance?.auditionDate?.format('dd-MMM-yyyy')}"/>
+			<span class="datepicker-reset" picker="audition-date" altfield="audition-date">clear</span>
+		</div>
 	</div>	
 	<div class="row group">
 		<div class="cell group"><label>CALLBACK:</label></div>	
@@ -124,7 +131,10 @@
 			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
 		</div>
 		<div class="cell"><label for="callbackDate">Date:</label></div>
-		<div class="cell"><g:textField name="callbackDate" class="datepick" id="callback-date" value="${castingProfileInstance?.callbackDate}"/></div>
+		<div class="cell">
+			<g:textField name="callbackDate" class="datepick" id="callback-date" value="${castingProfileInstance?.callbackDate?.format('dd-MMM-yyyy')}"/>
+			<span class="datepicker-reset" picker="callback-date" altfield="callback-date">clear</span>
+		</div>
 	</div>
 	<div class="row group">
 		<div class="cell group"><label>WARDROBE:</label></div>			
@@ -139,7 +149,10 @@
 			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
 		</div>
 		<div class="cell"><label for="wardrobeDate">Date:</label></div>
-		<div class="cell"><g:textField name="wardrobeDate" class="datepick" id="wardrobe-date" value="${castingProfileInstance?.wardrobeDate}"/></div>
+		<div class="cell">
+			<g:textField name="wardrobeDate" class="datepick" id="wardrobe-date" value="${castingProfileInstance?.wardrobeDate?.format('dd-MMM-yyyy')}"/>
+			<span class="datepicker-reset" picker="wardrobe-date" altfield="wardrobe-date">clear</span>
+		</div>
 	</div>	
 	<div class="row group">
 		<div class="cell group"><label>SHOOT:</label></div>		
@@ -154,7 +167,10 @@
 			<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
 		</div>
 		<div class="cell"><label for="shootDate">Date:</label></div>
-		<div class="cell"><g:textField name="shootDate" class="datepick" id="shoot-date" value="${castingProfileInstance?.shootDate}"/></div>
+		<div class="cell">
+			<g:textField name="shootDate" class="datepick" id="shoot-date" value="${castingProfileInstance?.shootDate?.format('dd-MMM-yyyy')}"/>
+			<span class="datepicker-reset" picker="shoot-date" altfield="shoot-date">clear</span>
+		</div>
 	</div>				
 </div>
 

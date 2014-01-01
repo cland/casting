@@ -21,12 +21,13 @@ class CastingRole {
 	//List<Date> callbackDates
 	//List<Date> wardropeDates
 	//List<Date> shootDates
-	List<Category> allowedCategories //emply list means all allowed otherwise restricted to allow categories in the list.
+	//List<Category> allowedCategories //emply list means all allowed otherwise restricted to allow categories in the list.
 	boolean deleted
-	static transients = [ 'deleted' ]
+	static transients = [ 'deleted' ,'wardropeDates']
 	
 	static belongsTo = [production:Production]
-	static hasMany = [agencyACL:Agency,auditionDates:Date,callbackDates:Date,wardropeDates:Date,shootDates:Date]
+
+	static hasMany = [agencyACL:Agency,auditionDates:Date,callbackDates:Date,wardrobeDates:Date,shootDates:Date,allowedCategories:Category]
 	static fetchMode = [shootDates: 'eager']
 	static constraints = {
 		name(blank:false)
@@ -34,8 +35,7 @@ class CastingRole {
 		minRequiredAuditionCount(min:0,nullable:true,blank:true)
 		requiredMaleCount(min:0,nullable:true,blank:true)
 		requiredFemaleCount(min:0,nullable:true,blank:true)
-		requiredCount(min:1,blank:true)	
-		allowedCategories nullable: true  
+		requiredCount(min:1,blank:true)			 
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 		feeNotes nullable:true,blank:true
@@ -63,5 +63,10 @@ class CastingRole {
 
 	String toString(){
 		"${name}"
+	}
+	
+	//to phase out with new versions
+	public getWardropeDates(){
+		return wardrobeDates
 	}
 } //end class

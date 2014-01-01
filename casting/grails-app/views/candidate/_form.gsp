@@ -64,6 +64,23 @@
 	</label>
 	<g:field type="email" name="person.email" value="${candidateInstance?.person?.email}"/>
 </div>
+
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.dateOfBirth', 'error')} required">
+	<label for="dateOfBirth">
+		<g:message code="user.dateOfBirth.label" default="Date of Birth" />
+		
+	</label>
+	<g:textField name="person.dateOfBirth" class="datepick_single_past" id="birth-date" value="${candidateInstance?.person?.dateOfBirth?.format('dd-MMM-yyyy')}"/>
+	<span class="datepicker-reset" picker="birth-date" altfield="birth-date">clear</span>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'keywords', 'error')} ">
+	<label for="keywords">
+		<g:message code="candidate.keywords.label" default="Keywords" />
+		
+	</label>
+	<g:textArea name="keywords" value="${candidateInstance?.keywords}" rows="3" cols="40" class="textarea"/>
+</div>
 <div class="fieldcontain">
 <fieldset><legend>Headshot (Only 1 required)</legend>
 <input type="file" name="headshot"/>

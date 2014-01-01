@@ -102,13 +102,26 @@
 <br/>
 
 <fieldset><legend>Who can access this production</legend>
-<div class="message">** None selected means ALL can access</div>
+
 	<div class="role-access-control">
 		<div class="role-data-table">
-			<div class="cell"><label for="agencyACL"><g:message code="role.agencyacl.label" default="Agency Access List" /></label></div>
-			<div class="cell">
-				<div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'agencyACL', 'error')} ">		
-					<g:select name="agencyACL" from="${com.cland.casting.Agency.list()}" multiple="multiple" optionKey="id" size="5" value="${castingRoleInstance?.agencyACL*.id}" class="many-to-many"/>
+			<div class="row">
+				<div class="cell"><label for="allowedCategories"><g:message code="role.allowedcategories.label" default="Allowed Categories" /></label>
+				<br/><span style="color:red;font-size:0.6em;">** None selected means ALL categories can access</span></div>
+					<div class="cell">
+					<div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'allowedCategories', 'error')} ">		
+						<g:select name="allowedCategories" from="${com.cland.casting.Category.list()}" multiple="multiple" optionKey="id" size="5" value="${castingRoleInstance?.allowedCategories*.id}" class="many-to-many"/>
+					</div>
+				</div>		
+			</div>
+			<div class="row">
+				<div class="cell"><label for="agencyACL"><g:message code="role.agencyacl.label" default="Any other sprecial agencies (optional)" /></label>
+					<br/><span style="color:red;font-size:0.6em;">** This to allow special agencies that might not fit the above selected categories.</span>
+				</div>
+				<div class="cell">
+					<div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'agencyACL', 'error')} ">		
+						<g:select name="agencyACL" from="${com.cland.casting.Agency.list()}" multiple="multiple" optionKey="id" size="5" optionValue="agencyAndCategories" value="${castingRoleInstance?.agencyACL*.id}" noSelection="['': '--None--']" class="many-to-many"/>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -40,7 +40,7 @@ body {
 	background: #ffffff;
 	color: #333333;
 	margin: 0 auto;
-	max-width: 1200px;
+	max-width: 1220px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: 0 0 0.3em #255b17;
 	-webkit-box-shadow: 0 0 0.3em #255b17;
@@ -96,10 +96,14 @@ img {
 
 .content {
 	float: right;
-    width: 77%;
+    width: 78%;
     padding-right:5px;
 }
-
+#page-body .content {
+	float:left;
+	width: 100%;
+    padding-right:5px;
+}
 .content h1 {
 	border-bottom: 1px solid #CCCCCC;
 	margin: 0.8em 0em 0.3em;
@@ -271,10 +275,11 @@ select[multiple] {
 }
 
 textarea {
-	width: 250px;
-	height: 150px;
+	width: 300px;
+	height: 100px;
 	overflow: auto; /* IE always renders vertical scrollbar without this */
 	vertical-align: top;
+	font-size:0.9em;
 }
 
 input[type=checkbox], input[type=radio] {
@@ -827,8 +832,9 @@ p {
 .attachments {margin-bottom:5px;}
 form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
 .tab a:link, .tab a:visited{color:#48802C ;}
-.tab a:hover {color:#EB8F2A ;text-decoration:none;}
-.datepicker-reset {pointer:hand;}
+.tab a:hover,.datepicker-reset:hover {color:#EB8F2A ;text-decoration:none;}
+.datepicker-reset {cursor:hand;cursor:pointer;color:#48802C;}
+
 .field-calendar-container{display:inline-block; margin-top:1em;margin-bottom:1em;width:100%;}
 .field-calendar-picker-container{width:48%;}
 .field-calendar-picker-container label {width:100% !important;text-align:left;}

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Casting Site</title>
+		<title>Casting Site: Home</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;
@@ -78,6 +78,11 @@
 					margin-top: 0;
 				}
 			}
+			.li-tick {padding:5px;list-style-position:inside;
+			list-style-image:url('${fam.icon(name: 'accept')}');
+			font-size:0.9em;
+			margin-bottom:10px;
+			}
 		</style>
 	</head>
 	<body>
@@ -96,9 +101,21 @@
 			</ul>
 		</div>
 		<div id="page-body" role="main">
-			<h1>Welcome to our casting site</h1>
-			<p>We are excited with what is to come in 2014...</p>
-
+			<h1>Home</h1>
+			<div class="content float-left">
+			<p>From the heart of one of the world's most beautiful cities, our talented, dedicated and hardworking casting team offers you: &nbsp;</p>
+			<br/>
+			<ul>
+			<li class="li-tick"><b>Global connectivity</b> ---- A unique, web-based casting process that is simple, fast and cost effective</li>
+			<li class="li-tick">
+			<b>Minimal turn-around time</b> ---- Once we've completed your auditions we require minimal turn-around time before you're able to log-on and view your material from anywhere in the world
+			</li>
+			<li class="li-tick"><b>Control</b> ---- Create your own presentations, reflecting only your preferred cast</li>
+			</ul>
+			<br/>
+			<p>WARNING ---- This new and exciting way of working can be addictive!</p>
+			</div>
+			<br/>
 		</div>
 	</body>
 </html>

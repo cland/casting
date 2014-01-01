@@ -70,6 +70,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="dateOfBirth" class="datepick_single_past" id="birth-date" value="${userInstance?.dateOfBirth?.format('dd-MMM-yyyy')}"/>
+	<span class="datepicker-reset" picker="birth-date" altfield="birth-date">clear</span>
 </div>
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'enabled', 'error')} ">
 	<label for="enabled">

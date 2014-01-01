@@ -49,14 +49,19 @@
 		</div>
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow
-$(document).ready(function() {		
+$(document).ready(function() {	
+	//alert(cland_params.production.start_date + "\n" + cland_params.production.end_date + "\n" + cland_params.production.audition_dates)
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
-	//$(element_or_selector).multiDatesPicker(options_to_initialize_datepicker_and_multidatepicker);
-	$(".datepick").multiDatesPicker({
-		dateFormat: "dd-M-yy",
-		beforeShowDay: $.datepicker.noWeekends,
-		maxPicks: 1		
+	$(".datepicker-reset").live("click",function(){
+		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
+	var frmdate = new Date(cland_params.production.start_date)
+	var todate = new Date(cland_params.production.end_date)
+	cland_datepickers.init_datepicker_single_future("#cast-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#audition-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#callback-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#wardrobe-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#shoot-date","dd-M-yy",frmdate,todate);
 });  //end method ready(...)
 
 </script>		

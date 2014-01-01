@@ -28,8 +28,10 @@ class CastingProfileController {
 		} 
 		if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
 		//work out the candidates list to present
-		def candidateList = castingApiService.getCandidates(productionId, agencyId, offset, max) //Candidate.list();
-        [castingProfileInstance: new CastingProfile(params),productionInstance:production,candidateList:candidateList, isEditing:true, isNew:true]
+		def candidateList = castingApiService.getCandidates(productionId, agencyId,false, offset, max) //Candidate.list();
+		def productionDates = castingApiService.getProductionDates(production)
+		
+        [castingProfileInstance: new CastingProfile(params),productionInstance:production,candidateList:candidateList,productionDates:productionDates, isEditing:true, isNew:true]
     }
 
     def save() {
@@ -49,9 +51,13 @@ class CastingProfileController {
 		
 		bindData(castingProfileInstance, params, [exclude: 'auditionDate'])
 		bindData(castingProfileInstance, params, [exclude: 'callbackDate'])
+		bindData(castingProfileInstance, params, [exclude: 'wardrobeDate'])
+		bindData(castingProfileInstance, params, [exclude: 'shootDate'])
 		bindData(castingProfileInstance, params, [exclude: 'castDate'])
 		bindData(castingProfileInstance, ['auditionDate': params.date('auditionDate', ['dd-MMM-yyyy'])], [include: 'auditionDate'])
 		bindData(castingProfileInstance, ['callbackDate': params.date('callbackDate', ['dd-MMM-yyyy'])], [include: 'callbackDate'])
+		bindData(castingProfileInstance, ['wardrobeDate': params.date('wardrobeDate', ['dd-MMM-yyyy'])], [include: 'wardrobeDate'])
+		bindData(castingProfileInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
 		bindData(castingProfileInstance, ['castDate': params.date('castDate', ['dd-MMM-yyyy'])], [include: 'castDate'])
         if (!castingProfileInstance.save(flush: true)) {
             render(view: "create", model: [castingProfileInstance: castingProfileInstance,productionInstance:production,candidateList:candidateList, isEditing:true, isNew:true])
@@ -89,7 +95,8 @@ class CastingProfileController {
 		//if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
 		//work out the candidates list to present
 		def candidateList = castingApiService.getCandidates(productionId, agencyId, offset, max)
-        [castingProfileInstance: castingProfileInstance,productionInstance:production,candidateList:candidateList, isEditing:true, isNew:false]
+		def productionDates = castingApiService.getProductionDates(production)
+        [castingProfileInstance: castingProfileInstance,productionInstance:production,candidateList:candidateList,productionDates:productionDates, isEditing:true, isNew:false]
     }
 
     def update(Long id, Long version) {
@@ -113,9 +120,13 @@ class CastingProfileController {
         castingProfileInstance.properties = params
 		bindData(castingProfileInstance, params, [exclude: 'auditionDate'])
 		bindData(castingProfileInstance, params, [exclude: 'callbackDate'])
+		bindData(castingProfileInstance, params, [exclude: 'wardrobeDate'])
+		bindData(castingProfileInstance, params, [exclude: 'shootDate'])
 		bindData(castingProfileInstance, params, [exclude: 'castDate'])
 		bindData(castingProfileInstance, ['auditionDate': params.date('auditionDate', ['dd-MMM-yyyy'])], [include: 'auditionDate'])
 		bindData(castingProfileInstance, ['callbackDate': params.date('callbackDate', ['dd-MMM-yyyy'])], [include: 'callbackDate'])
+		bindData(castingProfileInstance, ['wardrobeDate': params.date('wardrobeDate', ['dd-MMM-yyyy'])], [include: 'wardrobeDate'])
+		bindData(castingProfileInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
 		bindData(castingProfileInstance, ['castDate': params.date('castDate', ['dd-MMM-yyyy'])], [include: 'castDate'])
 		// remove deleted entities. This relies on the cascade:"all-delete-orphan" setting in the respective Entity.
 		castingProfileInstance.ratings.removeAll{ it.deleted }

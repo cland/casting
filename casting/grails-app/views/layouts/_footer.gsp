@@ -6,7 +6,7 @@
 </sec:ifNotLoggedIn>
 <sec:ifLoggedIn>
 <g:link controller="home" action="casting" >Casting</g:link> |
-<g:link controller="home" action="index" >About us</g:link> |
+<g:link controller="home" action="aboutus" >About us</g:link> |
 <g:link controller="home" action="index" >News & Events</g:link> |
 <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
 

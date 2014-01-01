@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <g:each in="${productionInstance?.roles}" var="p" status="i">
+                <g:each in="${rolesList}" var="p" status="i">
                 <tr rowId="${i}">
                     <td><g:link class="show" action="show" controller="castingRole" id="${p?.id}">${p.name}</g:link></td>
                     <td>${p.maxRequiredAuditionCount}</td>
@@ -36,7 +36,7 @@
         </ul>
         </g:if>
         <g:else>
-       		<g:each in="${productionInstance?.roles}" var="p" status="i">
+       		<g:each in="${rolesList}" var="p" status="i">
        			<div id="role-${p.id }" class="role-view">
 	       			<div id="role-header-section-${p.id }" class="role-header-section">
 	       				Role: <g:link class="show" action="show" controller="castingRole" id="${p?.id}">${p.name}</g:link>

@@ -62,10 +62,7 @@
             		<div class="cell"><label>Cast Date:</label></div>
             		<div class="cell"><span class="property-value"><g:formatDate date="${castingProfileInstance?.castDate}" format="dd-MMM-yyyy"/></span></div>
             	</div>	 
-             	<div class="row auditiondate">
-            		<div class="cell"><label>Audition Date:</label></div>
-            		<div class="cell"><span class="property-value"><g:formatDate date="${castingProfileInstance?.auditionDate}" format="dd-MMM-yyyy"/></span></div>
-            	</div>  
+             	 
 				<g:if test="${castingProfileInstance?.averating}">
 	             	<div class="row averating">
 	            		<div class="cell"><label>Audition Date:</label></div>
@@ -174,71 +171,87 @@
 				</ol>
 		</fieldset>
 		<fieldset><legend>Progress Indicators</legend>
-			<ol class="property-list castingProfile">
-				<g:if test="${castingProfileInstance?.isAuditionAvailable}">
-				<li class="fieldcontain">
-					<span id="isAuditionAvailable-label" class="property-label"><g:message code="castingProfile.isAuditionAvailable.label" default="Is Audition Available" /></span>
-					
-						<span class="property-value" aria-labelledby="isAuditionAvailable-label"><g:formatBoolean boolean="${castingProfileInstance?.isAuditionAvailable}" true="Yes" false="No"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.isInvited}">
-				<li class="fieldcontain">
-					<span id="isInvited-label" class="property-label"><g:message code="castingProfile.isInvited.label" default="Is Invited" /></span>
-					
-						<span class="property-value" aria-labelledby="isInvited-label"><g:formatBoolean boolean="${castingProfileInstance?.isInvited}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.isRoleAvailable}">
-				<li class="fieldcontain">
-					<span id="isRoleAvailable-label" class="property-label"><g:message code="castingProfile.isRoleAvailable.label" default="Is Role Available" /></span>
-					
-						<span class="property-value" aria-labelledby="isRoleAvailable-label"><g:formatBoolean boolean="${castingProfileInstance?.isRoleAvailable}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.isShortlist}">
-				<li class="fieldcontain">
-					<span id="isShortlist-label" class="property-label"><g:message code="castingProfile.isShortlist.label" default="Is Shortlist" /></span>
-					
-						<span class="property-value" aria-labelledby="isShortlist-label"><g:formatBoolean boolean="${castingProfileInstance?.isShortlist}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.ratings}">
-				<li class="fieldcontain">
-					<span id="ratings-label" class="property-label"><g:message code="castingProfile.ratings.label" default="Ratings" /></span>
-					
-						<g:each in="${castingProfileInstance.ratings}" var="r">
-						<span class="property-value" aria-labelledby="ratings-label"><g:link controller="rating" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${castingProfileInstance?.round}">
-				<li class="fieldcontain">
-					<span id="round-label" class="property-label"><g:message code="castingProfile.round.label" default="Round" /></span>
-					
-						<span class="property-value" aria-labelledby="round-label"><g:fieldValue bean="${castingProfileInstance}" field="round"/></span>
-					
-				</li>
-				</g:if>
-				<g:if test="${castingProfileInstance?.outcome}">
-				<li class="fieldcontain">
-					<span id="outcome-label" class="property-label"><g:message code="castingProfile.outcome.label" default="Outcome" /></span>
-					
-						<span class="property-value" aria-labelledby="outcome-label"><g:fieldValue bean="${castingProfileInstance}" field="outcome"/></span>
-					
-				</li>
-				</g:if>		
-			</ol>
+
+<div class="data-table">
+
+		<div class="row group">
+			<div class="cell group"><label>PROGRESS:</label></div>
+			<div class="cell"><span class="r-arrow"></span> <label for="isInvited">Invited:</label></div>
+			<div class="cell">
+				<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+			</div>		
+			<div class="cell"><label for="isShortlist">Shortlist:</label></div>
+			<div class="cell">
+				<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isShortlist?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+			</div>	
+			<div class="cell"><label for="isConfirmed">Confirmed:</label></div>
+			<div class="cell">
+				<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isConfirmed?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+			</div>					
+		</div>	
+
+	<div class="row group">
+		<div class="cell group"><label>AUDITION:</label></div>			
+		<div class="cell"><span class="r-arrow"></span> <label for="isAuditionAvailable">Available:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isAuditionAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="isAuditionAttended">Attended:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isAuditionAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="auditionDate">Date:</label></div>
+		<div class="cell">
+			<span class="property-value"><g:formatDate date="${castingProfileInstance?.auditionDate}" format="dd-MMM-yyyy"/></span>
+		</div>
+	</div>	
+	<div class="row group">
+		<div class="cell group"><label>CALLBACK:</label></div>	
+		<div class="cell"><span class="r-arrow"></span> <label for="isCallbackAvailable">Available:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isCallbackAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="isCallbackAttended">Attended:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isCallbackAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="callbackDate">Date:</label></div>
+		<div class="cell">
+			<span class="property-value"><g:formatDate date="${castingProfileInstance?.callbackDate}" format="dd-MMM-yyyy"/></span>
+		</div>
+	</div>
+	<div class="row group">
+		<div class="cell group"><label>WARDROBE:</label></div>			
+		<div class="cell"><span class="r-arrow"></span> <label for="isWardrobeAvailable">Available:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isWardrobeAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="isWardrobeAttended">Attended:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isWardrobeAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="wardrobeDate">Date:</label></div>
+		<div class="cell">
+			<span class="property-value"><g:formatDate date="${castingProfileInstance?.wardrobeDate}" format="dd-MMM-yyyy"/></span>
+		</div>
+	</div>	
+	<div class="row group">
+		<div class="cell group"><label>SHOOT:</label></div>		
+		<div class="cell"><span class="r-arrow"></span> <label for="isRoleAvailable">Available:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isRoleAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="isRoleAttended">Attended:</label></div>
+		<div class="cell">
+			<img src='${resource(dir: 'images/icons', file: (castingProfileInstance?.isRoleAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+		</div>
+		<div class="cell"><label for="shootDate">Date:</label></div>
+		<div class="cell">
+			<span class="property-value"><g:formatDate date="${castingProfileInstance?.wardrobeDate}" format="dd-MMM-yyyy"/></span>
+		</div>
+	</div>				
+</div>
+
 		</fieldset>
 		<fieldset><legend>Ratings and Comments</legend>
 		<g:render template="ratingsTable"/>

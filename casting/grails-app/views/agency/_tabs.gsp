@@ -15,7 +15,15 @@
 					
 				</li>
 				</g:if>
-			
+			<g:if test="${agencyInstance?.categories}">
+				<li class="fieldcontain">
+					<span id="categories-label" class="property-label"><g:message code="agency.categories.label" default="Category" /></span>
+					
+						<g:each in="${agencyInstance.categories}" var="c">
+						<span class="property-value" aria-labelledby="categories-label">${c.encodeAsHTML()}</span>
+						</g:each>					
+				</li>
+				</g:if>
 				<g:if test="${agencyInstance?.company}">
 				<li class="fieldcontain">
 					<span id="contacts-label" class="property-label"><g:message code="agency.contacts.label" default="Phone number" /></span>

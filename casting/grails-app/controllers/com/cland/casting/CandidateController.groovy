@@ -37,7 +37,8 @@ class CandidateController {
 				}
 			}
 		}
-		
+		bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
+		bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
         if (!candidateInstance.save(flush: true)) {
             render(view: "create", model: [candidateInstance: candidateInstance])
             return
@@ -90,7 +91,8 @@ class CandidateController {
         }
 
         candidateInstance.properties = params
-
+		bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
+		bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
         if (!candidateInstance.save(flush: true)) {
             render(view: "edit", model: [candidateInstance: candidateInstance])
             return

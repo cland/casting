@@ -10,6 +10,7 @@ class Agency {
 	Date dateCreated
 	Date lastUpdated
 	String status
+	static transients = [ 'agencyAndCategories' ]
 	static hasMany = [contacts:User,candidates:Candidate,categories:Category]
 	static constraints = {
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
@@ -29,6 +30,9 @@ class Agency {
 		// your code goes here
 	}
 
+	public getAgencyAndCategories(){
+		toString() + " [" + categories*.name.join(',') + "]"
+	}
 	String toString(){
 		"${company?.name}"
 	}

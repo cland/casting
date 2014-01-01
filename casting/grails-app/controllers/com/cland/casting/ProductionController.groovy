@@ -48,14 +48,14 @@ class ProductionController {
             return
         }
 
-		def auditionProfiles = productionInstance?.profiles?.sort{it.castNo} //?.findAll{it.isShortlist}
+		def auditionProfiles = [:]	//productionInstance?.profiles?.sort{it.castNo} 
 		def shortlistProfiles = productionInstance?.profiles?.findAll{it.isShortlist}
-		def finalProfiles = productionInstance?.profiles?.findAll{it?.outcome?.equalsIgnoreCase("selected")}
-		
+		def finalProfiles = productionInstance?.profiles?.findAll{it?.isConfirmed} //outcome?.equalsIgnoreCase("selected")}
+		def rolesList = castingApiService.getAllowedRoles(productionInstance,0) // productionInstance?.roles
 		def productionDates = castingApiService.getProductionDates(productionInstance)
 		
 		
-        [productionInstance: productionInstance,auditionProfiles:auditionProfiles,shortlistProfiles:shortlistProfiles,finalProfiles:finalProfiles,productionDates:productionDates, isEditing:false, isNew:false]
+        [productionInstance: productionInstance,auditionProfiles:auditionProfiles,shortlistProfiles:shortlistProfiles,finalProfiles:finalProfiles,productionDates:productionDates,rolesList:rolesList, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {

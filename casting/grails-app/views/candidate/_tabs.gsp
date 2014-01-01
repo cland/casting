@@ -32,7 +32,7 @@
 		
 				<g:if test="${candidateInstance?.person}">
 				<li class="fieldcontain">
-					<span id="person-label" class="property-label"><g:message code="candidate.person.label" default="Candidate" /></span>
+					<span id="person-label" class="property-label"><g:message code="candidate.person.label" default="Name" /></span>
 					
 						<span class="property-value" aria-labelledby="person-label"><g:link controller="user" action="show" id="${candidateInstance?.person?.id}">${candidateInstance?.person?.encodeAsHTML()}</g:link></span>
 					
@@ -52,13 +52,25 @@
 				<li class="fieldcontain">
 					<span id="person-email-label" class="property-label"><g:message code="candidate.person.email.label" default="Email" /></span>					
 					<span class="property-value" aria-labelledby="person-email-label"> ${candidateInstance?.person?.email?.encodeAsHTML()}</span>					
-				</li>																
-				</g:if>			
+				</li>	
+				<li class="fieldcontain">
+					<span id="person-email-label" class="property-label"><g:message code="candidate.person.dateofbirth.label" default="Date of Birth" /></span>					
+					<span class="property-value"><g:formatDate date="${candidateInstance?.person?.dateOfBirth}" format="dd-MMM-yyyy"/></span>						
+				</li>
+				</g:if>	
+					
 				<g:if test="${candidateInstance?.agency}">
 				<li class="fieldcontain">
 					<span id="agency-label" class="property-label"><g:message code="candidate.agency.label" default="Agency" /></span>
 					
 					<span class="property-value" aria-labelledby="agency-label"><g:link controller="agency" action="show" id="${candidateInstance?.agency?.id}">${candidateInstance?.agency?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+				<g:if test="${candidateInstance?.keywords}">
+				<li class="fieldcontain">
+					<span id="keywords-label" class="property-label"><g:message code="candidate.keywords.label" default="Keywords" /></span>					
+					<span class="property-value" aria-labelledby="keywords-label">${candidateInstance?.keywords?.encodeAsHTML()}</span>
 					
 				</li>
 				</g:if>

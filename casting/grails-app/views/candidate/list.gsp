@@ -28,7 +28,7 @@
 			<table>
 				<thead>
 					<tr>
-					
+						<th><g:message code="candidate.person.label" default="Candidate" /></th>
 						<th><g:message code="candidate.agency.label" default="Agency" /></th>
 					
 						<g:sortableColumn property="clothing" title="${message(code: 'candidate.clothing.label', default: 'Clothing')}" />
@@ -39,15 +39,15 @@
 					
 						<g:sortableColumn property="height" title="${message(code: 'candidate.height.label', default: 'Height')}" />
 					
-						<th><g:message code="candidate.person.label" default="Person" /></th>
+						
 					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${candidateInstanceList}" status="i" var="candidateInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${candidateInstance.id}">${fieldValue(bean: candidateInstance, field: "agency")}</g:link></td>
+						<td><g:link action="show" id="${candidateInstance.id}">${fieldValue(bean: candidateInstance, field: "person")}</g:link></td>
+						<td>${fieldValue(bean: candidateInstance, field: "agency")}</td>
 					
 						<td>${fieldValue(bean: candidateInstance, field: "clothing")}</td>
 					
@@ -57,7 +57,7 @@
 					
 						<td>${fieldValue(bean: candidateInstance, field: "height")}</td>
 					
-						<td>${fieldValue(bean: candidateInstance, field: "person")}</td>
+						
 					
 					</tr>
 				</g:each>

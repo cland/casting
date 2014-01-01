@@ -61,7 +61,7 @@
 </div>
 	<div id="role-dates-summary" class="role-userview-section">
 		<table>
-     		<tr><th>Audition Date(s)</th><th>Callback Date(s)</th><th>Wardrope Date(s)</th><th>Shoot Date(s)</th></tr>
+     		<tr><th>Audition Date(s)</th><th>Callback Date(s)</th><th>Wardrobe Date(s)</th><th>Shoot Date(s)</th></tr>
      		<tr>
      			<td class="td-audition-dates">
       				<g:each in="${productionDates?.auditionDates}" var="d">
@@ -74,7 +74,7 @@
 	           		</g:each>		       					
 				</td>
      			<td  class="td-wardrope-dates">  					
-     				<g:each in="${productionDates?.wardropeDates}" var="d">
+     				<g:each in="${productionDates?.wardrobeDates}" var="d">
 	           			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 	           		</g:each>
            		</td>

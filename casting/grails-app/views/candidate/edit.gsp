@@ -52,9 +52,12 @@
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow
 
-$(document).ready(function() {		
+$(document).ready(function() {	
+	$(".datepicker-reset").live("click",function(){
+		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
+	});
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-
+	cland_datepickers.init_datepicker_single_dob("#birth-date","dd-M-yy");
 	$("#tabs").tabs(
 					{
 					active:cland_params.active_tab(),

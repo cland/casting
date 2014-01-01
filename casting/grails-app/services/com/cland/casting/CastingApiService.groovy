@@ -64,6 +64,41 @@ class CastingApiService {
 		return productionList.sort{it.name} //.reverse() // Production.list() //
 	} //end function
 	
+	def getAllowedRoles(Production prod, long agencyId){
+		def productionRoles = prod?.roles
+		
+		if(isAdmin() || isDirector()){		
+			return prod?.roles
+		}
+		
+		def user = getCurrentUser()
+		agencyId = 0	//force agencyId to something that returns empty results
+		def agency = getAgencyForUser(user.id)
+
+		//First get all the allowed roles
+		//def test1  =  CastingRole.withCriteria { isEmpty("allowedCategories") eq("production.id",prod.id.toLong()) }.unique()
+		def rolesList = productionRoles?.findAll { it.allowedCategories.isEmpty()}
+		
+		//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.		
+		if(agency){
+			 agencyId = agency.id
+			 def agencyCategories = agency?.categories
+			 def restrictedRoles = productionRoles?.findAll { !(it.allowedCategories.isEmpty())}
+			 restrictedRoles.each{role ->
+				 //if agency is in the allowed agencyACL list then add, else test the categories
+				 if(role?.agencyACL?.contains(agency)) {
+					 rolesList.add(role)
+				 }else {
+					 //if role.allowedCategories contains 1 or more categories of given agency then include
+					 agencyCategories.each{cat ->
+	
+						 if(role?.allowedCategories?.contains(cat)) rolesList.add(role)
+					 }
+				 }		 
+			 } //end each restrictedRoles
+		} //end if agency
+		return rolesList
+	}
 	/*
 	 * Given a production, it computes all the key dates defined on the roles if any
 	 * These are: AUDITION_DATES, CALLBACK_DATES, WARDROPE_DATES, SHOOT_DATES
@@ -72,22 +107,26 @@ class CastingApiService {
 	def getProductionDates(Production production){
 		List auditionDates = []
 		List callbackDates = []
-		List wardropeDates = []
+		List wardrobeDates = []
 		List shootDates = []
 		//loop through the available roles
 		production?.roles?.each {role->
 			auditionDates.addAll(role?.auditionDates)
 			callbackDates.addAll(role?.callbackDates)
-			wardropeDates.addAll(role?.wardropeDates)
+			wardrobeDates.addAll(role?.wardrobeDates)
 			shootDates.addAll(role?.shootDates)
 		}
 		return [auditionDates:auditionDates?.sort()?.unique(),
 			callbackDates:callbackDates?.sort()?.unique(),
-			wardropeDates:wardropeDates?.sort()?.unique(),
+			wardropeDates:wardrobeDates?.sort()?.unique(),
 			shootDates:shootDates?.sort()?.unique()]
 	} //end function
 	
 	def getCandidates(long productionId, long agencyId, int offset, int max){
+		return getCandidates(productionId,agencyId, true,offset,max)		
+	} //end function getAgencyCandidates
+	
+	def getCandidates(long productionId, long agencyId, boolean with_profiles,int offset, int max){
 		def user = getCurrentUser() //springSecurityService.currentUser
 		def candidateList = []
 		
@@ -114,13 +153,24 @@ class CastingApiService {
 				eq('agent.id',agencyId)
 				//ilike('hair','black')
 			}
-		} 
+		}
 		
-		//candidateInstanceTotal: candidateList.totalCount
-		//println(candidateList.size())
+		if(!with_profiles){
+			//remove candidates that are already in the production list ??
+			def list_to_remove = []
+			candidateList.each{ candidate ->
+				def tmpProfiles = getProfiles(productionId,candidate.id,0,1)
+				if(tmpProfiles.size()>0){
+					//we need to exclude this candidate, already has a profile for this production
+					list_to_remove.add(candidate)
+				}
+			}
+			//remove the items
+			candidateList.removeAll(list_to_remove)
+		}
+		
 		return candidateList
-		
-	} //end function getAgencyCandidates
+	}
 	def getProfiles(long productionId, long candidateId, int offset, int max){
 		def profiles = CastingProfile.withCriteria {
 			canditate{

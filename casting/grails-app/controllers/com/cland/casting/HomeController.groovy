@@ -13,6 +13,12 @@ class HomeController {
 		
 	}
 
+	def aboutus = {
+		render (view:"aboutus")
+	}
+	def contactus = {
+		render (view:"aboutus")
+	}
 	def casting = {
 		//determine who is currently logged in and redirect them to the appropriate section:
 		//agency: To the login agency's profile

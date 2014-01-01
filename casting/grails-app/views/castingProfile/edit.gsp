@@ -52,11 +52,20 @@
 
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-	$(".datepick").multiDatesPicker({
-		dateFormat: "dd-M-yy",
-		beforeShowDay: $.datepicker.noWeekends,
-		maxPicks: 1		
+	$(".datepicker-reset").live("click",function(){
+		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
+
+	var frmdate = new Date(cland_params.production.start_date)
+	var todate = new Date(cland_params.production.end_date)
+
+	cland_datepickers.init_datepicker_single_future("#cast-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#audition-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#callback-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#wardrobe-date","dd-M-yy",frmdate,todate);
+	cland_datepickers.init_datepicker_single_future("#shoot-date","dd-M-yy",frmdate,todate);
+	
+
 	//Main tabs	
 	$("#tabs").tabs(
 			{

@@ -18,10 +18,16 @@
 	</label>
 	<g:textField name="company.name" value="${agencyInstance?.company?.name}" required=""/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: agencyInstance, field: 'categories', 'error')} ">
+	<label for="categories">
+		<g:message code="agency.categories.label" default="Category" />
+		
+	</label>
+	<g:select name="categories" from="${com.cland.casting.Category.list()}" multiple="multiple" optionKey="id" size="5" value="${agencyInstance?.categories*.id}"  class="many-to-many"/>
+</div>
 <div class="fieldcontain ${hasErrors(bean: agencyInstance?.company, field: 'phoneNo', 'error')} ">
 	<label for="company.phoneNo">
-		<g:message code="organisation.phoneNo.label" default="Phone No" />
-		
+		<g:message code="organisation.phoneNo.label" default="Phone No" />	
 	</label>
 	<g:textField name="company.phoneNo" value="${agencyInstance?.company?.phoneNo}"/>
 </div>
