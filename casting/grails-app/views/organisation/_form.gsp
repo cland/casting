@@ -89,6 +89,21 @@
 	</label>
 	<g:textField name="phyPostCode" value="${organisationInstance?.phyPostCode}"/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'isHost', 'error')} ">
+	<label for="isHost">
+		<g:message code="organisation.isHost.label" default="Is Host?" />
+		
+	</label>
+	<g:checkBox name="isHost" value="${organisationInstance?.isHost}" />
+				<span class="checkbox-text"><g:message code="default.yes.label" default="Yes" /></span>
+</div>
+<div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'staff', 'error')} ">
+	<label for="staff">
+		<g:message code="organisation.staff.label" default="Staff" />
+		
+	</label>
+	<g:select name="staff" from="${com.cland.casting.User.list()}" multiple="multiple" optionKey="id" size="5" value="${organisationInstance?.staff*.id}" noSelection="['':'- None - ']" optionValue="mediumDetails" class="many-to-many"/>
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: organisationInstance, field: 'comments', 'error')} ">
 	<label for="comments">

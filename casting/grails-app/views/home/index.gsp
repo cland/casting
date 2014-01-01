@@ -83,6 +83,10 @@
 			font-size:0.9em;
 			margin-bottom:10px;
 			}
+			.data-table .cell {width:50%;font-size:0.9em;padding:2px}
+			.data-table .cell div.staff {border:solid 1px #EB8F2A;padding:5px;height:180px;}
+			legend {font-weight:bold;color:#FFAE2F;font-size:1.2em;}
+			h1 {font-weight:bold;font-size:1.3em;}
 		</style>
 	</head>
 	<body>

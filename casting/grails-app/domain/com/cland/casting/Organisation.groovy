@@ -18,11 +18,12 @@ class Organisation {
 	Country country
 	String comments
 	String status
+	boolean isHost
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	//static hasMany = [people:Person]
+	static hasMany = [staff:User]
 	
     static constraints = {
 		name()
@@ -41,6 +42,7 @@ class Organisation {
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
+		isHost (nullable:true)
     }
 	def beforeInsert = {
 	createdBy = castingApiService.getCurrentUserId()

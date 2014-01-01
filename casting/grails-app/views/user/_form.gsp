@@ -104,3 +104,24 @@
 	<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
 </div>
 
+<fieldset><legend>Headshot</legend>
+<input type="file" name="headshot"/>
+<g:if test="${isNew == false  }">
+	<div id="headshot" class="attachments">
+			<attachments:each bean="${userInstance}" inputName="headshot" status="i">	
+			<div class="photo-display float-left">
+			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+				<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />			
+				<attachments:downloadLink attachment="${attachment}" inline="true" withContentType="true" />
+				${attachment.niceLength}
+				<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
+					returnPageURI="${createLink(action:'show', id:userInstance.id,absolute:true)}" />
+			</div>	
+				<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+			
+			</attachments:each>
+			<div style="clear:both"></div>
+	</div><br/>
+</g:if>	
+</fieldset>
+

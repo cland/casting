@@ -1,7 +1,7 @@
 package com.cland.casting
 
 import java.util.List;
-
+import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 import org.springframework.dao.DataIntegrityViolationException
 
 class UserController {
@@ -18,7 +18,7 @@ class UserController {
     }
 
     def create() {
-        [userInstance: new User(params)]
+        [userInstance: new User(params), isEditing:true, isNew:true]
     }
 
     def save() {
@@ -38,7 +38,7 @@ class UserController {
 //			def tmp = params.list("role_${r.authority}")
 //			if (tmp[0]) UserRole.create(userInstance, r, true)
 //		}
-
+		attachUploadedFilesTo(userInstance)
         flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
         redirect(action: "show", id: userInstance.id)
     }
@@ -52,7 +52,7 @@ class UserController {
         }
 		//get the roles
 		def roleMap = userInstance.getAuthorities()
-		[userInstance: userInstance,roleMap:roleMap,clientList:castingApiService.getClientListForUser(id, 0,100),agencyList:castingApiService.getAgencyListForUser(id, 0, 100)]
+		[userInstance: userInstance,roleMap:roleMap,clientList:castingApiService.getClientListForUser(id, 0,100),agencyList:castingApiService.getAgencyListForUser(id, 0, 100), isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
@@ -64,7 +64,7 @@ class UserController {
         }
 		//get the roles
 		def roleMap = userInstance.getAuthorities()
-        [userInstance: userInstance,roleMap:roleMap]
+        [userInstance: userInstance,roleMap:roleMap, isEditing:true, isNew:false]
     }
 
     def update(Long id, Long version) {
@@ -101,6 +101,7 @@ class UserController {
 //			def tmp = params.list("role_${r.authority}")
 //			if (tmp[0]) UserRole.create(userInstance, r, true)
 //		}
+		attachUploadedFilesTo(userInstance)
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
         redirect(action: "show", id: userInstance.id)
     }

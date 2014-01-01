@@ -35,7 +35,7 @@ class User {
 	long lastUpdatedBy
 	Date dateCreated
 	Date lastUpdated
-	 Organisation company
+	// Organisation company
 	 String status
 	// Candidate candidate
 	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName','age' ]
@@ -63,7 +63,7 @@ class User {
 		country(nullable:true)
 		contactNo()
 		email(email:true)
-		company(nullable:true)
+		//company(nullable:true)
 		dateCreated()
 		lastUpdatedBy nullable:true
 		createdBy nullable:true

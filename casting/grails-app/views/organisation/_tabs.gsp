@@ -2,7 +2,7 @@
 <div id="tabs" style="display: none;">
 	<ul>
 	    <li><a href="#tab-agency">Details</a></li>
-		<li><a href="#tab-other">Other</a></li>
+		<li><a href="#tab-staff">Staff</a></li>
 	</ul>
 	<div id="tab-agency">
 				<ol class="property-list organisation">
@@ -142,8 +142,16 @@
 			</fieldset>
 	</div>
 
-	<div id="tab-other">
-
+	<div id="tab-staff">
+		<g:if test="${organisationInstance?.staff}">
+				<li class="fieldcontain">
+					<span id="staff-label" class="property-label"><g:message code="organisation.staff.label" default="Staff List" /></span>
+					
+						<g:each in="${organisationInstance.staff}" var="c">
+						<span class="property-value" aria-labelledby="staff-label"><g:link controller="user" action="show" id="${c.id}">${c.getShortDetails().encodeAsHTML()}</g:link></span>
+						</g:each>					
+				</li>
+				</g:if>
 	</div>
 </div>
 

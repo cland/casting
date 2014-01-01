@@ -32,7 +32,7 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" >
+			<g:uploadForm method="post" >
 				<g:hiddenField name="id" value="${userInstance?.id}" />
 				<g:hiddenField name="version" value="${userInstance?.version}" />
 				<fieldset class="form">
@@ -42,7 +42,7 @@
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
-			</g:form>
+			</g:uploadForm>
 		</div>
 <script>
   $(document).ready(function() {

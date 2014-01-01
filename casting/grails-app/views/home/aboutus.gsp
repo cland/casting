@@ -1,3 +1,4 @@
+<g:set var="hostOrg" value="${ com.cland.casting.Organisation.find{isHost==true}}"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -83,8 +84,10 @@
 			font-size:0.9em;
 			margin-bottom:10px;
 			}
-			.data-table .cell {width:50%;font-size:0.9em;padding:2px}
-			.data-table .cell div.staff {border:solid 1px #EB8F2A;padding:5px;height:180px;}
+			.data-table .cell {width:50%;font-size:0.9em;padding:20px}
+			.data-table .cell div.staff {border:solid 1px #EB8F2A;padding:5px;height:280px;}
+			legend {font-weight:bold;color:#FFAE2F;font-size:1.2em;}
+			h1 {font-weight:bold;font-size:1.3em;}
 		</style>
 	</head>
 	<body>
@@ -115,27 +118,91 @@
 				You will find us at the top of St George's Mall in Cape Town's city centre, where we are surrounded by 5-star boutique hotels, flea-markets, sidewalk cafes and trendy night spots.<br><br>After a hard day's work in our spacious and comfortable, airconditioned studios, enjoy the best relaxation and entertainment Cape Town has to offer, right on our doorstep.
 				</p>
 				<p>
-				<b>T:</b> +27 21 424 4004<br><b>F:</b> +27 21 424 4003<br><b>M:</b> +27 82 491 3632<br><b>E:</b> <a href="mailto:info@castingcapetown.com">info@castingcapetown.com</a>
+				<b>T:</b> ${ hostOrg?.phoneNo?.split(",")?.find{true}}<br>
+				<b>F:</b> ${ hostOrg?.phoneNo?.split(",")?.getAt(1)}<br>
+				<b>M:</b> ${ hostOrg?.phoneNo?.split(",")?.getAt(2)}<br>
+				<b>E:</b> <a href="mailto:${ hostOrg?.email}">${ hostOrg?.email}</a>
 				</p>
 				</div>
 			</fieldset>
 			<fieldset id="team"><legend>Meet The Team</legend>
+			<g:set var="data_table" value=""/>
+			<g:set var="tmp" value=""/>
+			<g:set var="staffList" value="${ hostOrg?.staff}"/>
+			<g:set var="count_per_row" value="${2 }"/>
+			<g:set var="total_count" value="${staffList?.size() }"/>
 			<div class="data-table">
-				<div class="row">
-					<div class="cell" >
-					<div class="staff">
-					<b>JEANNE WEGNER</b> (BA English)<br>Casting Director, talent-spotter, slave driver and supplier of chocolate brownies
-					</div>
-					</div>
+			<g:each in="${ staffList.sort()}" var="userInstance" status="i">
+				<g:set var="entry">
 					<div class="cell">
-					<div class="staff">
-					<b>JORG WEGNER</b> (Dip Elec Eng)<br>Miracle making, trouble-shooting IT-man
+						<div class="staff">
+						<g:each in="${com.cland.casting.Image.withCriteria{
+				isNotEmpty("locations")				
+				}
+					
+			}" var="imageInstance">
+			<g:if test="${imageInstance.locations?.contains("team") && userInstance?.firstLastName?.equalsIgnoreCase(imageInstance?.name)}">
+			<attachments:each bean="${imageInstance}" inputName="image" status="k">	
+					<div class="photo-display " style="border:none;margin-bottom:1.5em;">
+					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+					<b>${userInstance} ${imageInstance?.description }</b><br/>
+					<span class="caption">${imageInstance?.caption }</span>							
+					</div>	
+						<g:if test="${k%2==0 & k!=0 }"><br/></g:if>
+					
+					</attachments:each>			
+			<br/>
+			</g:if>			
+			</g:each>
+
+						
+						</div>
 					</div>
-					</div>
-				</div>
+				</g:set>
+				
+				<g:set var="tmp" value="${tmp } ${entry }"/>
+
+						<g:if test="${((i+1)%count_per_row) ==0 }">
+							<g:set var="data_table">
+								<div id="row-${i}" class="staff-row">
+									${tmp }
+								</div>
+							</g:set>
+							<g:set var="tmp" value="" />
+						</g:if>
+						<!-- Add the last bit -->
+						<g:if test="${(total_count == (i+1)) & tmp != "" }">
+							<g:set var="data_table">
+								${data_table }
+								<div id="row-${i}" class="staff-row">
+									${tmp }
+								</div>
+							</g:set>
+						</g:if>
+				</g:each>
+				${data_table }
+				
 			</div>
 			</fieldset>
 			<fieldset id="facilities"><legend>Our Studio</legend>
+			<g:each in="${com.cland.casting.Image.withCriteria{
+				isNotEmpty("locations")				
+				}
+					
+			}" var="imageInstance">
+			<g:if test="${imageInstance.locations?.contains("studio")}">
+			<attachments:each bean="${imageInstance}" inputName="image" status="k">	
+					<div class="photo-display float-left" style="border:none;margin-bottom:1.5em;">
+					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+					<span class="caption">${imageInstance?.caption }</span>							
+					</div>	
+						<g:if test="${k%2==0 & k!=0 }"><br/></g:if>
+					
+					</attachments:each>			
+			<br/>
+			</g:if>			
+			</g:each>
+			
 			</fieldset>
 			<br/>
 		</div>

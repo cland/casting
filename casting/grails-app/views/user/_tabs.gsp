@@ -7,6 +7,16 @@
 		<li><a href="#tab-attachments">Supporting Documents</a></li>
 	</ul>
 	<div id="tab-person">
+	<div id="headshot" class="attachments float-right">
+			<attachments:each bean="${userInstance}" inputName="headshot" status="i">	
+			<div class="photo-display float-left">
+			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
+			</div>	
+				<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
+			
+			</attachments:each>
+			<div style="clear:both"></div>
+	</div><br/>
 			<ol class="property-list user">
 			
 				<g:if test="${userInstance?.username}">
@@ -172,14 +182,7 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.company}">
-				<li class="fieldcontain">
-					<span id="company-label" class="property-label"><g:message code="user.company.label" default="Company" /></span>
-					
-						<span class="property-value" aria-labelledby="company-label"><g:link controller="organisation" action="show" id="${userInstance?.company?.id}">${userInstance?.company?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
+
 			
 			</ol>
 			<fieldset><legend>Login Details</legend>

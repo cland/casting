@@ -75,9 +75,9 @@ class OrganisationController {
                 return
             }
         }
-
+		
         organisationInstance.properties = params
-
+	
         if (!organisationInstance.save(flush: true)) {
             render(view: "edit", model: [organisationInstance: organisationInstance])
             return
