@@ -17,8 +17,6 @@
          		<div class="row name">
             		<div class="cell"><label>Casting Role:</label></div>
             		<div class="cell"><span class="property-value">${castingRoleInstance?.name}</span></div>
-            	</div>
-            	<div class="row production">
             		<div class="cell"><label>Production:</label></div>
             		<div class="cell">
             			<g:link controller="production" action="show" id="${production?.id }">
@@ -26,47 +24,46 @@
             			</g:link>
             		</div>
             	</div>
+            	
            	<g:if test="${castingRoleInstance?.description}">
             	<div class="row description">
             		<div class="cell"><label>About the role:</label></div>
             		<div class="cell"><span class="property-value">${castingRoleInstance?.description?.encodeAsHTML()}</span></div>
+            		<div class="cell"><label></label></div>
+            		<div class="cell"><span class="property-value"></span></div>
             	</div>				
 				</g:if>   
-         		<div class="row dayfee">
-            		<div class="cell"><label>Day fee:</label></div>
-            		<div class="cell"><span class="property-value">${castingRoleInstance?.dayfee}</span></div>
-            	</div>				      	        	
-				<g:if test="${castingRoleInstance?.feeNotes}">
-            	<div class="row comments">
+         					      	        	
+				
+            	<div class="row feenotes">
             		<div class="cell"><label>Fee notes:</label></div>
             		<div class="cell"><span class="property-value">${castingRoleInstance?.feeNotes?.encodeAsHTML()}</span></div>
+            		<div class="cell"><label>Day fee:</label></div>
+            		<div class="cell"><span class="property-value">${castingRoleInstance?.dayfee}</span></div>
             	</div>				
-				</g:if>         	   
+				        	   
             	<div class="row castdate">
-            		<div class="cell"><label>Cast Date(s):</label></div>
+            		<div class="cell"><label>Audition Date(s):</label></div>
             		<div class="cell">
             			<g:each in="${castingRoleInstance?.auditionDates?.sort()}" var="d">
             			<span class="property-value"><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
             			</g:each>            			
             		</div>
-            	</div>	 
-             	<div class="row callbackdate">
             		<div class="cell"><label>Callback Date(s):</label></div>
             		<div class="cell">
             			<g:each in="${castingRoleInstance?.callbackDates?.sort()}" var="d">
             			<span class="property-value"><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
             			</g:each>            			
             		</div>
-            	</div>
-             	<div class="row wardropedate">
-            		<div class="cell"><label>Wardrope Date(s):</label></div>
+            	</div>	 
+             	
+             	<div class="row wardrobedate">
+            		<div class="cell"><label>Wardrobe Date(s):</label></div>
             		<div class="cell">
-            			<g:each in="${castingRoleInstance?.wardropeDates?.sort()}" var="d">
+            			<g:each in="${castingRoleInstance?.wardrobeDates?.sort()}" var="d">
             			<span class="property-value"><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
             			</g:each>            			
             		</div>
-            	</div>    
-             	<div class="row shootdates">
             		<div class="cell"><label>Shoot Date(s):</label></div>
             		<div class="cell">
             			<g:each in="${castingRoleInstance?.shootDates?.sort()}" var="d">
@@ -74,6 +71,7 @@
             			</g:each>            			
             		</div>
             	</div>    
+             	  
             	<div class="row required-count">
             		<div class="cell"><label>Required Count:</label></div>
             		<div class="cell"><span class="property-value">${castingRoleInstance?.requiredCount }</span></div>

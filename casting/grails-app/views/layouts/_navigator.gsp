@@ -1,8 +1,10 @@
 <div class="nav" role="navigation">
 	<ul>
 		
-		<li><a class="home" href="${createLink(uri: '/')}"><g:message
-						code="default.home.label" /></a>
+		<li>
+			<a class="home" href="${createLink(uri: '/')}">
+				<g:message code="default.home.label" />
+			</a>
 		</li>
 		<sec:ifLoggedIn>
 		<li><g:link controller="home" action="casting" class="casting"> <g:message

@@ -142,7 +142,7 @@
 			<div class="cell"><label for="agencyACL"><g:message code="production.agencyacl.label" default="Agency Access List" /></label></div>
 			<div class="cell">
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'agencyACL', 'error')} ">		
-					<g:select name="agencyACL" from="${com.cland.casting.Agency.list()}" multiple="multiple" noSelection="['': '--None--']" optionValue="agencyAndCategories" optionKey="id" size="5" value="${productionInstance?.agencyACL*.id}" class="many-to-many"/>
+					<g:select name="agencyACL" from="${com.cland.casting.Agency.list()}" multiple="multiple" noSelection="['': '--No Selection--']" optionValue="agencyAndCategories" optionKey="id" size="5" value="${productionInstance?.agencyACL*.id}" class="many-to-many"/>
 				</div>
 			</div>
 		</div>

@@ -14,7 +14,7 @@
 			Production List </span>
 	</div>
 	<div id="status1" class="leftbar" role="complementary">
-         <g:render template="../layouts/sidenav-admin"></g:render>
+         <g:sideMenu default=""></g:sideMenu> 
     </div>
 		<a href="#list-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 

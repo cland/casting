@@ -4,7 +4,7 @@ package com.cland.casting
 public enum CastEventType {
 	AUDITION("Audition"),
 	CALLBACK("Callback"),
-	WARDROPE("Wardrope"),
+	WARDROBE("Wardrobe"),
 	SHOOT("Shoot")
 	
 	final String value
@@ -22,6 +22,6 @@ public enum CastEventType {
 	}
 
 	static list() {
-		[AUDITION,CALLBACK,WARDROPE,SHOOT]
+		[AUDITION,CALLBACK,WARDROBE,SHOOT]
 	}
 }

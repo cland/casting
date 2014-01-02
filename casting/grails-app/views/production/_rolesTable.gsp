@@ -60,7 +60,7 @@
 	                </sec:ifAnyGranted>
 	       			<div id="role-userview-section-${p.id }" class="role-userview-section">
 		       			<table>
-		       				<tr><th>Audition Date(s)</th><th>Callback Date(s)</th><th>Wardrope Date(s)</th><th>Shoot Date(s)</th></tr>
+		       				<tr><th>Audition Date(s)</th><th>Callback Date(s)</th><th>Wardrobe Date(s)</th><th>Shoot Date(s)</th></tr>
 		       				<tr>
 		       					<td class="td-audition-dates">
 			       					<g:each in="${p?.auditionDates?.sort()}" var="d">
@@ -72,8 +72,8 @@
 			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 			            			</g:each>		       					
 								</td>
-		       					<td  class="td-wardrope-dates">  					
-		       						<g:each in="${p?.wardropeDates?.sort()}" var="d">
+		       					<td  class="td-wardrobe-dates">  					
+		       						<g:each in="${p?.wardrobeDates?.sort()}" var="d">
 			            			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 			            			</g:each>
 			            		</td>

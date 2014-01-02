@@ -16,6 +16,9 @@
 				<g:hiddenField name="viewas" id="hidden_viewas_stage1" value="headshots"/>
 				<g:hiddenField name="sortby" id="hidden_sortby_stage1" value="castno"/>
 				<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage1_top" class="submit action_wait"/></div>
+				<div class="cell float-right">
+					<g:render template="radio_selector"/>
+				</div>
 				<div class="cast-list" id="stage1-cast-list">
 					<g:render template="../layouts/profile_headshot" bean="${auditionProfiles}" var="profileList"></g:render>			
 				</div>
@@ -40,6 +43,9 @@
 		<g:hiddenField name="viewas" id="hidden_viewas_stage2" value="summary"/>
 		<g:hiddenField name="sortby" id="hidden_sortby_stage2" value="castno"/>
 		<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage2_top" class="submit action_wait"/></div>
+		<div class="cell float-right">
+				<g:render template="radio_selector"/>
+		</div>
 			<div class="cast-list" id="stage2-cast-list">
 				<g:render template="../layouts/profile_summary" collection="${shortlistProfiles }" var="profile"/>			
 			</div>
@@ -62,9 +68,12 @@
 		<g:hiddenField name="stage" value="3"/>
 		<g:hiddenField name="viewas" id="hidden_viewas_stage3" value="summary"/>
 		<g:hiddenField name="sortby" id="hidden_sortby_stage3" value="castno"/>
-		<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage3_top" class="submit action_wait"/></div>	
+		<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage3_top" class="submit action_wait"/></div>
+		<div class="cell float-right">
+				<g:render template="radio_selector"/>
+		</div>	
 			<div class="cast-list" id="stage3-cast-list">
-				<g:render template="../layouts/profile_detailed" collection="${finalProfiles }" var="profile"/>
+				<g:render template="../layouts/profile_summary" collection="${finalProfiles }" var="profile"/>
 			</div>
 		<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage3_bottom" class="submit action_wait"/></div>
 	</g:formRemote>

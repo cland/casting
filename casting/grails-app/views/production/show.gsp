@@ -19,7 +19,8 @@
 				</span>
 		</div>	
 	<div id="status1" class="leftbar" role="complementary">
-         <g:render template="../layouts/sidenav-admin"></g:render>
+<%--         <g:render template="../layouts/sidenav-admin"></g:render>--%>
+			<g:sideMenu default=""></g:sideMenu>  
     </div>
 		<a href="#show-production" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
@@ -74,6 +75,16 @@ $(document).ready(function() {
 				}
 		});
 });  //end method ready(...)
+function setAllRadio(group,value,checked){
+	//alert(group + " - " + value)
+	$(group).each(function() {
+		var el = $(this)
+        //alert(el.val() + " - " + el.is(':checked'))
+        if(el.val() == value){           
+          el.attr("checked",checked)
+        }
+    });
+}
 function onSuccessFilterStage1CallbackHander(data, textStatus){
 	stageDisplay(getCurrentTabText(),"stage1")
 //	$("#hidden_viewas_stage1").attr("value",$("#viewas_stage1").val())

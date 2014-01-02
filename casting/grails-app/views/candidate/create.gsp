@@ -20,7 +20,7 @@
 			</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-	         <g:render template="../layouts/sidenav-admin"></g:render>
+	         <g:sideMenu default=""></g:sideMenu> 
 	    </div>	
 		<a href="#create-candidate" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="create-candidate" class="content scaffold-create" role="main">

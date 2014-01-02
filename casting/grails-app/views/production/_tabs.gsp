@@ -73,7 +73,7 @@
 	           			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 	           		</g:each>		       					
 				</td>
-     			<td  class="td-wardrope-dates">  					
+     			<td  class="td-wardrobe-dates">  					
      				<g:each in="${productionDates?.wardrobeDates}" var="d">
 	           			<span class=""><g:formatDate date="${d}" format="dd-MMM-yyyy"/></span><br/>
 	           		</g:each>

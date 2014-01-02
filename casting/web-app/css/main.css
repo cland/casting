@@ -47,10 +47,11 @@ body {
 	        box-shadow: 0 0 0.3em #255b17;
 }
 
-#grailsLogo {
+#appLogo {
 	background-color: #F8BB59;
 }
-
+#current-user{float:right; margin:10px;padding:2px 10px;text-transform:capitalize;font-weight:bold;color:#000;font-size:0.9em;}
+#current-user label{color:#000;font-weight:normal;text-transform:none;}
 /* replace with .no-boxshadow body if you have modernizr available */
 .ie6 body,
 .ie7 body,
@@ -89,7 +90,7 @@ img {
 
 /* GENERAL */
 
-#grailsLogo a {
+#appLogo a {
 	display: inline-block;
 	margin: 1em;
 }
@@ -756,7 +757,7 @@ p {
     margin-bottom:0.8em;
     
 }
-.profile-row label {color:#8C8C8C;font-size:1em;}
+.profile-row label, .role-details label {color:#8C8C8C;font-size:0.9em;}
 .summary-row .cast-details,.profile-row .cast-details {
     float: left;
     border: none 1px #0e8523;
@@ -831,9 +832,11 @@ p {
 .photo-display{margin:5px;padding:5px;border:1px solid #ccc;text-align:center;}
 .attachments {margin-bottom:5px;}
 form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
-.tab a:link, .tab a:visited{color:#48802C ;}
+.tab a:link, .tab a:visited{color:#48802C;}
 .tab a:hover,.datepicker-reset:hover {color:#EB8F2A ;text-decoration:none;}
-.datepicker-reset {cursor:hand;cursor:pointer;color:#48802C;}
+.datepicker-reset, .action-link {cursor:hand;cursor:pointer;color:#48802C;font-size:0.9em;font-weight:bold;}
+.datepicker-reset:hover, .action-link:hover{color:#EB8F2A;}
+.action-link-label{color:#EB8F2A;font-weight:bold;font-size:0.8em;text-transform:uppercase;}
 
 .field-calendar-container{display:inline-block; margin-top:1em;margin-bottom:1em;width:100%;}
 .field-calendar-picker-container{width:48%;}
@@ -848,13 +851,13 @@ form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;paddi
 .role-userview-section {}
 .role-userview-section table tbody tr td.td-section-head{background:#f8f8f8;padding:8px;font-weight:bold;}
 .role-userview-section table tbody tr td.td-audition-dates,
-.role-userview-section table tbody tr td.td-wardrope-dates,
+.role-userview-section table tbody tr td.td-wardrobe-dates,
 .role-userview-section table tbody tr td.td-callback-dates,
 .role-userview-section table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;}
 .role-userview-section table tbody tr td.td-shoot-dates {border-right:none;}
 #role-dates-summary table th, #role-dates-summary table td { font-size: 0.9em;}
 #role-dates-summary table tbody tr td.td-audition-dates,
-#role-dates-summary table tbody tr td.td-wardrope-dates,
+#role-dates-summary table tbody tr td.td-wardrobe-dates,
 #role-dates-summary table tbody tr td.td-callback-dates,
 #role-dates-summary table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;vertical-align:top;}
 #role-dates-summary table tbody tr td.td-audition-dates {border-left:solid 1px #ccc;}
@@ -870,3 +873,5 @@ form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;paddi
 table tr th.center{text-align:center;background:#F9DCB1;border-left:1px solid #f8f8f8;}
 table tr td.center{text-align:center;} 
 table tr td.sub-head {font-weight:bold;font-size:0.9em;text-align:center;}
+#remember_me_holder {display:none;}
+.display-date-field, input.display-date-field:focus  {background:#F9DCB1;font-size:0.8em;width:270px;border:none;}

@@ -89,7 +89,7 @@
 					<div class="row">
 						<div class="cell"><label for=""><g:message code="default.viewas.label" default="View as" />:</label></div>
 						<div class="cell">
-							<g:select name="viewas" id="viewas_stage3" value="headshots" 
+							<g:select name="viewas" id="viewas_stage3" value="summary" 
 							from="${['Headshots','Summary','Detailed','List Table'] }" 
 							keys="${['headshots','summary','detailed','list']}"/>														
 						</div>

@@ -69,7 +69,16 @@
 		</style>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="/casting"><img src="${resource(dir: 'images', file: 'logo.png')}" alt="Cland"/></a></div>
+		<div id="appLogo" role="banner">
+			<g:link controller="home" action="casting" class="casting">
+				<img src="${resource(dir: 'images', file: 'logo.png')}" alt="Logo"/>
+			</g:link>
+			<span id="current-user">
+				<label><span class="r-arrow"></span></label>
+				<sec:ifLoggedIn><sec:loggedInUserInfo field="username" /></sec:ifLoggedIn>
+				<sec:ifNotLoggedIn>Anonymous</sec:ifNotLoggedIn>			
+			</span>
+		</div>
 		<g:render template="/layouts/navigator" />
 		<g:layoutBody/>
 		<g:render template="/layouts/footer" />

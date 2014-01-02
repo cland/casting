@@ -25,7 +25,7 @@ class CastingRoleController {
 		bindData(castingRoleInstance, params, [exclude: 'auditionDates'])
 		bindData(castingRoleInstance, params, [exclude: 'shootDates'])
 		bindData(castingRoleInstance, params, [exclude: 'callbackDates'])
-		bindData(castingRoleInstance, params, [exclude: 'wardropeDates'])
+		bindData(castingRoleInstance, params, [exclude: 'wardrobeDates'])
         if (!castingRoleInstance.save(flush: true)) {
             render(view: "create", model: [castingRoleInstance: castingRoleInstance])
             return
@@ -33,7 +33,7 @@ class CastingRoleController {
 		//add the dates
 		appendDates(params?.auditionDates,castingRoleInstance,CastEventType.AUDITION)
 		appendDates(params?.callbackDates,castingRoleInstance,CastEventType.CALLBACK)
-		appendDates(params?.wardropeDates,castingRoleInstance,CastEventType.WARDROPE)
+		appendDates(params?.wardrobeDates,castingRoleInstance,CastEventType.WARDROBE)
 		appendDates(params?.shootDates,castingRoleInstance,CastEventType.SHOOT)
         flash.message = message(code: 'default.created.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), castingRoleInstance.id])
         redirect(action: "show", id: castingRoleInstance.id)
@@ -85,7 +85,7 @@ class CastingRoleController {
 		bindData(castingRoleInstance, params, [exclude: 'auditionDates'])
 		bindData(castingRoleInstance, params, [exclude: 'shootDates'])
 		bindData(castingRoleInstance, params, [exclude: 'callbackDates'])
-		bindData(castingRoleInstance, params, [exclude: 'wardropeDates'])
+		bindData(castingRoleInstance, params, [exclude: 'wardrobeDates'])
         castingRoleInstance.properties = params
 	
         if (!castingRoleInstance.save(flush: true)) {
@@ -96,7 +96,7 @@ class CastingRoleController {
 		//add the dates
 		appendDates(params?.auditionDates,castingRoleInstance,CastEventType.AUDITION)
 		appendDates(params?.callbackDates,castingRoleInstance,CastEventType.CALLBACK)
-		appendDates(params?.wardropeDates,castingRoleInstance,CastEventType.WARDROPE)
+		appendDates(params?.wardrobeDates,castingRoleInstance,CastEventType.WARDROBE)
 		appendDates(params?.shootDates,castingRoleInstance,CastEventType.SHOOT)
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), castingRoleInstance.name])
@@ -131,8 +131,8 @@ class CastingRoleController {
 					case CastEventType.AUDITION:
 						datelist.each{ entry ->	addToAuditionDates(DateParser.fromString("",entry)).save(flush:true)} //end each
 					break;
-					case CastEventType.WARDROPE:
-						datelist.each{ entry ->	addToWardropeDates(DateParser.fromString("",entry)).save(flush:true)}
+					case CastEventType.WARDROBE:
+						datelist.each{ entry ->	addToWardrobeDates(DateParser.fromString("",entry)).save(flush:true)}
 					break;
 					case CastEventType.CALLBACK:
 					objInstance.callbackDates.clear()

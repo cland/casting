@@ -20,8 +20,7 @@
 		</span>
 	</div>
 	<div id="status1" class="leftbar" role="complementary">
-		<g:sideMenu default=""></g:sideMenu>
-       
+		<g:sideMenu default=""></g:sideMenu>    
     </div>
 
 	<a href="#show-agency" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

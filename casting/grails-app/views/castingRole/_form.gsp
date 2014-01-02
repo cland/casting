@@ -37,7 +37,7 @@
 		[<span class="datepicker-reset" picker="audition-datepicker" altfield="audition-date">clear</span>]
 	</label>
 	<div id="audition-datepicker"></div>
-	<g:textField name="auditionDates" id="audition-date" value="${castingRoleInstance?.auditionDates*.format('yyyy-M-d')?.join(",")}"/>	
+	<g:textField name="auditionDates" readonly class="display-date-field" id="audition-date" value="${castingRoleInstance?.auditionDates*.format('yyyy-M-d')?.join(",")}"/>	
 	
 </div>
 <div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'callbackDates', 'error')} float-right field-calendar-picker-container">	
@@ -46,29 +46,29 @@
 		[<span class="datepicker-reset" picker="callback-datepicker" altfield="callback-date">clear</span>]
 	</label>
 	<div id="callback-datepicker"></div>
-	<g:textField name="callbackDates" id="callback-date" value="${castingRoleInstance?.callbackDates*.format('yyyy-M-d')?.join(",")}"/>	
+	<g:textField name="callbackDates" readonly class="display-date-field" id="callback-date" value="${castingRoleInstance?.callbackDates*.format('yyyy-M-d')?.join(",")}"/>	
 </div>
 <div class="clear-both"></div>
 </div>
 
 <div class="field-calendar-container">
-<div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'wardropeDates', 'error')} float-right field-calendar-picker-container">	
-	<label for="wardropeDates">
-		<g:message code="castingRole.wardropeDates.label" default="Wardrope date(s)" />
-		[<span class="datepicker-reset" picker="wardrope-datepicker" altfield="wardrope-date">clear</span>]
+<div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'wardrobeDates', 'error')} float-right field-calendar-picker-container">	
+	<label for="wardrobeDates">
+		<g:message code="castingRole.wardrobeDates.label" default="Wardrobe date(s)" />
+		[<span class="datepicker-reset" picker="wardrobe-datepicker" altfield="wardrobe-date">clear</span>]
 	</label>
-	<div id="wardrope-datepicker"></div>
-	<g:textField name="wardropeDates" id="wardrope-date" value="${castingRoleInstance?.wardropeDates*.format('yyyy-M-d')?.join(",")}"/>	
+	<div id="wardrobe-datepicker"></div>
+	<g:textField name="wardrobeDates" readonly class="display-date-field" id="wardrobe-date" value="${castingRoleInstance?.wardrobeDates*.format('yyyy-M-d')?.join(",")}"/>	
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'shootDates', 'error')} float-left field-calendar-picker-container">	
 	<label for="shootDates">
 		<g:message code="castingRole.shootDates.label" default="Shoot date(s)" />
-		[<span class="datepicker-reset" picker="shootdate-datepicker" altfield="shootdate-date">clear</span>]
+		[<span class="datepicker-reset" picker="shoot-datepicker" altfield="shoot-date">clear</span>]
 	</label>
 	<div id="shoot-datepicker"></div>
 	
-	<g:textField name="shootDates" id="shoot-date" value="${castingRoleInstance?.shootDates*.format('yyyy-M-d')?.join(",")}"/>	
+	<g:textField name="shootDates" readonly class="display-date-field" id="shoot-date" value="${castingRoleInstance?.shootDates*.format('yyyy-M-d')?.join(",")}"/>	
 </div>
 <div class="clear-both"></div>
 </div>
@@ -120,7 +120,7 @@
 				</div>
 				<div class="cell">
 					<div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'agencyACL', 'error')} ">		
-						<g:select name="agencyACL" from="${com.cland.casting.Agency.list()}" multiple="multiple" optionKey="id" size="5" optionValue="agencyAndCategories" value="${castingRoleInstance?.agencyACL*.id}" noSelection="['': '--None--']" class="many-to-many"/>
+						<g:select name="agencyACL" from="${com.cland.casting.Agency.list()}" multiple="multiple" optionKey="id" size="5" optionValue="agencyAndCategories" value="${castingRoleInstance?.agencyACL*.id}" noSelection="['': '--No Selection--']" class="many-to-many"/>
 					</div>
 				</div>
 			</div>

@@ -16,7 +16,7 @@
 			</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-	         <g:render template="../layouts/sidenav-admin"></g:render>
+	         <g:sideMenu default=""></g:sideMenu> 
 	    </div>		
 		<a href="#list-candidate" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
@@ -29,36 +29,22 @@
 				<thead>
 					<tr>
 						<th><g:message code="candidate.person.label" default="Candidate" /></th>
-						<th><g:message code="candidate.agency.label" default="Agency" /></th>
-					
+						<th><g:message code="candidate.agency.label" default="Agency" /></th>					
 						<g:sortableColumn property="clothing" title="${message(code: 'candidate.clothing.label', default: 'Clothing')}" />
-					
-						<g:sortableColumn property="eyes" title="${message(code: 'candidate.eyes.label', default: 'Eyes')}" />
-					
-						<g:sortableColumn property="hair" title="${message(code: 'candidate.hair.label', default: 'Hair')}" />
-					
+						<g:sortableColumn property="eyes" title="${message(code: 'candidate.eyes.label', default: 'Eyes')}" />					
+						<g:sortableColumn property="hair" title="${message(code: 'candidate.hair.label', default: 'Hair')}" />					
 						<g:sortableColumn property="height" title="${message(code: 'candidate.height.label', default: 'Height')}" />
-					
-						
-					
 					</tr>
 				</thead>
 				<tbody>
 				<g:each in="${candidateInstanceList}" status="i" var="candidateInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td><g:link action="show" id="${candidateInstance.id}">${fieldValue(bean: candidateInstance, field: "person")}</g:link></td>
-						<td>${fieldValue(bean: candidateInstance, field: "agency")}</td>
-					
-						<td>${fieldValue(bean: candidateInstance, field: "clothing")}</td>
-					
-						<td>${fieldValue(bean: candidateInstance, field: "eyes")}</td>
-					
-						<td>${fieldValue(bean: candidateInstance, field: "hair")}</td>
-					
+						<td>${fieldValue(bean: candidateInstance, field: "agency")}</td>				
+						<td>${fieldValue(bean: candidateInstance, field: "clothing")}</td>					
+						<td>${fieldValue(bean: candidateInstance, field: "eyes")}</td>					
+						<td>${fieldValue(bean: candidateInstance, field: "hair")}</td>					
 						<td>${fieldValue(bean: candidateInstance, field: "height")}</td>
-					
-						
-					
 					</tr>
 				</g:each>
 				</tbody>

@@ -61,7 +61,7 @@ class CastingApiService {
 			}
 			productionList.addAll(tmpList)
 		}
-		return productionList.sort{it.name} //.reverse() // Production.list() //
+		return productionList.sort{it.name}?.unique() //.reverse() // Production.list() //
 	} //end function
 	
 	def getAllowedRoles(Production prod, long agencyId){
@@ -101,7 +101,7 @@ class CastingApiService {
 	}
 	/*
 	 * Given a production, it computes all the key dates defined on the roles if any
-	 * These are: AUDITION_DATES, CALLBACK_DATES, WARDROPE_DATES, SHOOT_DATES
+	 * These are: AUDITION_DATES, CALLBACK_DATES, WARDROBE_DATES, SHOOT_DATES
 	 * Returns: an array of unique dates as defined by all the roles for the production
 	 */
 	def getProductionDates(Production production){
@@ -118,7 +118,7 @@ class CastingApiService {
 		}
 		return [auditionDates:auditionDates?.sort()?.unique(),
 			callbackDates:callbackDates?.sort()?.unique(),
-			wardropeDates:wardrobeDates?.sort()?.unique(),
+			wardrobeDates:wardrobeDates?.sort()?.unique(),
 			shootDates:shootDates?.sort()?.unique()]
 	} //end function
 	
@@ -129,7 +129,7 @@ class CastingApiService {
 	def getCandidates(long productionId, long agencyId, boolean with_profiles,int offset, int max){
 		def user = getCurrentUser() //springSecurityService.currentUser
 		def candidateList = []
-		
+		println(max)
 		if(isAdmin()){
 			//if admin return all candidates for a given agencyId
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
@@ -138,6 +138,7 @@ class CastingApiService {
 				order('agent.company','asc')
 				order('p.firstName','asc')
 				if(agencyId > 0) eq('agent.id',agencyId)  //if not valid id is provided ignore this rule so that all candidates will be returned.
+				if(max > 0) maxResults(max)
 				//ilike('hair','black')
 			}
 		}else{
@@ -148,9 +149,11 @@ class CastingApiService {
 			if(agency) agencyId = agency.id
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
 				createAlias('person','p')
+				createAlias('agency','agent')
 				order('agent.company','asc')
 				order('p.firstName','asc')
 				eq('agent.id',agencyId)
+				if(max > 0) maxResults(max)
 				//ilike('hair','black')
 			}
 		}

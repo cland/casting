@@ -19,7 +19,7 @@
 			</span>
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
-	         <g:render template="../layouts/sidenav-admin"></g:render>
+	         <g:sideMenu default=""></g:sideMenu> 
 	    </div>			
 		<a href="#edit-castingRole" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
@@ -57,7 +57,7 @@ $(document).ready(function() {
 	});
 	cland_datepickers.init_datepicker("audition-datepicker","audition-date");
 	cland_datepickers.init_datepicker("callback-datepicker","callback-date");
-	cland_datepickers.init_datepicker("wardrope-datepicker","wardrope-date");
+	cland_datepickers.init_datepicker("wardrobe-datepicker","wardrobe-date");
 	cland_datepickers.init_datepicker("shoot-datepicker","shoot-date");
 
 	//Main tabs	
