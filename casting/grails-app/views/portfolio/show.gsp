@@ -1,67 +1,78 @@
-
+<%@ page import="com.cland.casting.SystemRoles" %>
 <%@ page import="com.cland.casting.Portfolio" %>
+<g:set var="profileList" value ="${portfolioInstance?.profiles}"/>
+<g:set  var="productionInstance" value="${portfolioInstance?.production}"/>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'portfolio.label', default: 'Portfolio')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		<g:render template="head"></g:render>
 	</head>
 	<body>
+		<div class="bread-crump">
+			<span class="r-arrow"></span>
+			<g:link controller="production" action="list">Productions</g:link>
+			<span class="r-arrow"></span>
+			<g:link controller="production" action="show" params="${['id':portfolioInstance?.production?.id]}">Production: ${portfolioInstance?.production?.name} (Client: ${portfolioInstance?.production?.client?.encodeAsHTML()})</g:link>
+			<span class="r-arrow"></span> 
+			<span class="current-crump">
+				${portfolioInstance }
+			</span>
+		</div>	
+		<div id="status1" class="leftbar" role="complementary">
+	         <g:sideMenu default=""></g:sideMenu> 
+	    </div>
 		<a href="#show-portfolio" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
+		
 		<div id="show-portfolio" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1>
+				<g:message code="default.show.label" args="[entityName]" />: 
+				<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${portfolioInstance}" field="name"/></span>
+			</h1>
+			<h4><g:fieldValue bean="${portfolioInstance}" field="comments"/></h4>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list portfolio">
 			
-				<g:if test="${portfolioInstance?.comments}">
-				<li class="fieldcontain">
-					<span id="comments-label" class="property-label"><g:message code="portfolio.comments.label" default="Comments" /></span>
-					
-						<span class="property-value" aria-labelledby="comments-label"><g:fieldValue bean="${portfolioInstance}" field="comments"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${portfolioInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="portfolio.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${portfolioInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${portfolioInstance?.production}">
-				<li class="fieldcontain">
-					<span id="production-label" class="property-label"><g:message code="portfolio.production.label" default="Production" /></span>
-					
-						<span class="property-value" aria-labelledby="production-label"><g:link controller="production" action="show" id="${portfolioInstance?.production?.id}">${portfolioInstance?.production?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${portfolioInstance?.profiles}">
-				<li class="fieldcontain">
-					<span id="profiles-label" class="property-label"><g:message code="portfolio.profiles.label" default="Profiles" /></span>
-					
-						<g:each in="${portfolioInstance.profiles}" var="p">
-						<span class="property-value" aria-labelledby="profiles-label"><g:link controller="castingProfile" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-			</ol>
+			<div class="wait">PROCESSING....PLEASE WAIT!!!</div>
+			<div class="cast-list">
+			<g:formRemote name="cast_form" url="[controller:'portfolio',action:'display_profiles']" 
+				update="cast-list" 
+				onLoading="onLoading()"
+				onComplete="onComplete()"
+				onFailure="onFailure(data,textStatus)"
+				onSuccess="onSuccessCastCallbackHander(data,textStatus)">
+				<g:hiddenField name="production.id" value="${productionInstance?.id }"/>
+				<g:hiddenField name="stage" value="1"/>
+				<g:hiddenField name="viewas" id="hidden_viewas_cast" value="list"/>
+				<g:hiddenField name="sortby" id="hidden_sortby_cast" value="castno"/>
+				<div class="cell float-left"> </div>
+				<div class="cell float-right"> </div>
+				<div class="" id="cast-list">
+				<table>
+		<thead><tr>
+			<th class="cell head">Cast No.</th>
+         	<th class="cell head">Name</th>
+         	<th class="cell head">Age</th>
+         	<th class="cell head">Production</th>
+         	<th class="cell head">Role</th>
+         	<th class="cell head center">Invited</th>                	
+         	<th class="cell head center ">Shortlisted</th>
+         	<th class="cell head center">Confirmed</th>
+         </tr>
+         <tbody>
+					<g:render template="../layouts/profile_list2" collection="${profileList}" var="profile"></g:render>			
+				         </tbody>         
+		</table>
+				</div>
+				
+			</g:formRemote>	
+			</div>
+		<div style="clear: both;"></div>
+			<br/>	
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">		
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${portfolioInstance?.id}" />
@@ -69,6 +80,49 @@
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
+			</sec:ifAnyGranted>
+			
 		</div>
+<script type="text/javascript">
+// when the page has finished loading.. execute the follow
+function onSuccessCastCallbackHander(data,textStatus){
+	
+}
+function onLoading(){
+	$(".wait").show()
+	//$(".action_wait").attr("disabled",true)
+}
+function onComplete(){
+	$(".wait").hide()
+	//$(".action_wait").attr("disabled",false)
+}
+function onFailure(data,textStatus){
+	$(".wait").hide()
+	alert("Operation failed with status '" + textStatus + "'")
+}
+$(document).ready(function() {		
+	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
+
+	//Main tabs	
+	$("#tabs").tabs(
+			{
+				active:cland_params.active_tab(),
+				create: function (event,ui){	
+					//executed after is created								
+					$('#tabs').show()
+				},
+				show: function(event,ui){
+					//on every tabs clicked
+				},
+				beforeLoad : function(event, ui) {
+					ui.jqXHR.error(function() {
+						ui.panel
+						.html("Couldn't load this tab. We'll try to fix this as soon as possible. ");
+					});
+				}
+		});		
+});  //end method ready(...)
+
+</script>		
 	</body>
 </html>

@@ -66,8 +66,9 @@ class ProductionController {
             redirect(action: "list")
             return
         }
-
-        [productionInstance: productionInstance, isEditing:true, isNew:false]
+		def rolesList = castingApiService.getAllowedRoles(productionInstance,0) 
+		def productionDates = castingApiService.getProductionDates(productionInstance)
+        [productionInstance: productionInstance,productionDates:productionDates,rolesList:rolesList, isEditing:true, isNew:false]
     }
 
     def update(Long id, Long version) {

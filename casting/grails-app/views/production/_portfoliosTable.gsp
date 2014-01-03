@@ -1,7 +1,8 @@
+<%@ page import="com.cland.casting.SystemRoles" %>
 <div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'portfolios', 'error')} ">
 
     <ul class="one-to-many">
-        <table id="portfolios-table" data="{tableName:'portfolios'}">
+        <table id="portfolios-table${isEditing==false ? '-view' : '' }" data="{tableName:'portfolios'}">
             <thead>
                 <tr>
                     <th data="{required:true, name:'name', placeholder:'Required'}">Name</th>
@@ -12,7 +13,14 @@
             <tbody>
                 <g:each in="${productionInstance?.portfolios}" var="p" status="i">
                 <tr rowId="${i}">
-                    <td>${p.name}</td>
+                	<g:if test="${isEditing==true }">
+                		<td>${p.name }</td>
+                	</g:if>
+                	<g:else>
+	                    <td>
+	                    	<g:link class="show" action="show" controller="portfolio" id="${p?.id}">${p.name}</g:link>
+	                    </td>
+                    </g:else>
                     <td>${p.comments}</td>
                     <td>
                     <g:if test="${isEditing }"><r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/></g:if>
@@ -21,9 +29,17 @@
                 </g:each>
             </tbody>
         </table>
-
-       <g:if test="${isEditing }"> <li class="add"><a id="addPortfolioLink" href="#">Add Portfolio</a></li></g:if>
+  
     </ul>
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+		<br/> <div class="add  action-link">
+	       <g:if test="${isEditing }"><a id="addPortfolioLink" href="#">Add Portfolio</a></g:if>
+	        <g:else>
+	        	<g:link class="create" action="create" controller="portfolio" params="${['production.id':productionInstance?.id]}">Add Portfolio</g:link>
+	        </g:else>
+	        </div>
+        </sec:ifAnyGranted>    
+  
 </div>
 <r:script>
 var portfolioTable = {

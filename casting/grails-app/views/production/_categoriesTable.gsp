@@ -27,7 +27,7 @@
         </table>
 		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 	        <g:if test="${isEditing == true }">
-	        	<li class="add float-right"><a id="addCategoryLink" href="#">Add Category</a></li>
+	        	<br/><div class="add float-left action-link"><a id="addCategoryLink" href="#">Add Category</div></li>
 	        </g:if>
 	        <g:else>
 	        	<g:link class="create float-right" action="create" controller="castingCategory" params="${['production.id':productionInstance?.id]}">Add Category</g:link>

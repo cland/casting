@@ -7,7 +7,9 @@ input, select, textarea {
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.1;
 }
-
+h4 {    font-size: 0.8em;
+    font-weight: bold;
+    padding-left: 5px;}
 /* BASE LAYOUT */
 
 html {
@@ -352,6 +354,8 @@ fieldset.embedded legend {
 
 .message {
 	background: #f3f3ff;
+	font-weight:bold;
+	padding:5px;
 	border: 1px solid #b2d1ff;
 	color: #006dba;
 	   -moz-box-shadow: 0 0 0.25em #b2d1ff;
@@ -834,8 +838,8 @@ p {
 form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
 .tab a:link, .tab a:visited{color:#48802C;}
 .tab a:hover,.datepicker-reset:hover {color:#EB8F2A ;text-decoration:none;}
-.datepicker-reset, .action-link {cursor:hand;cursor:pointer;color:#48802C;font-size:0.9em;font-weight:bold;}
-.datepicker-reset:hover, .action-link:hover{color:#EB8F2A;}
+.datepicker-reset, .action-link, .action-link:a {cursor:hand;cursor:pointer;color:#48802C;font-size:0.9em;font-weight:bold;}
+.datepicker-reset:hover, .action-link:hover, .action-link a:hover{color:#EB8F2A;}
 .action-link-label{color:#EB8F2A;font-weight:bold;font-size:0.8em;text-transform:uppercase;}
 
 .field-calendar-container{display:inline-block; margin-top:1em;margin-bottom:1em;width:100%;}

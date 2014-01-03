@@ -97,7 +97,7 @@
         </g:else>
     
 		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
-	        <g:if test="${isEditing == true }"><li class="add float-right"><a id="addRoleLink" href="#">Add Role</a></li></g:if>
+	        <g:if test="${isEditing == true }"><br/><div class="add float-left action-link"><a id="addRoleLink" href="#">Add Role</a></div></g:if>
 	        <g:else>
 	        	<g:link class="create float-right" action="create" controller="castingRole" params="${['production.id':productionInstance?.id]}">Add Role</g:link>
 	        </g:else>
