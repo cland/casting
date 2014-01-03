@@ -24,7 +24,7 @@
     <td><span class="property-value">${profile?.roles*.name.join("<br/>") }</span></td>  
     <td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td> 	
 	<td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-	<td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+	<td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
 	
 	<td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
 	<td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>

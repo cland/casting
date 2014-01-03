@@ -122,21 +122,28 @@ class CastingApiService {
 			shootDates:shootDates?.sort()?.unique()]
 	} //end function
 	
-	def getCandidates(long productionId, long agencyId, int offset, int max){
-		return getCandidates(productionId,agencyId, true,offset,max)		
+	def getCandidates(long productionId, long agencyId, def params){
+		return getCandidates(productionId,agencyId, true,params)		
 	} //end function getAgencyCandidates
 	
-	def getCandidates(long productionId, long agencyId, boolean with_profiles,int offset, int max){
+	def getCandidates(long productionId, long agencyId, boolean with_profiles,def params){
 		def user = getCurrentUser() //springSecurityService.currentUser
 		def candidateList = []
-		println(max)
+		def max = (params?.max ? params?.max:10)
+		def offset = (params?.offset ? params?.offset : 0)
+		def sortItem =(params?.sort ? params?.sort:null)
+		def byorder =  (params?.order ? params?.order:null)
 		if(isAdmin()){
 			//if admin return all candidates for a given agencyId
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
 				createAlias('agency','agent')
 				createAlias('person','p')
-				order('agent.company','asc')
-				order('p.firstName','asc')
+				if(!sortItem){
+					order('agent.company','asc')
+					order('p.firstName','asc')
+				}else{
+					order(sortItem,byorder)
+				}
 				if(agencyId > 0) eq('agent.id',agencyId)  //if not valid id is provided ignore this rule so that all candidates will be returned.
 				if(max > 0) maxResults(max)
 				//ilike('hair','black')
@@ -150,8 +157,12 @@ class CastingApiService {
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
 				createAlias('person','p')
 				createAlias('agency','agent')
-				order('agent.company','asc')
-				order('p.firstName','asc')
+				if(!sortItem){
+					order('agent.company','asc')
+					order('p.firstName','asc')
+				}else{
+					order(sortItem,byorder)
+				}
 				eq('agent.id',agencyId)
 				if(max > 0) maxResults(max)
 				//ilike('hair','black')

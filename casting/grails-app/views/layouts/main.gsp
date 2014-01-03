@@ -75,7 +75,7 @@
 			</g:link>
 			<span id="current-user">
 				<label><span class="r-arrow"></span></label>
-				<sec:ifLoggedIn><sec:loggedInUserInfo field="username" /></sec:ifLoggedIn>
+				<sec:ifLoggedIn><sec:loggedInUserInfo field="fullName" /></sec:ifLoggedIn>
 				<sec:ifNotLoggedIn>Anonymous</sec:ifNotLoggedIn>			
 			</span>
 		</div>

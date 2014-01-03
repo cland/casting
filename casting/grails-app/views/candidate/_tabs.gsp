@@ -139,11 +139,22 @@
 	
 	<!-- PRODUCTION PROFILE TAB -->
 	<div id="tab-profiles">
-	 <g:each in="${profileList }" var="p">
-	 	<span class="property-value" aria-labelledby="candidates-label">
-	 		<g:link controller="castingProfile" action="show" id="${p.id}">${p?.encodeAsHTML()} | ${p?.production?.name?.encodeAsHTML()}</g:link>
-	 	</span>
-	 </g:each>
+	<table>
+		<thead><tr>
+			<th class="cell head">Cast No.</th>
+         	<th class="cell head">Name</th>
+         	<th class="cell head">Age</th>
+         	<th class="cell head">Production</th>
+         	<th class="cell head">Role</th>
+         	<th class="cell head center">Invited</th>                	
+         	<th class="cell head center ">Shortlisted</th>
+         	<th class="cell head center">Confirmed</th>
+         </tr></thead>         
+         <tbody>
+         	<g:render template="../layouts/profile_list2" collection="${profileList }" var="profile"/>	        
+         </tbody>         
+	</table>
+	 
 	</div>
 	
 	<div id="tab-photos">

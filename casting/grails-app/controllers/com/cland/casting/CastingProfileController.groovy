@@ -28,7 +28,7 @@ class CastingProfileController {
 		} 
 		if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
 		//work out the candidates list to present
-		def candidateList = castingApiService.getCandidates(productionId, agencyId,false, offset, max) //Candidate.list();
+		def candidateList = castingApiService.getCandidates(productionId, agencyId,false, params) //Candidate.list();
 		def productionDates = castingApiService.getProductionDates(production)
 		
         [castingProfileInstance: new CastingProfile(params),productionInstance:production,candidateList:candidateList,productionDates:productionDates, isEditing:true, isNew:true]
@@ -47,7 +47,7 @@ class CastingProfileController {
 		}
 		if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
 		//work out the candidates list to present
-		def candidateList = castingApiService.getCandidates(productionId, agencyId, offset, max)
+		def candidateList = castingApiService.getCandidates(productionId, agencyId, params)
 		
 		bindData(castingProfileInstance, params, [exclude: 'auditionDate'])
 		bindData(castingProfileInstance, params, [exclude: 'callbackDate'])
@@ -94,7 +94,7 @@ class CastingProfileController {
 
 		//if(params?.agency?.id) agencyId = Agency.get(params.agency.id)?.id
 		//work out the candidates list to present
-		def candidateList = castingApiService.getCandidates(productionId, agencyId, offset, max)
+		def candidateList = castingApiService.getCandidates(productionId, agencyId,params)
 		def productionDates = castingApiService.getProductionDates(production)
         [castingProfileInstance: castingProfileInstance,productionInstance:production,candidateList:candidateList,productionDates:productionDates, isEditing:true, isNew:false]
     }

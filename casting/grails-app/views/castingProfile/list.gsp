@@ -25,10 +25,10 @@
 			<table>
 				<thead>
 					<tr>		
-						<g:sortableColumn property="canditate.person.firstName" title="${message(code: 'castingProfile.canditate.label', default: 'Candidate')}"/> 										
+						<g:sortableColumn property="candidate.person.firstName" title="${message(code: 'castingProfile.candidate.label', default: 'Candidate')}"/> 										
 						<g:sortableColumn property="castNo" title="${message(code: 'castingProfile.castNo.label', default: 'Cast No')}" />					
 						<g:sortableColumn property="production.name" title="${message(code: 'castingProfile.production.label', default: 'Production')}"/> 						
-						<g:sortableColumn property="outcome" title="${message(code: 'castingProfile.outcome.label', default: 'Outcome')}" />						
+						<g:sortableColumn property="isConfirmed" title="${message(code: 'castingProfile.isconfirmed.label', default: 'Confirmed')}" />						
 					</tr>
 				</thead>
 				<tbody>
