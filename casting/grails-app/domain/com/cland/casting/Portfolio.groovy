@@ -3,6 +3,9 @@ package com.cland.casting
 import java.util.Date;
 
 class Portfolio {
+	static searchable = {
+		spellCheck "include"
+	}
 	transient castingApiService
 	String name
 	String comments

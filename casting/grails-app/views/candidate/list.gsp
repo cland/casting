@@ -25,6 +25,16 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			<div id="local-search" style="display:none;">
+				<g:form url='[controller: "candidate", action: "search"]'
+					id="candidateSearchForm"
+					name="candidateSearchForm"
+					method="get">
+				<g:textField name="q" value="${params.q}" />
+				<input type="submit" value="Find a candidate" />
+				</g:form>
+			</div>
+			<br/>
 			<table>
 				<thead>
 					<tr>

@@ -1,8 +1,11 @@
 <!-- The tabs -->
+<%@ page import="com.cland.casting.SystemRoles" %>
 <div id="tabs" style="display: none;">
 	<ul>
 	    <li><a href="#tab-client">Details</a></li>
+	    <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 		<li><a href="#tab-productions">Productions</a></li>
+		</sec:ifAnyGranted>
 	</ul>
 	<div id="tab-client">
 			<ol class="property-list client">
@@ -38,7 +41,7 @@
 			
 			</ol>			
 	</div>
-
+<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 	<div id="tab-productions">
 	<ol>
 			<g:if test="${clientInstance?.productions}">
@@ -55,6 +58,7 @@
 			</g:if>
 		</ol>
 	</div>
+	</sec:ifAnyGranted>
 </div>
 
 <!--  End tabs -->

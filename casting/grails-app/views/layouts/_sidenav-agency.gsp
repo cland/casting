@@ -3,7 +3,8 @@
 		<h3><g:message code="default.agency.menu.label" default="Agency Menu" /></h3>
 		<div>
 			<ul>
-				<li><g:link class="show" controller="agency" action="show" id="1">
+				<g:set var="agency_id"><g:agencyId/></g:set>
+				<li><g:link class="show" controller="agency" action="show" id="${agency_id }">
 						<g:message code="default.view.label" args="['Details']" /></g:link></li>
 				<li><g:link class="list" controller="production" action="list">
 						<g:message code="default.list.label" args="['Production']" /></g:link></li>						

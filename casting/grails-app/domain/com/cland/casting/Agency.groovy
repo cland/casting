@@ -3,6 +3,9 @@ package com.cland.casting
 import java.util.Date;
 
 class Agency {
+	static searchable = {
+		spellCheck "include"
+	}
 	transient castingApiService
 	Organisation company
 	long createdBy

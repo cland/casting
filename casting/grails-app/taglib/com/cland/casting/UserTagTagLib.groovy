@@ -9,4 +9,19 @@ class UserTagTagLib {
 		  out << value
 		
 	  }
-}
+	
+	def agencyId = {attrs, body ->
+		def result = 0
+		if(castingApiService.isAgent()){
+			result = castingApiService.getAgencyForUser(castingApiService.getCurrentUserId())?.find{true}?.id
+		}
+		out << result
+	}
+	def clientId = {attrs,body ->
+		def result = 0
+		if(castingApiService.isClient()){
+			result = castingApiService.getClientForUser(castingApiService.getCurrentUserId())?.find{true}?.id
+		}
+		out << result
+	}
+} //

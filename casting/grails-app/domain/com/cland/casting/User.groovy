@@ -3,6 +3,9 @@ package com.cland.casting
 import java.util.Date;
 
 class User {
+	static searchable = {
+		spellCheck "include"
+	}
 	transient castingApiService
 	transient springSecurityService
 

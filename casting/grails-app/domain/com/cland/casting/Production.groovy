@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 class Production {
+	static searchable = {
+		spellCheck "include"
+	}
 	transient castingApiService
 	String name
 	String description

@@ -53,6 +53,11 @@
 			<h3><g:message code="default.other.menu" default="Other" /></h3>
 			<div>
 			<ul>
+<%--				<li>--%>
+<%--					<g:link class="search" controller="search" action="index">--%>
+<%--						<g:message code="default.search.label" default="Search" />--%>
+<%--					</g:link>--%>
+<%--				</li>--%>
 					<li><g:link class="create" controller="region" action="create">
 							<g:message code="default.new.label" args="['Region']" /></g:link></li>
 					<li><g:link class="list" controller="region" action="list">

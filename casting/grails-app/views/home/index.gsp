@@ -93,21 +93,15 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="status1" class="leftbar" role="complementary">
-			<h1>Latest News</h1>
-			<ul>
-				<li>It's coming soon and it's better...</li>
-			</ul>
-			<br/>
 			<h1>Noticeboard</h1>
 			<ul>
-				<li>Some important information to all our agencies and their candidates</li>
-				
+				<li>Nothing today!</li>			
 			</ul>
 		</div>
 		<div id="page-body" role="main">
 			<h1>Home</h1>
 			<div class="content float-left">
-			<p>From the heart of one of the world's most beautiful cities, our talented, dedicated and hardworking casting team offers you: &nbsp;</p>
+			<p>From the heart of one of the world's most beautiful cities, our talented, dedicated and hard-working casting team offers you: &nbsp;</p>
 			<br/>
 			<ul>
 			<li class="li-tick"><b>Global connectivity</b> ---- A unique, web-based casting process that is simple, fast and cost effective</li>

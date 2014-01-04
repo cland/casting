@@ -3,6 +3,9 @@ package com.cland.casting
 import java.util.Date;
 
 class Client {
+	static searchable = {
+		spellCheck "include"
+	}
 	def castingApiService
 	Organisation company
 	String status

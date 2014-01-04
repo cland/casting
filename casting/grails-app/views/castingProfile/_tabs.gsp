@@ -75,7 +75,7 @@
             	</div>
 				<g:if test="${castingProfileInstance?.comments}">
             	<div class="row comments">
-            		<div class="cell"><label>Production:</label></div>
+            		<div class="cell"><label>Comments:</label></div>
             		<div class="cell"><span class="property-value">${castingProfileInstance?.comments?.encodeAsHTML()}</span></div>
             	</div>				
 				</g:if>            									          	         	       

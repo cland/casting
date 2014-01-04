@@ -1,6 +1,9 @@
 package com.cland.casting;
 
 class Candidate {
+	static searchable = {
+		spellCheck "include"
+	}
 	transient castingApiService
 	//casting details:
 	User person

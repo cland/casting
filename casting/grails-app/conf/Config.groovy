@@ -140,6 +140,8 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/client/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	 '/client/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	 '/client/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	 '/searchable/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	 '/search/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	//** GENERAL AUTHENTICATED USER
 	//'/home/**': ['IS_AUTHENTICATED_FULLY'],
 	'/production/show/**': ['IS_AUTHENTICATED_FULLY'],

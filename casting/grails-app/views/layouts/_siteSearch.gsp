@@ -1,7 +1,6 @@
 <div id="search">
-	<g:form url='[controller: "race", action: "search"]'
-		id="raceSearchForm" name="raceSearchForm" method="get">
-		<g:textField name="q" value="${params.q}" />
-		<input type="submit" value="Find a race" />
-	</g:form>
+<g:form url='[controller: "search", action: "index"]' id="searchableForm" name="searchableForm" method="get">
+		<g:hiddenField name="suggestQuery" value="true"/>
+        <g:textField name="q" value="${params.q}" size="30"/> <input type="submit" value="Search" />
+    	</g:form>
 </div>

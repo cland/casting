@@ -5,6 +5,7 @@ import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 
 class CandidateController {
 	def castingApiService
+	def searchableService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -122,4 +123,15 @@ class CandidateController {
             redirect(action: "show", id: id)
         }
     }
-}
+	
+	/** Custom functions **/
+	
+	def search = {
+		flash.message = "Search results for: ${params.q}"
+		println(params)
+		def resultsMap = Candidate.search(params.q, params) //
+		render(view:'list',	model:[	candidateInstanceList:resultsMap.results,candidateInstanceTotal:Candidate.countHits(params.q)]
+		)
+	} //end search method
+	
+} //end class

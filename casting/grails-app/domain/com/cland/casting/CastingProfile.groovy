@@ -3,6 +3,9 @@ package com.cland.casting
 import java.util.Date;
 
 class CastingProfile {
+	static searchable = {
+		spellCheck "include"
+	}
 	transient castingApiService
 	BigInteger castNo
 	long createdBy
