@@ -175,7 +175,7 @@ SpringSecurityUtils.doWithAuth('default') {
 					 gender:"Male",
 					 address:"123 Main St",
 					 city:"Cape Town",
-					 email:"jay@whereever.com")
+					 email:"castadmin@nomail.com")
 	 
 					 adminUser.save()
 					 if(adminUser.hasErrors()){
@@ -229,7 +229,7 @@ SpringSecurityUtils.doWithAuth('default') {
 							gender:"Male",
 							address:"123 Low St",
 							city:"Cape Town",
-							email:"dev@whereever.com")
+							email:"dev@nomail.com")
 			
 							devUser.save()
 							if(devUser.hasErrors()){

@@ -1,11 +1,10 @@
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
-
-// grails.config.locations = [ "classpath:${appName}-config.properties",
-//                             "classpath:${appName}-config.groovy",
-//                             "file:${userHome}/.grails/${appName}-config.properties",
-//                             "file:${userHome}/.grails/${appName}-config.groovy"]
+//grails.config.locations = [ "classpath:${appName}-config.properties",
+//	"classpath:${appName}-config.groovy",
+//	"file:${userHome}/.grails/${appName}-config.properties",
+//	"file:${userHome}/.grails/${appName}-config.groovy"]
 
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
@@ -67,11 +66,31 @@ environments {
     development {
         grails.logging.jul.usebridge = true
 		grails.attachmentable.uploadDir = "C:\\Users\\Cland\\temp"
+		grails{
+			mail {
+				host = "mail.server.com"
+				'default' {
+				  from = "mail@me.net"
+				}
+				port = 25
+				username = "mail@me.com"
+				password = "password"
+				props = ["mail.smtp.auth": "true",
+				  "mail.smtp.socketFactory.port": "25",
+				  //"mail.smtp.socketFactory.class":"java.net.ssl.SSLSocketFactory",
+				  "mail.smtp.socketFactory.fallback": "false"]
+				}
+        }
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
-		grails.attachmentable.uploadDir = "C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\temp"
+        //grails.serverURL = "http://www.changeme.com"
+		
+		if (System.properties["os.name"] == "Linux") {
+			grails.config.locations = ["file:/var/grails/app-conf\\${appName}-Config.groovy"]
+		}else{
+			grails.config.locations = ["file:C:\\grails\\app-conf\\${appName}-Config.groovy"]
+		}
     }
 }
 

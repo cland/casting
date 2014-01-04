@@ -16,7 +16,7 @@ class Portfolio {
 	boolean deleted
 	static transients = [ 'deleted' ]
 	static belongsTo = [production:Production]
-	static hasMany =[profiles:CastingProfile]
+	static hasMany =[profiles:CastingProfile,usersAcl:User,agencyAcl:Agency]
 	static attachmentable = true
 	static constraints = {
 		lastUpdatedBy nullable:true
