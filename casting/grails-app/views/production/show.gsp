@@ -86,24 +86,22 @@ function setAllRadio(group,value,checked){
     });
 }
 function onSuccessFilterStage1CallbackHander(data, textStatus){
-	stageDisplay(getCurrentTabText(),"stage1")
-//	$("#hidden_viewas_stage1").attr("value",$("#viewas_stage1").val())
-//	$("#hidden_sortby_stage1").attr("value",$("#sortby_stage1").val())
+	stageDisplay("stage1")
 }
 function onSuccessFilterStage2CallbackHander(data, textStatus){
-	stageDisplay(getCurrentTabText(),"stage2")	
+	stageDisplay("stage2")	
 }
 function onSuccessFilterStage3CallbackHander(data, textStatus){
-	stageDisplay(getCurrentTabText(),"stage3")
+	stageDisplay("stage3")
 }
 function onSuccessStage1CallbackHander(data,textStatus){
-	stageDisplay(getCurrentTabText(),"stage1")
+	stageDisplay("stage1")
 }
 function onSuccessStage2CallbackHander(data,textStatus){
-	stageDisplay(getCurrentTabText(),"stage2")
+	stageDisplay("stage2")
 }
 function onSuccessStage3CallbackHander(data,textStatus){
-	stageDisplay(getCurrentTabText(),"stage3")
+	stageDisplay("stage3")
 }
 function onLoading(){
 	$(".wait").show()
@@ -118,39 +116,34 @@ function onFailure(data,textStatus){
 	alert("Operation failed with status '" + textStatus + "'")
 }
 
-function getCurrentTabText(){
-	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected").text()
-}
-function getCurrentTabLink(){
-	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected a").attr("href")
-}
-function stageDisplay(curtab, stage){
 
-	if(curtab.toLowerCase() == "auditions"){		
-		$(".vstage2").hide();
-		$(".vstage3").hide();
-		$(".vstage1").show();
-		
-	}else if(curtab.toLowerCase() == "shortlist"){
-	
-		$(".vstage1").hide();		
-		$(".vstage3").hide();
-		$(".vstage2").show();
-	}else if(curtab.toLowerCase() == "final cast"){
-		$(".vstage1").hide();		
-		$(".vstage2").hide();
-		$(".vstage3").show();
-	}
-	if($("#viewas_" + stage).attr("value") == "list"){
-		$("#submit_" + stage + "_top").hide()
-		$("#submit_" + stage + "_bottom").hide()
-	}else{
-		$("#submit_" + stage + "_top").show()
-		$("#submit_" + stage + "_bottom").show()
-	}
-	$("#hidden_viewas_" + stage).attr("value",$("#viewas_" + stage).val())
-	$("#hidden_sortby_" + stage).attr("value",$("#sortby_" + stage).val())
-} // end function
+<%--function stageDisplay(curtab, stage){--%>
+<%----%>
+<%--	if(curtab.toLowerCase() == "auditions"){		--%>
+<%--		$(".vstage2").hide();--%>
+<%--		$(".vstage3").hide();--%>
+<%--		$(".vstage1").show();--%>
+<%--		--%>
+<%--	}else if(curtab.toLowerCase() == "shortlist"){--%>
+<%--	--%>
+<%--		$(".vstage1").hide();		--%>
+<%--		$(".vstage3").hide();--%>
+<%--		$(".vstage2").show();--%>
+<%--	}else if(curtab.toLowerCase() == "final cast"){--%>
+<%--		$(".vstage1").hide();		--%>
+<%--		$(".vstage2").hide();--%>
+<%--		$(".vstage3").show();--%>
+<%--	}--%>
+<%--	if($("#viewas_" + stage).attr("value") == "list"){--%>
+<%--		$("#submit_" + stage + "_top").hide()--%>
+<%--		$("#submit_" + stage + "_bottom").hide()--%>
+<%--	}else{--%>
+<%--		$("#submit_" + stage + "_top").show()--%>
+<%--		$("#submit_" + stage + "_bottom").show()--%>
+<%--	}--%>
+<%--	$("#hidden_viewas_" + stage).attr("value",$("#viewas_" + stage).val())--%>
+<%--	$("#hidden_sortby_" + stage).attr("value",$("#sortby_" + stage).val())--%>
+<%--} // end function--%>
 
 
 function filterDialog(){

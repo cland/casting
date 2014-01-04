@@ -1,6 +1,10 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
 <%@ page import="com.cland.casting.Portfolio" %>
-<g:set var="profileList" value ="${portfolioInstance?.profiles}"/>
+<g:set var="profileList" value ="${portfolioInstance?.profiles?.sort{
+			if(params?.sortby?.equalsIgnoreCase("castname"))it?.firstLastName
+			else if(params?.sortby?.equalsIgnoreCase("castdate")) it?.auditionDate
+			else {it?.castNo}
+		}}"/>
 <g:set  var="productionInstance" value="${portfolioInstance?.production}"/>
 <!DOCTYPE html>
 <html>
@@ -44,28 +48,31 @@
 				onComplete="onComplete()"
 				onFailure="onFailure(data,textStatus)"
 				onSuccess="onSuccessCastCallbackHander(data,textStatus)">
-				<g:hiddenField name="production.id" value="${productionInstance?.id }"/>
-				<g:hiddenField name="stage" value="1"/>
-				<g:hiddenField name="viewas" id="hidden_viewas_cast" value="list"/>
-				<g:hiddenField name="sortby" id="hidden_sortby_cast" value="castno"/>
+				<fieldset><legend>Display Options</legend>
+					<g:render template="../layouts/display_options" model="[stage:'stage2',viewvalue:'list',sortvalue:'castno']"/>
+				</fieldset>
+				<g:hiddenField name="id" value="${portfolioInstance?.id }"/>
+				<g:hiddenField name="stage" value="2"/>
 				<div class="cell float-left"> </div>
 				<div class="cell float-right"> </div>
 				<div class="" id="cast-list">
-				<table>
-		<thead><tr>
-			<th class="cell head">Cast No.</th>
-         	<th class="cell head">Name</th>
-         	<th class="cell head">Age</th>
-         	<th class="cell head">Production</th>
-         	<th class="cell head">Role</th>
-         	<th class="cell head center">Invited</th>                	
-         	<th class="cell head center ">Shortlisted</th>
-         	<th class="cell head center">Confirmed</th>
-         </tr>
-         <tbody>
-					<g:render template="../layouts/profile_list2" collection="${profileList}" var="profile"></g:render>			
-				         </tbody>         
-		</table>
+					<table>
+						<thead><tr>
+							<th class="cell head">Cast No.</th>
+				         	<th class="cell head">Name</th>
+				         	<th class="cell head">Age</th>
+				         	<th class="cell head">Production</th>
+				         	<th class="cell head">Role</th>
+				         	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
+			         		<th class="cell head center">Invited</th>            
+			         	</sec:ifAnyGranted>                	
+				         	<th class="cell head center ">Shortlisted</th>
+				         	<th class="cell head center">Confirmed</th>
+				         </tr>
+				         <tbody>
+							<g:render template="../layouts/profile_list2" collection="${profileList}" var="profile"></g:render>			
+						</tbody>         
+					</table>
 				</div>
 				
 			</g:formRemote>	
@@ -86,7 +93,7 @@
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow
 function onSuccessCastCallbackHander(data,textStatus){
-	
+	stageDisplay("stage2")
 }
 function onLoading(){
 	$(".wait").show()

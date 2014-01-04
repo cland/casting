@@ -204,6 +204,9 @@
 			</g:each>
 			
 			</fieldset>
+			
+			<br/>
+<%--	example youtube video: 		<g:video videoKey="wyUsWVMukT0"/>--%>
 			<br/>
 		</div>
 	</body>

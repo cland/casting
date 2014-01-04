@@ -106,36 +106,53 @@
 			</sec:ifAnyGranted>
             
 	</div>
-	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+	
 	<div class="cast-actions-data-table">
 
          		<div class="row vstage1 invited">
 					<div class="cell"><label for="invited_${profile?.id }"><g:message code="default.invited.label" default="Invited" />:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
 						<g:radioGroup name="invited_${profile?.id }" value='${profile?.isInvited }' values="['true','false']" labels="['yes','no']" class="invite_radio_group">
 								<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_AGENT }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>	
 				</div>         	
          		<div class="row vstage1 vstage2 shortlist">
 					<div class="cell"><label for="shortlist_${profile?.id }"><g:message code="default.shortlist.label" default="Shortlist" />:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
 						<g:radioGroup name="shortlist_${profile?.id }" value='${profile?.isShortlist }' values="['true','false']" labels="['yes','no']" class="shortlist_radio_group">
 								<span class="mugshot_radio">${it.radio } ${it.label } </span>
-							</g:radioGroup>
+						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_AGENT }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isShortlist?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>	
 				</div>	
          		<div class="row vstage2 vstage3 confirmed">
 					<div class="cell"><label for="confirmed_${profile?.id }"><g:message code="default.confirmed.label" default="Confirmed" />:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
 						<g:radioGroup name="confirmed_${profile?.id }" value='${profile?.isConfirmed }' values="['true','false']" labels="['yes','no']" class="confirm_radio_group">
 								<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_AGENT }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isConfirmed?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>	
 				</div>
 			</div>
-			</sec:ifAnyGranted>
+		
+			
 			<div class="data-table">
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 				<div class="row vstage1 group">
 					<div class="cell group"><label><g:message code="default.auditiongroup.label" default="AUDITION" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="audition_${profile.id }">Available:</label></div>
@@ -151,53 +168,84 @@
 						</g:radioGroup>
 					</div>
 				</div>
+			</sec:ifAnyGranted>
 				<div class="row vstage2 vstage3 group">
 					<div class="cell group"><label><g:message code="default.callbackgroup.label" default="CALLBACK" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="callback_${profile?.id }">Available:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 						<g:radioGroup name="callback_${profile?.id }" value='${profile?.isCallbackAvailable }' values="['true','false']" labels="['yes','no']" class="callback_avail_radio_group">
 							<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>
 					<div class="cell"><label for="callback_attended_${profile?.id }">Attended:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 						<g:radioGroup name="callback_attended_${profile?.id }" value='${profile?.isCallbackAttended }' values="['true','false']" labels="['yes','no']" class="callback_attend_radio_group">
 							<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>
 				</div>
 				<div class="row vstage2 vstage3 group">
 					<div class="cell group"><label><g:message code="default.wardrobegroup.label" default="WARDROBE" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="wardrobe_${profile?.id }">Available:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 						<g:radioGroup name="wardrobe_${profile?.id }" value='${profile?.isWardrobeAvailable }' values="['true','false']" labels="['yes','no']" class="wardrobe_avail_radio_group">
 							<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isWardrobeAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>
 					<div class="cell"><label for="wardrobe_attended_${profile?.id }">Attended:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 						<g:radioGroup name="wardrobe_attended_${profile?.id }" value='${profile?.isWardrobeAttended }' values="['true','false']" labels="['yes','no']" class="wardrobe_attend_radio_group">
 							<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isWardrobeAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>
 				</div>	
 				<div class="row vstage2 vstage3 group">
 					<div class="cell group"><label><g:message code="default.shootgroup.label" default="SHOOT" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="shoot_${profile?.id }">Available:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 						<g:radioGroup name="shoot_${profile?.id }" value='${profile?.isRoleAvailable }' values="['true','false']" labels="['yes','no']" class="shoot_avail_radio_group">
 							<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isRoleAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>
 					<div class="cell"><label for="shoot_attended_${profile?.id }">Attended:</label></div>
 					<div class="cell">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 						<g:radioGroup name="shoot_attended_${profile?.id }" value='${profile?.isRoleAttended }' values="['true','false']" labels="['yes','no']" class="shoot_attend_radio_group">
 							<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
+					</sec:ifAnyGranted>
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+					<img src='${resource(dir: 'images/icons', file: (profile?.isRoleAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
+					</sec:ifAnyGranted>
 					</div>
 				</div>											
 			</div>
-
+	
                         
     </div>  
           

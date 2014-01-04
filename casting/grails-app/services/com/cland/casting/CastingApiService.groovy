@@ -326,8 +326,8 @@ class CastingApiService {
 				//then we only show them their profiles
 				def agency = getAgencyForUser(user.id)?.find{true} //user.id				
 				if(agency) agencyId = agency.id
-				canditate {
-					createAlias("canditate.agency",'agency')
+				candidate {
+					createAlias("candidate.agency",'agency')
 					eq("agency.id",agencyId.toLong())				
 				}			
 			}
@@ -412,13 +412,13 @@ class CastingApiService {
 					idEq(productionId)
 				}
 			}
-		}.unique().with{				
-				sort{ it?.castNo	
+		}.unique().
+				sort{
 					if(params?.sortby?.equalsIgnoreCase("castname"))it?.firstLastName
-					else if(params?.sortby?.equalsIgnoreCase("castno")){ it?.castNo	}
-					else if(params?.sortby?.equalsIgnoreCase("castdate")) it?.auditionDate				
+					else if(params?.sortby?.equalsIgnoreCase("castdate")) it?.auditionDate
+					else {it?.castNo}
 				}
-			}
+			//}
 		
 		return profiles
 	} //end doStage1Filter

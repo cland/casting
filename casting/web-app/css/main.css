@@ -838,7 +838,7 @@ p {
 form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
 .tab a:link, .tab a:visited{color:#48802C;}
 .tab a:hover,.datepicker-reset:hover {color:#EB8F2A ;text-decoration:none;}
-.datepicker-reset, .action-link, .action-link:a {cursor:hand;cursor:pointer;color:#48802C;font-size:0.9em;font-weight:bold;}
+.datepicker-reset, .action-link, .action-link a {cursor:pointer;color:#48802C;font-size:0.9em;font-weight:bold;}
 .datepicker-reset:hover, .action-link:hover, .action-link a:hover{color:#EB8F2A;}
 .action-link-label{color:#EB8F2A;font-weight:bold;font-size:0.8em;text-transform:uppercase;}
 

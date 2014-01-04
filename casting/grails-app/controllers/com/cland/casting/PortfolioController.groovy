@@ -99,4 +99,15 @@ class PortfolioController {
             redirect(action: "show", id: id)
         }
     }
-}
+	
+	/** CUSTOM ACTIONS **/
+	
+	def display_profiles(){
+		def portfolioInstance = Portfolio.get(params?.id)
+		render (view:"filter", model:[profileList:portfolioInstance?.profiles?.sort{
+			if(params?.sortby?.equalsIgnoreCase("castname"))it?.firstLastName
+			else if(params?.sortby?.equalsIgnoreCase("castdate")) it?.auditionDate
+			else {it?.castNo}
+		},viewas:params?.viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset])
+	}
+} //END CLASS

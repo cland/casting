@@ -29,7 +29,39 @@ function onChangeCompany(){
 	lnk = lnk.substring(0,lnk.indexOf("?"))
 	document.location.href = lnk + "?company.id=" + id
 }
+function getCurrentTabText(){
+	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected").text()
+}
+function getCurrentTabLink(){
+	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected a").attr("href")
+}
+function stageDisplay(stage){
 
+	if(stage.toLowerCase() == "stage1"){		
+		$(".vstage2").hide();
+		$(".vstage3").hide();
+		$(".vstage1").show();
+		
+	}else if(stage.toLowerCase() == "stage2"){
+	
+		$(".vstage1").hide();		
+		$(".vstage3").hide();
+		$(".vstage2").show();
+	}else if(stage.toLowerCase() == "stage2"){
+		$(".vstage1").hide();		
+		$(".vstage2").hide();
+		$(".vstage3").show();
+	}
+	if($("#viewas_" + stage).attr("value") == "list"){
+		$("#submit_" + stage + "_top").hide()
+		$("#submit_" + stage + "_bottom").hide()
+	}else{
+		$("#submit_" + stage + "_top").show()
+		$("#submit_" + stage + "_bottom").show()
+	}
+	$("#hidden_viewas_" + stage).attr("value",$("#viewas_" + stage).val())
+	$("#hidden_sortby_" + stage).attr("value",$("#sortby_" + stage).val())
+} // end function
 var cland_datepickers = {
 		reset_picker : function resetPicker(picker_id,altfield_id, type){
 			$("#" + picker_id).multiDatesPicker('resetDates',type);

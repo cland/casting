@@ -78,6 +78,7 @@
 				<sec:ifLoggedIn><sec:loggedInUserInfo field="fullName" /></sec:ifLoggedIn>
 				<sec:ifNotLoggedIn>Anonymous</sec:ifNotLoggedIn>			
 			</span>
+			
 		</div>
 		<g:render template="/layouts/navigator" />
 		<g:layoutBody/>

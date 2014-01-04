@@ -23,9 +23,11 @@
     </td>
     <td><span class="property-value">${profile?.age }</span></td>
     <td><span class="property-value">${profile?.roles*.name?.join("<br/>") }</span></td>  
+    <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
     <td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td> 	
 	<td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
 	<td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+	</sec:ifAnyGranted>
 	
 	<td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
 	<td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>

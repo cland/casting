@@ -14,7 +14,7 @@
         margin: 1em 0;
         padding: .3em .5em;
         text-align: right;
-        background-color: seashell;
+        background-color: #F9DCB1;
         border-top: 1px solid lightblue;
       }
 
@@ -51,7 +51,6 @@
 		<a href="#list-search" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
 		<div id="list-search" class="content scaffold-list" role="main">
-<br/>
 <%--		<g:form url='[controller: "search", action: "index"]' id="searchableForm" name="searchableForm" method="get">--%>
 <%--		<g:hiddenField name="suggestQuery" value="true"/>--%>
 <%--        <g:textField name="q" value="${params.q}" size="50"/> <input type="submit" value="Search" />--%>
