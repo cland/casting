@@ -30,10 +30,11 @@ environments {
         }
     }
     production {
+		//the datasource configuration should be in an external configuration. see Config.groovy for locations.
         dataSource {
-            username = "root"
-			password = "Cland001"			
-			url = "jdbc:mysql://localhost:3306/casting?autoreconnect=true"
+            username = "none"
+			password = "none"			
+			url = "jdbc:mysql://localhost:3306/casting_none?autoreconnect=true"
             dbCreate = "update"            
             pooled = true
             properties {

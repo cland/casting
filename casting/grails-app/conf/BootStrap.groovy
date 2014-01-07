@@ -5,6 +5,7 @@ import org.springframework.web.context.support.*;
 import org.codehaus.groovy.grails.commons.*;
 import groovy.ui.Console;
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
 class BootStrap {
 
 	def init = { servletContext ->
@@ -43,7 +44,16 @@ SpringSecurityUtils.doWithAuth('default') {
   new Note(name:'Testing').save()
 }
 		 */
+		def appName = grails.util.Metadata.current.'app.name'
+		println (">> Bootstrapping: ${appName} on OS >> " + System.properties["os.name"] )
 		boolean doBootStrap = false
+		def userlist = User.list()
+		if(userlist?.size() < 1){
+			println("BootStrap >> ON!")
+			doBootStrap = true
+		}else{
+		println("BootStrap >> off!")
+		}
 		switch(Environment.getCurrent()){
 			case "DEVELOPMENT":
 				if(doBootStrap){
@@ -157,6 +167,8 @@ SpringSecurityUtils.doWithAuth('default') {
 								println directorUser2.errors
 							}
 							UserRole.create(directorUser2, directorRole, true)
+							//keywords for location
+							new Keywords(name:"system_areas",category:"system_locations",value:'about us~studio~team~contact us~home').save()
 				 }
 					
 				} //end if doBootStrap
@@ -236,6 +248,9 @@ SpringSecurityUtils.doWithAuth('default') {
 								println devUser.errors
 							}
 							UserRole.create(devUser, devRole, true)
+							
+							//keywords for location
+							new Keywords(name:"system_areas",category:"system_locations",value:'about us~studio~team~contact us~home').save()
 					}//end with
 				} //end doBootStrap
 				

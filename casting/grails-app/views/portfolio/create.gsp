@@ -1,4 +1,5 @@
 <%@ page import="com.cland.casting.Portfolio" %>
+<%@ page import="com.cland.casting.SystemRoles" %>
 <!DOCTYPE html>
 <html>
 	<head>

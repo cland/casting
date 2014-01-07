@@ -52,10 +52,12 @@ $(document).ready(function() {
 	$(".datepicker-reset").live("click",function(){
 		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
-	cland_datepickers.init_datepicker("audition-datepicker","audition-date");
-	cland_datepickers.init_datepicker("callback-datepicker","callback-date");
-	cland_datepickers.init_datepicker("wardrobe-datepicker","wardrobe-date");
-	cland_datepickers.init_datepicker("shoot-datepicker","shoot-date");
+	var frmdate = new Date(cland_params.production.start_date)
+	var todate = new Date(cland_params.production.end_date)
+	cland_datepickers.init_datepicker("audition-datepicker","audition-date",frmdate,todate);
+	cland_datepickers.init_datepicker("callback-datepicker","callback-date",frmdate,todate);
+	cland_datepickers.init_datepicker("wardrobe-datepicker","wardrobe-date",frmdate,todate);
+	cland_datepickers.init_datepicker("shoot-datepicker","shoot-date",frmdate,todate);
 });  //end method ready(...)
 
 </script>	

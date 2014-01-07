@@ -42,10 +42,10 @@ class User {
 	 String status
 	// Candidate candidate
 	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName','age' ]
-	static hasOne = [candidate:Candidate] 
+	//static hasOne = [candidate:Candidate] 
 	static attachmentable = true
 	static constraints = {
-		candidate(nullable:true)
+		//candidate(nullable:true)
 		username blank: true, unique: true, nullable:true
 		password blank: true, nullable:true
 		firstName(blank:false)
@@ -76,6 +76,7 @@ class User {
 
 	static mapping = {
 		password column: '`password`'
+		candidate  cascade: "delete"
 	}
 
 	Set<Role> getAuthorities() {

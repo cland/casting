@@ -16,7 +16,13 @@ class CastingRoleController {
     }
 
     def create() {
-        [castingRoleInstance: new CastingRole(params)]
+		def production = null
+		long productionId = 0
+		
+		if(params?.production?.id) {
+			production = Production.get(params.production.id)			
+		}
+        [castingRoleInstance: new CastingRole(params),productionInstance:production]
     }
 
     def save() {

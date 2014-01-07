@@ -59,12 +59,15 @@ class CastingProfileController {
 		bindData(castingProfileInstance, ['wardrobeDate': params.date('wardrobeDate', ['dd-MMM-yyyy'])], [include: 'wardrobeDate'])
 		bindData(castingProfileInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
 		bindData(castingProfileInstance, ['castDate': params.date('castDate', ['dd-MMM-yyyy'])], [include: 'castDate'])
+		
+		castingProfileInstance = castingProfileInstance.merge()
+		
         if (!castingProfileInstance.save(flush: true)) {
             render(view: "create", model: [castingProfileInstance: castingProfileInstance,productionInstance:production,candidateList:candidateList, isEditing:true, isNew:true])
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'castingProfile.label', default: 'CastingProfile'), castingProfileInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'castingProfile.label', default: 'CastingProfile'), castingProfileInstance])
         redirect(action: "show", id: castingProfileInstance.id)
     }
 
@@ -135,7 +138,7 @@ class CastingProfileController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'castingProfile.label', default: 'CastingProfile'), castingProfileInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'castingProfile.label', default: 'CastingProfile'), castingProfileInstance])
         redirect(action: "show", id: castingProfileInstance.id)
     }
 

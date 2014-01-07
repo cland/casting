@@ -25,6 +25,7 @@ class ProductionController {
     }
 
     def save() {
+		
         def productionInstance = new Production(params)
 		bindData(productionInstance, params, [exclude: 'shootDate'])
 		bindData(productionInstance, ['shootDate': params.date('shootDate', ['dd-MMM-yyyy'])], [include: 'shootDate'])
@@ -32,12 +33,15 @@ class ProductionController {
 		bindData(productionInstance, ['startDate': params.date('startDate', ['dd-MMM-yyyy'])], [include: 'startDate'])
 		bindData(productionInstance, params, [exclude: 'endDate'])
 		bindData(productionInstance, ['endDate': params.date('endDate', ['dd-MMM-yyyy'])], [include: 'endDate'])
+		
+		productionInstance = productionInstance.merge()
+		
         if (!productionInstance.save(flush: true)) {
             render(view: "create", model: [productionInstance: productionInstance])
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'production.label', default: 'Production'), productionInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'production.label', default: 'Production'), productionInstance.name])
         redirect(action: "show", id: productionInstance.id)
     }
 
@@ -105,7 +109,7 @@ class ProductionController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'production.label', default: 'Production'), productionInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'production.label', default: 'Production'), productionInstance.name])
         redirect(action: "show", id: productionInstance.id)
     }
 

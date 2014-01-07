@@ -109,12 +109,13 @@
 	</div>
 </fieldset>
 <br/>
-<fieldset><legend>Roles and Categories</legend>
-<g:render template="rolesTable"/>
-<br/>
-<g:render template="categoriesTable"/>
-</fieldset>
-
+<g:if test="${!isNew}">
+	<fieldset><legend>Roles and Categories</legend>
+		<g:render template="rolesTable"/>
+		<br/>
+		<g:render template="categoriesTable"/>
+	</fieldset>
+</g:if>
 <fieldset><legend>Notes and Other Information</legend>
 	<div class="production-comments">
 		<div class="production-data-table">
@@ -129,11 +130,12 @@
 		</div>
 	</div>
 </fieldset>
-<br/>
-<fieldset><legend>Portfolios</legend>
-	<g:render template="portfoliosTable"/>
-</fieldset>
-
+<g:if test="${!isNew}">
+	<br/>
+	<fieldset><legend>Portfolios</legend>
+		<g:render template="portfoliosTable"/>
+	</fieldset>
+</g:if>
 <br/>
 <fieldset><legend>Who can access this production</legend>
 <div class="message">** None selected means ALL can access</div>

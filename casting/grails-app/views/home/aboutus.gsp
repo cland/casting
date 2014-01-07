@@ -109,8 +109,14 @@
 			<h1>About us</h1>
 			<div class="content">
 			<p>
-			Jeanne began her career in the film industry as a film editor and line producer before starting Casting Cape Town, which in the 8 years since its inception, has developed a reputation for producing excellent work .<br><br>This success is largely due to Jeanne’s knack for talent-spotting, which has helped her to surround herself with an awesome team of associates, freelancers and assistants who all bring their own unique sensibility to the casting process.<br><br><p align="center" style="padding-left:100px; font-size:12pt"><strong>"Lead with your talent"</strong></p>
+			Jeanne began her career in the film industry as a film editor and line producer before starting Casting Cape Town, which in the 8 years since its inception, has developed a reputation for producing excellent work .
+			<br><br>This success is largely due to Jeanne’s knack for talent-spotting, which has helped her to surround herself with an awesome team of associates, freelancers and assistants who all bring their own unique sensibility to the casting process.
+			<br><br>
 			</p>
+			<p align="center" style="padding-left:0px; font-size:12pt">
+			<strong>"Lead with your talent"</strong>
+			</p>
+			
 			<fieldset id="contactus"><legend>Contact us</legend>
 			
 				<div class="content float-left" style="width:100%;">
@@ -118,9 +124,10 @@
 				You will find us at the top of St George's Mall in Cape Town's city centre, where we are surrounded by 5-star boutique hotels, flea-markets, sidewalk cafes and trendy night spots.<br><br>After a hard day's work in our spacious and comfortable, airconditioned studios, enjoy the best relaxation and entertainment Cape Town has to offer, right on our doorstep.
 				</p>
 				<p>
-				<b>T:</b> ${ hostOrg?.phoneNo?.split(",")?.find{true}}<br>
-				<b>F:</b> ${ hostOrg?.phoneNo?.split(",")?.getAt(1)}<br>
-				<b>M:</b> ${ hostOrg?.phoneNo?.split(",")?.getAt(2)}<br>
+				<g:set value="${ hostOrg?.phoneNo?.split(',')}" var="phoneList"/>
+				<b>T:</b> ${ phoneList?.find{true}}<br>
+				<b>F:</b><g:if test="${phoneList?.size() >= 2 }">  ${phoneList?.getAt(1)}</g:if><br>
+				<b>M:</b><g:if test="${phoneList?.size() >= 3 }">  ${phoneList?.getAt(2)}</g:if><br>
 				<b>E:</b> <a href="mailto:${ hostOrg?.email}">${ hostOrg?.email}</a>
 				</p>
 				</div>
@@ -132,7 +139,7 @@
 			<g:set var="count_per_row" value="${2 }"/>
 			<g:set var="total_count" value="${staffList?.size() }"/>
 			<div class="data-table">
-			<g:each in="${ staffList.sort()}" var="userInstance" status="i">
+			<g:each in="${ staffList?.sort()}" var="userInstance" status="i">
 				<g:set var="entry">
 					<div class="cell">
 						<div class="staff">
@@ -208,6 +215,7 @@
 			<br/>
 <%--	example youtube video: 		<g:video videoKey="wyUsWVMukT0"/>--%>
 			<br/>
+		</div>
 		</div>
 	</body>
 </html>

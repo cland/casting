@@ -26,20 +26,15 @@ class CandidateController {
     }
 
     def save() {
-		//println(params.person)
-		//def lines = params.list("param-name")  //accessing a parameter
-		
-        def candidateInstance = new Candidate(params)
+		def candidateInstance = new Candidate(params)
 		bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
 		bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
-		if(!params.person.id){
-			if(params.person.id == ""){
-				if(!candidateInstance.person.save(flush:true)){	
-					println("Failed to save new person..."  + candidateInstance.person?.errors)		
-					render(view: "create", model: [candidateInstance: candidateInstance])
-					return
-				}
-			}
+		
+		candidateInstance.person.properties = params
+		if(!candidateInstance.person.save(flush:true)){
+			println("Failed to save new person..."  + candidateInstance.person?.errors)
+		}else {
+			candidateInstance = candidateInstance.merge()
 		}
 		
         if (!candidateInstance.save(flush: true)) {
@@ -47,8 +42,8 @@ class CandidateController {
             return
         }
 		attachUploadedFilesTo(candidateInstance)
-        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidateInstance.id])
-        redirect(action: "show", id: candidateInstance.id)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidateInstance.toSummary()])
+        redirect(action: "show", id:  candidateInstance.id)
     }
 
     def show(Long id) {
@@ -101,8 +96,8 @@ class CandidateController {
             return
         }
 		attachUploadedFilesTo(candidateInstance)
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidateInstance.id])
-        redirect(action: "show", id: candidateInstance.id)
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: 'Candidate'),candidateInstance.toSummary()])
+        redirect(action: "show", id:  candidateInstance.id)
     }
 
     def delete(Long id) {
@@ -135,3 +130,17 @@ class CandidateController {
 	} //end search method
 	
 } //end class
+
+//	REMOVED SECTION FROM SAVE() ACTION
+//		if(!params.person.id){
+//			if(params.person.id == ""){
+//				if(!candidateInstance.person.save(flush:true)){
+//					println("Failed to save new person..."  + candidateInstance.person?.errors)
+//					render(view: "create", model: [candidateInstance: candidateInstance])
+//					return
+//				}else{
+//					println("Person ID: " + candidateInstance?.person?.id)
+//					//params.person.id = candidateInstance?.person?.id
+//				}
+//			}
+//		}

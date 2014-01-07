@@ -1,3 +1,4 @@
+<%@ page import="com.cland.casting.SystemRoles" %>
 <%@ page import="com.cland.casting.Portfolio" %>
 
 <div class="fieldcontain ${hasErrors(bean: portfolioInstance, field: 'name', 'error')} ">

@@ -29,6 +29,12 @@ function onChangeCompany(){
 	lnk = lnk.substring(0,lnk.indexOf("?"))
 	document.location.href = lnk + "?company.id=" + id
 }
+function onChangePerson(){
+	var id = $("#person").val()
+	var lnk = document.location.href
+	lnk = lnk.substring(0,lnk.indexOf("?"))
+	document.location.href = lnk + "?person.id=" + id
+}
 function getCurrentTabText(){
 	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected").text()
 }
@@ -141,5 +147,25 @@ var cland_datepickers = {
 				datelist = datelist.split(",");			
 				el.multiDatesPicker('addDates',datelist);
 			}	
-		}
+		},
+		
+		init_datepicker_single_standard : function initDatePickerSingleStandard(picker_id,fmt,frmdate,todate,default_date){
+			var el = $(picker_id)
+			var datelist = el.attr("value")
+			if(!frmdate) frmdate="-100y";
+			if(!todate) todate="+0";
+			if(!default_date) default_date="+0"
+			$(picker_id).multiDatesPicker({
+				dateFormat: fmt,
+				maxDate:todate,
+				defaultDate: default_date,
+				maxPicks: 1
+			});
+
+			if(datelist) {
+				el.attr("value",datelist)
+				datelist = datelist.split(",");			
+				el.multiDatesPicker('addDates',datelist);
+			}	
+		}		
 } //end cland_datepicker
