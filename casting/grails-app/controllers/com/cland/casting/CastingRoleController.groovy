@@ -41,7 +41,7 @@ class CastingRoleController {
 		appendDates(params?.callbackDates,castingRoleInstance,CastEventType.CALLBACK)
 		appendDates(params?.wardrobeDates,castingRoleInstance,CastEventType.WARDROBE)
 		appendDates(params?.shootDates,castingRoleInstance,CastEventType.SHOOT)
-        flash.message = message(code: 'default.created.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), castingRoleInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'castingRole.label', default: 'CastingRole'), castingRoleInstance.name])
         redirect(action: "show", id: castingRoleInstance.id)
     }
 

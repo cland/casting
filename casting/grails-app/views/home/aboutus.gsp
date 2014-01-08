@@ -79,6 +79,9 @@
 					margin-top: 0;
 				}
 			}
+			@media print{
+				#page-body {marging:0;}
+			}
 			.li-tick {padding:5px;list-style-position:inside;
 			list-style-image:url('${fam.icon(name: 'accept')}');
 			font-size:0.9em;

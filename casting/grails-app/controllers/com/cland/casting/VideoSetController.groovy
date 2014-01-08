@@ -30,7 +30,7 @@ class VideoSetController {
         }
 		attachUploadedFilesTo(videoSetInstance)
 		
-        flash.message = message(code: 'default.created.message', args: [message(code: 'videoSet.label', default: 'VideoSet'), videoSetInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'videoSet.label', default: 'VideoSet'), videoSetInstance])
         redirect(action: "show", id: videoSetInstance.id)
     }
 
@@ -82,7 +82,7 @@ class VideoSetController {
             return
         }
 		attachUploadedFilesTo(videoSetInstance)
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'videoSet.label', default: 'VideoSet'), videoSetInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'videoSet.label', default: 'VideoSet'), videoSetInstance])
         redirect(action: "show", id: videoSetInstance.id)
     }
 

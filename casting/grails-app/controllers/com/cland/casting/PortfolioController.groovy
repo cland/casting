@@ -26,7 +26,7 @@ class PortfolioController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'portfolio.label', default: 'Portfolio'), portfolioInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'portfolio.label', default: 'Portfolio'), portfolioInstance])
         redirect(action: "show", id: portfolioInstance.id)
     }
 
@@ -77,7 +77,7 @@ class PortfolioController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'portfolio.label', default: 'Portfolio'), portfolioInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'portfolio.label', default: 'Portfolio'), portfolioInstance])
         redirect(action: "show", id: portfolioInstance.id)
     }
 

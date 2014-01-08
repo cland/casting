@@ -19,6 +19,7 @@ class Production {
 	Date shootDate
 	Date startDate
 	Date endDate
+	transient boolean notify
 	ProductionStatus status
 	
 	String producer

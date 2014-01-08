@@ -137,6 +137,14 @@
 	</fieldset>
 </g:if>
 <br/>
+<fieldset class="hide"><legend>Notifications</legend>
+Send notification? 
+	<g:radioGroup name="notify" values="['true','false']" value="no" labels="['yes','no']" >
+		<span>${it.radio } ${it.label } </span>
+	</g:radioGroup>
+</fieldset>
+<br/>
+
 <fieldset><legend>Who can access this production</legend>
 <div class="message">** None selected means ALL can access</div>
 	<div class="prodcution-access-control">
@@ -150,6 +158,7 @@
 		</div>
 	</div>
 </fieldset>
+
 
 
 

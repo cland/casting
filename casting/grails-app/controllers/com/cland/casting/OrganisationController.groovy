@@ -33,7 +33,7 @@ class OrganisationController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'organisation.label', default: 'Organisation'), organisationInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'organisation.label', default: 'Organisation'), organisationInstance])
         redirect(action: "show", id: organisationInstance.id)
     }
 
@@ -83,7 +83,7 @@ class OrganisationController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'organisation.label', default: 'Organisation'), organisationInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'organisation.label', default: 'Organisation'), organisationInstance])
         redirect(action: "show", id: organisationInstance.id)
     }
 

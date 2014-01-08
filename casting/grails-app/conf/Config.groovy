@@ -60,7 +60,7 @@ grails.hibernate.cache.queries = false
 //attachments
 
 //grails.attachmentable.uploadDir = "C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\temp" //YOUR_USER_HOME/APP_NAME
-grails.attachmentable.poster.evaluator = { "unknown" }
+grails.attachmentable.poster.evaluator = { getPrincipal() } //
 environments {
     development {
 		grails.attachmentable.maxInMemorySize = 1024
@@ -69,18 +69,16 @@ environments {
 		grails.attachmentable.uploadDir = "C:\\Users\\Cland\\temp"
 		grails{
 			mail {
-				host = "mail.server.com"
-				'default' {
-				  from = "mail@me.net"
-				}
-				port = 25
-				username = "mail@me.com"
-				password = "password"
-				props = ["mail.smtp.auth": "true",
-				  "mail.smtp.socketFactory.port": "25",
-				  //"mail.smtp.socketFactory.class":"java.net.ssl.SSLSocketFactory",
-				  "mail.smtp.socketFactory.fallback": "false"]
-				}
+			     host = "smtp.gmail.com"
+			     port = 465
+			     username = "droid.cleverland@gmail.com"
+			     password = "G3ttyNyangani10"
+			     props = ["mail.smtp.auth":"true", 					   
+			              "mail.smtp.socketFactory.port":"465",
+			              "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+			              "mail.smtp.socketFactory.fallback":"false"]
+			
+			}
         }
     }
     production {

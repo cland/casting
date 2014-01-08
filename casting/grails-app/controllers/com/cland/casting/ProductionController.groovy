@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class ProductionController {
 	def castingApiService
+	def castingMailService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -41,6 +42,10 @@ class ProductionController {
             return
         }
 
+		//send notification
+		if(params?.notify){
+		//	castingMailService.sendProductionMail(productionInstance)
+		}
         flash.message = message(code: 'default.created.message', args: [message(code: 'production.label', default: 'Production'), productionInstance.name])
         redirect(action: "show", id: productionInstance.id)
     }
@@ -115,19 +120,20 @@ class ProductionController {
 
     def delete(Long id) {
         def productionInstance = Production.get(id)
+		def name = productionInstance?.getName()
         if (!productionInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'production.label', default: 'Production'), id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'production.label', default: 'Production'), name])
             redirect(action: "list")
             return
         }
 
         try {
             productionInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'production.label', default: 'Production'), id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'production.label', default: 'Production'), name])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'production.label', default: 'Production'), id])
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'production.label', default: 'Production'), name])
             redirect(action: "show", id: id)
         }
     }

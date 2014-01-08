@@ -1,5 +1,6 @@
 package com.cland.casting
-
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 import org.springframework.dao.DataIntegrityViolationException
 import com.macrobit.grails.plugins.attachmentable.domains.Attachment; 
 class AgencyPortfolioSetController {
@@ -28,7 +29,7 @@ class AgencyPortfolioSetController {
             return
         }
 		attachUploadedFilesTo(agencyPortfolioSetInstance)
-        flash.message = message(code: 'default.created.message', args: [message(code: 'agencyPortfolioSet.label', default: 'AgencyPortfolioSet'), agencyPortfolioSetInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'agencyPortfolioSet.label', default: 'AgencyPortfolioSet'), agencyPortfolioSetInstance])
         redirect(action: "show", id: agencyPortfolioSetInstance.id)
     }
 
@@ -82,7 +83,7 @@ class AgencyPortfolioSetController {
         }
 		attachUploadedFilesTo(agencyPortfolioSetInstance)
 		
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'agencyPortfolioSet.label', default: 'AgencyPortfolioSet'), agencyPortfolioSetInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'agencyPortfolioSet.label', default: 'AgencyPortfolioSet'), agencyPortfolioSetInstance])
         redirect(action: "show", id: agencyPortfolioSetInstance.id)
     }
 
@@ -104,4 +105,38 @@ class AgencyPortfolioSetController {
             redirect(action: "show", id: id)
         }
     }
-}
+	
+	def downloadPortfolioZip(Long id){
+		
+		def portfolioInstance = AgencyPortfolioSet.get(id)
+
+		
+		response.setContentType("APPLICATION/OCTET-STREAM")
+		response.setHeader('Content-Disposition', 'Attachmet;Filename="portfolio_' + portfolioInstance?.name?.toLowerCase() + '.zip"')
+		ZipOutputStream zip = new ZipOutputStream(response.outputStream)
+		
+		//add data
+		if(portfolioInstance){
+			//get the attachments
+			//def attachments = portfolioInstance.attachments
+			def pictures = portfolioInstance.attachments //portfolioInstance.getAttachments('pictures')	
+			pictures?.each{pic ->
+				def fileEntry = new ZipEntry(pic.getFilename())
+				zip.putNextEntry(fileEntry)
+				def file = new File(pic.getPath())
+				def data = "Data for: " + pic.getFilename() + " - " + pic.getNiceLength()
+				zip.write(file.bytes)
+				println("Added: " + pic.getPath())  //full path to the file on disk. need to read this file. :)
+			}
+		}
+//		def file1Entry = new ZipEntry('first_file1.txt') //open a file
+//		zip.putNextEntry(file1Entry)	//add it to zip
+//		zip.write("This is the content of the first file".bytes) //write the data
+//		
+//		def file2Entry = new ZipEntry('first_file2.txt')
+//		zip.putNextEntry(file2Entry)
+//		zip.write("This is the content of the second file".bytes)
+		zip.close()
+	} //end downloadPortfolioZip
+	
+} //end class

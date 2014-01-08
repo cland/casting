@@ -40,7 +40,7 @@ class ClientController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), clientInstance])
         redirect(action: "show", id: clientInstance.id)
     }
 
@@ -92,7 +92,7 @@ class ClientController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), clientInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: 'Client'), clientInstance])
         redirect(action: "show", id: clientInstance.id)
     }
 

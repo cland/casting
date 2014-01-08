@@ -100,6 +100,8 @@
 					<g:hiddenField name="id" value="${agencyPortfolioSetInstance?.id}" />
 					<g:link class="edit" action="edit" id="${agencyPortfolioSetInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+					<span class="l-arrow"></span> | <span class="r-arrow"></span>
+					<g:link class="download" controller="agencyPortfolioSet" action="downloadPortfolioZip" id="${agencyPortfolioSetInstance?.id}">Download Portfolio</g:link>
 				</fieldset>
 			</g:form>
 		</div>

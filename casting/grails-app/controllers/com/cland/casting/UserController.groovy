@@ -39,7 +39,7 @@ class UserController {
 //			if (tmp[0]) UserRole.create(userInstance, r, true)
 //		}
 		attachUploadedFilesTo(userInstance)
-        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance])
         redirect(action: "show", id: userInstance.id)
     }
 
@@ -102,7 +102,7 @@ class UserController {
 //			if (tmp[0]) UserRole.create(userInstance, r, true)
 //		}
 		attachUploadedFilesTo(userInstance)
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance])
         redirect(action: "show", id: userInstance.id)
     }
 

@@ -4,6 +4,7 @@ input, select, textarea {
 	font-family: Arial,"Verdana","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
 	color:#000;
 	background:#fff;
+	
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -234,7 +235,7 @@ fieldset.embedded legend {
 
 .errors,
 .message {
-	font-size: 0.8em;
+	font-size: 10pt;
 	line-height: 2;
 	margin: 1em 2em;
 	padding: 0.25em;
@@ -506,9 +507,7 @@ a.skip {
 
 .leftbar { display:none; }
 
-/** CUSTOM CSS RULES **/
-
-.bread-crump {padding:6px;font-size:0.8em;font-weight:bold;}
+.bread-crump {padding:6px;font-size:10pt;font-weight:bold;}
 .current-crump {font-weight:normal;}
 .bread-crump:before {content:'You are here: ';color:green;padding-left:0.5em;}
 .bread-crump r-arrow:after, .r-arrow:after {content:"\00BB"}
@@ -530,7 +529,7 @@ a.skip {
 tr > th:last-child.action-header {text-align:center;}
 .list-action-buttons {width:208px;}
 tr > td:first-child, tr > th:first-child {
-    padding-left: 0.8em !important;
+    padding-left: 10pt !important;
 }
 td {
     vertical-align: middle !important;
@@ -548,7 +547,7 @@ tr > td:last-child, tr > th:last-child {
 	background :#fff !important;
 }
 .checkbox-text {    
-    font-size: 0.9em;
+    font-size: 10pt;
     vertical-align: text-top;
 }
 .fieldcontain label, .fieldcontain .property-label {
@@ -559,7 +558,7 @@ tr > td:last-child, tr > th:last-child {
 	font-size:1em !important;
 }
 p {
-	font-size:0.9em;
+	font-size:10pt;
 }
 /* begin: jQuery UI Datepicker moving pixels fix */
 	table.ui-datepicker-calendar {border-collapse: separate;}
@@ -578,8 +577,10 @@ p {
 	width:100%;
 	clear:both;
 	margin: 10px 0 5px 0;
-	font-size: 0.9em;
+	font-size: 10pt;
 }
+.cast-list fieldset legend {font-size:1.1em;}
+.cast-list table tr td {border-bottom:1px dotted #ccc;}
 .headshot-row {
     clear:both;
     page-break-inside: avoid;
@@ -602,25 +603,34 @@ p {
     float:left;
     width:100%;
     border:solid 1px #ccc;
-    margin-bottom:0.8em;
+    margin-bottom:10pt;
 }
-
-.summary-row .cast-details {
+.profile-row {
+    clear: both;
+    page-break-inside: avoid;
+    width:100%;
+    border:solid 1px #ccc;
+    margin-bottom:0.8em;
+    
+}
+.profile-row label, .role-details label {color:#8C8C8C;font-size:10pt;}
+.summary-row .cast-details,.profile-row .cast-details {
     float: left;
     border: none 1px #0e8523;
-    width: 30%;
+    width: 28%;
     margin: 0.5em;
 }
-.summary-row .cast-actions {
+.summary-row .cast-actions, .profile-row .cast-actions {
     float: left;
     border: none 1px #0094ff;
-	width: 40%;
+	width: 45%;
     margin: 0.5em;
     margin-left:1px;
     margin-right:1px;
 }
-.summary-row .cast-actions textarea{font-size:0.8em; width:166px;height:60px;}
-.summary-row .cast-mugshot {
+
+.summary-row .cast-actions textarea,.profile-row .cast-actions textarea, .production textarea{font-size:10pt; width:166px !important;height:75px !important;}
+.summary-row .cast-mugshot,.profile-row .cast-mugshot,.candidate-mugshot {
     border: solid 1px #0094ff;
     float: left;
     padding: 0.5em;
@@ -628,44 +638,108 @@ p {
     margin: 0.5em;
     margin-left:0;
     float:right;   
-    width:150px;    
+    width:180px;    
 }
+.profile-row .cast-details {width:66%}
+.profile-row .cast-mugshot {width:200px;text-align:center;}
 .detailed-row {
     clear: both;
     page-break-inside: avoid;
     float:left;
     width:100%;
     border:solid 1px #ccc;
+    margin-bottom:15px;
+    text-align:left;
 }
-.detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#999;}
+.detailed-row label,.summary-row label, .headshot-row label{font-weight:bold; color:#8C8C8C;}
 .detailed-row .cast-details {
     float: left;
     border: none 1px #0e8523;
     margin: 0.5em;
+    width:50%;
 }
 .detailed-row .cast-actions {
     float: left;
     display:none;  
-    width: 40%;
+    width: 10%;
     margin: 0.5em;
 }
-.detailed-row .cast-mugshot {
-    border: solid 1px #0094ff;
+.detailed-row .cast-mugshot-container {
+    border: none 1px #0094ff;
     float: left;
     padding: 0.5em;
-    text-align: center;
+    text-align: left;
     margin: 0.5em;
     float:right;
-    width:25%;
+    width:45%;
 }
-.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table{display:table;}
+.detailed-row .cast-mugshot {float:right;padding:5px;}
+
+.ui-tabs .ui-tabs-panel {padding:0.5em !important;}
+.production fieldset {padding:1em;}
+.data-table,.cast-details-data-table, cast-actions-data-table,cast-mugshot-data-table,production-data-table{display:table;width:100%;}
 .row{display:table-row;}
-.row:hover, .row:hover label{background:#999;color:#fff !important;}
+.row:hover, .row:hover label{background:#8C8C8C;color:#fff !important;}
 .cell{display:table-cell; padding:4px;}
+.cell .property-value {font-size:10pt;}
 .float-right{float:right;}
 .float-left{float:left;}
+.clear{clear:both;}
+.photo-display{margin:5px;padding:5px;border:1px solid #ccc;text-align:center;}
+.attachments {margin-bottom:5px;}
+form fieldset legend, .tab fieldset legend {font-weight:bold;color:#EB8F2A;padding:5px;}
+.tab a:link, .tab a:visited{color:#48802C;}
+.tab a:hover,.datepicker-reset:hover {color:#EB8F2A ;text-decoration:none;}
+.datepicker-reset, .action-link, .action-link a {cursor:pointer;color:#48802C;font-size:10pt;font-weight:bold;}
+.datepicker-reset:hover, .action-link:hover, .action-link a:hover{color:#EB8F2A;}
+.action-link-label{color:#EB8F2A;font-weight:bold;font-size:10pt;text-transform:uppercase;}
+
+.field-calendar-container{display:inline-block; margin-top:1em;margin-bottom:1em;width:100%;}
+.field-calendar-picker-container{width:48%;}
+.field-calendar-picker-container label {width:100% !important;text-align:left;}
+
+.role-view {border:solid 1px #ccc;margin-bottom:1em;width:100%;}
+.role-view table th {font-size:10pt;}
+.role-view table td {font-size:10pt;}
+.role-header-section {padding: 8px;background:#F9DCB1;font-size:12pt;}
+.role-edit_buttons {float:right;}
+.role-admin-section {}
+.role-userview-section {}
+.role-userview-section table tbody tr td.td-section-head{background:#f8f8f8;padding:8px;font-weight:bold;}
+.role-userview-section table tbody tr td.td-audition-dates,
+.role-userview-section table tbody tr td.td-wardrobe-dates,
+.role-userview-section table tbody tr td.td-callback-dates,
+.role-userview-section table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;}
+.role-userview-section table tbody tr td.td-shoot-dates {border-right:none;}
+#role-dates-summary table th, #role-dates-summary table td { font-size: 10pt;}
+#role-dates-summary table tbody tr td.td-audition-dates,
+#role-dates-summary table tbody tr td.td-wardrobe-dates,
+#role-dates-summary table tbody tr td.td-callback-dates,
+#role-dates-summary table tbody tr td.td-shoot-dates {border-right:solid 1px #ccc;border-bottom:solid 1px #ccc;vertical-align:top;}
+#role-dates-summary table tbody tr td.td-audition-dates {border-left:solid 1px #ccc;}
+.search-filter-container {font-size:10pt;}
+.search-filter-container label, .data-table label {font-weight:bold;color:#666;}
+.search-filter-container .filter-button {display:none;}
+.search-filter-container .search-filter {border:solid 1px #ccc; padding:10px;}
+.cell.group {background:#F9DCB1;}
+.row.group .cell {border-bottom:solid 1px #F9DCB1;font-size:10pt;}
+.row.group .cell.group {font-size:10pt;border-bottom:1px dotted #F8F8F8;}
+.hide, .wait {display:none;padding:10px; border:solid 1px red;text-align:center;font-weight:bold;font-size:1.5em;color:#EB8F2A;}
+.cell input.submit {background:#EB8F2A; color:#fff;font-weight:bold;}
+table tr th.center{text-align:center;background:#F9DCB1;border-left:1px solid #f8f8f8;}
+table tr td.center{text-align:center;} 
+table tr td.sub-head {font-weight:bold;font-size:10pt;text-align:center;}
+#remember_me_holder {display:none;}
+.display-date-field, input.display-date-field:focus  {background:#F9DCB1;font-size:10pt;width:270px;border:none;}
+div.nav ul li div#search{margin-left:150px;}
 ul, img {
    page-break-inside: avoid;
 }
-.buttons,.search-filter-container {display:none;}
+.buttons,.search-filter-container, .search-filter-container, .search-filter-container label, .data-table label,
+.search-filter-container .filter-button, .search-filter-container .search-filter,
+.submit, .action_wait,.action-link-label,.action-link, .create,.bread-crump  {display:none;}
+#page-body {padding:0; margin:0}
+fieldset legend, h1{font-size:14pt;}
+h2 {font-size:12pt;}
+.property-label,.property-value, label, .cell, .ui-widget-content a, .fieldcontain  {font-size:10pt;}
 

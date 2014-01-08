@@ -30,7 +30,7 @@ class PictureSetController {
         }
 		attachUploadedFilesTo(pictureSetInstance)
 		//println("saved! ${videoSetInstance.totalAttachments}" )
-        flash.message = message(code: 'default.created.message', args: [message(code: 'pictureSet.label', default: 'PictureSet'), pictureSetInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'pictureSet.label', default: 'PictureSet'), pictureSetInstance])
         redirect(action: "show", id: pictureSetInstance.id)
     }
 
@@ -83,7 +83,7 @@ class PictureSetController {
         }
 		
 		attachUploadedFilesTo(pictureSetInstance)
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'pictureSet.label', default: 'PictureSet'), pictureSetInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'pictureSet.label', default: 'PictureSet'), pictureSetInstance])
         redirect(action: "show", id: pictureSetInstance.id)
     }
 

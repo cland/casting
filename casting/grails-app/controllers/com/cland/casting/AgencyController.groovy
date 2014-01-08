@@ -40,7 +40,7 @@ class AgencyController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'agency.label', default: 'Agency'), agencyInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'agency.label', default: 'Agency'), agencyInstance])
         redirect(action: "show", id: agencyInstance.id)
     }
 
@@ -102,7 +102,7 @@ class AgencyController {
             return
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'agency.label', default: 'Agency'), agencyInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'agency.label', default: 'Agency'), agencyInstance])
         redirect(action: "show", id: agencyInstance.id)
     }
 

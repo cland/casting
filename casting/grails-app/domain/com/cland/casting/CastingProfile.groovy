@@ -46,7 +46,8 @@ class CastingProfile {
 	List ratings
 	static transients = [ 'mediumDetails',
 		'shortDetails','firstLastName','lastFirstName','gender','race','email','contactNo',
-		'wardropeDate', 'isWardropeAvailable','isWardropeAttended','candidate','currentAge' ]
+		'wardropeDate', 'isWardropeAvailable','isWardropeAttended','candidate','currentAge',
+		'castingDetails' ]
 	
 	static hasMany = [ratings:Rating,roles:CastingRole,categories:CastingCategory]
 	static hasOne = [videos:VideoSet,pictures:PictureSet]
@@ -128,7 +129,12 @@ class CastingProfile {
 	public String getContactNo(){
 		candidate?.person?.contactNo
 	}
-
+	public getCastingDetails(){
+		def invited = (isInvited ? "yes":"no")
+		def shortlist = (isShortlist ? "yes":"no")
+		def confirmed = (isConfirmed ? "yes":"no")
+		"Cast No: ${castNo} | ${candidate?.person?.toString()} | Invited: ${invited} | Shortlist: ${shortlist} | Invited: ${confirmed} | Role: ${roles?.join(',')}"
+	}
 	String getName(){
 		"${candidate?.person?.toString()}"
 	}
