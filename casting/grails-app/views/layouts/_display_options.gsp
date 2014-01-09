@@ -1,4 +1,4 @@
-<div class="display-options">
+<div class="display-options no-print">
 	<div class="data-table">
 		<div class="row">
 			<div class="cell"><label for=""><g:message code="default.viewas.label" default="View as" />:</label></div>

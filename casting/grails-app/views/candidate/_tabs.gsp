@@ -27,7 +27,7 @@
 					
 				</g:if>
 			</sec:ifAnyGranted>
-		</div>
+	</div>
 		<ol class="property-list candidate">
 		
 				<g:if test="${candidateInstance?.person}">
@@ -178,9 +178,6 @@
 						<td><g:formatDate date="${agencyPortfolioSetInstance.dateCreated}" format="dd-MMM-yyyy"/></td>
 						<td><g:userFullname id="${fieldValue(bean: agencyPortfolioSetInstance, field: "lastUpdatedBy")}" default="None"/></td>
 						<td><g:formatDate date="${agencyPortfolioSetInstance.lastUpdated}" format="dd-MMM-yyyy"/></td>
-					
-						
-					
 					</tr>
 				</g:each>
 				</tbody>

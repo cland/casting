@@ -23,11 +23,11 @@
 						</div>
 					</div>
 				</sec:ifAnyGranted>
-				
+				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
 					<div class="row invited vstage1" id="invited_${profile?.id }">
 						<div class="cell"><label class="profile-text">Invite:</label></div>
 						<div class="cell">
-						<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
+						<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 							<g:radioGroup name="invited_${profile?.id }" value='${profile?.isInvited }' values="['true','false']" labels="['yes','no']" class="invite_radio_group">
 								<span class="mugshot_radio">${it.radio } ${it.label } </span>
 							</g:radioGroup>			
@@ -37,7 +37,7 @@
 						</sec:ifAnyGranted>
 						</div>
 					</div>		
-							
+				</sec:ifAnyGranted>			
 					<div class="row vstage1 vstage2 shortlist" id="shortlist_${profile?.id }">
 						<div class="cell"><label class="profile-text">Shortlist:</label></div>
 						<div class="cell">

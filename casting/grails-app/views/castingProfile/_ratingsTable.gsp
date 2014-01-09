@@ -1,3 +1,4 @@
+<%@ page import="com.cland.casting.SystemRoles" %>
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'ratings', 'error')} ">
 
     <ul class="one-to-many">
@@ -26,10 +27,11 @@
                 </g:each>
             </tbody>
         </table>
-
+		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
 		<g:if test="${isEditing }">
         <li class="add"><a id="addRatingLink" href="#">Rate this profile</a></li>
         </g:if>
+        </sec:ifAnyGranted>
     </ul>
 </div>
 <r:script>

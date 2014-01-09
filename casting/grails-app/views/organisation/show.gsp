@@ -1,4 +1,4 @@
-
+<%@ page import="com.cland.casting.SystemRoles" %>
 <%@ page import="com.cland.casting.Organisation" %>
 <!DOCTYPE html>
 <html>
@@ -27,6 +27,7 @@
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
 			<g:render template="tabs"/>
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${organisationInstance?.id}" />
@@ -34,6 +35,7 @@
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>
+			</sec:ifAnyGranted>
 		</div>
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow

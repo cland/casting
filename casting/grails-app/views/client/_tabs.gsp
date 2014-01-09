@@ -43,20 +43,32 @@
 	</div>
 <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 	<div id="tab-productions">
-	<ol>
-			<g:if test="${clientInstance?.productions}">
-			
-					<g:each in="${clientInstance?.productions}" var="p">
-					<span class="property-value" aria-labelledby="production-label"><g:link controller="production" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></span>
-					<span class="property-value" aria-labelledby="production-label">${p?.status?.encodeAsHTML()}</span>
-					<span class="property-value" aria-labelledby="production-label">${p?.shootDate?.encodeAsHTML()}</span>
-					<span class="property-value" aria-labelledby="production-label">${p?.roles}</span>
-					<span class="property-value" aria-labelledby="production-label">${p?.categories}</span>
-					<br/><br/>
-					</g:each>					
-		
-			</g:if>
-		</ol>
+	<g:if test="${clientInstance?.productions}">
+		<table>
+			<thead>
+				<tr>
+				<g:sortableColumn property="name" title="${message(code: 'production.name.label', default: 'Name')}" />
+				<g:sortableColumn property="status" title="${message(code: 'production.status.label', default: 'Status')}" />	
+				<g:sortableColumn property="startDate" title="${message(code: 'production.startdate.label', default: 'Start Date')}" />
+				<g:sortableColumn property="endDate" title="${message(code: 'production.enddate.label', default: 'End Date')}" />					
+				</tr>
+			</thead>
+			<tbody>
+			<g:each in="${clientInstance?.productions}" status="i" var="productionInstance">
+				<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+				
+					<td><g:link controller="production" action="show" id="${productionInstance.id}">${fieldValue(bean: productionInstance, field: "name")}</g:link></td>
+					<td>${fieldValue(bean: productionInstance, field: "status")}</td>
+					<td>${productionInstance?.startDate.format("dd-MMM-yyyy") }</td>
+					<td>${productionInstance?.endDate.format("dd-MMM-yyyy") }</td>
+				</tr>
+			</g:each>
+			</tbody>
+			</table>
+							
+	
+		</g:if>
+
 	</div>
 	</sec:ifAnyGranted>
 </div>

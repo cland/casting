@@ -66,9 +66,26 @@
 .nav a.print-button {
 	background-image: url("${fam.icon(name:'printer')}");
 }
+
+@media print {
+	.print-preview-only{display:none;}
+}
 		</style>
 	</head>
 	<body>
+		<div class="print-preview-only">	
+		<div class="float-right">
+			<a href="#" class="print-button" onclick="printPage(false);return false;">
+				<g:message code="default.print.label" />
+			</a> |
+			<a href="javascript:printFriendly(false);"  class="print-button">
+				<g:message code="default.done.label" />
+			</a>
+		</div>
+			<br/>
+			<hr/>
+			
+		</div>
 		<div id="appLogo" role="banner">
 			<g:link controller="home" action="casting" class="casting">
 				<img src="${resource(dir: 'images', file: 'logo.png')}" alt="Logo"/>

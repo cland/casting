@@ -147,7 +147,7 @@
 	</div>
 </fieldset>
 	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
-		<fieldset><legend>Who can access this production</legend>
+		<fieldset class="no-print"><legend>Who can access this production</legend>
 		<span id="agencyACL-label" class="property-label"><g:message code="production.agencyacl.label" default="Agency access list" /></span>
 				<g:if test="${productionInstance?.agencyACL}">								
 				<br/>

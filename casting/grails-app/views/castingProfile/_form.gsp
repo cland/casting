@@ -175,7 +175,8 @@
 </div>
 
 </fieldset>
-
-<fieldset><legend>Ratings and Comments</legend>
-<g:render template="ratingsTable"/>
-</fieldset>
+<g:if test="${!isNew }">
+	<fieldset><legend>Ratings and Comments</legend>
+	<g:render template="ratingsTable"/>
+	</fieldset>
+</g:if>

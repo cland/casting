@@ -617,13 +617,13 @@ p {
 .summary-row .cast-details,.profile-row .cast-details {
     float: left;
     border: none 1px #0e8523;
-    width: 28%;
+    width: 22%;
     margin: 0.5em;
 }
 .summary-row .cast-actions, .profile-row .cast-actions {
     float: left;
     border: none 1px #0094ff;
-	width: 45%;
+	width: 46%;
     margin: 0.5em;
     margin-left:1px;
     margin-right:1px;
@@ -735,11 +735,11 @@ div.nav ul li div#search{margin-left:150px;}
 ul, img {
    page-break-inside: avoid;
 }
-.buttons,.search-filter-container, .search-filter-container, .search-filter-container label, .data-table label,
+.buttons,.search-filter-container, .search-filter-container, .search-filter-container label,
 .search-filter-container .filter-button, .search-filter-container .search-filter,
-.submit, .action_wait,.action-link-label,.action-link, .create,.bread-crump  {display:none;}
+.submit, .action_wait,.action-link-label,.action-link, .create,.bread-crump, .no-print, .editRowButton  {display:none;}
 #page-body {padding:0; margin:0}
 fieldset legend, h1{font-size:14pt;}
 h2 {font-size:12pt;}
 .property-label,.property-value, label, .cell, .ui-widget-content a, .fieldcontain  {font-size:10pt;}
-
+.print-preview-only{display:block;font-size:1.25em}

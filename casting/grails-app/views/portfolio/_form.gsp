@@ -29,6 +29,6 @@
 		<g:message code="portfolio.profiles.label" default="Profiles" />
 		
 	</label>
-	<g:select name="profiles" from="${portfolioInstance?.production?.profiles}" multiple="multiple" optionKey="id" size="5" value="${portfolioInstance?.production?.profiles*.id}" optionValue="castingDetails" class="many-to-many"/>
+	<g:select name="profiles" from="${portfolioInstance?.production?.profiles?.sort{it.name}}" multiple="multiple" optionKey="id" size="5" value="${portfolioInstance?.profiles*.id}" optionValue="castingDetails" class="many-to-many"/>
 </div>
 

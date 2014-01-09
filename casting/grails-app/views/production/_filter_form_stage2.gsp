@@ -1,4 +1,5 @@
-		<fieldset><legend>Search Filter and Display Options</legend>
+<%@ page import="com.cland.casting.SystemRoles" %>
+<fieldset class="no-print"><legend>Search Filter and Display Options</legend>
 		<g:formRemote name="stage2_filter_form" url="[controller:'production',action:'filter']" update="stage2-cast-list" onSuccess="onSuccessFilterStage2CallbackHander(data,textStatus)"
 			onLoading="onLoading()"
 			onComplete="onComplete()"

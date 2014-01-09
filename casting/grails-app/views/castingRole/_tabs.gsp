@@ -4,7 +4,7 @@
 <div id="tabs" style="display: none;">
 	<ul>
 		<li><a href="#tab-details">Details</a></li>
-		<li><a href="#tab-profiles">Profiles</a></li>
+		<li class="hide"><a href="#tab-profiles">Profiles</a></li>
 	</ul>
 
 	<!-- DETAILS -->	
@@ -113,7 +113,7 @@
 </div>
 
 	<!-- Profiles -->
-<div id="tab-profiles" class="tab">
+<div id="tab-profiles" class="tab hide">
 		
 		<p>No profiles available yet!</p>
 		

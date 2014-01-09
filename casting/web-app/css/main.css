@@ -880,3 +880,4 @@ table tr td.sub-head {font-weight:bold;font-size:0.9em;text-align:center;}
 #remember_me_holder {display:none;}
 .display-date-field, input.display-date-field:focus  {background:#F9DCB1;font-size:0.8em;width:270px;border:none;}
 div.nav ul li div#search{margin-left:150px;}
+.print-preview-only{display:none;}

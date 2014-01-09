@@ -108,11 +108,11 @@
 	</div>
 	
 	<div class="cast-actions-data-table">
-
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
          		<div class="row vstage1 invited">
 					<div class="cell"><label for="invited_${profile?.id }"><g:message code="default.invited.label" default="Invited" />:</label></div>
 					<div class="cell">
-					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
+					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 						<g:radioGroup name="invited_${profile?.id }" value='${profile?.isInvited }' values="['true','false']" labels="['yes','no']" class="invite_radio_group">
 								<span class="mugshot_radio">${it.radio } ${it.label } </span>
 						</g:radioGroup>
@@ -121,7 +121,8 @@
 					<img src='${resource(dir: 'images/icons', file: (profile?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/>
 					</sec:ifAnyGranted>
 					</div>	
-				</div>         	
+				</div>     
+			</sec:ifAnyGranted>    	
          		<div class="row vstage1 vstage2 shortlist">
 					<div class="cell"><label for="shortlist_${profile?.id }"><g:message code="default.shortlist.label" default="Shortlist" />:</label></div>
 					<div class="cell">

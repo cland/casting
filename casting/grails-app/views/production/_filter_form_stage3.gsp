@@ -1,4 +1,5 @@
-		<fieldset><legend>Search Filter and Display Options</legend>
+<%@ page import="com.cland.casting.SystemRoles" %>
+<fieldset class="no-print"><legend>Search Filter and Display Options</legend>
 		<g:formRemote name="stage3_filter_form" url="[controller:'production',action:'filter']" update="stage3-cast-list" onSuccess="onSuccessFilterStage3CallbackHander(data,textStatus)"
 			onLoading="onLoading()"
 			onComplete="onComplete()"
@@ -84,6 +85,6 @@
 					  
 				</div>
 			</div>
-				<g:render template="../layouts/display_options" model="[stage:'stage1',viewvalue:'summary',sortvalue:'castno']"/>
+				<g:render template="../layouts/display_options" model="[stage:'stage3',viewvalue:'summary',sortvalue:'castno']"/>
 			</g:formRemote>
 </fieldset>

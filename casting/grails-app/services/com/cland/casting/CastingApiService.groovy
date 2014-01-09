@@ -46,6 +46,19 @@ class CastingApiService {
 				order("status", "asc")
 			}
 			productionList.addAll(tmpList)
+		}else if(isDirector()){
+			def clientId = 0	//force agencyId to something that returns empty results
+			def clientInstance = getClientForUser(user.id)?.find{true}			
+			if(clientInstance){
+				 clientId = clientInstance?.id 
+			}
+			def tmpList = Production.withCriteria {
+				client { idEq(clientId) }
+				//firstResult(offset)
+				maxResults(max)
+				order("startDate", "desc")
+			}
+			productionList.addAll(tmpList)
 		}else{
 			agencyId = 0	//force agencyId to something that returns empty results
 			def agency = getAgencyForUser(user.id)?.find{true}
@@ -97,7 +110,7 @@ class CastingApiService {
 				 }		 
 			 } //end each restrictedRoles
 		} //end if agency
-		return rolesList
+		return rolesList?.unique()?.sort{it.name}
 	}
 	/*
 	 * Given a production, it computes all the key dates defined on the roles if any
@@ -239,29 +252,32 @@ class CastingApiService {
 	} //end function
 	String getHomeLink(){
 		Long userId = getCurrentUserId() // springSecurityService?.currentUser?.id
-		if(isAdmin()) return "/admin/"
+		def status = ""
+		if(isAdmin()) return "/production/list"
 		if(isAgent()){
 			//work out the agency that this user belongs to
-			def agency = getAgencyForUser(userId)?.find{true}
-			long id = agency?.id //?.get(0) //comes back as an array coz user can belong to more that one???? 
-			
+			def agency = getAgencyForUser(userId)?.find{true}			
 			if(agency?.id){
 				//return agency's details link
-				return "/agency/show/" + id
+				return "/agency/show/" + agency?.id + "?sidebar=0"
+			}else{
+			status="agencylinked=0"
 			}
 		}
 		if (isClient()){
 			//work out the client that this user belongs to
 			def client = getClientForUser(userId)?.find{true}
-			long id = client?.id	//?.get(0)
+			
 			if(client){
 				//return client's details link
-				return "/client/show/" + id
+				return "/client/show/" + client?.id + "?sidebar=0"
+			}else{
+				status="clientlinked=0"
 			}
 		}
 		
-		//else we rturn the user back to home page.
-		return "/"
+		//else we return the user back to home page.
+		return "/?" + status
 	}
 	String getSideMenuName(){
 		long userId = getCurrentUserId() //springSecurityService.currentUser?.id //?.principal?.id
@@ -270,9 +286,7 @@ class CastingApiService {
 			return "sidenav-agency"
 		}
 		if (isClient()){
-
 			return "sidenav-client"
-
 		}
 
 		//else we rturn the user back to home page.
@@ -326,7 +340,7 @@ class CastingApiService {
 				//then we only show them their profiles
 				def agency = getAgencyForUser(user.id)?.find{true} //user.id				
 				if(agency) agencyId = agency.id
-				candidate {
+				canditate {
 					createAlias("candidate.agency",'agency')
 					eq("agency.id",agencyId.toLong())				
 				}			

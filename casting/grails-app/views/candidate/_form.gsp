@@ -1,15 +1,18 @@
 <%@ page import="com.cland.casting.Candidate" %>
+
 <g:if test="${agencyInstance != null}">
+<g:set var="personList" value="${agencyInstance?.candidates*.person }"/>
 <g:hiddenField name="agency.id" value="${agencyInstance?.id}" />
 </g:if>
 <g:if test="${agencyInstance == null}">
+<g:set var="personList" value="${com.cland.casting.User.list().sort() }"/>
 <fieldset><legend>Agency Details</legend>
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'agency', 'error')} required">
 	<label for="agency">
 		<g:message code="candidate.agency.label" default="Agency" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="agency" name="agency.id" from="${com.cland.casting.Agency.list()}" optionKey="id" required="" value="${candidateInstance?.agency?.id}" class="many-to-one" noSelection="['': '--Select Agency--']"/>
+	<g:select id="agency" name="agency.id" from="${com.cland.casting.Agency.list()?.sort()}" optionKey="id" required="" value="${candidateInstance?.agency?.id}" class="many-to-one" noSelection="['': '--Select Agency--']"/>
 </div>
 </fieldset>
 </g:if>
@@ -20,7 +23,7 @@
 		<g:message code="candidate.person.label" default="Person" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="person" onChange="onChangePerson();" name="person.id" from="${com.cland.casting.User.list()}" optionKey="id"  value="${candidateInstance?.person?.id}" class="many-to-one"  noSelection="['': '--New Person/Select One--']"/>
+	<g:select id="person" onChange="onChangePerson();" name="person.id" from="${personList?.sort()}" optionKey="id"  value="${candidateInstance?.person?.id}" class="many-to-one"  noSelection="['': '--New Person/Select One--']"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.firstName', 'error')} required">

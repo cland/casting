@@ -89,11 +89,11 @@ environments {
 //		grails.attachmentable.maxUploadSize = 31457280
 //		grails.attachmentable.uploadDir = "/var/grails/uploads/taglets/${appName}"
 		
-	//	if (System.properties["os.name"] == "Linux") {
+		if (System.properties["os.name"] == "Linux") {
 			grails.config.locations = ["file:/var/grails/app-conf/${appName}-config.groovy"]
-	//	}else{
-	//		grails.config.locations = ["file:C:\\grails\\app-conf\\${appName}-Config.groovy"]
-	//	}
+		}else{
+			grails.config.locations = ["file:C:\\grails\\app-conf\\${appName}-Config.groovy"]
+		}
     }
 }
 
@@ -135,10 +135,12 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/personRole/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/userRole/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/organisation/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/organisation/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	'/organisation/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],	
 	'/organisation/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/role/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
-	'/user/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	'/user/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	'/user/list/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
+	'/user/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/production/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/production/edit/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
 	'/image/create/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY'],
@@ -167,6 +169,8 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	//** GENERAL AUTHENTICATED USER
 	//'/home/**': ['IS_AUTHENTICATED_FULLY'],
 	'/production/show/**': ['IS_AUTHENTICATED_FULLY'],
+	'/organisation/show/**': ['IS_AUTHENTICATED_FULLY'],
+	'/user/show/**': ['IS_AUTHENTICATED_FULLY'],
 	'/production/list/**': ['IS_AUTHENTICATED_FULLY'],
 	'/home/casting/**': ['IS_AUTHENTICATED_FULLY'],
 	'/agency/show**': ['IS_AUTHENTICATED_FULLY'],
@@ -175,7 +179,7 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/castingCategory/**': ['IS_AUTHENTICATED_FULLY'],
 	'/castingProfile/**': ['IS_AUTHENTICATED_FULLY'],
 	'/castingRole/show/**': ['IS_AUTHENTICATED_FULLY'],
-	'/oraganisation/show/**': ['IS_AUTHENTICATED_FULLY'],
+	
 	'/category/**': ['IS_AUTHENTICATED_FULLY'],
 	'/client/show/**': ['IS_AUTHENTICATED_FULLY'],
 	'/pictureSet/**': ['IS_AUTHENTICATED_FULLY'],

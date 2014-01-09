@@ -48,7 +48,7 @@
 				onComplete="onComplete()"
 				onFailure="onFailure(data,textStatus)"
 				onSuccess="onSuccessCastCallbackHander(data,textStatus)">
-				<fieldset><legend>Display Options</legend>
+				<fieldset class="no-print"><legend>Display Options</legend>
 					<g:render template="../layouts/display_options" model="[stage:'stage2',viewvalue:'list',sortvalue:'castno']"/>
 				</fieldset>
 				<g:hiddenField name="id" value="${portfolioInstance?.id }"/>

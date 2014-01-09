@@ -102,6 +102,12 @@
 			</ul>
 		</div>
 		<div id="page-body" role="main">
+			<g:if test="${params?.agencylinked == '0' }">
+				<div class="errors">You are not linked to any agency. Please contact the administrator.</div>
+			</g:if>
+			<g:if test="${params?.clientlinked == '0' }">
+				<div class="errors">You are not linked to any agency. Please contact the administrator.</div>
+			</g:if>
 			<h1>Home</h1>
 			<div class="content float-left">
 			<p>From the heart of one of the world's most beautiful cities, our talented, dedicated and hard-working casting team offers you: &nbsp;</p>

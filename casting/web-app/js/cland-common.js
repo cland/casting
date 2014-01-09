@@ -6,8 +6,9 @@ function printableTabs() {
 			+"</h2><br />";
 			var a = $(this).attr('href');
 			tabsforPrint = tabsforPrint + $(a).html() + "<br />";
+			
 		});
-		$(this).html(tabsforPrint);
+		if(tabsforPrint != "") $(this).html(tabsforPrint);
 	});
 } //end function printableTabs()
 
@@ -15,12 +16,16 @@ function setStyle(frmstyle,tostyle){
 	var lnk = ($("link[media=screen]").attr("href"));
 	$("link[media=screen]").attr({href : lnk.replace(frmstyle,tostyle)});
 }
-function printFriendly(){
-	printableTabs();
-	setStyle("main.css","print.css")
+function printFriendly(on,alltabs){
+	if(on){
+		if(alltabs) printableTabs();
+		setStyle("main.css","print.css")
+	}else{
+		setStyle("print.css","main.css")
+	}
 }
-function printPage(){
-	printableTabs();
+function printPage(alltabs){
+	if(alltabs) printableTabs();
 	window.print();
 }
 function onChangeCompany(){
@@ -53,7 +58,7 @@ function stageDisplay(stage){
 		$(".vstage1").hide();		
 		$(".vstage3").hide();
 		$(".vstage2").show();
-	}else if(stage.toLowerCase() == "stage2"){
+	}else if(stage.toLowerCase() == "stage3"){
 		$(".vstage1").hide();		
 		$(".vstage2").hide();
 		$(".vstage3").show();

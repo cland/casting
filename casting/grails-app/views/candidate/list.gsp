@@ -1,5 +1,6 @@
 
 <%@ page import="com.cland.casting.Candidate" %>
+<g:set var="agencyId"><g:agencyId/></g:set>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,6 +26,11 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+			<fieldset class="buttons">
+				<g:link class="create" controller="candidate" action="create" params="${['agency.id':agencyId]}">
+					<g:message code="default.new.label" args="['Candidate']"/>
+				</g:link>
+			</fieldset>
 			<div id="local-search" style="display:none;">
 				<g:form url='[controller: "candidate", action: "search"]'
 					id="candidateSearchForm"

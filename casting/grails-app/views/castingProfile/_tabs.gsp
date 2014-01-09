@@ -2,7 +2,7 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
 <g:set var="pictureSetInstance" value="${castingProfileInstance?.pictures}"/>
 <g:set var="videoSetInstance" value="${castingProfileInstance?.videos}"/>
-<g:set var="candidate" value="${castingProfileInstance?.canditate }"/>
+<g:set var="candidate" value="${castingProfileInstance?.candidate }"/>
 <div id="tabs" style="display: none;">
 	<ul>
 		<li><a href="#tab-details">Details</a></li>
@@ -252,10 +252,10 @@
 	</div>				
 </div>
 
-		</fieldset>
-		<fieldset><legend>Ratings and Comments</legend>
+	</fieldset>
+	<fieldset><legend>Ratings and Comments</legend>
 		<g:render template="ratingsTable"/>
-		</fieldset>	
+	</fieldset>	
 </div>
 	
 	
@@ -290,7 +290,17 @@
 		</fieldset>
 		<br/>
 		<fieldset><legend>Other Pictures</legend>
-		<div id="attachments-photos" class="attachments">
+			<div id="candidate-mugshot-${castingProfileInstance?.id }" class="candidate-mugshot float-left">
+				<g:set var="hasphoto" value="${false }"/>
+			    <attachments:each bean="${candidate}" inputName="headshot" status="j">	         
+					<g:if test="${j==0}">
+						<g:set var="hasphoto" value="${true }"/>
+						<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+					</g:if>			
+				</attachments:each>	
+			</div>		
+			<br/>
+			<div id="attachments-photos" class="attachments">
 				<attachments:each bean="${pictureSetInstance}" inputName="pictures" status="i">	
 				<div class="photo-display float-left">
 				<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
@@ -306,7 +316,8 @@
 				
 				</attachments:each>
 				<div style="clear:both"></div>
-		</div>
+			</div>
+					
 		</fieldset>
 		
 </div>	

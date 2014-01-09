@@ -84,29 +84,33 @@
 	</div>
 	<div id="tab-productions">
 		
-			<g:if test="${productionList}">
-			<table>
-				<thead>
-					<tr>
-					<g:sortableColumn property="name" title="${message(code: 'production.name.label', default: 'Name')}" />
-					<g:sortableColumn property="status" title="${message(code: 'production.status.label', default: 'Status')}" />	
-					<g:sortableColumn property="client.company.name" title="${message(code: 'production.client.label', default: 'Client')}" />					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${productionList}" status="i" var="productionInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${productionInstance.id}">${fieldValue(bean: productionInstance, field: "name")}</g:link></td>
-						<td>${fieldValue(bean: productionInstance, field: "status")}</td>
-						<td>${fieldValue(bean: productionInstance, field: "client")}</td>
-					</tr>
-				</g:each>
-				</tbody>
-				</table>
-								
-		
-			</g:if>
+		<g:if test="${productionList}">
+		<table>
+			<thead>
+				<tr>
+				<g:sortableColumn property="name" title="${message(code: 'production.name.label', default: 'Name')}" />
+				<g:sortableColumn property="status" title="${message(code: 'production.status.label', default: 'Status')}" />	
+				<g:sortableColumn property="client.company.name" title="${message(code: 'production.client.label', default: 'Client')}" />
+				<g:sortableColumn property="startDate" title="${message(code: 'production.startdate.label', default: 'Start Date')}" />
+				<g:sortableColumn property="endDate" title="${message(code: 'production.enddate.label', default: 'End Date')}" />					
+				</tr>
+			</thead>
+			<tbody>
+			<g:each in="${productionList}" status="i" var="productionInstance">
+				<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+				
+					<td><g:link controller="production" action="show" id="${productionInstance.id}">${fieldValue(bean: productionInstance, field: "name")}</g:link></td>
+					<td>${fieldValue(bean: productionInstance, field: "status")}</td>
+					<td>${fieldValue(bean: productionInstance, field: "client")}</td>
+					<td>${productionInstance?.startDate.format("dd-MMM-yyyy") }</td>
+					<td>${productionInstance?.endDate.format("dd-MMM-yyyy") }</td>
+				</tr>
+			</g:each>
+			</tbody>
+			</table>
+							
+	
+		</g:if>
 		
 	</div>
 	</sec:ifAnyGranted>
