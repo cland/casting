@@ -54,7 +54,9 @@
 
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-
+	stageDisplay("stage1")
+	stageDisplay("stage2")
+	stageDisplay("stage3")
 	//Main tabs	
 	$("#tabs").tabs(
 			{
@@ -116,36 +118,6 @@ function onFailure(data,textStatus){
 	alert("Operation failed with status '" + textStatus + "'")
 }
 
-
-<%--function stageDisplay(curtab, stage){--%>
-<%----%>
-<%--	if(curtab.toLowerCase() == "auditions"){		--%>
-<%--		$(".vstage2").hide();--%>
-<%--		$(".vstage3").hide();--%>
-<%--		$(".vstage1").show();--%>
-<%--		--%>
-<%--	}else if(curtab.toLowerCase() == "shortlist"){--%>
-<%--	--%>
-<%--		$(".vstage1").hide();		--%>
-<%--		$(".vstage3").hide();--%>
-<%--		$(".vstage2").show();--%>
-<%--	}else if(curtab.toLowerCase() == "final cast"){--%>
-<%--		$(".vstage1").hide();		--%>
-<%--		$(".vstage2").hide();--%>
-<%--		$(".vstage3").show();--%>
-<%--	}--%>
-<%--	if($("#viewas_" + stage).attr("value") == "list"){--%>
-<%--		$("#submit_" + stage + "_top").hide()--%>
-<%--		$("#submit_" + stage + "_bottom").hide()--%>
-<%--	}else{--%>
-<%--		$("#submit_" + stage + "_top").show()--%>
-<%--		$("#submit_" + stage + "_bottom").show()--%>
-<%--	}--%>
-<%--	$("#hidden_viewas_" + stage).attr("value",$("#viewas_" + stage).val())--%>
-<%--	$("#hidden_sortby_" + stage).attr("value",$("#sortby_" + stage).val())--%>
-<%--} // end function--%>
-
-
 function filterDialog(){
   	 var $dialog = $('<div></div>')
 
@@ -164,9 +136,7 @@ function filterDialog(){
                  
     $dialog.dialog('open');
   }
-function loadProfiles(){
- 
-}
+
 
 </script>
 	</body>

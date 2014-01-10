@@ -40,6 +40,7 @@ class User {
 	Date lastUpdated
 	// Organisation company
 	 String status
+	 String caption
 	// Candidate candidate
 	static transients = [ 'mediumDetails','shortDetails','firstLastName','lastFirstName','age' ]
 	//static hasOne = [candidate:Candidate] 
@@ -72,6 +73,7 @@ class User {
 		createdBy nullable:true
 		status(inList:["Active","Inactive"],nullable:true,blank:false)
 		//candidate(nullable:true)
+		caption(nullable:true)
 	}
 
 	static mapping = {

@@ -123,5 +123,12 @@
 			<div style="clear:both"></div>
 	</div><br/>
 </g:if>	
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'caption', 'error')} ">
+	<label for="caption">
+		<g:message code="user.caption.label" default="Caption" />
+		
+	</label>
+	<g:textField name="caption" value="${userInstance?.caption}"/>
+</div>
 </fieldset>
 

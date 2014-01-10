@@ -1,5 +1,5 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
-<fieldset class="no-print"><legend>Search Filter and Display Options</legend>
+<fieldset class="no-print"><legend><g:message code="default.filterheader.label" default="Search Filter and Display Options" /></legend>
 		<g:formRemote name="stage3_filter_form" url="[controller:'production',action:'filter']" update="stage3-cast-list" onSuccess="onSuccessFilterStage3CallbackHander(data,textStatus)"
 			onLoading="onLoading()"
 			onComplete="onComplete()"
@@ -7,6 +7,7 @@
 			<g:hiddenField name="production.id" value="${productionInstance?.id }"/>
 			<g:hiddenField name="filter_shortlist_stage3" value="yes"/>
 			<g:hiddenField name="filter_confirmed_stage3" value="yes"/>
+			<g:hiddenField name="stage" value="stage3"/>
 			<div class="search-filter">
 				<div class="filter-button float-right"><a href="#" onclick="filterDialog();return false;">Update Filter</a></div>
 				<div class="filter-selected">
@@ -29,8 +30,9 @@
 								
 							</div>
 						</div>
+						<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 						<div class="row group">
-							<div class="cell group"><label>CALLBACK:</label></div>
+							<div class="cell group"><label><g:message code="default.callbackgroup.label" default="CALLBACK" />:</label></div>
 							<div class="cell"><span class="r-arrow"></span> <label>Available</label></div>
 							<div class="cell">
 								<g:radioGroup name="filter_callback_stage3" values="['yes','no','any']" labels="['yes','no','any']" >
@@ -47,7 +49,7 @@
 							<div class="cell"></div>
 						</div>
 						<div class="row group">
-							<div class="cell group"><label>WARDROBE:</label></div>
+							<div class="cell group"><label><g:message code="default.wardrobegroup.label" default="WARDROBE" />:</label></div>
 							<div class="cell"><span class="r-arrow"></span> <label>Available:</label></div>
 							<div class="cell">
 								<g:radioGroup name="filter_wardrobe_stage3" values="['yes','no','any']" labels="['yes','no','any']" >
@@ -64,7 +66,7 @@
 							<div class="cell"></div>
 						</div>
 						<div class="row group">
-							<div class="cell group"><label>SHOOT:</label></div>
+							<div class="cell group"><label><g:message code="default.shootgroup.label" default="SHOOT" />:</label></div>
 							<div class="cell"><span class="r-arrow"></span> <label>Available:</label></div>
 							<div class="cell">
 								<g:radioGroup name="filter_shoot_stage3" values="['yes','no','any']" labels="['yes','no','any']" >
@@ -80,7 +82,7 @@
 							<div class="cell"><label></label></div>
 							<div class="cell"></div>
 						</div>
-
+						</sec:ifAnyGranted>
 					</div>
 					  
 				</div>

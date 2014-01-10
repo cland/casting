@@ -21,14 +21,14 @@
 				<g:if test="${hasphoto==false}"> 
 					<g:if test="${ candidateInstance}">
 							<g:link class="edit" action="edit" id="${candidateInstance?.id}">
-							<g:message code="default.add.label" args="['Headshot']"/>
+							<g:message code="default.add.label" args="['Headshot!!']"/>
 							</g:link>
 					</g:if>
 					
 				</g:if>
 			</sec:ifAnyGranted>
 	</div>
-		<ol class="property-list candidate">
+		<ol class="property-list candidate" style="width:60%;">
 		
 				<g:if test="${candidateInstance?.person}">
 				<li class="fieldcontain">
@@ -158,7 +158,7 @@
 	</div>
 	
 	<div id="tab-photos">
-					<table>
+			<table>
 				<thead>
 					<tr>
 					<th><g:message code="agencyPortfolioSet.candidate.label" default="Candidate" /></th>

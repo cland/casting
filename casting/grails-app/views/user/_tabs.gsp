@@ -7,7 +7,7 @@
 		<li><a href="#tab-attachments">Supporting Documents</a></li>
 	</ul>
 	<div id="tab-person">
-	<div id="headshot" class="attachments float-right">
+	<div id="headshot" class="attachments float-right" style="text-align:center">
 			<attachments:each bean="${userInstance}" inputName="headshot" status="i">	
 			<div class="photo-display float-left">
 			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
@@ -15,6 +15,7 @@
 				<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
 			
 			</attachments:each>
+			<br/><span class="caption"> ${userInstance?.caption}</span>
 			<div style="clear:both"></div>
 	</div><br/>
 			<ol class="property-list user">

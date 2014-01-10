@@ -1,5 +1,6 @@
 <!-- The tabs -->
 <%@ page import="com.cland.casting.SystemRoles" %>
+<%@ page import="com.cland.casting.Candidate" %>
 <g:set var="pictureSetInstance" value="${castingProfileInstance?.pictures}"/>
 <g:set var="videoSetInstance" value="${castingProfileInstance?.videos}"/>
 <g:set var="candidate" value="${castingProfileInstance?.candidate }"/>
@@ -23,8 +24,17 @@
             		<div class="cell"><span class="property-value">${castingProfileInstance?.castNo}</span></div>
             	</div>
             	<div class="row name">
-            		<div class="cell"><label>Name:</label></div>
-            		<div class="cell"><span class="property-value">${candidate?.person?.encodeAsHTML() }</span></div>
+            		<div class="cell"><label>Name:</label></div>            		
+            		<div class="cell">
+            			<span class="property-value">
+            				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+            				<g:link controller="candidate" action="show" id="${ candidate?.id}">${candidate?.person?.encodeAsHTML() }</g:link>
+            				</sec:ifAnyGranted>
+            				<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR},${SystemRoles.ROLE_AGENT }">
+            				${candidate?.person?.encodeAsHTML() }
+            				</sec:ifAnyGranted>
+            			</span>
+            		</div>
             	</div>
             	<div class="row contactno">
             		<div class="cell"><label>Contact No.:</label></div>
@@ -92,21 +102,30 @@
 					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
 				</g:if>			
 			</attachments:each>	
-			
+			<g:set var="hasphoto" value="${false }"/>				
+					    <attachments:each bean="${Candidate.get(candidate?.id)}" inputName="headshot" status="j">
+							<g:if test="${j==0}">					
+								<g:set var="hasphoto" value="${true }"/>
+								<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+							</g:if>			
+			</attachments:each>	
+			<g:if test="${hasphoto==false}"> 
+					<img src="${request.contextPath}/images/noimage.gif"/><br/>
 			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
-				<g:if test="${hasphoto==false}"> 
+				
 					<g:if test="${ castingProfileInstance?.pictures}">
 							<g:link class="edit" controller="pictureSet" action="edit" id="${castingProfileInstance?.pictures?.id}">
-							<g:message code="default.add.label" args="['Photo']"/>
+							<g:message code="default.edit.label" args="['Photo']"/>
 							</g:link>
 					</g:if>
 					<g:else>
 						<g:link class="create" controller="pictureSet" action="create" params="${['castingProfile.id':castingProfileInstance?.id]}">
-						<g:message code="default.add.label" args="['Photo']"/>
+						<g:message code="default.edit.label" args="['Photo']"/>
 						</g:link>
 					</g:else>
-				</g:if>
+				
 			</sec:ifAnyGranted>
+			</g:if>
 		</div>
 		<br/>
 		<div class="clear"></div>
@@ -115,56 +134,56 @@
 		
 		<fieldset><legend>Characteristics</legend>	
 		<ol class="property-list candidate">
-				<g:if test="${castingProfileInstance?.canditate?.clothing}">
+				<g:if test="${candidate?.clothing}">
 				<li class="fieldcontain">
 					<span id="clothing-label" class="property-label"><g:message code="candidate.clothing.label" default="Clothing" /></span>
 					
-						<span class="property-value" aria-labelledby="clothing-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="clothing"/></span>
+						<span class="property-value" aria-labelledby="clothing-label"><g:fieldValue bean="${candidate}" field="clothing"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${castingProfileInstance?.canditate?.eyes}">
+				<g:if test="${candidate?.eyes}">
 				<li class="fieldcontain">
 					<span id="eyes-label" class="property-label"><g:message code="candidate.eyes.label" default="Eyes" /></span>
 					
-						<span class="property-value" aria-labelledby="eyes-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="eyes"/></span>
+						<span class="property-value" aria-labelledby="eyes-label"><g:fieldValue bean="${candidate}" field="eyes"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${castingProfileInstance?.canditate?.hair}">
+				<g:if test="${candidate?.hair}">
 				<li class="fieldcontain">
 					<span id="hair-label" class="property-label"><g:message code="candidate.hair.label" default="Hair" /></span>
 					
-						<span class="property-value" aria-labelledby="hair-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="hair"/></span>
+						<span class="property-value" aria-labelledby="hair-label"><g:fieldValue bean="${candidate}" field="hair"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${castingProfileInstance?.canditate?.height}">
+				<g:if test="${candidate?.height}">
 				<li class="fieldcontain">
 					<span id="height-label" class="property-label"><g:message code="candidate.height.label" default="Height" /></span>
 					
-						<span class="property-value" aria-labelledby="height-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="height"/></span>
+						<span class="property-value" aria-labelledby="height-label"><g:fieldValue bean="${candidate}" field="height"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${castingProfileInstance?.canditate?.shoe}">
+				<g:if test="${candidate?.shoe}">
 				<li class="fieldcontain">
 					<span id="shoe-label" class="property-label"><g:message code="candidate.shoe.label" default="Shoe" /></span>
 					
-						<span class="property-value" aria-labelledby="shoe-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="shoe"/></span>
+						<span class="property-value" aria-labelledby="shoe-label"><g:fieldValue bean="${candidate}" field="shoe"/></span>
 					
 				</li>
 				</g:if>
 			
-				<g:if test="${castingProfileInstance?.canditate?.waist}">
+				<g:if test="${candidate?.waist}">
 				<li class="fieldcontain">
 					<span id="waist-label" class="property-label"><g:message code="candidate.waist.label" default="Waist" /></span>
 					
-						<span class="property-value" aria-labelledby="waist-label"><g:fieldValue bean="${castingProfileInstance?.canditate}" field="waist"/></span>
+						<span class="property-value" aria-labelledby="waist-label"><g:fieldValue bean="${candidate}" field="waist"/></span>
 					
 				</li>
 				</g:if>
@@ -257,8 +276,7 @@
 		<g:render template="ratingsTable"/>
 	</fieldset>	
 </div>
-	
-	
+		
 	<!-- PHOTOS -->
 <div id="tab-photos">
 		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
@@ -290,10 +308,11 @@
 		</fieldset>
 		<br/>
 		<fieldset><legend>Other Pictures</legend>
-			<div id="candidate-mugshot-${castingProfileInstance?.id }" class="candidate-mugshot float-left">
-				<g:set var="hasphoto" value="${false }"/>
-			    <attachments:each bean="${candidate}" inputName="headshot" status="j">	         
-					<g:if test="${j==0}">
+		
+			<div id="candidate-mugshot-${castingProfileInstance?.id }" class="candidate-mugshot float-left">		
+				<g:set var="hasphoto" value="${false }"/>				
+			    <attachments:each bean="${Candidate.get(candidate?.id)}" inputName="headshot" status="j">
+					<g:if test="${j==0}">					
 						<g:set var="hasphoto" value="${true }"/>
 						<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
 					</g:if>			
@@ -317,12 +336,34 @@
 				</attachments:each>
 				<div style="clear:both"></div>
 			</div>
+			<br/>
+			<table>
+				<thead>
+					<tr>
 					
+					<g:sortableColumn property="name" title="${message(code: 'agencyPortfolioSet.title.label', default: 'Portfolio Set')}" />
+					<g:sortableColumn property="createdBy" title="${message(code: 'agencyPortfolioSet.createdBy.label', default: 'Created By')}" />
+					<g:sortableColumn property="dateCreated" title="${message(code: 'agencyPortfolioSet.dateCreated.label', default: 'Date Created')}" />
+					<g:sortableColumn property="lastUpdatedBy" title="${message(code: 'agencyPortfolioSet.lastUpdatedBy.label', default: 'Last Updated By')}" />
+					<g:sortableColumn property="lastUpdated" title="${message(code: 'agencyPortfolioSet.lastUpdated.label', default: 'Last Updated')}" />
+					</tr>
+				</thead>
+				<tbody>
+				<g:each in="${candidate?.portfolios}" status="i" var="agencyPortfolioSetInstance">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+						
+						<td><g:link controller="agencyPortfolioSet" action="show" id="${agencyPortfolioSetInstance.id}">${fieldValue(bean: agencyPortfolioSetInstance, field: "name")}</g:link></td>			
+						<td><g:userFullname id="${fieldValue(bean: agencyPortfolioSetInstance, field: "createdBy")}"/></td>
+						<td><g:formatDate date="${agencyPortfolioSetInstance.dateCreated}" format="dd-MMM-yyyy"/></td>
+						<td><g:userFullname id="${fieldValue(bean: agencyPortfolioSetInstance, field: "lastUpdatedBy")}" default="None"/></td>
+						<td><g:formatDate date="${agencyPortfolioSetInstance.lastUpdated}" format="dd-MMM-yyyy"/></td>
+					</tr>
+				</g:each>
+				</tbody>
+			</table>				
 		</fieldset>
 		
 </div>	
-
-
 
 <!-- VIDEOS -->
 <div id="tab-videos">

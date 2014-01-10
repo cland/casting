@@ -133,13 +133,15 @@ class CastingProfile {
 		def invited = (isInvited ? "yes":"no")
 		def shortlist = (isShortlist ? "yes":"no")
 		def confirmed = (isConfirmed ? "yes":"no")
-		"Cast No: ${castNo} | ${candidate?.person?.toString()} | Invited: ${invited} | Shortlist: ${shortlist} | Confirmed: ${confirmed} | Role: ${roles?.join(',')}"
+		def num = (castNo ? castNo : "--")
+		"Cast No: ${num} | ${candidate?.person?.toString()} | Invited: ${invited} | Shortlist: ${shortlist} | Confirmed: ${confirmed} | Role: ${roles?.join(',')}"
 	}
 	String getName(){
 		"${candidate?.person?.toString()}"
 	}
 	String toString(){
-		"Cast: ${castNo} - ${candidate?.person?.toString()}"
+		def num = (castNo ? castNo : "--")
+		"Cast: ${num} - ${candidate?.person?.toString()}"
 	}
 	
 	public Candidate getCandidate(){

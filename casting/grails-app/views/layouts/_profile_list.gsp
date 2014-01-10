@@ -24,19 +24,19 @@
     <td><span class="property-value">${profile?.age }</span></td>
     <td><span class="property-value">${profile?.roles*.name?.join("<br/>") }</span></td>  
     <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
-    <td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td> 	
-	<td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-	<td class="vstage1 center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+    <td class="vstage1_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isInvited?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td> 	
+	<td class="vstage1_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+	<td class="vstage1_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isAuditionAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
 	</sec:ifAnyGranted>
 	
-	<td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-	<td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-    <td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isWardrobeAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-    <td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isWardrobeAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-    <td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isRoleAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-    <td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isRoleAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-    <td class="vstage1 vstage2 center"><img src='${resource(dir: 'images/icons', file: (profile?.isShortlist?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
-    <td class="vstage2 vstage3 center"><img src='${resource(dir: 'images/icons', file: (profile?.isConfirmed?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+	<td class="vstage2_${stage} vstage3_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+	<td class="vstage2_${stage} vstage3_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isCallbackAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+    <td class="vstage2_${stage} vstage3_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isWardrobeAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+    <td class="vstage2_${stage} vstage3_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isWardrobeAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+    <td class="vstage2_${stage} vstage3_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isRoleAvailable?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+    <td class="vstage2_${stage} vstage3_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isRoleAttended?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+    <td class="vstage1_${stage} vstage2_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isShortlist?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
+    <td class="vstage2_${stage} vstage3_${stage} center"><img src='${resource(dir: 'images/icons', file: (profile?.isConfirmed?'accept.png':'delete.png'), plugin: 'famfamfam')}'/></td>
 </tr>     
 </g:if>
 <g:else>

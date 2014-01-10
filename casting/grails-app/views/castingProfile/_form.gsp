@@ -63,7 +63,7 @@
 	</label>
 	<g:field name="castNo" type="number" value="${castingProfileInstance.castNo}" />
 </div>
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'round', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'round', 'error')} required hide">
 	<label for="round">
 		<g:message code="castingProfile.round.label" default="Round" />
 		

@@ -30,7 +30,7 @@
 		<a href="#show-agencyPortfolioSet" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="show-agencyPortfolioSet" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.show.label" args="[entityName]" />: </h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -48,32 +48,6 @@
 					<span id="candidate-label" class="property-label"><g:message code="agencyPortfolioSet.candidate.label" default="Candidate" /></span>
 					
 						<span class="property-value" aria-labelledby="candidate-label"><g:link controller="candidate" action="show" id="${agencyPortfolioSetInstance?.candidate?.id}">${agencyPortfolioSetInstance?.candidate?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${agencyPortfolioSetInstance?.dateCreated}">
-				<li class="fieldcontain">
-					<span id="dateCreated-label" class="property-label"><g:message code="agencyPortfolioSet.dateCreated.label" default="Date Created" /></span>
-					
-						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${agencyPortfolioSetInstance?.dateCreated}" /></span>
-					
-				</li>
-				</g:if>
-				<g:if test="${agencyPortfolioSetInstance?.createdBy}">
-				<li class="fieldcontain">
-					<span id="createdBy-label" class="property-label"><g:message code="agencyPortfolioSet.createdBy.label" default="Created By" /></span>
-					
-						<span class="property-value" aria-labelledby="createdBy-label"><g:fieldValue bean="${agencyPortfolioSetInstance}" field="createdBy"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${agencyPortfolioSetInstance?.lastUpdated}">
-				<li class="fieldcontain">
-					<span id="lastUpdated-label" class="property-label"><g:message code="agencyPortfolioSet.lastUpdated.label" default="Last Updated" /></span>
-					
-						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${agencyPortfolioSetInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>

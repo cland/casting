@@ -1,6 +1,6 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
 <div class="footer" id="footer">
-<a href="/casting/">Home</a> |
+<a href="${request.contextPath}">Home</a> |
 <sec:ifNotLoggedIn>
 <g:link controller="login" action="index" >Login</g:link> |
 </sec:ifNotLoggedIn>

@@ -147,9 +147,10 @@ class ProductionController {
 		int offset = 0
 		int max = 50
 		def viewas = params?.viewas 
+		def stage = params?.stage
 		
 		def profiles = castingApiService.profileFilter(productionId, params)
-		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset]
+		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage]
 	} //end 
 	
 	def update_profiles(){
@@ -158,7 +159,6 @@ class ProductionController {
 		def viewas = params?.viewas ? params.viewas : "headshots"
 		def sortby = params?.sortby ? params.sortby : "castno"
 		def stage = params?.stage
-
 		//get the list of profiles submitted
 		List profiles = []
 		params?.profiles?.each {entry ->					
@@ -225,7 +225,7 @@ class ProductionController {
 				profiles.add(tmp)
 			}
 		}  //end for each profile submitted			
-		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset])
+		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset],stage:stage)
 	} //end def update_stage1()
 	
 	def dialogfilter(Long id){

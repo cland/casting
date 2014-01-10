@@ -1,3 +1,5 @@
+<%@ page import="com.cland.casting.SystemRoles" %>
+<%@ page import="com.cland.casting.User" %>
 <g:set var="hostOrg" value="${ com.cland.casting.Organisation.find{isHost==true}}"/>
 <!DOCTYPE html>
 <html>
@@ -87,25 +89,20 @@
 			font-size:0.9em;
 			margin-bottom:10px;
 			}
-			.data-table .cell {width:50%;font-size:0.9em;padding:20px}
-			.data-table .cell div.staff {border:solid 1px #EB8F2A;padding:5px;height:280px;}
+			.data-table .cell {width:50%;font-size:0.9em;padding:20px;vertical-align:top;}
+			.data-table .cell div.staff {border:solid 1px #EB8F2A;padding:5px;height:290px; text-align:center;}
 			legend {font-weight:bold;color:#FFAE2F;font-size:1.2em;}
 			h1 {font-weight:bold;font-size:1.3em;}
+			.caption {padding:5px;}
 		</style>
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		
 		<div id="status1" class="leftbar" role="complementary">
-			<h1>Latest News</h1>
-			<ul>
-				<li>It's coming soon and it's better...</li>
-			</ul>
-			<br/>
 			<h1>Noticeboard</h1>
 			<ul>
-				<li>Some important information to all our agencies and their candidates</li>
-				
+				<li>Nothing today!</li>			
 			</ul>
 		</div>
 		<div id="page-body" role="main">
@@ -142,30 +139,25 @@
 			<g:set var="count_per_row" value="${2 }"/>
 			<g:set var="total_count" value="${staffList?.size() }"/>
 			<div class="data-table">
-			<g:each in="${ staffList?.sort()}" var="userInstance" status="i">
+			<g:each in="${ staffList?.sort{it.id}}" var="userInstance" status="i">
+				<g:set var="thisUser" value="${ User.get(userInstance.id)}"/>
 				<g:set var="entry">
 					<div class="cell">
-						<div class="staff">
-						<g:each in="${com.cland.casting.Image.withCriteria{
-				isNotEmpty("locations")				
-				}
-					
-			}" var="imageInstance">
-			<g:if test="${imageInstance.locations?.contains("team") && userInstance?.firstLastName?.equalsIgnoreCase(imageInstance?.name)}">
-			<attachments:each bean="${imageInstance}" inputName="image" status="k">	
-					<div class="photo-display " style="border:none;margin-bottom:1.5em;">
-					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
-					<b>${userInstance} ${imageInstance?.description }</b><br/>
-					<span class="caption">${imageInstance?.caption }</span>							
-					</div>	
-						<g:if test="${k%2==0 & k!=0 }"><br/></g:if>
-					
-					</attachments:each>			
-			<br/>
-			</g:if>			
-			</g:each>
-
-						
+						<div class="staff">			
+						<g:set var="hasphoto" value="${false }"/>			
+							<attachments:each bean="${thisUser}" inputName="headshot" status="k">	
+							<g:set var="hasphoto" value="${true }"/>
+								<div class="photo-display" style="border:none;margin-bottom:1.5em;">
+									<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/>															
+								</div>	
+								<g:if test="${k%2==0 & k!=0 }"><br/></g:if>
+							</attachments:each>	
+							<g:if test="${!hasphoto }">
+								<div class="photo-display" style="border:none;margin-bottom:1.5em;"><img src="../images/noimage.gif"/></div>
+							</g:if>		
+							<b>${userInstance}</b><br/>
+							<span class="caption"> ${thisUser?.caption}</span>
+							<br/>		
 						</div>
 					</div>
 				</g:set>

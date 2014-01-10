@@ -47,22 +47,21 @@ function getCurrentTabLink(){
 	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected a").attr("href")
 }
 function stageDisplay(stage){
-
-	if(stage.toLowerCase() == "stage1"){		
-		$(".vstage2").hide();
-		$(".vstage3").hide();
-		$(".vstage1").show();
-		
-	}else if(stage.toLowerCase() == "stage2"){
-	
-		$(".vstage1").hide();		
-		$(".vstage3").hide();
-		$(".vstage2").show();
-	}else if(stage.toLowerCase() == "stage3"){
-		$(".vstage1").hide();		
-		$(".vstage2").hide();
-		$(".vstage3").show();
+	if(stage) stage = stage.toLowerCase()
+	if(stage == "stage1"){		
+		$(".vstage2_" + stage).hide();
+		$(".vstage3_" + stage).hide();
+		$(".vstage1_" + stage).show();
+	}else if(stage == "stage2"){
+		$(".vstage1_" + stage).hide();		
+		$(".vstage3_" + stage).hide();
+		$(".vstage2_" + stage).show();
+	}else if(stage == "stage3"){
+		$(".vstage1_" + stage).hide();		
+		$(".vstage2_" + stage).hide();
+		$(".vstage3_" + stage).show();
 	}
+	
 	if($("#viewas_" + stage).attr("value") == "list"){
 		$("#submit_" + stage + "_top").hide()
 		$("#submit_" + stage + "_bottom").hide()

@@ -1,5 +1,6 @@
 <!-- div SUMMARY structure -->
 <%@ page import="com.cland.casting.SystemRoles" %>
+<%@ page import="com.cland.casting.Candidate" %>
      <div id="row-${profile?.id }" class="summary-row">
      <g:hiddenField name="profiles" value="${profile.id}"/>
          <div id="cast-details-${profile?.id }" class="cast-details">
@@ -31,8 +32,8 @@
          
          	<div class="cast-actions-data-table">
          	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
-         		<div class="row vstage1 invited">
-					<div class="cell"><label for="invited_${profile?.id }"><g:message code="default.invited.label" default="Invited" /></label></div>
+         		<div class="row vstage1_${stage} invited">
+					<div class="cell"><label for="invited_${profile?.id }"><g:message code="default.invite.label" default="Request" /></label></div>
 					<div class="cell">
 					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 						<g:radioGroup name="invited_${profile?.id }" value='${profile?.isInvited }' values="['true','false']" labels="['yes','no']" class="invite_radio_group">
@@ -45,7 +46,7 @@
 					</div>	
 				</div>     
 			</sec:ifAnyGranted>    	
-         		<div class="row vstage2 vstage1 shortlist">
+         		<div class="row vstage2_${stage} vstage1_${stage} shortlist">
 					<div class="cell"><label for="shortlist_${profile?.id }"><g:message code="default.shortlist.label" default="Shortlist" /></label></div>
 					<div class="cell">
 					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
@@ -58,8 +59,8 @@
 					</sec:ifAnyGranted>	
 					</div>	
 				</div>	
-         		<div class="row vstage2 vstage3 confirmed">
-					<div class="cell"><label for="confirmed_${profile?.id }"><g:message code="default.confirmed.label" default="Confirmed" /></label></div>
+         		<div class="row vstage2_${stage} vstage3_${stage} confirmed">
+					<div class="cell"><label for="confirmed_${profile?.id }"><g:message code="default.confirm.label" default="Confirm" /></label></div>
 					<div class="cell">
 					<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
 						<g:radioGroup name="confirmed_${profile?.id }" value='${profile?.isConfirmed }' values="['true','false']" labels="['yes','no']" class="confirm_radio_group">
@@ -73,10 +74,10 @@
 				</div>
 			</div>
 		
-			
+			<br/>
 			<div class="data-table">
 			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
-				<div class="row vstage1 group">
+				<div class="row vstage1_${stage} group">
 				
 					<div class="cell group"><label><g:message code="default.auditiongroup.label" default="AUDITION" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="audition_${profile.id }">Available</label></div>
@@ -93,7 +94,7 @@
 					</div>
 				</div>
 			</sec:ifAnyGranted>
-				<div class="row vstage2 vstage3 group">
+				<div class="row vstage2_${stage} vstage3_${stage} group">
 					<div class="cell group"><label><g:message code="default.callbackgroup.label" default="CALLBACK" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="callback_${profile?.id }">Available</label></div>
 					<div class="cell">
@@ -118,7 +119,7 @@
 					</sec:ifAnyGranted>
 					</div>
 				</div>
-				<div class="row vstage2 vstage3 group">
+				<div class="row vstage2_${stage} vstage3_${stage} group">
 					<div class="cell group"><label><g:message code="default.wardrobegroup.label" default="WARDROBE" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="wardrobe_${profile?.id }">Available</label></div>
 					<div class="cell">
@@ -143,7 +144,7 @@
 					</sec:ifAnyGranted>
 					</div>
 				</div>	
-				<div class="row vstage2 vstage3 group">
+				<div class="row vstage2_${stage} vstage3_${stage} group">
 					<div class="cell group"><label><g:message code="default.shootgroup.label" default="SHOOT" />:</label></div>
 					<div class="cell"><span class="r-arrow"></span> <label for="shoot_${profile?.id }">Available</label></div>
 					<div class="cell">
@@ -179,7 +180,18 @@
 					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
 				</g:if>			
 			</attachments:each>	
-			
+			<g:if test="${!hasphoto }">
+				<attachments:each bean="${Candidate.get(profile?.candidate?.id)}" inputName="headshot" status="m">	         
+				<g:if test="${m==0}">
+				<g:set var="hasphoto" value="${true }"/>
+					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+				</g:if>			
+			</attachments:each>
+			<g:if test="${!hasphoto }">
+				
+				<img src="${request.contextPath}/images/noimage.gif"/>
+			</g:if>
+			</g:if>			
 			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
 				<g:if test="${hasphoto==false}"> 
 					<g:if test="${ profile?.pictures}">

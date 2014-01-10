@@ -341,7 +341,7 @@ class CastingApiService {
 				def agency = getAgencyForUser(user.id)?.find{true} //user.id				
 				if(agency) agencyId = agency.id
 				canditate {
-					createAlias("candidate.agency",'agency')
+					createAlias("canditate.agency",'agency')
 					eq("agency.id",agencyId.toLong())				
 				}			
 			}
