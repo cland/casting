@@ -38,7 +38,7 @@
 				<li class="fieldcontain">
 					<span id="contacts-label" class="property-label"><g:message code="agency.contacts.label" default="Primary contact" /></span>
 						
-						<span class="property-value" aria-labelledby="contacts-label"><g:link controller="user" action="show" id="${agencyInstance.company.id}">${agencyInstance?.company?.contactPerson?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="contacts-label">${agencyInstance?.company?.contactPerson?.encodeAsHTML()}</span>
 										
 				</li>				
 				</g:if>

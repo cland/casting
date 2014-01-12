@@ -59,8 +59,8 @@ class ProductionController {
         }
 
 		def auditionProfiles = [:]	//productionInstance?.profiles?.sort{it.castNo} 
-		def shortlistProfiles = productionInstance?.profiles?.findAll{it.isShortlist}
-		def finalProfiles = productionInstance?.profiles?.findAll{it?.isConfirmed} //outcome?.equalsIgnoreCase("selected")}
+		def shortlistProfiles = [:]	//productionInstance?.profiles?.findAll{it.isShortlist}
+		def finalProfiles = [:]	//productionInstance?.profiles?.findAll{it?.isConfirmed} //outcome?.equalsIgnoreCase("selected")}
 		def rolesList = castingApiService.getAllowedRoles(productionInstance,0) // productionInstance?.roles
 		def productionDates = castingApiService.getProductionDates(productionInstance)
 		

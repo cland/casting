@@ -102,13 +102,14 @@
 					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
 				</g:if>			
 			</attachments:each>	
-			<g:set var="hasphoto" value="${false }"/>				
-					    <attachments:each bean="${Candidate.get(candidate?.id)}" inputName="headshot" status="j">
-							<g:if test="${j==0}">					
-								<g:set var="hasphoto" value="${true }"/>
-								<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
-							</g:if>			
-			</attachments:each>	
+			<g:if test="${hasphoto==false}"> 				
+				<attachments:each bean="${Candidate.get(candidate?.id)}" inputName="headshot" status="j">
+					<g:if test="${j==0}">					
+						<g:set var="hasphoto" value="${true }"/>
+						<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
+					</g:if>			
+				</attachments:each>	
+			</g:if>
 			<g:if test="${hasphoto==false}"> 
 					<img src="${request.contextPath}/images/noimage.gif"/><br/>
 			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
