@@ -46,7 +46,7 @@
 	<g:select id="categories" name="categories" from="${productionInstance?.categories}" optionKey="id" required="" value="${castingProfileInstance?.categories?.id}" class="many-to-one" required="" noSelection="['': '-- select one --']"/>
 </div>
 <sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN.value },${SystemRoles.ROLE_DEVELOPER.value }">
-<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'castDate', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'castDate', 'error')} required hide">
 	<label for="castDate">
 		<g:message code="castingProfile.castDate.label" default="Cast Date" />
 		

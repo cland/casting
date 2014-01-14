@@ -3,10 +3,10 @@
 <div class="production-brief">
 	<div class="production-data-table">
 		<div class="row">
-			<div class="cell"><label for="name"><g:message code="production.name.label" default="Job" /></label></div>
+			<div class="cell"><label for="name"><g:message code="production.name.label" default="Job" /><span class="required-indicator">*</span></label></div>
 			<div class="cell">
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'name', 'error')} ">
-					<g:textField name="name" value="${productionInstance?.name}"/>
+					<g:textField name="name" value="${productionInstance?.name}" required=""/>
 				</div>
 			</div>
 			<div class="cell"><label for="status"><g:message code="production.status.label" default="Status" /><span class="required-indicator">*</span></label></div>
@@ -22,10 +22,10 @@
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'client', 'error')} required">
 					<g:select id="client" name="client.id" from="${com.cland.casting.Client.list()}" optionKey="id" required="" value="${productionInstance?.client?.id}" class="many-to-one"/></div>
 				</div>	
-			<div class="cell"><label for="startDate"><g:message code="production.startDate.label" default="Start Date" /></label></div>
+			<div class="cell"><label for="startDate"><g:message code="production.startDate.label" default="Start Date" /><span class="required-indicator">*</span></label></div>
 			<div class="cell">
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'startDate', 'error')} required">	
-					<g:textField name="startDate" class="datepick_single_future" id="start-date" value="${productionInstance?.startDate?.format('dd-MMM-yyyy')}"/>	
+					<g:textField name="startDate" class="datepick_single_future" id="start-date" value="${productionInstance?.startDate?.format('dd-MMM-yyyy')}" required=""/>	
 				</div>
 			</div>
 		</div>
@@ -37,11 +37,11 @@
 				</div>			
 			</div>
 			<div class="cell">
-				<label for="endDate"><g:message code="production.endDate.label" default="End Date" /></label>
+				<label for="endDate"><g:message code="production.endDate.label" default="End Date" /><span class="required-indicator">*</span></label>
 			</div>
 			<div class="cell">
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'endDate', 'error')} required">	
-					<g:textField name="endDate" class="datepick_single_future" id="end-date" value="${productionInstance?.endDate?.format('dd-MMM-yyyy')}"/>	
+					<g:textField name="endDate" class="datepick_single_future" id="end-date" value="${productionInstance?.endDate?.format('dd-MMM-yyyy')}" required=""/>	
 				</div>			
 			</div>			
 		</div>

@@ -740,6 +740,7 @@ p {
     padding: 0.5em;
     text-align: center;
     margin: 0.5em;
+    width:210px;
 }
 .profile-text{}
 .profile-input{}
@@ -881,3 +882,4 @@ table tr td.sub-head {font-weight:bold;font-size:0.9em;text-align:center;}
 .display-date-field, input.display-date-field:focus  {background:#F9DCB1;font-size:0.8em;width:270px;border:none;}
 div.nav ul li div#search{margin-left:150px;}
 .print-preview-only{display:none;}
+.many-to-many-400{height:400px}

@@ -47,9 +47,8 @@
 
 <div class="fieldcontain ${hasErrors(bean: agencyInstance, field: 'contacts', 'error')} ">
 	<label for="contacts">
-		<g:message code="agency.contacts.label" default="Authorised Users" />
-		
+		<g:message code="agency.contacts.label" default="Authorised Users" />	
 	</label>
-	<g:select name="contacts" from="${agencyList}" multiple="multiple" optionKey="id" size="5" value="${agencyInstance?.contacts*.id}" optionValue="mediumDetails" class="many-to-many"/>
+	<g:select name="contacts" from="${agencyList?.sort{it.firstName}.reverse()}" multiple="multiple" optionKey="id" size="5" value="${agencyInstance?.contacts*.id}" optionValue="mediumDetails" class="many-to-many many-to-many-400"/>
 </div>
 

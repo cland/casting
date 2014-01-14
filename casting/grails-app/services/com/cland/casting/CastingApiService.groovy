@@ -32,7 +32,7 @@ class CastingApiService {
 			def tmp = UserRole.findAllByRole(role)*.user
 			if( tmp ) alldata.addAll(tmp)
 		}		
-		return alldata
+		return alldata?.unique()
 	} //
 	
 	def getProductions(long agencyId, int offset, int max){
@@ -142,7 +142,7 @@ class CastingApiService {
 	def getCandidates(long productionId, long agencyId, boolean with_profiles,def params){
 		def user = getCurrentUser() //springSecurityService.currentUser
 		def candidateList = []
-		def max = (params?.max ? params?.max:10)
+		def max = (params?.max ? params?.max:100)
 		def offset = (params?.offset ? params?.offset : 0)
 		def sortItem =(params?.sort ? params?.sort:null)
 		def byorder =  (params?.order ? params?.order:null)
@@ -197,6 +197,47 @@ class CastingApiService {
 		}
 		
 		return candidateList
+	}
+	def getCandidatesCount(long productionId, long agencyId, boolean with_profiles,def params){
+		def user = getCurrentUser() //springSecurityService.currentUser
+		def candidateList = []
+		
+		if(isAdmin()){
+			//if admin return all candidates for a given agencyId
+			candidateList = Candidate.createCriteria().list(){
+				createAlias('agency','agent')
+				createAlias('person','p')				
+				if(agencyId > 0) eq('agent.id',agencyId)  //if not valid id is provided ignore this rule so that all candidates will be returned.
+			}
+		}else{
+			//current user is not admin, check if he/she is agency contact
+			agencyId = 0	//force agencyId to something that returns empty results
+			def agency = getAgencyForUser(user.id)?.find{true}
+			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
+			if(agency) agencyId = agency.id
+			candidateList = Candidate.createCriteria().list(){
+				createAlias('person','p')
+				createAlias('agency','agent')
+				
+				eq('agent.id',agencyId)				
+			}
+		}
+		
+		if(!with_profiles){
+			//remove candidates that are already in the production list ??
+			def list_to_remove = []
+			candidateList.each{ candidate ->
+				def tmpProfiles = getProfiles(productionId,candidate.id,0,1)
+				if(tmpProfiles.size()>0){
+					//we need to exclude this candidate, already has a profile for this production
+					list_to_remove.add(candidate)
+				}
+			}
+			//remove the items
+			candidateList.removeAll(list_to_remove)
+		}
+		
+		return candidateList.size()
 	}
 	def getProfiles(long productionId, long candidateId, int offset, int max){
 		def profiles = CastingProfile.withCriteria {

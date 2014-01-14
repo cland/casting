@@ -1,13 +1,15 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
-
 <g:if test="${viewas?.equalsIgnoreCase("detailed") }">
+	<div> <span class="r-arrow"></span> Displaying: <b>${profileList?.size() }</b> profiles! </div><br/>
 	<g:render template="../layouts/profile_detailed" collection="${profileList }" var="profile"/>
 </g:if>
 <g:elseif test="${viewas?.equalsIgnoreCase("summary") }">
+	<div> <span class="r-arrow"></span> Displaying: <b>${profileList?.size() }</b> profiles!</div><br/>
 	<g:render template="../layouts/profile_summary" collection="${profileList }" var="profile" model="[stage: stage]"/>
 </g:elseif>
 
 <g:elseif test="${viewas?.equalsIgnoreCase("list") }">
+	<div> <span class="r-arrow"></span> Displaying: <b>${profileList?.size() }</b> profiles!</div><br/>
 	<table>
 		<thead><tr>
 			<th class="cell head">Cast No.</th>

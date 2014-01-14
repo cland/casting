@@ -13,9 +13,7 @@ class AgencyController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def candidatesList = Candidate.list() //castingApiService.getAgencyCandidates(1, 0, params.max)		
-        [agencyInstanceList: Agency.list(params), agencyInstanceTotal: Agency.count(),candidatesList:candidatesList]
-		
+        [agencyInstanceList: Agency.list(params), agencyInstanceTotal: Agency.count()] 		
     }
 
     def create() {
@@ -66,6 +64,7 @@ class AgencyController {
         }
 		List <String> rolenames = [SystemRoles.ROLE_AGENT.value]
 		def userList = castingApiService.getUsersWithRole(rolenames)
+		
         [agencyInstance: agencyInstance, isEditing:true, isNew:false,agencyList:userList]
     }
 

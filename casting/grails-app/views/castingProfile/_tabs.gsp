@@ -68,7 +68,7 @@
 						</g:each>
             		</div>
             	</div>           	   
-            	<div class="row castdate">
+            	<div class="row castdate hide">
             		<div class="cell"><label>Cast Date:</label></div>
             		<div class="cell"><span class="property-value"><g:formatDate date="${castingProfileInstance?.castDate}" format="dd-MMM-yyyy"/></span></div>
             	</div>	 

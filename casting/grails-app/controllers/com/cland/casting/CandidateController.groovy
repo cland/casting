@@ -14,8 +14,9 @@ class CandidateController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-		def candidates = castingApiService.getCandidates(0, 0, params)
-        [candidateInstanceList: candidates, candidateInstanceTotal: candidates?.size()]
+		def candidates = castingApiService.getCandidates(0, 0,true, params)
+		def total = castingApiService.getCandidatesCount(0, 0, true, params)
+        [candidateInstanceList: candidates, candidateInstanceTotal: total]
     }
 
     def create() {

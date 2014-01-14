@@ -63,8 +63,12 @@ class Production {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 		shootDate (nullable:true)
-		startDate (nullable:true)
-		endDate (nullable:true)
+		startDate (blank:false)
+		endDate (blank:false)
+//		endDate(validator: { val, obj ->
+//			val?.after(obj.startDate)
+//		//	if(!val?.after(obj.startDate)) return ['dateBeforeStartDate']
+//		})
 	}
 
 	def beforeInsert = { 

@@ -68,14 +68,10 @@
 				</g:each>
 				</tbody>
 			</table>
-			<div class="pagination" style="">
+			<div class="pagination">
 				<g:paginate total="${agencyInstanceTotal}" />
-				<a href="#" class="first" data-action="first">&laquo;</a>
-			    <a href="#" class="previous" data-action="previous"> &lsaquo;</a>               
-			    <input type="text" readonly="readonly" />
-			    <a href="#" class="next" data-action="next">&rsaquo;</a>
-			    <a href="#" class="last" data-action="last">&raquo;</a>
 			</div>
+
 		</div>
 <script type="text/javascript">
 // when the page has finished loading.. execute the follow

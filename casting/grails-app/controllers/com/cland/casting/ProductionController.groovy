@@ -36,11 +36,17 @@ class ProductionController {
 		bindData(productionInstance, ['endDate': params.date('endDate', ['dd-MMM-yyyy'])], [include: 'endDate'])
 		
 		productionInstance = productionInstance.merge()
-		
+		try{
         if (!productionInstance.save(flush: true)) {
             render(view: "create", model: [productionInstance: productionInstance])
             return
         }
+		}catch (Exception ex){
+			ex.printStackTrace()
+			flash.message = ex.getMessage()
+			render(view: "create", model: [productionInstance: productionInstance])
+			return
+		}
 
 		//send notification
 		if(params?.notify){
@@ -142,14 +148,16 @@ class ProductionController {
 	 * Custom functions
 	 */
 
-	def filter(){	
+	def filter(Integer max){	
+
 		def productionId = params?.production?.id?.toLong()
-		int offset = 0
-		int max = 50
+		//int offset = 0
+		params.max = Math.min(max ?: 50, 100)
 		def viewas = params?.viewas 
 		def stage = params?.stage
 		
 		def profiles = castingApiService.profileFilter(productionId, params)
+
 		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage]
 	} //end 
 	
@@ -158,7 +166,7 @@ class ProductionController {
 		def productionId = params?.production?.id?.toLong()		
 		def viewas = params?.viewas ? params.viewas : "headshots"
 		def sortby = params?.sortby ? params.sortby : "castno"
-		def stage = params?.stage
+		def stage = "stage" + params?.stage
 		//get the list of profiles submitted
 		List profiles = []
 		params?.profiles?.each {entry ->					
@@ -224,8 +232,8 @@ class ProductionController {
 				}
 				profiles.add(tmp)
 			}
-		}  //end for each profile submitted			
-		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset],stage:stage)
+		}  //end for each profile submitted	
+		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage])
 	} //end def update_stage1()
 	
 	def dialogfilter(Long id){

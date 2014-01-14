@@ -97,13 +97,12 @@
 					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
 				</g:if>			
 			</attachments:each>
-			<g:if test="${!hasphoto }">
-				
+			<g:if test="${!hasphoto }">	
 				<img src="${request.contextPath}/images/noimage.gif"/>
 			</g:if>
 			</g:if>			
 			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
-				<g:if test="${hasphoto==false}"> 
+				<g:if test="${hasphoto==false}"> <br/>
 					<g:if test="${ profile?.pictures}">
 							<g:link class="edit" controller="pictureSet" action="edit" id="${profile?.pictures?.id}">
 							<g:message code="default.add.label" args="['Photo']"/>

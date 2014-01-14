@@ -3,9 +3,9 @@
 <%@ page import="com.cland.casting.Candidate" %>
 <g:set var="data_table" value=""/>
 <g:set var="tmp" value=""/>
-<g:set var="count_per_row" value="${4 }"/>
+<g:set var="count_per_row" value="${3 }"/>
 <g:set var="total_count" value="${profileList?.size() }"/>
-
+<div> <span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles!</div>
 <g:each in="${profileList }"  var="profile" status="i">
 	<g:set var="entry">
 		<div id="entry-${profile?.id }" class="mugshot">
@@ -23,11 +23,10 @@
 				<g:set var="hasphoto" value="${true }"/>
 					<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>		
 				</g:if>			
-			</attachments:each>
-			<g:if test="${!hasphoto }">
-				
-				<img src="${request.contextPath}/images/noimage.gif"/>
-			</g:if>
+				</attachments:each>
+				<g:if test="${!hasphoto }">
+					<img src="${request.contextPath}/images/noimage.gif"/>
+				</g:if>
 			</g:if>
 			<div class="data-table">
 				<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_AGENT }">
@@ -144,6 +143,7 @@
 	
 	<g:if test="${((i+1)%count_per_row) ==0 }">
 		<g:set var="data_table">
+			${data_table }
 			<div id="row-${i}" class="headshot-row">
 				${tmp }
 			</div>
