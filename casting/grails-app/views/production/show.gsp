@@ -117,7 +117,22 @@ function onFailure(data,textStatus){
 	$(".wait").hide()
 	alert("Operation failed with status '" + textStatus + "'")
 }
+function beforeSubmit(){
+	if (!confirm('sure?')) {return false;}
+}
+function submitForm(form_id,action,update){
+	var form = $(form_id)
+	var b4_action = form.attr("action")
+	var b4_onsubmit = form.attr("onsubmit")
+	var onsubmit = b4_onsubmit.replace(b4_action,action)
+	
+	form.attr("action",action)
+	form.attr("onsubmit",onsubmit)
+//	form.submit()
 
+//	form.attr("action",b4_action)
+//	form.attr("onsubmit",b4_onsubmit)
+}
 function filterDialog(){
   	 var $dialog = $('<div></div>')
 

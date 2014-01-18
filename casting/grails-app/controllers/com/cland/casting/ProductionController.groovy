@@ -1,5 +1,7 @@
 package com.cland.casting
 
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 import org.springframework.dao.DataIntegrityViolationException
 
 class ProductionController {
@@ -149,7 +151,6 @@ class ProductionController {
 	 */
 
 	def filter(Integer max){	
-
 		def productionId = params?.production?.id?.toLong()
 		//int offset = 0
 		params.max = Math.min(max ?: 50, 100)
@@ -157,8 +158,7 @@ class ProductionController {
 		def stage = params?.stage
 		
 		def profiles = castingApiService.profileFilter(productionId, params)
-
-		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage]
+		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage,productionId:productionId]
 	} //end 
 	
 	def update_profiles(){
@@ -233,8 +233,66 @@ class ProductionController {
 				profiles.add(tmp)
 			}
 		}  //end for each profile submitted	
-		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage])
+		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage,productionId:productionId])
 	} //end def update_stage1()
+	def downloadProfilesZip(Long id){
+		def productionInstance = Production.get(params?.prod_id)
+		
+		def profiles = params?.profiles //?.replace("[", "")?.replace("]", "")?.split(",")
+		def message = ""
+		if(profiles){
+			//Initialize zip variables
+			response.setContentType("APPLICATION/OCTET-STREAM")
+			response.setHeader('Content-Disposition', 'Attachmet;Filename="' +  productionInstance?.name?.toLowerCase() + '.zip"')
+			ZipOutputStream zip = new ZipOutputStream(response.outputStream)
+			try{		
+				//get the list of profiles submitted		
+				profiles?.each {entry ->
+					def castingProfileInstance = CastingProfile.get(entry.toLong())
+					def values = [:]  //  [:].withDefault { [] }
+					if(castingProfileInstance){
+						//get the videos and pics and add to zip
+						def zipfolder = "castno-" + castingProfileInstance?.castNo + "_" + castingProfileInstance?.name + "_id-" + castingProfileInstance?.id + "/"
+											
+						def pictures = castingProfileInstance?.pictures?.attachments
+						pictures?.each{att ->							
+							def diskFilename = att.getPath().tokenize('\\').last().toString()
+							diskFilename = diskFilename.substring(0,diskFilename.indexOf("."))							
+							def fileEntry = new ZipEntry(zipfolder + diskFilename + "_" + att.getFilename())
+							zip.putNextEntry(fileEntry)
+							def file = new File(att.getPath())							
+							zip.write(file.bytes)							
+						}	
+						
+						//add videos
+						def videos = castingProfileInstance?.videos?.attachments
+						videos?.each{att ->							
+							def diskFilename = att.getPath().tokenize('\\').last().toString()
+							diskFilename = diskFilename.substring(0,diskFilename.indexOf("."))							
+							def fileEntry = new ZipEntry(zipfolder + diskFilename + "_" + att.getFilename())
+							zip.putNextEntry(fileEntry)
+							def file = new File(att.getPath())
+							zip.write(file.bytes)							
+						}
+						
+						//close the folder for this castingProfileInstance
+						zip.closeEntry()
+					} //end if castingProfileInstance
+				}  //end for each profile submitted
+			
+				zip.close()
+			}catch(Exception e){
+				message = "Failed to download zip: " + e.getMessage()
+			}finally{				
+				if(!zip.closed) zip.close()
+			}
+		}else {
+			//No profiles to download
+			message = "No profiles found to download!"
+		}
+	//	render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage,message:message])
+	} //end functin downloadProfilesZip
+	
 	
 	def dialogfilter(Long id){
 		def productionInstance = Production.get(id)

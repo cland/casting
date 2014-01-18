@@ -5,7 +5,12 @@
 <g:set var="tmp" value=""/>
 <g:set var="count_per_row" value="${3 }"/>
 <g:set var="total_count" value="${profileList?.size() }"/>
-<div> <span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles!</div>
+<div> 
+	<span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles!	
+	<g:if test="${total_count > 0 && prod_id }">
+		[ <g:link controller="production" action="downloadProfilesZip" params="[prod_id:prod_id,profiles:profileList?.id ]"><g:message code="default.download.media.label" default="Download" /></g:link> ]
+	</g:if>
+</div>
 <g:each in="${profileList }"  var="profile" status="i">
 	<g:set var="entry">
 		<div id="entry-${profile?.id }" class="mugshot">

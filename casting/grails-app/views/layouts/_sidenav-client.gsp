@@ -5,12 +5,12 @@
 			<ul>
 				<li>
 					<g:set var="client_id"><g:clientId/></g:set>
-					<g:link class="show" controller="client" action="show" id="${client_id }">
+					<g:link class="show" controller="client" action="show" id="${client_id }" params="[sidebar:'0']">
 						<g:message code="default.view.label" args="['Details']" />
 					</g:link>
 				</li>
 				<li>
-					<g:link class="list" controller="production" action="list">
+					<g:link class="list" controller="production" action="list" params="[sidebar:'0']">
 						<g:message code="default.list.label" args="['Production']" />
 					</g:link>
 				</li>						

@@ -5,7 +5,7 @@
 			<g:render template="filter_form_stage1"/>
 		</div>
 		<div class="wait">PROCESSING....PLEASE WAIT!!!</div>
-			<g:formRemote name="stage1_form" url="[controller:'production',action:'update_profiles']" 
+			<g:formRemote id="stage1_form" name="stage1_form" url="[controller:'production',action:'update_profiles']" 
 				update="stage1-cast-list" 
 				onLoading="onLoading()"
 				onComplete="onComplete()"
@@ -15,12 +15,14 @@
 				<g:hiddenField name="stage" value="1"/>
 				<g:hiddenField name="viewas" id="hidden_viewas_stage1" value="headshots"/>
 				<g:hiddenField name="sortby" id="hidden_sortby_stage1" value="castno"/>
-				<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage1_top" class="submit action_wait"/></div>
+				<div class="cell float-left"> 
+					<g:submitButton name="Save Changes" id="submit_stage1_top" class="submit action_wait"/>					
+				</div>
 				<div class="cell float-right">
 					<g:render template="radio_selector"/>
 				</div>
 				<div class="cast-list" id="stage1-cast-list">
-					<g:render template="../layouts/profile_headshot" bean="${auditionProfiles}" var="profileList" model="[stage:'stage1']"></g:render>			
+					<g:render template="../layouts/profile_headshot" bean="${auditionProfiles}" var="profileList" model="[stage:'stage1',prod_id:productionInstance?.id]"></g:render>			
 				</div>
 				<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage1_bottom" class="submit action_wait"/></div>
 			</g:formRemote>	
@@ -37,19 +39,24 @@
 		onLoading="onLoading()"
 		onComplete="onComplete()"
 		onFailure="onFailure(data,textStatus)"
-		onSuccess="onSuccessStage2CallbackHander(data,textStatus)">
+		onSuccess="onSuccessStage2CallbackHander(data,textStatus)"
+		before="beforeSubmit()">
 		<g:hiddenField name="production.id" value="${productionInstance?.id }"/>
 		<g:hiddenField name="stage" value="2"/>
 		<g:hiddenField name="viewas" id="hidden_viewas_stage2" value="summary"/>
 		<g:hiddenField name="sortby" id="hidden_sortby_stage2" value="castno"/>
-		<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage2_top" class="submit action_wait"/></div>
+		<div class="cell float-left"> 
+			<g:submitButton name="Save Changes" id="submit_stage2_top" class="submit action_wait"/>
+		</div>
 		<div class="cell float-right">
 				<g:render template="radio_selector"/>
 		</div>
 			<div class="cast-list" id="stage2-cast-list">
 				<g:render template="../layouts/profile_summary" collection="${shortlistProfiles }" var="profile" model="[stage:'stage2']"/>			
 			</div>
-		<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage2_bottom" class="submit action_wait"/></div>
+		<div class="cell float-left"> 
+			<g:submitButton name="Save Changes" id="submit_stage2_bottom" class="submit action_wait"/>
+		</div>
 	</g:formRemote>
 	<div style="clear: both;"></div>
 </div>

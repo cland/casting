@@ -311,7 +311,8 @@ class CastingApiService {
 			
 			if(client){
 				//return client's details link
-				return "/client/show/" + client?.id + "?sidebar=0"
+				//return "/client/show/" + client?.id + "?sidebar=0"
+				return "/production/list?sidebar=0"
 			}else{
 				status="clientlinked=0"
 			}

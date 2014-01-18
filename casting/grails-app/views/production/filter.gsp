@@ -1,15 +1,31 @@
 <%@ page import="com.cland.casting.SystemRoles" %>
+<g:set var="total_count" value="${profileList?.size() }"/>
 <g:if test="${viewas?.equalsIgnoreCase("detailed") }">
-	<div> <span class="r-arrow"></span> Displaying: <b>${profileList?.size() }</b> profiles! </div><br/>
-	<g:render template="../layouts/profile_detailed" collection="${profileList }" var="profile"/>
+	<div> 
+		<span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles! 
+		<g:if test="${total_count > 0 && productionId }">
+			[ <g:link controller="production" action="downloadProfilesZip" params="[prod_id:productionId,profiles:profileList?.id ]"><g:message code="default.download.media.label" default="Download" /></g:link> ]
+		</g:if>
+	</div><br/>
+	<g:render template="../layouts/profile_detailed" collection="${profileList }" var="profile"  model="[stage: stage,prod_id:productionId]"/>
 </g:if>
 <g:elseif test="${viewas?.equalsIgnoreCase("summary") }">
-	<div> <span class="r-arrow"></span> Displaying: <b>${profileList?.size() }</b> profiles!</div><br/>
-	<g:render template="../layouts/profile_summary" collection="${profileList }" var="profile" model="[stage: stage]"/>
+	<div> 
+		<span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles! 
+		<g:if test="${total_count > 0 && productionId }">
+			[ <g:link controller="production" action="downloadProfilesZip" params="[prod_id:productionId,profiles:profileList?.id ]"><g:message code="default.download.media.label" default="Download" /></g:link> ]
+		</g:if>
+	</div><br/>
+	<g:render template="../layouts/profile_summary" collection="${profileList }" var="profile" model="[stage: stage,prod_id:productionId]"/>
 </g:elseif>
 
 <g:elseif test="${viewas?.equalsIgnoreCase("list") }">
-	<div> <span class="r-arrow"></span> Displaying: <b>${profileList?.size() }</b> profiles!</div><br/>
+	<div> 
+		<span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles!
+		<g:if test="${total_count > 0 && productionId }">
+			[ <g:link controller="production" action="downloadProfilesZip" params="[prod_id:productionId,profiles:profileList?.id ]"><g:message code="default.download.media.label" default="Download" /></g:link> ]
+		</g:if>
+	</div><br/>
 	<table>
 		<thead><tr>
 			<th class="cell head">Cast No.</th>
@@ -37,12 +53,12 @@
          	<td class="vstage2_${stage} vstage3_${stage}"></td>
          </tr>
          <tbody>
-         	<g:render template="../layouts/profile_list" collection="${profileList }" var="profile" model="[stage: stage]"/>
+         	<g:render template="../layouts/profile_list" collection="${profileList }" var="profile" model="[stage: stage,prod_id:productionId]"/>
          </tbody>         
 	</table>
 	
 </g:elseif>
 
 <g:else>
-	<g:render template="../layouts/profile_headshot" bean="${profileList}" var="profileList" model="[stage: stage]"></g:render>
+	<g:render template="../layouts/profile_headshot" bean="${profileList}" var="profileList" model="[stage: stage,prod_id:productionId]"></g:render>
 </g:else>
