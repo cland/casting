@@ -8,7 +8,7 @@
 <div> 
 	<span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles!	
 	<g:if test="${total_count > 0 && prod_id }">
-		[ <g:link controller="production" action="downloadProfilesZip" params="[prod_id:prod_id,profiles:profileList?.id ]"><g:message code="default.download.media.label" default="Download" /></g:link> ]
+		[ <g:link controller="production" action="downloadProfilesZip" params="[prod_id:prod_id,profiles:profileList?.id,portfolioId:portfolioId ]"><g:message code="default.download.media.label" default="Download" /></g:link> ]
 	</g:if>
 </div>
 <g:each in="${profileList }"  var="profile" status="i">

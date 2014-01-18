@@ -9,7 +9,7 @@
 	</div><br/>
 	<g:render template="../layouts/profile_detailed" collection="${profileList }" var="profile"  model="[stage: stage,prod_id:productionId]"/>
 </g:if>
-<g:elseif test="${viewas?.equalsIgnoreCase("summary") }">
+<g:elseif test="${viewas?.equalsIgnoreCase("summary") }"> 
 	<div> 
 		<span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles! 
 		<g:if test="${total_count > 0 && productionId }">

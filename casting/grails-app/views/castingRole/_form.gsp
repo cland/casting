@@ -101,7 +101,7 @@
 </fieldset>
 <br/>
 
-<fieldset><legend>Who can access this production</legend>
+<fieldset><legend>Who can access this casting role</legend>
 
 	<div class="role-access-control">
 		<div class="role-data-table">

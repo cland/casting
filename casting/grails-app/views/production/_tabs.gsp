@@ -8,7 +8,7 @@
 		</sec:ifAnyGranted>
 		<li><a href="#tab-shortlist">Shortlist</a></li>
 		<li><a href="#tab-finalcast">Final Cast</a></li>				
-		<li><a href="#tab-resources">Resources</a></li>
+		<li class="hide no-print"><a href="#tab-resources">Resources</a></li>
 		<li><a href="#tab-portfolios">Portfolios</a></li>
 	</ul>
 <div id="tab-production" class="tab">
@@ -166,7 +166,7 @@
 	<!-- CASTING TABS -->
 	<g:render template="tabs_casting"></g:render>
 	
-	<div id="tab-resources">
+	<div id="tab-resources" class="hide no-print">
 		<div id="attachments" class="attachments">
 			<attachments:each bean="${productionInstance}">
 				<attachments:icon attachment="${attachment}" />

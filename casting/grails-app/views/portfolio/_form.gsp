@@ -26,9 +26,27 @@
 
 <div class="fieldcontain ${hasErrors(bean: portfolioInstance, field: 'profiles', 'error')} ">
 	<label for="profiles">
-		<g:message code="portfolio.profiles.label" default="Profiles" />
-		
+		<g:message code="portfolio.profiles.label" default="Profiles" />		
 	</label>
 	<g:select name="profiles" from="${portfolioInstance?.production?.profiles?.sort{it.name}}" multiple="multiple" optionKey="id" size="5" value="${portfolioInstance?.profiles*.id}" optionValue="castingDetails" class="many-to-many"/>
 </div>
+
+<fieldset><legend>Who can access this portfolio other than the client</legend>
+
+	<div class="role-access-control">
+		<div class="role-data-table">
+			
+			<div class="row">
+				<div class="cell"><label for="agencyAcl"><g:message code="role.agencyacl.label" default="Agencies" /></label>
+					<br/><span style="color:red;font-size:0.6em;">** This to allow agencies to view this portfolio. Selected agencies will be able to view this portfolios' profiles including candidates that don't belong to their agency. If none selected, it means ONLY the client who owns this production can see this portfolio.</span>
+				</div>
+				<div class="cell">
+					<div class="fieldcontain ${hasErrors(bean: portfolioInstance, field: 'agencyACL', 'error')} ">		
+						<g:select name="agencyAcl" from="${com.cland.casting.Agency.list()}" multiple="multiple" optionKey="id" size="5" optionValue="agencyAndCategories" value="${portfolioInstance?.agencyAcl*.id}" noSelection="['': '--No Selection--']" class="many-to-many"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</fieldset>
 

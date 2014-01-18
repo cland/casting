@@ -70,10 +70,12 @@ class ProductionController {
 		def shortlistProfiles = [:]	//productionInstance?.profiles?.findAll{it.isShortlist}
 		def finalProfiles = [:]	//productionInstance?.profiles?.findAll{it?.isConfirmed} //outcome?.equalsIgnoreCase("selected")}
 		def rolesList = castingApiService.getAllowedRoles(productionInstance,0) // productionInstance?.roles
+		def portfolioList = castingApiService.getPortfoliosAllowed(productionInstance)
+	
 		def productionDates = castingApiService.getProductionDates(productionInstance)
 		
 		
-        [productionInstance: productionInstance,auditionProfiles:auditionProfiles,shortlistProfiles:shortlistProfiles,finalProfiles:finalProfiles,productionDates:productionDates,rolesList:rolesList, isEditing:false, isNew:false]
+        [productionInstance: productionInstance,auditionProfiles:auditionProfiles,shortlistProfiles:shortlistProfiles,finalProfiles:finalProfiles,productionDates:productionDates,rolesList:rolesList,portfolioList:portfolioList, isEditing:false, isNew:false]
     }
 
     def edit(Long id) {
@@ -239,11 +241,22 @@ class ProductionController {
 		def productionInstance = Production.get(params?.prod_id)
 		
 		def profiles = params?.profiles //?.replace("[", "")?.replace("]", "")?.split(",")
+		def portfolioInstance = Portfolio.get(params?.portfolioId)
+		def portfolioName = ""
+		if (portfolioInstance){
+			portfolioName = portfolioInstance?.name
+		}
 		def message = ""
+		String zipFilename = ""
 		if(profiles){
 			//Initialize zip variables
+			if(!portfolioName.equals("")){
+				zipFilename = productionInstance?.name?.toLowerCase() + "-" + portfolioName + ".zip"
+			}else{
+				zipFilename = productionInstance?.name?.toLowerCase() + ".zip"
+			}
 			response.setContentType("APPLICATION/OCTET-STREAM")
-			response.setHeader('Content-Disposition', 'Attachmet;Filename="' +  productionInstance?.name?.toLowerCase() + '.zip"')
+			response.setHeader('Content-Disposition', 'Attachmet;Filename="' +  zipFilename + '"')
 			ZipOutputStream zip = new ZipOutputStream(response.outputStream)
 			try{		
 				//get the list of profiles submitted		

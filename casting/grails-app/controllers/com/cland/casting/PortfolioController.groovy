@@ -3,7 +3,7 @@ package com.cland.casting
 import org.springframework.dao.DataIntegrityViolationException
 
 class PortfolioController {
-
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -37,7 +37,15 @@ class PortfolioController {
             redirect(action: "list")
             return
         }
-
+		if(castingApiService.isAgent()){
+			def user = castingApiService.getCurrentUser()
+			def agency = castingApiService.getAgencyForUser(user.id)?.find{true}		
+			if(!portfolioInstance?.agencyAcl?.contains(agency)){
+				//not allow to view this portfolio
+				render view: '../login/denied', params: params
+				return
+			}
+		}
         [portfolioInstance: portfolioInstance]
     }
 
@@ -104,10 +112,11 @@ class PortfolioController {
 	
 	def display_profiles(){
 		def portfolioInstance = Portfolio.get(params?.id)
+		def productionId = portfolioInstance?.production?.id
 		render (view:"filter", model:[profileList:portfolioInstance?.profiles?.sort{
 			if(params?.sortby?.equalsIgnoreCase("castname"))it?.firstLastName
 			else if(params?.sortby?.equalsIgnoreCase("castdate")) it?.auditionDate
 			else {it?.castNo}
-		},viewas:params?.viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset])
+		},viewas:params?.viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,productionId:productionId,portfolioId:portfolioInstance?.id])
 	}
 } //END CLASS

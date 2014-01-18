@@ -6,6 +6,8 @@
 			else {it?.castNo}
 		}}"/>
 <g:set  var="productionInstance" value="${portfolioInstance?.production}"/>
+<g:set var="total_count" value="${profileList?.size() }"/>
+<g:set var="productionId" value="${productionInstance?.id }"/>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -56,6 +58,12 @@
 				<div class="cell float-left"> </div>
 				<div class="cell float-right"> </div>
 				<div class="" id="cast-list">
+					<div> 
+						<span class="r-arrow"></span> Displaying: <b>${total_count }</b> profiles! 
+						<g:if test="${total_count > 0 && productionId }">
+							[ <g:link controller="production" action="downloadProfilesZip" params="[prod_id:productionId,profiles:profileList?.id ,portfolioId:portfolioInstance?.id]"><g:message code="default.download.media.label" default="Download" /></g:link> ]
+						</g:if>
+					</div><br/>				
 					<table>
 						<thead><tr>
 							<th class="cell head">Cast No.</th>
@@ -79,7 +87,22 @@
 			</div>
 		<div style="clear: both;"></div>
 			<br/>	
-			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">		
+			<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">	
+			
+		<fieldset class="no-print"><legend>Who can access this portfolio other than the client</legend>
+		<span id="agencyAcl-label" class="property-label"><g:message code="production.agencyacl.label" default="Agencies" /></span>
+				<g:if test="${portfolioInstance?.agencyAcl}">								
+				<br/>
+					<g:each in="${portfolioInstance.agencyAcl}" var="p">
+					<span class="property-value" aria-labelledby="agencyAcl-label">
+						<span class="r-arrow"></span>
+						<g:link controller="agency" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link><br/>
+					</span>
+					</g:each>		
+				</g:if>
+				<g:else><span class="property-value">None</span></g:else>
+		</fieldset>
+			
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${portfolioInstance?.id}" />

@@ -76,12 +76,32 @@ class CastingApiService {
 		}
 		return productionList.sort{it.name}?.unique() //.reverse() // Production.list() //
 	} //end function
-	
+	def getPortfoliosAllowed(Production prod){
+		def portfolioList = prod?.portfolios
+		if(isAdmin() || isDirector()){
+			return portfolioList
+		}
+		//else agency we check if they are in the acl list
+		long agencyId = 0
+		def user = getCurrentUser()
+		def agency = getAgencyForUser(user.id)?.find{true}
+		def tmpList = [:]
+		if(agency){
+			agencyId = agency?.id
+			tmpList = Portfolio.withCriteria {
+				agencyAcl { idEq(agencyId) }
+				//firstResult(offset)
+				//maxResults(max)
+				order("name", "asc")
+			}
+		}
+		return tmpList
+	} //end 
 	def getAllowedRoles(Production prod, long agencyId){
 		def productionRoles = prod?.roles
 		
 		if(isAdmin() || isDirector()){		
-			return prod?.roles
+			return productionRoles
 		}
 		
 		def user = getCurrentUser()

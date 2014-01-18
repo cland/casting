@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <g:each in="${productionInstance?.portfolios}" var="p" status="i">
+                <g:each in="${portfolioList}" var="p" status="i">
                 <tr rowId="${i}">
                 	<g:if test="${isEditing==true }">
                 		<td>${p.name }</td>
