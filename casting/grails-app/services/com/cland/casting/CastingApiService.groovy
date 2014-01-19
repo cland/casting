@@ -194,14 +194,14 @@ class CastingApiService {
 			if(agency) agencyId = agency.id
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
 				createAlias('person','person')
-				createAlias('agency','agent')
+				createAlias('agency','agency')
 				if(!sortItem){
 					order('agency.company','desc')
 					order('person.firstName','asc')
 				}else{
 					order(sortItem,byorder)
 				}
-				eq('agent.id',agencyId)
+				eq('agency.id',agencyId)
 				if(max > 0) maxResults(max)
 				//ilike('hair','black')
 			}
@@ -230,9 +230,9 @@ class CastingApiService {
 		if(isAdmin()){
 			//if admin return all candidates for a given agencyId
 			candidateList = Candidate.createCriteria().list(){
-				createAlias('agency','agent')
-				createAlias('person','p')				
-				if(agencyId > 0) eq('agent.id',agencyId)  //if not valid id is provided ignore this rule so that all candidates will be returned.
+				createAlias('agency','agency')
+				createAlias('person','person')				
+				if(agencyId > 0) eq('agency.id',agencyId)  //if not valid id is provided ignore this rule so that all candidates will be returned.
 			}
 		}else{
 			//current user is not admin, check if he/she is agency contact
@@ -241,10 +241,10 @@ class CastingApiService {
 			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
 			if(agency) agencyId = agency.id
 			candidateList = Candidate.createCriteria().list(){
-				createAlias('person','p')
-				createAlias('agency','agent')
+				createAlias('person','person')
+				createAlias('agency','agency')
 				
-				eq('agent.id',agencyId)				
+				eq('agency.id',agencyId)				
 			}
 		}
 		
