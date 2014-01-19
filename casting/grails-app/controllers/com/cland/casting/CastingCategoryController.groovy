@@ -3,7 +3,7 @@ package com.cland.casting
 import org.springframework.dao.DataIntegrityViolationException
 
 class CastingCategoryController {
-
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -37,7 +37,10 @@ class CastingCategoryController {
             redirect(action: "list")
             return
         }
-
+		if(!castingApiService.canViewProduction(castingCategoryInstance?.production, null)){
+			render view: '../login/denied', params: params
+			return
+		}
         [castingCategoryInstance: castingCategoryInstance]
     }
 

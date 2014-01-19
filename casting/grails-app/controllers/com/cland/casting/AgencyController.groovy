@@ -13,6 +13,9 @@ class AgencyController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 30, 100)
+		params.sort = (params?.sort ? params?.sort : 'company')
+		params.order = (params?.order ? params?.order : 'desc')
+		
         [agencyInstanceList: Agency.list(params), agencyInstanceTotal: Agency.count()] 		
     }
 

@@ -37,8 +37,9 @@ class CastingApiService {
 	
 	def getProductions(long agencyId, int offset, int max){
 		def user = springSecurityService?.currentUser
-		def productionList = Production.withCriteria { isEmpty("agencyACL") }
+		def productionList = []
 		if(isAdmin()){
+			productionList = Production.withCriteria { isEmpty("agencyACL") }
 			def tmpList = Production.withCriteria {
 				if(agencyId > 0) agencyACL { idEq(agencyId) }
 				//firstResult(offset)
@@ -47,19 +48,23 @@ class CastingApiService {
 			}
 			productionList.addAll(tmpList)
 		}else if(isDirector()){
+		
 			def clientId = 0	//force agencyId to something that returns empty results
 			def clientInstance = getClientForUser(user.id)?.find{true}			
 			if(clientInstance){
 				 clientId = clientInstance?.id 
 			}
+			
 			def tmpList = Production.withCriteria {
 				client { idEq(clientId) }
 				//firstResult(offset)
 				maxResults(max)
 				order("startDate", "desc")
 			}
+			
 			productionList.addAll(tmpList)
 		}else{
+			productionList = Production.withCriteria { isEmpty("agencyACL") }
 			agencyId = 0	//force agencyId to something that returns empty results
 			def agency = getAgencyForUser(user.id)?.find{true}
 			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
@@ -169,15 +174,15 @@ class CastingApiService {
 		if(isAdmin()){
 			//if admin return all candidates for a given agencyId
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
-				createAlias('agency','agent')
-				createAlias('person','p')
+				createAlias('agency','agency')
+				createAlias('person','person')
 				if(!sortItem){
-					order('agent.company','asc')
-					order('p.firstName','asc')
-				}else{
+					order('agency.company','desc')
+					order('person.firstName','asc')
+				}else{				
 					order(sortItem,byorder)
 				}
-				if(agencyId > 0) eq('agent.id',agencyId)  //if not valid id is provided ignore this rule so that all candidates will be returned.
+				if(agencyId > 0) eq('agency.id',agencyId)  //if not valid id is provided ignore this rule so that all candidates will be returned.
 				if(max > 0) maxResults(max)
 				//ilike('hair','black')
 			}
@@ -188,11 +193,11 @@ class CastingApiService {
 			//if an agency entity exists, then set the id so that he/she can only see her own list of candidates.
 			if(agency) agencyId = agency.id
 			candidateList = Candidate.createCriteria().list(offset:offset, max:max){
-				createAlias('person','p')
+				createAlias('person','person')
 				createAlias('agency','agent')
 				if(!sortItem){
-					order('agent.company','asc')
-					order('p.firstName','asc')
+					order('agency.company','desc')
+					order('person.firstName','asc')
 				}else{
 					order(sortItem,byorder)
 				}
@@ -372,6 +377,28 @@ class CastingApiService {
 	boolean isReviewer(){
 		return (SpringSecurityUtils.ifAnyGranted(SystemRoles.ROLE_REVIEWER.value))
 	}
+	boolean canViewProduction(Production productionInstance, User user){
+		if(!user){
+			user = getCurrentUser()
+		}
+		//if director, check if this belongs to the login in 'client'
+		if(isClient()){
+			def client = getClientForUser(user?.id)?.find{true}
+			if(!client | client?.id != productionInstance?.client?.id){				
+				return false
+			}
+		}
+		if(isAgent()){
+			
+			def agency = getAgencyForUser(user.id)?.find{true}
+			if(!productionInstance?.agencyACL.isEmpty()){
+				if(!productionInstance?.agencyACL?.contains(agency)){					
+					return false
+				}
+			}
+		}
+		return true
+	} //end method canViewProduction
 	Long getCurrentUserId(){
 		long userId = 0 //.currentUser?.id //
 		if(springSecurityService?.principal?.id) userId = springSecurityService?.principal?.id

@@ -18,6 +18,7 @@ class AgencyPortfolioSet {
 	static attachmentable = true
 	static belongsTo = [candidate:Candidate]
 	static constraints = {
+		name(blank:false)
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 	}

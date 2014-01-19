@@ -78,7 +78,10 @@ class CastingProfileController {
             redirect(action: "list")
             return
         }
-
+		if(!castingApiService.canViewProduction(castingProfileInstance?.production, null)){
+			render view: '../login/denied', params: params
+			return
+		}
         [castingProfileInstance: castingProfileInstance, isEditing:false, isNew:false]
     }
 

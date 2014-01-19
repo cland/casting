@@ -70,7 +70,7 @@ environments {
 		grails.attachmentable.maxInMemorySize = 1024
 		grails.attachmentable.maxUploadSize = 31457280
         grails.logging.jul.usebridge = true
-		grails.attachmentable.uploadDir = "C:\\Users\\Cland\\temp"
+		grails.attachmentable.uploadDir = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp"
 		grails{
 			mail {
 			     host = "smtp.gmail.com"
@@ -94,9 +94,9 @@ environments {
 //		grails.attachmentable.uploadDir = "/var/grails/uploads/taglets/${appName}"
 		
 		if (System.properties["os.name"] == "Linux") {
-			grails.config.locations = ["file:/var/grails/app-conf/${appName}-config.groovy"]
+			grails.config.locations = ["file:" + File.separator + "var" + File.separator + "grails" + File.separator + "app-conf" + File.separator + "${appName}-config.groovy"]
 		}else{
-			grails.config.locations = ["file:C:\\grails\\app-conf\\${appName}-Config.groovy"]
+			grails.config.locations = ["file:C:" + File.separator + "grails" + File.separator + "app-conf" + File.separator + "${appName}-Config.groovy"]
 		}
     }
 }

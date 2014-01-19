@@ -158,6 +158,7 @@
 	</div>
 	
 	<div id="tab-photos">
+	
 			<table>
 				<thead>
 					<tr>
@@ -173,7 +174,7 @@
 				<g:each in="${candidateInstance?.portfolios}" status="i" var="agencyPortfolioSetInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 						<td>${fieldValue(bean: agencyPortfolioSetInstance, field: "candidate.person")}</td>
-						<td><g:link controller="agencyPortfolioSet" action="show" id="${agencyPortfolioSetInstance.id}">${fieldValue(bean: agencyPortfolioSetInstance, field: "name")}</g:link></td>			
+						<td><g:link controller="agencyPortfolioSet" action="show" id="${agencyPortfolioSetInstance.id}">${(agencyPortfolioSetInstance?.name ? agencyPortfolioSetInstance?.name : 'No Title')}</g:link></td>			
 						<td><g:userFullname id="${fieldValue(bean: agencyPortfolioSetInstance, field: "createdBy")}"/></td>
 						<td><g:formatDate date="${agencyPortfolioSetInstance.dateCreated}" format="dd-MMM-yyyy"/></td>
 						<td><g:userFullname id="${fieldValue(bean: agencyPortfolioSetInstance, field: "lastUpdatedBy")}" default="None"/></td>

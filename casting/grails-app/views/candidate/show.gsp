@@ -47,7 +47,7 @@
 						<g:message code="default.add.label" args="['Picture Set']"/>
 						</g:link>
 					</sec:ifAnyGranted>
-					<a id="pdf-link" class="hide" href="#pdf-link" onClick="javascript:window.open('<g:createLink action="renderFormPDF" id="${candidateInstance?.id}"/>','_blank','width=800, height=600')">Render PDF</a>
+					
 				</fieldset>
 			</g:form>
 		</div>

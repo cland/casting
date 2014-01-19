@@ -37,14 +37,9 @@ class PortfolioController {
             redirect(action: "list")
             return
         }
-		if(castingApiService.isAgent()){
-			def user = castingApiService.getCurrentUser()
-			def agency = castingApiService.getAgencyForUser(user.id)?.find{true}		
-			if(!portfolioInstance?.agencyAcl?.contains(agency)){
-				//not allow to view this portfolio
-				render view: '../login/denied', params: params
-				return
-			}
+		if(!castingApiService.canViewProduction(portfolioInstance?.production, null)){
+			render view: '../login/denied', params: params
+			return
 		}
         [portfolioInstance: portfolioInstance]
     }

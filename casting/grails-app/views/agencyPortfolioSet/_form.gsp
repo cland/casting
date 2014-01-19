@@ -19,9 +19,8 @@
 		<g:message code="agencyPortfolioSet.name.label" default="Title" />
 		
 	</label>
-	<g:textField name="name" value="${agencyPortfolioSetInstance?.name}"/>
+	<g:textField name="name" required="" value="${agencyPortfolioSetInstance?.name}"/>
 </div>
-
 
 <br/>
 <div class="fieldcontain">

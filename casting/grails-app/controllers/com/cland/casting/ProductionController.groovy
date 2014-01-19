@@ -66,6 +66,12 @@ class ProductionController {
             return
         }
 
+		//if director, check if this belongs to the login in 'client'
+		if(!castingApiService.canViewProduction(productionInstance, null)){
+			render view: '../login/denied', params: params
+			return
+		}
+
 		def auditionProfiles = [:]	//productionInstance?.profiles?.sort{it.castNo} 
 		def shortlistProfiles = [:]	//productionInstance?.profiles?.findAll{it.isShortlist}
 		def finalProfiles = [:]	//productionInstance?.profiles?.findAll{it?.isConfirmed} //outcome?.equalsIgnoreCase("selected")}
@@ -85,6 +91,10 @@ class ProductionController {
             redirect(action: "list")
             return
         }
+		if(!castingApiService.canViewProduction(productionInstance, null)){
+			render view: '../login/denied', params: params
+			return
+		}
 		def rolesList = castingApiService.getAllowedRoles(productionInstance,0) 
 		def productionDates = castingApiService.getProductionDates(productionInstance)
         [productionInstance: productionInstance,productionDates:productionDates,rolesList:rolesList, isEditing:true, isNew:false]
@@ -269,7 +279,7 @@ class ProductionController {
 											
 						def pictures = castingProfileInstance?.pictures?.attachments
 						pictures?.each{att ->							
-							def diskFilename = att.getPath().tokenize('\\').last().toString()
+							def diskFilename = att.getPath().tokenize(File.separator).last().toString()
 							diskFilename = diskFilename.substring(0,diskFilename.indexOf("."))							
 							def fileEntry = new ZipEntry(zipfolder + diskFilename + "_" + att.getFilename())
 							zip.putNextEntry(fileEntry)
@@ -280,7 +290,7 @@ class ProductionController {
 						//add videos
 						def videos = castingProfileInstance?.videos?.attachments
 						videos?.each{att ->							
-							def diskFilename = att.getPath().tokenize('\\').last().toString()
+							def diskFilename = att.getPath().tokenize(File.separator).last().toString()
 							diskFilename = diskFilename.substring(0,diskFilename.indexOf("."))							
 							def fileEntry = new ZipEntry(zipfolder + diskFilename + "_" + att.getFilename())
 							zip.putNextEntry(fileEntry)

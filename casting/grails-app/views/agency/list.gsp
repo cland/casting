@@ -40,9 +40,9 @@
 			<table class="myTable">
 				<thead>
 					<tr>
-					
-						<th><g:message code="agency.company.label" default="Company" /></th>
-						<th>Contact Person</th>
+						<g:sortableColumn property="company" title="${message(code: 'agency.company.label', default: 'Company')}" />
+						<g:sortableColumn property="company.contactPerson" title="${message(code: 'company.contactperson.label', default: 'Contact Person')}" />
+						<th>Category</th>						
 					     <th>Phone No.</th>
 					     <th class="action-header">Action</th>
 					
@@ -51,11 +51,12 @@
 				<tbody>
 				<g:each in="${agencyInstanceList}" status="i" var="agencyInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${agencyInstance.id}">${fieldValue(bean: agencyInstance, field: "company")}</g:link></td>
-					<td>${agencyInstance.company?.contactPerson }</td>
-					<td>${agencyInstance.company?.phoneNo }</td>
-					<td class="list-action-buttons">
+						
+						<td><g:link action="show" id="${agencyInstance.id}">${fieldValue(bean: agencyInstance, field: "company")}</g:link></td>						
+						<td>${agencyInstance.company?.contactPerson }</td>
+						<td>${ agencyInstance?.categories?.join(",")}</td>
+						<td>${agencyInstance.company?.phoneNo }</td>
+						<td class="list-action-buttons">
 						<g:form>
 						<fieldset class="buttons list_buttons">
 							<g:hiddenField name="id" value="${agencyInstance?.id}" />

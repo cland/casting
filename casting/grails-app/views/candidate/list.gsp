@@ -44,9 +44,9 @@
 			<br/>
 			<table>
 				<thead>
-					<tr>
-						<th><g:message code="candidate.person.label" default="Candidate" /></th>
-						<th><g:message code="candidate.agency.label" default="Agency" /></th>					
+					<tr>						
+						<g:sortableColumn property="person.firstName" title="${message(code: 'candidate.person.label', default: 'Candidate')}" />						
+						<g:sortableColumn property="agency.company" title="${message(code: 'candidate.agency.label', default: 'Agency')}" />				
 						<g:sortableColumn property="clothing" title="${message(code: 'candidate.clothing.label', default: 'Clothing')}" />
 						<g:sortableColumn property="eyes" title="${message(code: 'candidate.eyes.label', default: 'Eyes')}" />					
 						<g:sortableColumn property="hair" title="${message(code: 'candidate.hair.label', default: 'Hair')}" />					

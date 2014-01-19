@@ -54,7 +54,10 @@ class CastingRoleController {
             redirect(action: "list")
             return
         }
-
+		if(!castingApiService.canViewProduction(castingRoleInstance?.production, null)){
+			render view: '../login/denied', params: params
+			return
+		}
         [castingRoleInstance: castingRoleInstance]
     }
 
