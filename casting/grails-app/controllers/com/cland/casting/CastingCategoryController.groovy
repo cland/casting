@@ -11,7 +11,7 @@ class CastingCategoryController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [castingCategoryInstanceList: CastingCategory.list(params), castingCategoryInstanceTotal: CastingCategory.count()]
     }
 

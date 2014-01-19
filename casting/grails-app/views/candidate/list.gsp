@@ -22,6 +22,7 @@
 		<a href="#list-candidate" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
 		<div id="list-candidate" class="content scaffold-list" role="main">
+		<export:formats formats="['excel', 'pdf']" />
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>

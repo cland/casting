@@ -72,5 +72,7 @@ grails.project.dependency.resolution = {
 		compile ":audit-logging:0.5.5.3"
 		compile ":searchable:0.6.4"  	//v: 0.6.4+ for grails version: 2.2+
 		//compile ":searchable:0.6.6"  //v: 0.6.5+ for grails version: 2.3+
+		//compile ":rendering:0.4.4"
+		compile ":export:1.5"
     }
 }

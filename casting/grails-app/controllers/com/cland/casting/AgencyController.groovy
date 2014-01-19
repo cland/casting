@@ -12,7 +12,7 @@ class AgencyController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [agencyInstanceList: Agency.list(params), agencyInstanceTotal: Agency.count()] 		
     }
 

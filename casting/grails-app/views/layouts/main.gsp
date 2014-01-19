@@ -17,7 +17,7 @@
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 			<!-- link rel="stylesheet" href="${resource(dir: 'css', file: 'fieldset.css')}" type="text/css" -->
 <link rel="stylesheet"	href="${resource(dir:'css/south-street',file:'jquery-ui-1.10.3.custom.min.css')}" />
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'jqpagination.css')}" type="text/css">
+
 
 		<g:layoutHead/>
 		<r:require module="application" />

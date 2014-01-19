@@ -55,10 +55,19 @@ $(document).ready(function() {
 	$(".datepicker-reset").live("click",function(){
 		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
-	cland_datepickers.init_datepicker("audition-datepicker","audition-date");
-	cland_datepickers.init_datepicker("callback-datepicker","callback-date");
-	cland_datepickers.init_datepicker("wardrobe-datepicker","wardrobe-date");
-	cland_datepickers.init_datepicker("shoot-datepicker","shoot-date");
+	var frmdate = new Date(cland_params.production.start_date)
+	var todate = new Date(cland_params.production.end_date)
+	//if dates are not defined, user default productiondates
+	if($("#audition-date").attr("value") == "") $("#audition-date").attr("value",cland_params.production.audition_dates)
+	if($("#callback-date").attr("value") == "") $("#callback-date").attr("value",cland_params.production.callback_dates)
+	if($("#wardrobe-date").attr("value") == "") $("#wardrobe-date").attr("value",cland_params.production.wardrobe_dates)	
+	if($("#shoot-date").attr("value") == "") $("#shoot-date").attr("value",cland_params.production.shoot_dates)
+	
+	
+	cland_datepickers.init_datepicker("audition-datepicker","audition-date",frmdate,todate);
+	cland_datepickers.init_datepicker("callback-datepicker","callback-date",frmdate,todate);
+	cland_datepickers.init_datepicker("wardrobe-datepicker","wardrobe-date",frmdate,todate);
+	cland_datepickers.init_datepicker("shoot-datepicker","shoot-date",frmdate,todate);
 
 	//Main tabs	
 	$("#tabs").tabs(

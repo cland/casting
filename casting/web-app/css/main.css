@@ -883,3 +883,11 @@ table tr td.sub-head {font-weight:bold;font-size:0.9em;text-align:center;}
 div.nav ul li div#search{margin-left:150px;}
 .print-preview-only{display:none;}
 .many-to-many-400{height:400px}
+.export{float:right !important; width:35% !important;font-size:0.9em;font-size: 0.7em;
+    text-align: right;
+    padding-right:10px !important;
+    background : none !important;
+    border: none !important;
+    display:none;
+    }
+  .export .menuButton {margin-right:10px;}

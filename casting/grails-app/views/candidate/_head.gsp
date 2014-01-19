@@ -1,3 +1,4 @@
+<r:require module="export"/>
 <script type="text/javascript">
 //<![CDATA[
 var cland_params = {

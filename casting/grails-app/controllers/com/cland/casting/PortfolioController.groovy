@@ -11,7 +11,7 @@ class PortfolioController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [portfolioInstanceList: Portfolio.list(params), portfolioInstanceTotal: Portfolio.count()]
     }
 

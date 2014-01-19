@@ -6,7 +6,9 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+		
 		<g:render template="head"></g:render>
+			
 	</head>
 	<body>
 	<div class="bread-crump">		
@@ -21,12 +23,13 @@
 			<span class="r-arrow"></span> <span class="current-crump">
 				${candidateInstance?.encodeAsHTML() }
 			</span>
+			
 		</div>
 		<div id="status1" class="leftbar" role="complementary">
 	         <g:sideMenu default=""></g:sideMenu> 
 	    </div>	
 		<a href="#show-candidate" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="show-candidate" class="content scaffold-show" role="main">
+		<div id="show-candidate" class="content scaffold-show" role="main">		
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
@@ -44,7 +47,7 @@
 						<g:message code="default.add.label" args="['Picture Set']"/>
 						</g:link>
 					</sec:ifAnyGranted>
-					
+					<a id="pdf-link" class="hide" href="#pdf-link" onClick="javascript:window.open('<g:createLink action="renderFormPDF" id="${candidateInstance?.id}"/>','_blank','width=800, height=600')">Render PDF</a>
 				</fieldset>
 			</g:form>
 		</div>

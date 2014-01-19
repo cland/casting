@@ -12,7 +12,7 @@ class AgencyPortfolioSetController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [agencyPortfolioSetInstanceList: AgencyPortfolioSet.list(params), agencyPortfolioSetInstanceTotal: AgencyPortfolioSet.count()]
     }
 

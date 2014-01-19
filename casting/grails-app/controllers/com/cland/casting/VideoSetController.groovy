@@ -11,7 +11,7 @@ class VideoSetController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [videoSetInstanceList: VideoSet.list(params), videoSetInstanceTotal: VideoSet.count()]
     }
 

@@ -4,8 +4,7 @@ modules = {
         resource url:'js/application.js'
         resource url:'js/jquery.metadata.js'
         resource url:'js/jquery.ui.writetable.js'
-		resource url: 'js/jquery.jqGrid.min.js'
-		resource url: 'js/jquery.jqpagination.min.js'
+		resource url: 'js/jquery.jqGrid.min.js'		
 		resource url: 'js/jquery-ui.multidatespicker.js'
 		resource url: 'js/cland-common.js'
     }

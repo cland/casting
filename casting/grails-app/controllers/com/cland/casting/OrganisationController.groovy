@@ -12,7 +12,7 @@ class OrganisationController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
 		//def orglist = Organisation.list(params);
 		int offset = 0	//some pagination calculated value here
 		def orglist = Organisation.createCriteria().list (offset:offset,max:params.max){

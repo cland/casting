@@ -14,7 +14,7 @@ class ProductionController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
 		def productions = castingApiService.getProductions(0, 0, params.max)
         [productionInstanceList: productions, productionInstanceTotal: productions.size()]
     }

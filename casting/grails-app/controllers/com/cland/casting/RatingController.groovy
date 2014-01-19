@@ -11,7 +11,7 @@ class RatingController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [ratingInstanceList: Rating.list(params), ratingInstanceTotal: Rating.count()]
     }
 

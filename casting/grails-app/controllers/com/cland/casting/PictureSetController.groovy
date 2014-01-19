@@ -12,7 +12,7 @@ class PictureSetController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [pictureSetInstanceList: PictureSet.list(params), pictureSetInstanceTotal: PictureSet.count()]
     }
 

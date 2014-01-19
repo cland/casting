@@ -52,6 +52,12 @@ $(document).ready(function() {
 	$(".datepicker-reset").live("click",function(){
 		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
+	
+	$("#audition-date").attr("value",cland_params.production.audition_dates)
+	$("#callback-date").attr("value",cland_params.production.callback_dates)
+	$("#wardrobe-date").attr("value",cland_params.production.wardrobe_dates)
+	$("#shoot-date").attr("value",cland_params.production.shoot_dates)
+	
 	var frmdate = new Date(cland_params.production.start_date)
 	var todate = new Date(cland_params.production.end_date)
 	cland_datepickers.init_datepicker("audition-datepicker","audition-date",frmdate,todate);

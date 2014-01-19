@@ -6,6 +6,9 @@ import com.macrobit.grails.plugins.attachmentable.domains.Attachment;
 class CandidateController {
 	def castingApiService
 	def searchableService
+	//def pdfRenderingService
+	def exportService
+	def grailsApplication  //inject GrailsApplication
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -13,9 +16,19 @@ class CandidateController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
 		def candidates = castingApiService.getCandidates(0, 0,true, params)
 		def total = castingApiService.getCandidatesCount(0, 0, true, params)
+		
+		//** un-comment code below if we want make use of the export-1.5 plugin to export data.
+//		if(params?.format && params.format != "html"){ 
+//			response.contentType = grailsApplication.config.grails.mime.types[params.format] 
+//			response.setHeader("Content-disposition", "attachment; filename=candidates.${params.extension}")		
+//			List fields = ["person.firstLastName", "clothing"]
+//			Map labels = ["person.firstLastName": "Candidate", "clothing": "Clothing"]
+//			exportService.export(params.format, response.outputStream,candidates, fields, labels,[:],[:]) 
+//		}
+		
         [candidateInstanceList: candidates, candidateInstanceTotal: total]
     }
 
@@ -129,7 +142,12 @@ class CandidateController {
 		render(view:'list',	model:[	candidateInstanceList:resultsMap.results,candidateInstanceTotal:Candidate.countHits(params.q)]
 		)
 	} //end search method
-	
+//	def renderFormPDF(){
+//		//compile ":rendering:0.4.4"
+//		def formInstance = Candidate.get(params.id)
+//		def args = [template:"pdf", model:[form:formInstance]]
+//		pdfRenderingService.render(args+[controller:this],response)
+//	}
 } //end class
 
 //	REMOVED SECTION FROM SAVE() ACTION

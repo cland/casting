@@ -2,8 +2,9 @@ package com.cland.casting
 
 import org.springframework.dao.DataIntegrityViolationException
 import com.cland.casting.DateParser
-class CastingRoleController {
 
+class CastingRoleController {
+	def castingApiService
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
@@ -11,18 +12,19 @@ class CastingRoleController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [castingRoleInstanceList: CastingRole.list(params), castingRoleInstanceTotal: CastingRole.count()]
     }
 
     def create() {
 		def production = null
 		long productionId = 0
-		
+		def productionDates = []
 		if(params?.production?.id) {
-			production = Production.get(params.production.id)			
+			production = Production.get(params.production.id)		
+			productionDates = castingApiService.getProductionDates(production)
 		}
-        [castingRoleInstance: new CastingRole(params),productionInstance:production]
+        [castingRoleInstance: new CastingRole(params),productionInstance:production,productionDates:productionDates]
     }
 
     def save() {
@@ -64,8 +66,12 @@ class CastingRoleController {
             redirect(action: "list")
             return
         }
-
-        [castingRoleInstance: castingRoleInstance]
+		def productionDates = []
+		if(castingRoleInstance?.production) {
+			productionDates = castingApiService.getProductionDates(castingRoleInstance?.production)
+		}
+		
+        [castingRoleInstance: castingRoleInstance,productionDates:productionDates]
     }
 
     def update(Long id, Long version) {

@@ -11,7 +11,7 @@ class ClientController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
         [clientInstanceList: Client.list(params), clientInstanceTotal: Client.count()]
     }
 

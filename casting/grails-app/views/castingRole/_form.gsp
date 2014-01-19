@@ -80,7 +80,7 @@
 		<g:message code="castingRole.requiredCount.label" default="Required Count" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="requiredCount" type="number" value="${castingRoleInstance.requiredCount}" required=""/>
+	<g:field name="requiredCount" type="number" value="${(castingRoleInstance.requiredCount > 0 ? castingRoleInstance.requiredCount : 1) }" required=""/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: castingRoleInstance, field: 'maxRequiredAuditionCount', 'error')} required">

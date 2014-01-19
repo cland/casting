@@ -11,7 +11,7 @@ class CastingProfileController {
     }
 
     def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
+        params.max = Math.min(max ?: 30, 100)
 		if(!(params?.sort)) params.sort = "production.name"
         [castingProfileInstanceList: CastingProfile.list(params), castingProfileInstanceTotal: CastingProfile.count()]
     }
