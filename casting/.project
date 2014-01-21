@@ -26,7 +26,7 @@
 		<link>
 			<name>.link_to_grails_plugins</name>
 			<type>2</type>
-			<locationURI>GRAILS_ROOT/2.2.4/projects/casting/plugins</locationURI>
+			<location>C:/git/com.cland.casting/casting/target/work/plugins</location>
 		</link>
 	</linkedResources>
 </projectDescription>

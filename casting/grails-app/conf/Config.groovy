@@ -11,7 +11,7 @@
 // }
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
-grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
+grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
 grails.mime.types = [
     all:           '*/*',
@@ -67,6 +67,30 @@ grails.hibernate.cache.queries = false
 grails.attachmentable.poster.evaluator = { getPrincipal() } //
 environments {
     development {
+		weceem {
+			tools.prefix = 'wcm-tools'
+			admin.prefix = 'wcm-admin'
+			upload.dir = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp\\weceem" + File.separator + "uploads"
+			weceem.logout.url = [controller:'admin', action:'logout']
+			weceem.login.url = [controller:'admin',action:'login']
+			weceem.profile.url = [controller:'register', action:'edit']
+			//weceem.admin.layout="mylayout" //This stops Weceem from using the standard "weceemadmin" GSP layout and uses yours instead.
+			weceem.security.policy.path = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp" + File.separator + "weceem" + File.separator + "policy"
+			springsecurity.details.mapper = { ->
+				[ // Stuff required by weceem spring sec
+					username: username,
+					password: password,
+					enabled: enabled,
+					authorities: authorities,
+					// optional stuff we add
+					email: email,
+					//description: description,
+					firstName: firstName,
+					lastName: lastName,
+					id: id
+				]
+			}
+		}
 		grails.attachmentable.maxInMemorySize = 1024
 		grails.attachmentable.maxUploadSize = 31457280
         grails.logging.jul.usebridge = true
