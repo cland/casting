@@ -108,21 +108,13 @@
 		<div id="page-body" role="main">
 			<h1>About us</h1>
 			<div class="content">
-			<p>
-			Jeanne began her career in the film industry as a film editor and line producer before starting Casting Cape Town, which in the 8 years since its inception, has developed a reputation for producing excellent work .
-			<br><br>This success is largely due to Jeanne’s knack for talent-spotting, which has helped her to surround herself with an awesome team of associates, freelancers and assistants who all bring their own unique sensibility to the casting process.
-			<br><br>
-			</p>
-			<p align="center" style="padding-left:0px; font-size:12pt">
-			<strong>"Lead with your talent"</strong>
-			</p>
+			${com.cland.casting.Document.findByName('$aboutus')?.content?.decodeHTML() }
 			
 			<fieldset id="contactus"><legend>Contact us</legend>
 			
 				<div class="content float-left" style="width:100%;">
-				<p style="width:100%;margin:0;">
-				You will find us at the top of St George's Mall in Cape Town's city centre, where we are surrounded by 5-star boutique hotels, flea-markets, sidewalk cafes and trendy night spots.<br><br>After a hard day's work in our spacious and comfortable, airconditioned studios, enjoy the best relaxation and entertainment Cape Town has to offer, right on our doorstep.
-				</p>
+				${com.cland.casting.Document.findByName('$contactus')?.content?.decodeHTML() }
+				
 				<p>
 				<g:set value="${ hostOrg?.phoneNo?.split(',')}" var="phoneList"/>
 				<b>T:</b> ${ phoneList?.find{true}}<br>

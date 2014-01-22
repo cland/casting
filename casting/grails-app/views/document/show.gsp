@@ -21,21 +21,6 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<div id="headshot" class="attachments">
-			<attachments:each bean="${documentInstance}" inputName="document" status="i">	
-			<div class="photo-display float-left">
-			<img src="${createLink(controller:'attachmentable',action:'download', id:attachment.id)}"/><br/>
-				<img src="${resource(dir:'images/icons',file:'picture.png',plugin:'famfamfam')}" />			
-				<attachments:downloadLink attachment="${attachment}" inline="true" withContentType="true" />
-				${attachment.niceLength}
-				<attachments:deleteLink attachment="${attachment}" label="${'[ delete ]'}"
-					returnPageURI="${createLink(action:'show', id:documentInstance.id,absolute:true)}" />
-			</div>	
-				<g:if test="${i%2==0 & i!=0 }"><br/></g:if>
-			
-			</attachments:each>
-			<div style="clear:both"></div>
-	</div><br/>
 			<ol class="property-list document">
 			
 				<g:if test="${documentInstance?.name}">
@@ -47,11 +32,23 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${documentInstance?.description}">
+				<g:if test="${documentInstance?.content}">
 				<li class="fieldcontain">
-					<span id="description-label" class="property-label"><g:message code="document.description.label" default="Description" /></span>
+					<span id="content-label" class="property-label"><g:message code="document.content.label" default="Content" /></span>
 					
-						<span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${documentInstance}" field="description"/></span>
+						<span class="property-value" aria-labelledby="content-label">
+							${documentInstance?.content?.decodeHTML()} 
+						</span>
+					
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${documentInstance?.lastUpdatedBy}">
+				<li class="fieldcontain">
+					<span id="lastUpdatedBy-label" class="property-label"><g:message code="document.lastUpdatedBy.label" default="Last Updated By" /></span>
+					
+						<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${documentInstance}" field="lastUpdatedBy"/></span>
 					
 				</li>
 				</g:if>
@@ -74,20 +71,20 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${documentInstance?.docType}">
+				<li class="fieldcontain">
+					<span id="docType-label" class="property-label"><g:message code="document.docType.label" default="Doc Type" /></span>
+					
+						<span class="property-value" aria-labelledby="docType-label"><g:fieldValue bean="${documentInstance}" field="docType"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${documentInstance?.lastUpdated}">
 				<li class="fieldcontain">
 					<span id="lastUpdated-label" class="property-label"><g:message code="document.lastUpdated.label" default="Last Updated" /></span>
 					
 						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${documentInstance?.lastUpdated}" /></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${documentInstance?.lastUpdatedBy}">
-				<li class="fieldcontain">
-					<span id="lastUpdatedBy-label" class="property-label"><g:message code="document.lastUpdatedBy.label" default="Last Updated By" /></span>
-					
-						<span class="property-value" aria-labelledby="lastUpdatedBy-label"><g:fieldValue bean="${documentInstance}" field="lastUpdatedBy"/></span>
 					
 				</li>
 				</g:if>

@@ -45,7 +45,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-		//mavenRepo "http://repo.grails.org/grails/core"
+		mavenRepo "http://repo.grails.org/grails/core"
     }
 
     dependencies {
@@ -91,16 +91,16 @@ grails.project.dependency.resolution = {
 		compile ":jquery-ui:1.10.3"
 		compile ":mail:1.0.1"
 		//compile ":zkui:0.5.6"
-		compile ":grails-melody:1.45"
+		compile ":grails-melody:1.49.0" //** compile ":grails-melody:1.45"
 		compile ":attachmentable:0.3.0"
-		compile ":audit-trail:2.0.0"
+	//	compile ":audit-trail:2.0.0"
 		compile ":audit-logging:0.5.5.3"
 		//compile ":searchable:0.6.4"  	//v: 0.6.4+ for grails version: 2.2+
 		compile ":searchable:0.6.5"  //v: 0.6.5+ for grails version: 2.3+ (0.6.6 was problematic)
 		//compile ":rendering:0.4.4"
 		compile ":export:1.5"
-		compile ":weceem:1.2-M1"
-		compile ":weceem-spring-security:1.2-M1"
-		//compile ":ckeditor:3.6.6.1.0"
+	//	compile ":weceem:1.2-M1"					//simply needs more testing - could not get it run-app
+	//	compile ":weceem-spring-security:1.2-M1"	//simply needs more testing - could not get it run-app
+		compile ":ckeditor:3.6.6.1.1"
     }
 }

@@ -1,5 +1,5 @@
 package com.cland.casting
-@gorm.AuditStamp
+//@gorm.AuditStamp
 class Rating {
 	transient castingApiService
 	Integer rating

@@ -5,7 +5,8 @@ import java.util.Date;
 class Document {
 	transient castingApiService
 	String name
-	String description
+	String docType
+	String content
 	long createdBy
 	long lastUpdatedBy
 	Date dateCreated
@@ -13,9 +14,13 @@ class Document {
 	static attachmentable = true
 	static constraints = {
 		name(blank:false,unique:true)
-		description(nullable:true)
+		content(nullable:true)
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
+		docType(nullable:true)
+	}
+	static mapping = {
+		content sqlType: "longtext"
 	}
 	def beforeInsert = {
 		createdBy = castingApiService.getCurrentUserId()

@@ -16,8 +16,8 @@
 			<g:message code="default.aboutus.label" /></a>
 		</li>
 
-		<li><a class="newsevents" href="${createLink(uri: '/')}"> <g:message
-					code="default.newsevents.label" /></a></li>
+		<li><a class="newsevents" href="${createLink(uri: '/home/news')}"> 
+		<g:message code="default.newsevents.label" /></a></li>
 		<sec:ifLoggedIn>		
 			<li>
 				<g:link controller="logout" action="index" class="logout">

@@ -41,7 +41,8 @@
 			}
 
 			#page-body {
-				margin: 0em 1em 1.25em 18em;
+				margin: 2em 1em 1.25em 1.25em;
+				width:100%;
 			}
 
 			h2 {
@@ -90,17 +91,11 @@
 			.data-table .cell div.staff {border:solid 1px #EB8F2A;padding:5px;height:180px;}
 			legend {font-weight:bold;color:#FFAE2F;font-size:1.2em;}
 			h1 {font-weight:bold;font-size:1.3em;}
+			.footer {margin-right:1.5em;margin-left:-1.5em}
 		</style>
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		
-		<div id="status1" class="leftbar" role="complementary">
-			<h1>Noticeboard</h1>
-			<ul>
-				<li>Nothing today!</li>			
-			</ul>
-		</div>
 		<div id="page-body" role="main">
 			<g:if test="${params?.agencylinked == '0' }">
 				<div class="errors">You are not linked to any agency. Please contact the administrator.</div>
@@ -109,7 +104,7 @@
 				<div class="errors">You are not linked to any agency. Please contact the administrator.</div>
 			</g:if>
 			<div class="content float-left">
-			${com.cland.casting.Document.findByName('$home')?.content?.decodeHTML() }
+			${com.cland.casting.Document.findByName('$news')?.content?.decodeHTML() }
 			</div>
 	</body>
 </html>

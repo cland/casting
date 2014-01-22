@@ -53,6 +53,7 @@ class DocumentController {
     }
 
     def update(Long id, Long version) {
+	
         def documentInstance = Document.get(id)
         if (!documentInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'document.label', default: 'Document'), id])

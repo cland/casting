@@ -11,7 +11,7 @@
 // }
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
-grails.mime.file.extensions = false // enables the parsing of file extensions from URLs into the request format
+grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format	change to false if weceem is enabled
 grails.mime.use.accept.header = false
 grails.mime.types = [
     all:           '*/*',
@@ -67,30 +67,61 @@ grails.hibernate.cache.queries = false
 grails.attachmentable.poster.evaluator = { getPrincipal() } //
 environments {
     development {
-		weceem {
-			tools.prefix = 'wcm-tools'
-			admin.prefix = 'wcm-admin'
-			upload.dir = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp\\weceem" + File.separator + "uploads"
-			weceem.logout.url = [controller:'admin', action:'logout']
-			weceem.login.url = [controller:'admin',action:'login']
-			weceem.profile.url = [controller:'register', action:'edit']
-			//weceem.admin.layout="mylayout" //This stops Weceem from using the standard "weceemadmin" GSP layout and uses yours instead.
-			weceem.security.policy.path = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp" + File.separator + "weceem" + File.separator + "policy"
-			springsecurity.details.mapper = { ->
-				[ // Stuff required by weceem spring sec
-					username: username,
-					password: password,
-					enabled: enabled,
-					authorities: authorities,
-					// optional stuff we add
-					email: email,
-					//description: description,
-					firstName: firstName,
-					lastName: lastName,
-					id: id
-				]
+		ckeditor {
+			config = "/js/ckeditor/ckconfig.js"
+				skipAllowedItemsCheck = false
+			defaultFileBrowser = "ofm"
+			upload {
+				basedir = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp" + File.separator + "ckeditor" + File.separator + "uploads"
+					overwrite = false
+					link {
+						browser = true
+						upload = false
+						allowed = []
+						denied = ['html', 'htm', 'php', 'php2', 'php3', 'php4', 'php5',
+								  'phtml', 'pwml', 'inc', 'asp', 'aspx', 'ascx', 'jsp',
+								  'cfm', 'cfc', 'pl', 'bat', 'exe', 'com', 'dll', 'vbs', 'js', 'reg',
+								  'cgi', 'htaccess', 'asis', 'sh', 'shtml', 'shtm', 'phtm']
+					}
+					image {
+						browser = true
+						upload = true
+						allowed = ['jpg', 'gif', 'jpeg', 'png']
+						denied = []
+					}
+					flash {
+						browser = false
+						upload = false
+						allowed = ['swf']
+						denied = []
+					}
 			}
 		}
+	
+//		weceem {
+//			tools.prefix = 'wcm-tools'
+//			admin.prefix = 'wcm-admin'
+//			upload.dir = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp" + File.separator + "weceem" + File.separator + "uploads"
+//			weceem.logout.url = [controller:'admin', action:'logout']
+//			weceem.login.url = [controller:'admin',action:'login']
+//			weceem.profile.url = [controller:'register', action:'edit']
+//			//weceem.admin.layout="mylayout" //This stops Weceem from using the standard "weceemadmin" GSP layout and uses yours instead.
+//			weceem.security.policy.path = "C:" + File.separator + "Users" + File.separator + "Cland" + File.separator + "temp" + File.separator + "weceem" + File.separator + "policy" + File.separator + "weceem-policy.groovy"
+//			springsecurity.details.mapper = { ->
+//				[ // Stuff required by weceem spring sec
+//					username: username,
+//					password: password,
+//					enabled: enabled,
+//					authorities: authorities,
+//					// optional stuff we add
+//					email: email,
+//					//description: description,
+//					firstName: firstName,
+//					lastName: lastName,
+//					id: id
+//				]
+//			}
+//		}
 		grails.attachmentable.maxInMemorySize = 1024
 		grails.attachmentable.maxUploadSize = 31457280
         grails.logging.jul.usebridge = true
@@ -214,59 +245,65 @@ grails.plugins.springsecurity.controllerAnnotations.staticRules=[
 	'/portfolio/**': ['IS_AUTHENTICATED_FULLY'],
 	'/videoSet/**': ['IS_AUTHENTICATED_FULLY'],
 	'/login/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
-	'/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY']
+	'/logout/**': ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	
+	'/ck/**': ["hasRole('ROLE_ADMIN')",'IS_AUTHENTICATED_FULLY']
+//	/ck/standard/filemanager
+//	/ck/standard/uploader
+//	/ck/ofm/filemanager
+//	/ck/ofm/filetree
 ]
 
 //Audit Trail Config
 
-grails{
-	plugin{
-		audittrail{
-			createdBy.field = "createdBy"
-			editedBy.field = "editedBy"
-			createdDate.field = "createdDate"
-			editedDate.field = "editedDate"
-			/*
-			// ** if field is not specified then it will default to 'createdBy'
-			createdBy.field = "createdBy"  // createdBy is default
-			// ** fully qualified class name for the type
-			createdBy.type   = "java.lang.Long" //Long is the default
-			// ** the constraints settings
-			createdBy.constraints = "nullable:false,display:false,editable:false"
-			// ** the mapping you want setup
-			createdBy.mapping = "column: 'inserted_by'" //<-example as there are NO defaults for mapping
-
-			createdDate.field = "createdDate"
-			createdDate.type  = "java.util.Date"
-			createdDate.constraints = "nullable:false,display:false,editable:false"
-			createdDate.mapping = "column: 'date_created'" //<-example as there are NO defaults for mapping
-
-			// ** Last updated by
-			editedBy.field = "lastUpdatedBy"  // createdBy is default
-			// ** fully qualified class name for the type
-			editedBy.type   = "java.lang.Long" //Long is the default
-			// ** the constraints settings
-			editedBy.constraints = "nullable:false,display:false,editable:false"
-			// ** the mapping you want setup
-			editedBy.mapping = "column: 'updated_by'" //<-example as there are NO defaults for mapping
-			
-			editedDate.field = "lastUpdatedDate"
-			editedDate.type  = "java.util.Date"
-			editedDate.constraints = "nullable:false,display:false,editable:false"
-			editedDate.mapping = "column: 'date_updated'" //<-example as there are NO defaults for mapping
-			
-			//custom closure to return the current user who is logged in
-			currentUserClosure = {ctx->
-				//ctx is the applicationContext
-				//default is basically
-				return springSecurityService.principal?.id
-			}
-			//there are NO defaults for companyId.
-			//companyId.field   = "companyId" //used for multi-tenant apps and is just the name of the field to use
-			 
-	
-			 */
-		}
-	}
-}
+//grails{
+//	plugin{
+//		audittrail{
+//			createdBy.field = "createdBy"
+//			editedBy.field = "editedBy"
+//			createdDate.field = "createdDate"
+//			editedDate.field = "editedDate"
+//			/*
+//			// ** if field is not specified then it will default to 'createdBy'
+//			createdBy.field = "createdBy"  // createdBy is default
+//			// ** fully qualified class name for the type
+//			createdBy.type   = "java.lang.Long" //Long is the default
+//			// ** the constraints settings
+//			createdBy.constraints = "nullable:false,display:false,editable:false"
+//			// ** the mapping you want setup
+//			createdBy.mapping = "column: 'inserted_by'" //<-example as there are NO defaults for mapping
+//
+//			createdDate.field = "createdDate"
+//			createdDate.type  = "java.util.Date"
+//			createdDate.constraints = "nullable:false,display:false,editable:false"
+//			createdDate.mapping = "column: 'date_created'" //<-example as there are NO defaults for mapping
+//
+//			// ** Last updated by
+//			editedBy.field = "lastUpdatedBy"  // createdBy is default
+//			// ** fully qualified class name for the type
+//			editedBy.type   = "java.lang.Long" //Long is the default
+//			// ** the constraints settings
+//			editedBy.constraints = "nullable:false,display:false,editable:false"
+//			// ** the mapping you want setup
+//			editedBy.mapping = "column: 'updated_by'" //<-example as there are NO defaults for mapping
+//			
+//			editedDate.field = "lastUpdatedDate"
+//			editedDate.type  = "java.util.Date"
+//			editedDate.constraints = "nullable:false,display:false,editable:false"
+//			editedDate.mapping = "column: 'date_updated'" //<-example as there are NO defaults for mapping
+//			
+//			//custom closure to return the current user who is logged in
+//			currentUserClosure = {ctx->
+//				//ctx is the applicationContext
+//				//default is basically
+//				return springSecurityService.principal?.id
+//			}
+//			//there are NO defaults for companyId.
+//			//companyId.field   = "companyId" //used for multi-tenant apps and is just the name of the field to use
+//			 
+//	
+//			 */
+//		}
+//	}
+//}
 
