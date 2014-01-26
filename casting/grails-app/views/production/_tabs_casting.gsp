@@ -19,7 +19,7 @@
 					<g:submitButton name="Save Changes" id="submit_stage1_top" class="submit action_wait"/>					
 				</div>
 				<div class="cell float-right">
-					<g:render template="radio_selector"/>
+					<g:render template="radio_selector" model="[stage:'stage1']"/>
 				</div>
 				<div class="cast-list" id="stage1-cast-list">
 					<g:render template="../layouts/profile_headshot" bean="${auditionProfiles}" var="profileList" model="[stage:'stage1',prod_id:productionInstance?.id]"></g:render>			
@@ -49,7 +49,7 @@
 			<g:submitButton name="Save Changes" id="submit_stage2_top" class="submit action_wait"/>
 		</div>
 		<div class="cell float-right">
-				<g:render template="radio_selector"/>
+				<g:render template="radio_selector" model="[stage:'stage2']"/>
 		</div>
 			<div class="cast-list" id="stage2-cast-list">
 				<g:render template="../layouts/profile_summary" collection="${shortlistProfiles }" var="profile" model="[stage:'stage2']"/>			
@@ -77,7 +77,7 @@
 		<g:hiddenField name="sortby" id="hidden_sortby_stage3" value="castno"/>
 		<div class="cell float-left"> <g:submitButton name="Save Changes" id="submit_stage3_top" class="submit action_wait"/></div>
 		<div class="cell float-right">
-				<g:render template="radio_selector"/>
+				<g:render template="radio_selector" model="[stage:'stage3']"/>
 		</div>	
 			<div class="cast-list" id="stage3-cast-list">
 				<g:render template="../layouts/profile_summary" collection="${finalProfiles }" var="profile" model="[stage:'stage3']"/>

@@ -67,6 +67,28 @@ grails.hibernate.cache.queries = false
 grails.attachmentable.poster.evaluator = { getPrincipal() } //
 environments {
     development {
+		casting {
+			theme {
+				name = "" //"" == DEFAULT:ui-lightnes | OTHER OPTIONS: "black-tie"|"blitzer"|"south-street"|"smoothness"|"redmond"
+				if(casting.theme.name != ""){
+					maincss =casting.theme.name + "/main.css"
+					printcss =casting.theme.name + "/print.css"		
+				}else{
+					maincss="main.css"
+					printcss="print.css"
+				}	
+			}			
+		}
+		grails.resources.modules = {
+			if(casting.theme.name != "" ){
+			overrides {
+				'jquery-theme' {
+					resource id:'theme', url:'/css/'+casting.theme.name+'/jquery-ui-1.10.4.custom.css'
+				}
+			}
+			}
+		}
+
 		ckeditor {
 			config = "/js/ckeditor/ckconfig.js"
 				skipAllowedItemsCheck = false

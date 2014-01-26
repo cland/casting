@@ -1,3 +1,11 @@
+function setAllRadio(group,value,checked){
+	$(group).each(function() {
+		var el = $(this)        
+        if(el.val() == value){           
+          el.prop("checked",checked)
+        } 	
+    });
+}
 function printableTabs() {
 	$("#tabs").each(function() {
 		var tabsforPrint = "";

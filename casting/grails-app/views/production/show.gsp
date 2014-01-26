@@ -77,16 +77,7 @@ $(document).ready(function() {
 				}
 		});
 });  //end method ready(...)
-function setAllRadio(group,value,checked){
-	//alert(group + " - " + value)
-	$(group).each(function() {
-		var el = $(this)
-        //alert(el.val() + " - " + el.is(':checked'))
-        if(el.val() == value){           
-          el.attr("checked",checked)
-        }
-    });
-}
+
 function onSuccessFilterStage1CallbackHander(data, textStatus){
 	stageDisplay("stage1")
 }
