@@ -29,52 +29,52 @@
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.firstName', 'error')} required">
 	<label for="person.firstName">
 		<g:message code="user.firstName.label" default="First Name" />
-		<span class="required-indicator">*</span>
+		
 	</label>
 	<g:textField name="person.firstName" required="" value="${candidateInstance?.person?.firstName}"/>
 </div>
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.lastName', 'error')} required">
 	<label for="person.lastName">
 		<g:message code="user.lastName.label" default="Last Name" />
-		<span class="required-indicator">*</span>
+		
 	</label>
 	<g:textField name="person.lastName" required="" value="${candidateInstance?.person?.lastName}"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.gender', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.gender', 'error')} required">
 	<label for="person.gender">
 		<g:message code="user.gender.label" default="Gender" />
 		
 	</label>
-	<g:select name="person.gender" from="${com.cland.casting.User.constraints.gender.inList}" value="${candidateInstance?.person?.gender}" valueMessagePrefix="person.gender" noSelection="['': '']"/>
+	<g:select name="person.gender" required="" from="${com.cland.casting.User.constraints.gender.inList}" value="${candidateInstance?.person?.gender}" valueMessagePrefix="person.gender" noSelection="['': '']"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.race', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.race', 'error')} required">
 	<label for="person.race">
 		<g:message code="user.race.label" default="Race" />
 		
 	</label>
-	<g:select id="person.race" name="person.race.id" from="${com.cland.casting.Race.list()}" optionKey="id" value="${candidateInstance?.person?.race?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:select name="person.race.id" required="" from="${com.cland.casting.Race.list()}" optionKey="id" value="${candidateInstance?.person?.race?.id}"  noSelection="['': '']"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.contactNo', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.contactNo', 'error')} required">
 	<label for="person.contactNo">
 		<g:message code="user.contactNo.label" default="Contact No" />
 		
 	</label>
-	<g:textField name="person.contactNo" value="${candidateInstance?.person?.contactNo}"/>
+	<g:textField name="person.contactNo" required="" value="${candidateInstance?.person?.contactNo}"/>
 </div>
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.email', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.email', 'error')} required">
 	<label for="person.email">
 		<g:message code="user.email.label" default="Email" />
 		
 	</label>
-	<g:field type="email" name="person.email" value="${candidateInstance?.person?.email}"/>
+	<g:field type="email" required="" name="person.email" value="${candidateInstance?.person?.email}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'person.dateOfBirth', 'error')} required">
 	<label for="dateOfBirth">
 		<g:message code="user.dateOfBirth.label" default="Date of Birth" />
-		
+	
 	</label>
-	<g:textField name="person.dateOfBirth" class="datepick_single_past" id="birth-date" value="${candidateInstance?.person?.dateOfBirth?.format('dd-MMM-yyyy')}"/>
+	<g:textField name="person.dateOfBirth" required="" class="datepick_single_past" id="birth-date" value="${candidateInstance?.person?.dateOfBirth?.format('dd-MMM-yyyy')}"/>
 	<span class="datepicker-reset" picker="birth-date" altfield="birth-date">clear</span>
 </div>
 
@@ -112,51 +112,51 @@
 
 <br/>
 <fieldset><legend>Characteristics</legend>	
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'clothing', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'clothing', 'error')} required">
 	<label for="clothing">
 		<g:message code="candidate.clothing.label" default="Clothing" />
 		
 	</label>
-	<g:textField name="clothing" value="${candidateInstance?.clothing}"/>
+	<g:textField name="clothing" required="" value="${candidateInstance?.clothing}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'eyes', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'eyes', 'error')} required">
 	<label for="eyes">
 		<g:message code="candidate.eyes.label" default="Eyes" />
 		
 	</label>
-	<g:textField name="eyes" value="${candidateInstance?.eyes}"/>
+	<g:textField name="eyes" required="" value="${candidateInstance?.eyes}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'hair', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'hair', 'error')} required">
 	<label for="hair">
 		<g:message code="candidate.hair.label" default="Hair" />
 		
 	</label>
-	<g:textField name="hair" value="${candidateInstance?.hair}"/>
+	<g:textField name="hair" required="" value="${candidateInstance?.hair}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'height', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'height', 'error')} required">
 	<label for="height">
 		<g:message code="candidate.height.label" default="Height" />
 		
 	</label>
-	<g:textField name="height" value="${candidateInstance?.height}"/>
+	<g:textField name="height" required="" value="${candidateInstance?.height}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'shoe', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'shoe', 'error')} required">
 	<label for="shoe">
 		<g:message code="candidate.shoe.label" default="Shoe" />
 		
 	</label>
-	<g:textField name="shoe" value="${candidateInstance?.shoe}"/>
+	<g:textField name="shoe" required="" value="${candidateInstance?.shoe}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'waist', 'error')} ">
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'waist', 'error')} required">
 	<label for="waist">
 		<g:message code="candidate.waist.label" default="Waist" />
 		
 	</label>
-	<g:textField name="waist" value="${candidateInstance?.waist}"/>
+	<g:textField name="waist" required="" value="${candidateInstance?.waist}"/>
 </div>
 </fieldset>

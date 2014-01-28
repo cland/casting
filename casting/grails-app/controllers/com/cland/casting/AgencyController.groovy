@@ -29,11 +29,15 @@ class AgencyController {
         def agencyInstance = new Agency(params)
 		if(!params.company.id){
 			if(params.company.id == ""){
-				if(!agencyInstance.company.save(flush:true)){
-					println("Failed to save new organisation/company..."  + agencyInstance.company?.errors)
-					render(view: "create", model: [clientInstance: agencyInstance])
+				def co = new Organisation(params?.company)				
+				if(!co.save(flush:true)){
+					println("Failed to save new organisation/company..."  + co?.errors)
+					List <String> rolenames = [SystemRoles.ROLE_AGENT.value]
+					def userList = castingApiService.getUsersWithRole(rolenames)
+					render(view: "create", model: [agencyInstance: agencyInstance,agencyList:userList])
 					return
-				}
+				}	
+				agencyInstance.company = co
 			}
 		}
         if (!agencyInstance.save(flush: true)) {

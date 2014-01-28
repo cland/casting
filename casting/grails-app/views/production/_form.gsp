@@ -38,6 +38,7 @@
 			</div>
 			<div class="cell">
 				<label for="endDate"><g:message code="production.endDate.label" default="End Date" /><span class="required-indicator">*</span></label>
+	
 			</div>
 			<div class="cell">
 				<div class="fieldcontain ${hasErrors(bean: productionInstance, field: 'endDate', 'error')} required">	

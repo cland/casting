@@ -40,19 +40,36 @@ class CandidateController {
     }
 
     def save() {
+		params?.person?.dateOfBirth = params.date('person.dateOfBirth', ['dd-MMM-yyyy'])
 		def candidateInstance = new Candidate(params)
-		bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
-		bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
+	//	bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
+	//	bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
 		
-		candidateInstance.person.properties = params
-		if(!candidateInstance.person.save(flush:true)){
-			println("Failed to save new person..."  + candidateInstance.person?.errors)
-		}else {
-			candidateInstance = candidateInstance.merge()
+		if(!params?.person?.id){
+			if(params?.person?.id == ""){
+				def p = new User(params?.person)
+				if(!p.save(flush:true)){
+					println("Failed to save new person..."  + p?.errors)
+					flash.message = "Error: Failed to save candidate due to an error saving person details."
+					def agency = null
+					if(params?.agency?.id) agency = Agency.get(params.agency.id)
+					render(view: "create", model: [candidateInstance: candidateInstance,agencyInstance:agency, isEditing:true, isNew:true])
+					return
+				}
+				candidateInstance.person = p
+				candidateInstance = candidateInstance.merge()
+			}
 		}
+//		else {
+//			candidateInstance = candidateInstance.merge()
+//		}
 		
         if (!candidateInstance.save(flush: true)) {
-            render(view: "create", model: [candidateInstance: candidateInstance])
+			println(candidateInstance.errors)
+			def agency = null
+			flash.message = "Error: Failed to save candidate"
+			if(params?.agency?.id) agency = Agency.get(params.agency.id)
+            render(view: "create", model: [candidateInstance: candidateInstance,agencyInstance:agency, isEditing:true, isNew:true])
             return
         }
 		attachUploadedFilesTo(candidateInstance)
@@ -102,9 +119,10 @@ class CandidateController {
             }
         }
 
+		params?.person?.dateOfBirth = params.date('person.dateOfBirth', ['dd-MMM-yyyy'])
         candidateInstance.properties = params
-		bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
-		bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
+	//	bindData(candidateInstance, params, [exclude: 'person.dateOfBirth'])
+	//	bindData(candidateInstance, ['person.dateOfBirth': params.date('person.dateOfBirth', ['dd-MMM-yyyy'])], [include: 'person.dateOfBirth'])
         if (!candidateInstance.save(flush: true)) {
             render(view: "edit", model: [candidateInstance: candidateInstance])
             return

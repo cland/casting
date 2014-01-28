@@ -48,7 +48,7 @@
 		// when the page has finished loading.. execute the follow
 		
 		$(document).ready(function() {	
-			$(".datepicker-reset").live("click",function(){
+			$(".datepicker-reset").on("click",function(){
 				cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 			});	
 			$("#accordion" ).accordion({ active: cland_params.active_sidebar() });

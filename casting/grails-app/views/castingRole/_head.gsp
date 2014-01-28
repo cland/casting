@@ -11,7 +11,7 @@ var cland_params = {
 			callback_dates :"${productionDates?.callbackDates*.format('yyyy-MM-dd')?.join(',')}",
 			wardrobe_dates :"${productionDates?.wardrobeDates*.format('yyyy-MM-dd')?.join(',')}",
 			shoot_dates : "${productionDates?.shootDates*.format('yyyy-MM-dd')?.join(',')}"		
-	}
+		}
 	}
 //]]>
 </script>

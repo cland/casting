@@ -28,11 +28,18 @@ class ClientController {
         def clientInstance = new Client(params)
 		if(!params.company.id){
 			if(params.company.id == ""){
-				if(!clientInstance.company.save(flush:true)){
-					println("Failed to save new organisation/company..."  + clientInstance.company?.errors)
-					render(view: "create", model: [clientInstance: clientInstance])
+				def co = new Organisation(params?.company)
+				if(!co.save(flush:true)){
+					println("Failed to save new organisation/company..."  + co?.errors)
+					flash.message = "Failed to save new organisation/company..." // + co?.errors
+					List <String> rolenames = [SystemRoles.ROLE_DIRECTOR.value,SystemRoles.ROLE_REVIEWER.value]
+					//rolenames.add(SystemRoles.ROLE_REVIEWER.value)
+					def userList = castingApiService.getUsersWithRole(rolenames)
+					render(view: "create", model: [clientInstance: clientInstance, isEditing:true, isNew:true,directorList:userList])
 					return
 				}
+				clientInstance?.company = co
+				//clientInstance = clientInstance.merge()
 			}
 		}
         if (!clientInstance.save(flush: true)) {

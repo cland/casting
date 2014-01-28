@@ -64,7 +64,7 @@
 <script>
   $(document).ready(function() {
 	  $("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-	 // $("#add_org").live("click",function(){
+	 // $("#add_org")("click",function(){
 	//	  addOrganisation();
 	//	});
   });

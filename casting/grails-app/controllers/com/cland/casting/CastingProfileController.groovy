@@ -11,6 +11,9 @@ class CastingProfileController {
     }
 
     def list(Integer max) {
+		if(!castingApiService.canListProfiles()){
+			redirect(uri: castingApiService.getHomeLink())
+		}
         params.max = Math.min(max ?: 30, 100)
 		if(!(params?.sort)) params.sort = "production.name"
         [castingProfileInstanceList: CastingProfile.list(params), castingProfileInstanceTotal: CastingProfile.count()]
@@ -147,6 +150,7 @@ class CastingProfileController {
 
     def delete(Long id) {
         def castingProfileInstance = CastingProfile.get(id)
+		//Long pId = castingProfileInstance?.production?.id?.toLong()
         if (!castingProfileInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'castingProfile.label', default: 'CastingProfile'), id])
             redirect(action: "list")
@@ -160,7 +164,7 @@ class CastingProfileController {
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'castingProfile.label', default: 'CastingProfile'), id])
-            redirect(action: "show", id: id)
+            redirect(controller:"production",action: "show", id: id)
         }
     }
 }

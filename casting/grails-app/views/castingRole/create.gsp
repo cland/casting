@@ -49,7 +49,7 @@
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
 	//$(element_or_selector).multiDatesPicker(options_to_initialize_datepicker_and_multidatepicker);
-	$(".datepicker-reset").live("click",function(){
+	$(".datepicker-reset").on("click",function(){
 		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
 	

@@ -49,6 +49,8 @@
 // when the page has finished loading.. execute the follow
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });	
+	//var frmdate = new Date(cland_params.production.start_date)
+	//var todate = new Date(cland_params.production.end_date)
 	cland_datepickers.init_datepicker_single_standard("#start-date","dd-M-yy","-50y","+6m","+0");
 	cland_datepickers.init_datepicker_single_standard("#end-date","dd-M-yy","-50y","+6m","+0");
 	

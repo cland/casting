@@ -170,18 +170,26 @@ class ProductionController {
 		def stage = params?.stage
 		
 		def profiles = castingApiService.profileFilter(productionId, params)
+	
 		[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage,productionId:productionId]
 	} //end 
 	
 	def update_profiles(){
 		//println(params)
-		def productionId = params?.production?.id?.toLong()		
+		def productionId = params?.production?.id?.toLong()	
+	
 		def viewas = params?.viewas ? params.viewas : "headshots"
 		def sortby = params?.sortby ? params.sortby : "castno"
 		def stage = "stage" + params?.stage
 		//get the list of profiles submitted
 		List profiles = []
-		params?.profiles?.each {entry ->					
+		if(params?.profiles instanceof java.util.List ) {
+			println("1 element...")
+			
+			params?.profiles = params?.profiles?.toList()
+		}
+		params?.list("profiles")?.each {entry ->	
+				
 			def tmp = CastingProfile.get(entry.toLong())
 			def values = [:]  //  [:].withDefault { [] }
 			if(tmp){
@@ -245,12 +253,13 @@ class ProductionController {
 				profiles.add(tmp)
 			}
 		}  //end for each profile submitted	
+		
 		render (view:"filter", model:[profileList:profiles,viewas:viewas,sortby:params?.sortby,max:params?.max,offset:params?.offset,stage:stage,productionId:productionId])
 	} //end def update_stage1()
 	def downloadProfilesZip(Long id){
 		def productionInstance = Production.get(params?.prod_id)
 		
-		def profiles = params?.profiles //?.replace("[", "")?.replace("]", "")?.split(",")
+		def profiles = params.list("profiles") //?.replace("[", "")?.replace("]", "")?.split(",")
 		def portfolioInstance = Portfolio.get(params?.portfolioId)
 		def portfolioName = ""
 		if (portfolioInstance){
@@ -322,4 +331,5 @@ class ProductionController {
 		//get all the filter params and tab where we are coming from
 		[productionInstance: productionInstance]
 	}
+
 } //End class

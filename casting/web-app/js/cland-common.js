@@ -12,7 +12,7 @@ function printableTabs() {
 		$(this).find(".ui-tabs-nav li a").each(function() {
 			tabsforPrint = tabsforPrint + "<h2>" + $(this).html();
 			+"</h2><br />";
-			var a = $(this).attr('href');
+			var a = $(this).prop('href');
 			tabsforPrint = tabsforPrint + $(a).html() + "<br />";
 			
 		});
@@ -21,8 +21,8 @@ function printableTabs() {
 } //end function printableTabs()
 
 function setStyle(frmstyle,tostyle){
-	var lnk = ($("link[media=screen]").attr("href"));
-	$("link[media=screen]").attr({href : lnk.replace(frmstyle,tostyle)});
+	var lnk = ($("link[media=screen]").prop("href"));
+	$("link[media=screen]").prop({href : lnk.replace(frmstyle,tostyle)});
 }
 function printFriendly(on,alltabs){
 	if(on){
@@ -52,7 +52,7 @@ function getCurrentTabText(){
 	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected").text()
 }
 function getCurrentTabLink(){
-	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected a").attr("href")
+	return $("#tabs ul.ui-tabs-nav li.ui-tabs-selected a").prop("href")
 }
 function stageDisplay(stage){
 	if(stage) stage = stage.toLowerCase()
@@ -70,25 +70,25 @@ function stageDisplay(stage){
 		$(".vstage3_" + stage).show();
 	}
 	
-	if($("#viewas_" + stage).attr("value") == "list"){
+	if($("#viewas_" + stage).prop("value") == "list"){
 		$("#submit_" + stage + "_top").hide()
 		$("#submit_" + stage + "_bottom").hide()
 	}else{
 		$("#submit_" + stage + "_top").show()
 		$("#submit_" + stage + "_bottom").show()
 	}
-	$("#hidden_viewas_" + stage).attr("value",$("#viewas_" + stage).val())
-	$("#hidden_sortby_" + stage).attr("value",$("#sortby_" + stage).val())
+	$("#hidden_viewas_" + stage).prop("value",$("#viewas_" + stage).val())
+	$("#hidden_sortby_" + stage).prop("value",$("#sortby_" + stage).val())
 } // end function
 var cland_datepickers = {
 		reset_picker : function resetPicker(picker_id,altfield_id, type){
 			$("#" + picker_id).multiDatesPicker('resetDates',type);
-			$("#" + altfield_id).attr("value","")
+			$("#" + altfield_id).prop("value","")
 		},
 		init_datepicker : function initDatePicker(picker_id,altfield_id, frmdate, todate){
 			var el = $("#" + picker_id)
 			var altEl = $("#" + altfield_id)
-			var datelist = altEl.attr("value")
+			var datelist = altEl.prop("value")
 			if(!frmdate) frmdate="+0";
 			if(!todate) todate="+3M +5D";
 			el.multiDatesPicker({
@@ -101,14 +101,14 @@ var cland_datepickers = {
 				//maxPicks: 1		
 			});
 			if(datelist) {
-				altEl.attr("value",datelist)
+				altEl.prop("value",datelist)
 				datelist = datelist.split(",");			
 				el.multiDatesPicker('addDates',datelist);
 			}	
 		},
 		init_datepicker_single_future : function initDatePickerSingleFuture(picker_id,fmt, frmdate, todate){
 			var el = $(picker_id)
-			var datelist = el.attr("value")
+			var datelist = el.prop("value")
 			if(!frmdate) frmdate="+0";
 			if(!todate) todate="+3M +5D";
 			el.multiDatesPicker({
@@ -119,7 +119,7 @@ var cland_datepickers = {
 			});
 
 			if(datelist) {
-				el.attr("value",datelist)
+				el.prop("value",datelist)
 				datelist = datelist.split(",");			
 				el.multiDatesPicker('addDates',datelist);
 			}
@@ -127,7 +127,7 @@ var cland_datepickers = {
 			
 		},init_datepicker_single_past : function initDatePickerSinglePast(picker_id,fmt,frmdate,todate){
 			var el = $(picker_id)
-			var datelist = el.attr("value")
+			var datelist = el.prop("value")
 			if(!frmdate) frmdate="-100y";
 			if(!todate) todate="+0";
 			$(picker_id).multiDatesPicker({
@@ -137,14 +137,14 @@ var cland_datepickers = {
 			});
 
 			if(datelist) {
-				el.attr("value",datelist)
+				el.prop("value",datelist)
 				datelist = datelist.split(",");			
 				el.multiDatesPicker('addDates',datelist);
 			}	
 		},
 		init_datepicker_single_dob : function initDatePickerSingleDob(picker_id,fmt,frmdate,todate){
 			var el = $(picker_id)
-			var datelist = el.attr("value")
+			var datelist = el.prop("value")
 			if(!frmdate) frmdate="-100y";
 			if(!todate) todate="+0";
 			$(picker_id).multiDatesPicker({
@@ -155,7 +155,7 @@ var cland_datepickers = {
 			});
 
 			if(datelist) {
-				el.attr("value",datelist)
+				el.prop("value",datelist)
 				datelist = datelist.split(",");			
 				el.multiDatesPicker('addDates',datelist);
 			}	
@@ -163,7 +163,7 @@ var cland_datepickers = {
 		
 		init_datepicker_single_standard : function initDatePickerSingleStandard(picker_id,fmt,frmdate,todate,default_date){
 			var el = $(picker_id)
-			var datelist = el.attr("value")
+			var datelist = el.prop("value")
 			if(!frmdate) frmdate="-100y";
 			if(!todate) todate="+0";
 			if(!default_date) default_date="+0"
@@ -175,7 +175,7 @@ var cland_datepickers = {
 			});
 
 			if(datelist) {
-				el.attr("value",datelist)
+				el.prop("value",datelist)
 				datelist = datelist.split(",");			
 				el.multiDatesPicker('addDates',datelist);
 			}	

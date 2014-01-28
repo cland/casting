@@ -65,8 +65,16 @@ grails.hibernate.cache.queries = false
 
 //grails.attachmentable.uploadDir = "C:\\Program Files\\Apache Software Foundation\\Tomcat 7.0\\temp" //YOUR_USER_HOME/APP_NAME
 grails.attachmentable.poster.evaluator = { getPrincipal() } //
+println ("Configuring taglet '${appName}', on '" + System.properties["os.name"] + "'")
 environments {
     development {
+		
+		if (System.properties["os.name"] == "Linux") {
+			println(System.properties["os.name"] + " appname: " + appName)
+		}else{
+			println(System.properties["os.name"] + " appname: " + appName)
+		}
+		
 		casting {
 			theme {
 				name = "" //"" == DEFAULT:ui-lightnes | OTHER OPTIONS: "black-tie"|"blitzer"|"south-street"|"smoothness"|"redmond"
@@ -173,8 +181,9 @@ environments {
 		if (System.properties["os.name"] == "Linux") {
 			grails.config.locations = ["file:" + File.separator + "var" + File.separator + "grails" + File.separator + "app-conf" + File.separator + "${appName}-config.groovy"]
 		}else{
-			grails.config.locations = ["file:C:" + File.separator + "grails" + File.separator + "app-conf" + File.separator + "${appName}-Config.groovy"]
+			grails.config.locations = ["file:C:" + File.separator + "grails" + File.separator + "app-conf" + File.separator + "${appName}-config.groovy"]
 		}
+		println("Config.Locations set to: '" + grails.config.locations + "'")
     }
 }
 

@@ -399,6 +399,22 @@ class CastingApiService {
 		}
 		return true
 	} //end method canViewProduction
+	boolean canListProfiles(User user){
+		if(!user){
+			user = getCurrentUser()
+		}
+		//if director, check if this belongs to the login in 'client'
+		if(isClient()){			
+			return false
+		}
+		if(isAgent()){
+			
+			return false
+		}
+		
+		return true
+	}
+	
 	Long getCurrentUserId(){
 		long userId = 0 //.currentUser?.id //
 		if(springSecurityService?.principal?.id) userId = springSecurityService?.principal?.id

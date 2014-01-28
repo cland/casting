@@ -52,7 +52,7 @@
 
 $(document).ready(function() {		
 	$("#accordion" ).accordion({ active: cland_params.active_sidebar() });
-	$(".datepicker-reset").live("click",function(){
+	$(".datepicker-reset").on("click",function(){
 		cland_datepickers.reset_picker($(this).attr("picker"),$(this).attr("altfield"), 'picked')
 	});
 
