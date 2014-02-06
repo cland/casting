@@ -3,6 +3,7 @@ package com.cland.casting
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import org.springframework.dao.DataIntegrityViolationException
+import org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap;
 
 class ProductionController {
 	def castingApiService
@@ -176,6 +177,7 @@ class ProductionController {
 	
 	def update_profiles(){
 		//println(params)
+		
 		def productionId = params?.production?.id?.toLong()	
 	
 		def viewas = params?.viewas ? params.viewas : "headshots"
@@ -184,15 +186,16 @@ class ProductionController {
 		//get the list of profiles submitted
 		List profiles = []
 		if(params?.profiles instanceof java.util.List ) {
-			println("1 element...")
-			
 			params?.profiles = params?.profiles?.toList()
 		}
 		params?.list("profiles")?.each {entry ->	
-				
+				 
 			def tmp = CastingProfile.get(entry.toLong())
 			def values = [:]  //  [:].withDefault { [] }
 			if(tmp){
+				
+				saveRatings(tmp, params, "rating.admin")
+				saveRatings(tmp, params, "rating.director")
 				
 				//progress status params
 				def isInvited = params?.boolean("invited_${entry.toLong()}")
@@ -331,5 +334,43 @@ class ProductionController {
 		//get all the filter params and tab where we are coming from
 		[productionInstance: productionInstance]
 	}
+	
+	private saveRatings(CastingProfile tmp,GrailsParameterMap params, String prefix){
+		try{
+		Long profileid = tmp?.id?.toLong()
+		def rating_value = params?.list("${prefix}.rating_${profileid}")  //"rating.admin.rating_${entry.toLong()}"
+		def rating_comment = (params?.list("${prefix}.comment_${profileid}"))?.join("")
+		if(rating_value || rating_comment){
+			if(!rating_value) rating_value = 0 else rating_value = rating_value?.join("")?.toLong()
+			
+			def ratingid = (params?.list("${prefix}.id_${profileid}"))?.join("")			
+			def rating_type = (params?.list("${prefix}.type_${profileid}"))?.join("")
+			if(rating_comment.equals("")) rating_comment = "none"
+			
+		//	println("id: " + admin_ratingid + " | rating: " + admin_rating_value + " | " + admin_rating_type + " - " + admin_rating_comment)
+			def ratingInstance = null
+			
+			if(!ratingid){				
+				ratingInstance = new Rating(rating:rating_value,comments:rating_comment,ratingType:rating_type)
+				if(ratingInstance?.hasErrors()){
+					println(ratingInstance?.errors)
+				}else{
+					tmp.addToRatings(ratingInstance)
+				}
+			}else{
+		//	println("Updating rating....${admin_ratingid}")
+				ratingInstance = Rating.get(ratingid?.toLong())
+				ratingInstance.rating = rating_value
+				ratingInstance.comments = rating_comment
+				ratingInstance.ratingType = rating_type
+				if(!ratingInstance.save()){
+					println(ratingInstance.errors)
+				}
+			}
+		}
+		}catch(Exception e){
+			e.printStackTrace()
+		}
+	} //end closure testThis
 
 } //End class

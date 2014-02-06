@@ -2,7 +2,7 @@
 <div class="fieldcontain ${hasErrors(bean: castingProfileInstance, field: 'ratings', 'error')} ">
 
     <ul class="one-to-many">
-        <table id="ratings-table" data="{tableName:'ratings'}">
+        <table id="ratings-table${isEditing==false ? '-view' : '-view' }" data="{tableName:'ratings'}">
             <thead>
                 <tr>
                     <th data="{required:true, name:'rating',type:'intenger',cssClass:'field-small'}">Rating</th>
@@ -16,7 +16,7 @@
                 <tr rowId="${i}">
                     <td>${p.rating}</td>
                     <td>${p.comments}</td>
-                    <td>${com.cland.casting.User.get(p?.createdBy) }</td>
+                    <td>${p.ratingType?.replace("ROLE_","") } (${com.cland.casting.User.get(p?.createdBy) }) </td>
                     <td>
                     <g:if test="${isEditing }">
                     <r:img class="deleteRowButton" dir='images' file='skin/database_delete.png'/>
@@ -29,7 +29,7 @@
         </table>
 		<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN },${SystemRoles.ROLE_DIRECTOR }">
 		<g:if test="${isEditing }">
-        <li class="add"><a id="addRatingLink" href="#">Rate this profile</a></li>
+        <li class="add hide"><a id="addRatingLink" href="#">Rate this profile</a></li>
         </g:if>
         </sec:ifAnyGranted>
     </ul>

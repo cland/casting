@@ -47,6 +47,8 @@ class CastingRole {
 		minRequiredAuditionCount defaultValue: 5
 		requiredMaleCount defaultValue: 1
 		requiredFemaleCount defaultValue: 1
+		feeNotes sqlType: "longtext"
+		description sqlType: "longtext"
 	 }
 	def beforeInsert = {
 		createdBy = castingApiService.getCurrentUserId()

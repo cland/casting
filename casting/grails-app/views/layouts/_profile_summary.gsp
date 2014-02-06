@@ -1,6 +1,14 @@
 <!-- div SUMMARY structure -->
 <%@ page import="com.cland.casting.SystemRoles" %>
 <%@ page import="com.cland.casting.Candidate" %>
+<%@ page import="com.cland.casting.Rating" %>
+
+<g:set var="adminRating" value="${
+	Rating.find("from Rating as r where r.ratingType=:rtype and r.profile.id=:profileid" , [rtype: SystemRoles.ROLE_ADMIN.toString(),profileid:profile?.id?.toLong()])	
+	}"/>
+<g:set var="directorRating" value="${
+Rating.find("from Rating as r where r.ratingType=:rtype and r.profile.id=:profileid" , [rtype: SystemRoles.ROLE_DIRECTOR.toString(),profileid:profile?.id?.toLong()])
+}"/>
      <div id="row-${profile?.id }" class="summary-row">
      <g:hiddenField name="profiles" value="${profile.id}"/>
          <div id="cast-details-${profile?.id }" class="cast-details">
@@ -25,8 +33,43 @@
             		<div class="cell"><label>Age:</label></div>
             		<div class="cell"><span class="property-value">${profile?.age }</span></div>
             	</div>
-            
+            	<div class="row blank"></div>
+            	<sec:ifAnyGranted roles="${SystemRoles.ROLE_ADMIN }">
+            		<g:hiddenField name="rating.admin.id_${profile?.id}" value="${adminRating?.id }"/>
+					<g:hiddenField name="rating.admin.type_${profile?.id}" value="${SystemRoles.ROLE_ADMIN }"/>
+	            	<div class="row rating">
+	            		<div class="cell"><label for="rating.admin.rating_${profile?.id }"><g:message code="rating.adminrating.label" default="Admin Rating" /></label></div>
+	            		<div class="cell">
+	            			<g:radioGroup name="rating.admin.rating_${profile?.id }" value='${adminRating?.rating }' values="['1','2','3','4','5','0']" labels="['1','2','3','4','5','none']" class="ratingadmin_radio_group">
+								<span class="mugshot_radio">${it.radio } ${it.label } </span>
+							</g:radioGroup>
+						</div>
+	            	</div>
+	            	<div class="row comments">	            		
+						<div class="cell"><label for="rating.admin.comment_${profile?.id}"><g:message code="rating.admincomment.label" default="Admin Comment" /></label></div>
+						<div class="cell">
+							<div class="fieldcontain">			
+								<g:textArea name="rating.admin.comment_${profile?.id}" value="${adminRating?.comments}" rows="3" cols="40"/>
+							</div>			
+						</div>
+	            	</div>	            	
+            	</sec:ifAnyGranted>
+            	<sec:ifNotGranted roles="${SystemRoles.ROLE_ADMIN }">
+            		<div class="row rating">
+	            		<div class="cell"><label for="rating.admin.rating_${profile?.id }"><g:message code="rating.adminrating.label" default="Admin Rating" /></label></div>
+	            		<div class="cell">
+	            			<span class="property-value"> ${adminRating?.rating }</span>	            			
+						</div>
+	            	</div>
+					<div class="row comments">	            		
+						<div class="cell"><label for="rating.admin.comment_${profile?.id}"><g:message code="rating.admincomment.label" default="Admin Comment" /></label></div>
+						<div class="cell">
+							<span class="property-value">${adminRating?.comments}</span>									
+						</div>
+	            	</div>	            	
+            	</sec:ifNotGranted>
             </div>
+            
          </div>
          <div id="cast-actions-${profile?.id }" class="cast-actions">
          
@@ -72,6 +115,41 @@
 					</sec:ifAnyGranted>
 					</div>	
 				</div>
+				<div class="row blank"></div>
+				<sec:ifAnyGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+					<g:hiddenField name="rating.director.id_${profile?.id}" value="${directorRating?.id }"/>
+					<g:hiddenField name="rating.director.type_${profile?.id}" value="${SystemRoles.ROLE_DIRECTOR }"/>
+	            	<div class="row rating">
+	            		<div class="cell"><label for="rating_director.rating_${profile?.id }"><g:message code="rating.directorrating.label" default="Director Rating" /></label></div>
+	            		<div class="cell">
+	            			<g:radioGroup name="rating.director.rating_${profile?.id }" value='${directorRating?.rating}' values="['1','2','3','4','5','0']" labels="['1','2','3','4','5','none']" class="ratingdirector_radio_group">
+								<span class="mugshot_radio">${it.radio } ${it.label } </span>
+							</g:radioGroup>
+						</div>
+	            	</div>
+	            	<div class="row comments">            		
+						<div class="cell"><label for="rating.director.comment_${profile?.id}"><g:message code="rating.directorcomment.label" default="Director Comment" /></label></div>
+						<div class="cell">
+							<div class="fieldcontain">			
+								<g:textArea name="rating.director.comment_${profile?.id}" value="${directorRating?.comments}" rows="3" cols="40"/>
+							</div>			
+						</div>
+	            	</div>
+            	</sec:ifAnyGranted>
+            	<sec:ifNotGranted roles="${SystemRoles.ROLE_DIRECTOR }">
+            		<div class="row rating">
+	            		<div class="cell"><label for="rating_director.rating_${profile?.id }"><g:message code="rating.directorrating.label" default="Director Rating" /></label></div>
+	            		<div class="cell">
+	            			<span class="property-value">${directorRating?.rating}</span>	            			
+						</div>
+	            	</div>
+	            	<div class="row comments">            		
+						<div class="cell"><label for="rating.director.comment_${profile?.id}"><g:message code="rating.directorcomment.label" default="Director Comment" /></label></div>
+						<div class="cell">
+							<span class="property-value">${directorRating?.comments}</span>								
+						</div>
+	            	</div>
+            	</sec:ifNotGranted>
 			</div>
 		
 			<br/>

@@ -43,6 +43,8 @@ class Production {
 		categories cascade:"all-delete-orphan"
 		portfolios cascade:"all-delete-orphan"
 		status defaultValue : ProductionStatus.OPEN_CANDIDATES_REQUIRED	
+		description sqlType: "longtext"
+		feeNotes sqlType: "longtext"
 	}
 	
 	static belongsTo = [client:Client]

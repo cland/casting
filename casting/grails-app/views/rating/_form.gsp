@@ -12,7 +12,10 @@
 		<g:message code="rating.rating.label" default="Rating" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="rating" type="number" min="1" max="5" value="${ratingInstance.rating}" required=""/>
+	<g:radioGroup name="rating" value='${ratingInstance?.rating }' values="['1','2','3','4','5','0']" labels="['1','2','3','4','5','none']" class="ratingadmin_radio_group">
+		<span class="mugshot_radio">${it.radio } ${it.label } </span>
+	</g:radioGroup>
+	
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: ratingInstance, field: 'comments', 'error')} ">
