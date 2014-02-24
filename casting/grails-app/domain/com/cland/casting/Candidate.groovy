@@ -13,6 +13,7 @@ class Candidate {
 	String height
 	String hair
 	String eyes
+	String chest
 	String status
 	String keywords
 	long createdBy
@@ -27,6 +28,7 @@ class Candidate {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
 		keywords (blank:true, nullable:true)
+		chest (nullable:true)
 	}
 	def beforeInsert = {
 		// your code goes here

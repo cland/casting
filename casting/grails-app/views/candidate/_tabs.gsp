@@ -132,6 +132,15 @@
 					
 				</li>
 				</g:if>
+				<g:if test="${candidateInstance?.chest}">
+				<li class="fieldcontain">
+					<span id="chest-label" class="property-label">
+					<g:message code="candidate.chest.label" default="Bust/Chest" /></span>
+					
+						<span class="property-value" aria-labelledby="chest-label"><g:fieldValue bean="${candidateInstance}" field="chest"/></span>
+					
+				</li>
+				</g:if>
 				</ol>
 			</fieldset>
 						

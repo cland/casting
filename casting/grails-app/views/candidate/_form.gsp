@@ -159,4 +159,11 @@
 	</label>
 	<g:textField name="waist" required="" value="${candidateInstance?.waist}"/>
 </div>
+<div class="fieldcontain ${hasErrors(bean: candidateInstance, field: 'chest', 'error')} required">
+	<label for="chest">
+		<g:message code="candidate.chest.label" default="Chest/Bust" />
+		
+	</label>
+	<g:textField name="chest" required="" value="${candidateInstance?.chest}"/>
+</div>
 </fieldset>
