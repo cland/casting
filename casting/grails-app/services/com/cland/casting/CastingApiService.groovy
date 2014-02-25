@@ -451,14 +451,14 @@ class CastingApiService {
 				}			
 			}
 			roles{
-				if(params?.filter_roles_stage1) 'in'("id",params?.filter_roles_stage1*.toLong())
-				if(params?.filter_roles_stage2) 'in'("id",params?.filter_roles_stage2*.toLong())
-				if(params?.filter_roles_stage3) 'in'("id",params?.filter_roles_stage3*.toLong())
+				if(params?.filter_roles_stage1) 'in'("id",params?.list("filter_roles_stage1")*.toLong()) //params?.filter_roles_stage1*.toLong())
+				if(params?.filter_roles_stage2) 'in'("id",params?.list("filter_roles_stage2")*.toLong()) //params?.filter_roles_stage2*.toLong())
+				if(params?.filter_roles_stage3) 'in'("id",params?.list("filter_roles_stage3")*.toLong()) //params?.filter_roles_stage3*.toLong())
 			}			
 			categories{
-				if(params?.filter_categories_stage1) 'in'("id",params?.filter_categories_stage1*.toLong())
-				if(params?.filter_categories_stage2) 'in'("id",params?.filter_categories_stage2*.toLong())
-				if(params?.filter_categories_stage3) 'in'("id",params?.filter_categories_stage3*.toLong())
+				if(params?.filter_categories_stage1) 'in'("id",params?.list("filter_categories_stage1")*.toLong()) //params?.filter_categories_stage1*.toLong())
+				if(params?.filter_categories_stage2) 'in'("id",params?.list("filter_categories_stage2")*.toLong()) //params?.filter_categories_stage2*.toLong())
+				if(params?.filter_categories_stage3) 'in'("id",params?.list("filter_categories_stage3")*.toLong()) //params?.filter_categories_stage3*.toLong())
 			}
 			//STAGE 1
 			params?.filter_invited_stage1?.with{

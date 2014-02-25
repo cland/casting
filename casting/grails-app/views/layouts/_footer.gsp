@@ -19,5 +19,5 @@
 <g:link controller="logout" action="index" >Logout</g:link>
 </sec:ifLoggedIn>
 <br/>
-<div class="copyright"><g:copyright startYear="2013">Tagumi Systems</g:copyright></div>
+<div class="copyright"><g:meta name="app.name"/> version: <g:meta name="app.version"/> | <g:copyright startYear="2013">Tagumi Systems</g:copyright></div>
 </div>
