@@ -134,7 +134,7 @@ class CastingProfile {
 		def shortlist = (isShortlist ? "yes":"no")
 		def confirmed = (isConfirmed ? "yes":"no")
 		def num = (castNo ? castNo : "--")
-		"Cast No: ${num} | ${candidate?.person?.toString()} | Invited: ${invited} | Shortlist: ${shortlist} | Confirmed: ${confirmed} | Role: ${roles?.join(',')}"
+		"Cast No: ${num} | ${candidate?.person?.toString()} | Gender: ${getGender()} | Role: ${roles?.join(',')} | Shortlist: ${shortlist}"
 	}
 	String getName(){
 		"${candidate?.person?.toString()}"

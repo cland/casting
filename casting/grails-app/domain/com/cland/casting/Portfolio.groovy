@@ -21,6 +21,7 @@ class Portfolio {
 	static constraints = {
 		lastUpdatedBy nullable:true
 		createdBy nullable:true
+		comments nullable:true
 	}
 	def beforeInsert = {
 		createdBy = castingApiService.getCurrentUserId()

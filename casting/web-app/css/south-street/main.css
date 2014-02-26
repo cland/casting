@@ -896,4 +896,8 @@ div.nav ul li div#search{margin-left:150px;}
 .ui-widget-content a:hover {
 	color:blue !important;
 	text-decoration:none;
-}  
+}
+select.multi-list-picker-large {height:400px;}
+select.multi-list-picker-large option {padding:2px;}
+select.multi-list-picker-large option:before {content:"\00BB "}
+select.multi-list-picker-large option:hover{background:#ccc;}

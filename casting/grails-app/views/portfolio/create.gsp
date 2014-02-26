@@ -1,5 +1,8 @@
 <%@ page import="com.cland.casting.Portfolio" %>
 <%@ page import="com.cland.casting.SystemRoles" %>
+<%@ page import="com.cland.casting.Production" %>
+<g:set var="productionInstance" value="${Production.get(params?.production?.id) }"/>
+
 <!DOCTYPE html>
 <html>
 	<head>
